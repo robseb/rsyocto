@@ -13,7 +13,7 @@ It is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **
 
 The “*rsyoctoMakingSD*”- script allow developer to **customize the *rsYocto*-image** with the installment of their own software files or **FPGA configuration file, that will be configured on the FPGA fabric before the Linux boots**.
 
-The final *rsYocto*-Image can be **installed** on a **SD-Card** with any commonly **used Boot-Image creating tools**. Versions are available for the **Terasic DE10 Standard-** (Cyclone V), **Terasic DE10 Nano-** (Cyclone V) or **Terasic Han Pilot (Arria 10)**.
+The final *rsYocto*-Image can be **installed** on a **SD-Card** with any commonly **used Boot-Image creating tools**. Versions are available for the **Terasic DE10 Standard-** (Cyclone V), **Terasic DE10 Nano-** (Cyclone V) or **Terasic Han Pilot** (Arria 10).
 
 On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connect clients to a Hard-IP Bus, because the HPS interfaces with the pre insalled configuration is routed to FPGA I/O-Pins. 
 <br>
