@@ -28,5 +28,6 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 
 <br>
 # Mondivation
+
 ![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto Layers")
 *required building steps for rsYocto**
