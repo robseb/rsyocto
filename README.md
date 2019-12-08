@@ -2,7 +2,8 @@
 
 ### *rsYocto* is an open-source embedded Linux System designed with the Yocto Project and optimized for Intel SoC-FPGAs (Intel Cyclone V and Intel Arria 10) to allow the best customization for the strong requirements of modern embedded applications.
 <br>
-*rsYocto* implements a **modern Linux Kernel** and brings a set of today fundamentally needed components to Intel SoC-FPGAs and **help to simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of Things- or deep learning applications.
+
+*rsYocto* implements a **modern Linux Kernel** and brings a set of today fundamentally needed components to Intel SoC-FPGAs and help to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of Things- or deep learning applications.
 
 To allow that is for example **Python3** with the Python Package manager **PiP** and the **Apache Webserver** with **PHP** included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for is best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface.
 
