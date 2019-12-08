@@ -20,5 +20,13 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 
 # Features of *rsYocto*
 
-![Alt text](doc/symbols/rsYoctoLayers.jpg?raw=true "rsYocto Layers")
+![Alt text](doc/symbols/rsYoctoLayers.jpg?raw=true "System Overview")
 **System Overview of rsYocto**
+
+![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote developemed IDEs")
+*poerfull remote developemed IDEs**
+
+<br>
+# Mondivation
+![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto Layers")
+*required building steps for rsYocto**
