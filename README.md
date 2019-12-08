@@ -7,7 +7,7 @@
 
 To allow that is for example **Python3** with the Python Package manager **PiP** and the **Apache Webserver** with **PHP** included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for is best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface.
 
-During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. *rsYocto* application can **build, deployed and even debugged over the network**. With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* is a simply installment and quick jumpstart in the development process possible, because all required compilers run direct on *rsYocto*.
+During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. *rsYocto* application can **build, deployed and even debugged over the network**. With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* is a simple installment and quick jumpstart in the development process possible, because all required compilers run directly on *rsYocto*.
 
 It is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C, CAN,…**) and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for development of industrial connected solutions. With a single command is *rsYocto* capable to **load a new FPGA configuration** or to **read and write the AXI-Bridge Interface to the FPGA**.
 
@@ -15,7 +15,7 @@ The “*rsyoctoMakingSD*”- script allow developer to **customize the *rsYocto*
 
 The final *rsYocto*-Image can be **installed** on a **SD-Card** with any commonly **used Boot-Image creating tools**. Versions are available for the **Terasic DE10 Standard-** (Cyclone V), **Terasic DE10 Nano-** (Cyclone V) and **Terasic Han Pilot** (Arria 10).
 
-On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connect clients to a Hard-IP Bus, because the HPS interfaces with the pre insalled configuration is routed to FPGA I/O-Pins. 
+On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connect clients to a Hard-IP Bus, because the HPS interfaces with the pre installed configuration are routed to FPGA I/O-Pins. 
 <br>
 
 # Features of *rsYocto*
