@@ -1,4 +1,4 @@
-!\[Alt text\](doc/symbols/rsYoctoLogo.jpg?raw=true "rsYocto Logo")
+![Alt text](doc/symbols/rsYoctoLogo.jpg?raw=true "rsYocto Logo")
 
 ### *rsYocto* is an open-source embedded Linux System designed with the Yocto Project and optimized for Intel SoC-FPGAs (Intel Cyclone V and Intel Arria 10) to allow the best customization for the strong requirements of modern embedded applications.
 <br>
@@ -17,6 +17,6 @@ The final \*rsYocto\*-image can be **installed** on a **SD-Card** with any commo
 On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connect clients to a Hard-IP Bus, because the HPS interfaces with the pre insalled configuration is routed to FPGA I/O-Pins. 
 <br>
 
-\# Features of rsYocto
+# Features of rsYocto
 
-!\[Alt text\](doc/symbols/rsYoctoLayers.jpg?raw=true "rsYocto Layers")
+![Alt text](doc/symbols/rsYoctoLayers.jpg?raw=true "rsYocto Layers")
