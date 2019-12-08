@@ -18,6 +18,7 @@ The final *rsYocto*-Image can be **installed** on a **SD-Card** with any commonl
 On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connect clients to a Hard-IP Bus, because the HPS interfaces with the pre insalled configuration is routed to FPGA I/O-Pins. 
 <br>
 
-# Features of rsYocto
+# Features of *rsYocto*
 
 ![Alt text](doc/symbols/rsYoctoLayers.jpg?raw=true "rsYocto Layers")
+** System Overview of *rsYocto* **
