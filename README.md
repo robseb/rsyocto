@@ -45,9 +45,9 @@ ___
 ![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote developemed IDEs")
 **Poerfull remote developemed IDEs and Web server to install your web interface**
 <br>
+<br>
 
-
-# Getting started tutorial
+# Tutorials
 The entries guide in the usege and the development of rsyocto applications is parted in following levels: 
 
 | Level | Objective | Guide
