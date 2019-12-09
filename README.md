@@ -26,20 +26,22 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 <br>
 **pre-installed Linux commands**
 
-`ab` `arch` `arm-poky-linux-gnueabi-gcc-ar` `arm-poky-linux-gnueabi-ranlib` `autom4te`
-`aclocal` `arch.coreutils` `arm-poky-linux-gnueabi-gcc-nm` `arm-poky-linux-gnueabi-readelf` `automake`
-`aclocal-1.16` `arm-poky-linux-gnueabi-addr2line` `arm-poky-linux-gnueabi-gcc-ranlib`
-`arm-poky-linux-gnueabi-size` `automake-1.16` `addgroup` `arm-poky-linux-gnueabi-ar` 
-`arm-poky-linux-gnueabi-gprof` `arm-poky-linux-gnueabi-strings` `autopoint` `addpart` 
-`arm-poky-linux-gnueabi-as` `arm-poky-linux-gnueabi-ld` `arm-poky-linux-gnueabi-strip` `autoreconf`
-`addr2line` `autoscan` `adduser` `arm-poky-linux-gnueabi-cpp` `asc2log` `autoupdate` `agetty`
-`arm-poky-linux-gnueabi-dwp` `arm-poky-linux-gnueabi-nm` `ascii-xfr` `awk` `alias` `ash` `apachectl` `arm-poky-linux-gnueabi-g++`
-`autoconf` `ar` `arm-poky-linux-gnueabi-gcc` `autoheader`
-`b2sum` `basename.coreutils` `bg` `blkzone` `bridge` `busybox.nosuid` `bzdiff` 
-`base32` `basenc` `bind` `blockdev` `builtin` `busybox.suid` `bzegrep` `bzip2recover` `base64` `bash` `blkdiscard`
-`blockdev.util-linux` `bunzip2` `bzcat` `bzfgrep` `bzless` `base64.coreutils` `bash.bash` `blkid` `bootlogd` `bunzip2.bzip2` 
-`bzcat.bzip2` `bzgrep` `bzmore` `basename` `bcmserver` `blkid.util-linux` `break` `busybox` `bzcmp` `bzip2`
+`arch`,`arm-poky-linux-gnueabi-gcc-nm` `automake` `addgroup` `arm-poky-linux-gnueabi-ar` 
+`adduser` `arm-poky-linux-gnueabi-cpp` `asc2log` `autoupdate` `agetty` `ash` `apachectl` 
+`arm-poky-linux-gnueabi-g++` `autoconf` `ar` `arm-poky-linux-gnueabi-gcc` `autoheader`
+`b2sum` `bg` `bzegrep` `bash` `blkdiscard` `bunzip2` `bzcat` `bzfgrep` `bzless` `basename` 
+`bcmserver``busybox` `bzcmp` `bzip2``c++` `cangen` `ccache` `chpasswd` `csplit` `cangw` `chgpasswd`
+`compgen` `csplit.coreutils` `canlogserver` `cfdisk` `chgrp` `chroot` `cal` `canplayer`  `chgrp.coreutils` `chroot.coreutils` `cmp.diffutils` `compopt` `ctrlaltdel` `cal.util-linux` `cansend` `chattr` `chmem` `chrt` `caller` `cansniffer` `chcon`
+`chrt.util-linux` `colcrt` `coproc` `cut.coreutils` `can-calc-bit-timing` `chcon.coreutils` `chmod.coreutils` `chsh` `colrm`
+`cvtsudoers` `canbusload` `cat` `chcpu` `choom` `cp.coreutils` `candump` `chvt` `comm` `cpio` `canfdtest` `cc` `chfn` 
+`chown.coreutils` `cksum` `comm.coreutils` `cpp`
+`date` `fdisk` `FPGA-gpiRead` `FPGA-gpoWrite` `FPGA-readBridge` `FPGA-readMSEL` `FPGA-resetFabric` `FPGA-status` `FPGA-writeBridge` `FPGA-writeConfig`
+`g++` `gdb` `gunzip` `gcc` `gdbserver` `gzip` `hostname` `httpd`  `hexdump` `i2cdetect` `i2ctransfer` `i2cdump` `i2cget` `i2cset` `lscpu` `lsipc`
+`microcom` `minicom` `mount` `mkdir` `php` `pip3` `phpdbg` `pydoc3` `python3` `python3.7` `rsync` `route`
+`tee`  `tftp` `top` `tac.coreutils` `tcf-agent` `tail` `tcf-client` `telinit` `time` `ttytclsh` `telnet` `tar`              
+
 ___
+
 ![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote developemed IDEs")
 *poerfull remote developemed IDEs**
 <br>
