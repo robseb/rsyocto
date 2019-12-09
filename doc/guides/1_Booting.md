@@ -34,7 +34,7 @@ This guide shows how to install *rsYocto* on SD-Card and boot them on Terasic DE
   
 ## Login to *rsYocto*
 * default device name: `cyclone5` or `arria10` 
-* login: `admin`
+* login: `root`
 * Passwort:  `eit`
 * default MAC: d6:7d:ae:b3:0e:ba
  <br>
