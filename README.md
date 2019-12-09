@@ -23,10 +23,10 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 ![Alt text](doc/symbols/rsYoctoLayers.jpg?raw=true "System Overview")
 **System Overview of rsYocto**
 
-<br>
-**pre-installed Linux commands**
 
-`arch`,`arm-poky-linux-gnueabi-gcc-nm` `automake` `addgroup` `arm-poky-linux-gnueabi-ar` 
+**main pre-installed Linux commands**
+
+`arch` `arm-poky-linux-gnueabi-gcc-nm` `automake` `addgroup` `arm-poky-linux-gnueabi-ar` 
 `adduser` `arm-poky-linux-gnueabi-cpp` `asc2log` `autoupdate` `agetty` `ash` `apachectl` 
 `arm-poky-linux-gnueabi-g++` `autoconf` `ar` `arm-poky-linux-gnueabi-gcc` `autoheader`
 `b2sum` `bg` `bzegrep` `bash` `blkdiscard` `bunzip2` `bzcat` `bzfgrep` `bzless` `basename` 
@@ -39,7 +39,6 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 `g++` `gdb` `gunzip` `gcc` `gdbserver` `gzip` `hostname` `httpd`  `hexdump` `i2cdetect` `i2ctransfer` `i2cdump` `i2cget` `i2cset` `lscpu` `lsipc`
 `microcom` `minicom` `mount` `mkdir` `php` `pip3` `phpdbg` `pydoc3` `python3` `python3.7` `rsync` `route`
 `tee`  `tftp` `top` `tac.coreutils` `tcf-agent` `tail` `tcf-client` `telinit` `time` `ttytclsh` `telnet` `tar`              
-
 ___
 
 ![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote developemed IDEs")
