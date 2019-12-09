@@ -52,7 +52,7 @@ The entries guide in the usege and the development of rsyocto applications is pa
 
 | Level | Objective | Guide
 |:--|:--|:--|
-| 1 | **Booting rsyocto on your Board** | iiii
+| 1 | **Booting rsyocto on your Board** | [**Getting started Guide**](../doc/guide/1_Booting.md)
 | 2 | **Using SSH to controll and reconfige the FPGA** | iiii
 | 3 | **Debugging C++ applications remotely** | iiii
 | 4 | **Debugging Python applications remotely** | iiii
@@ -71,8 +71,11 @@ The entries guide in the usege and the development of rsyocto applications is pa
   * [meta-networking](https://github.com/openembedded/meta-openembedded/tree/master/meta-networking) 
 * [meta-linaro](https://git.linaro.org/openembedded/meta-linaro.git)
 * [meta-rstools](https://github.com/robseb/meta-rstools)
+
 <br>
+
 # Author
+
 * **Robin Sebastian**
 
 *rsYocto* was developed a year ago as an student project and fruther for my master thesis optimized.
