@@ -3,7 +3,8 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
 
 ## Connecting to *rsYocto* with SSH
 1. Open Linux or Windows Comand Promt (Windows 10) and insiert this command to connect to your Board:
-  ''''shell 
+
+```bash
   ssh root@<Boards iPv4-address>
   ''''
 2. Use the Passwort `eit`
@@ -13,20 +14,20 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
 
 ## Toogeling the HPS-LED of your Board
 1. Following turns the HPS Led on
-  ''''shell 
+  '''' 
     echo 100 > /sys/class/leds/hps_led0/brightness
   ''''
 2. To turn of the LED use type this:
-  ''''shell 
+  '''' 
     echo 0 > /sys/class/leds/hps_led0/brightness
   ''''
 3. To toogle the LED is a *BlinkLED* Python scipt pre-installed
   * Try it out:
-    ''''shell 
+    '''' 
     python3 blinkLed.py
    ''''
 4. With `nano`- Editor it is posible to change the script
-   ''''shell 
+   '''' 
     nano blinkLed.py
    ''''
    * later will be a pleasant be shown (Level 4) 
