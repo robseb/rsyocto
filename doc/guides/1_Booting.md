@@ -25,9 +25,14 @@ This guide shows how to install rsyocto on SD and boot them on Terasic DE10 FPGA
   4. Connect a USB Kabel to the FTDI Virtual **COM-Port** (USB CDC) and to your Computer
   5. Open the COM-Port
     + you can use for example the tool [MobaXterm](https://mobaxterm.mobatek.net/)
-    + Use following settings: **`115200N8 (ASCII)` **
+    + Use following settings: **`115200N8 (ASCII) with CR/LF` **
     
 ## Boot *rsYocto* on your FPGA-Baord
   1. Power Up your FPGA Board
   2. Now should boot **rsYocto** thorough following stages:
      ![Alt text](BootingStep.jpg?raw=true "Boot steps of rsYocto")
+  
+## Login to *rsYocto*
+* User Name: `admin`
+* Passwort:  `eit`
+  
