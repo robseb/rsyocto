@@ -60,7 +60,7 @@ ___
 <br>
 
 # Getting started tutorial
-The entries guide in the usege and the development of rsyocto applications in parted in following levels. 
+The entries guide in the usege and the development of rsyocto applications is parted in following levels: 
 
 | Level | Objective | Guide
 |:--|:--|:--|
