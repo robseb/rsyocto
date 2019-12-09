@@ -20,4 +20,4 @@ This guide shows how to install rsyocto on SD and boot them on Terasic DE10 FPGA
   1. Eject the SD-Card from your Computer and insird them into the SD-slot of your FPGA Board
   2. Change the MSEL-Bit switch to following setting: 
   
-  ![Alt text](doc/symbols/requiredMSEL.jpg?raw=true "Required MSEL-Bit Switch Selection")
+  ![Alt text](../doc/symbols/requiredMSEL.jpg?raw=true "Required MSEL-Bit Switch Selection")
