@@ -33,9 +33,17 @@ This guide shows how to install *rsYocto* on SD-Card and boot them on Terasic DE
      ![Alt text](BootingStep.jpg?raw=true "Boot steps of rsYocto")
   
 ## Login to *rsYocto*
-* User Name: `admin`
+* default device name: `cyclone5` or `arria10` 
+* login: `admin`
 * Passwort:  `eit`
 * default MAC: d6:7d:ae:b3:0e:ba
  <br>
  
+ ## Find the iP-Address of your Board
+ * Use following Linux Command to get the iPv4-Address of your Board
+ ``shell
+  ifconfig
+ `` 
+ * the iP-Address is also shown during the boot
+ <br>
  ## Continue with the next level: [Using SSH to controll and reconfige the FPGA](2_SSH_FPGA.md)
