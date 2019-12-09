@@ -24,7 +24,7 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 **System Overview of rsYocto**
 ___
 
-**Main pre-installed Linux commands**
+**Build, deployed and even debugged your applications over the network**
 
 `arch` `arm-poky-linux-gnueabi-gcc-nm` `automake` `addgroup` `arm-poky-linux-gnueabi-ar` 
 `adduser` `arm-poky-linux-gnueabi-cpp` `asc2log` `autoupdate` `agetty` `ash` `apachectl` 
@@ -41,8 +41,10 @@ ___
 `tee`  `tftp` `top` `tac.coreutils` `tcf-agent` `tail` `tcf-client` `telinit` `time` `ttytclsh` `telnet` `tar`              
 ___
 
+**Main pre-installed Linux commands**
+
 ![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote developemed IDEs")
-**poerfull remote developemed IDEs**
+**Poerfull remote developemed IDEs**
 <br>
 # Built With
 * [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) - Linux
