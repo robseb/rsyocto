@@ -1,14 +1,14 @@
-# Windows Kernel Mode Driver (KMDF)
-## Installation of the WKD 
+# Using SSH to controll and reconfige the FPGA
+This guide shows how to connect via SSH remotly to *rsYocto* and how simple it is to read FPGA IP and changing the FPGA configuration. 
 
-+ Step by Step MSDN Guide: [Debug Universal Drivers - Step-by-Step Lab (Echo Kernel Mode) - Windows drivers \| Microsoft Docs](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debug-universal-drivers---step-by-step-lab--echo-kernel-mode-)  
-+ Requiered Compunents on the Host (machine with Visual Studio)
-  + Windows Driver Kit (WDK) (includes Plugin for Visual Studio)
-+ Requiered compunents on the traget computer (machine with the Driver under Test)
-  + Windows SDK 
-+ booth computers must be connected to a domain and looged in with the same acount
-+ open an command prompt with admin rights on the **target computer** and run folowing CMDs:
-  ````shell
-  bcdedit /set {default} DEBUG YES
-  bcdedit /set TESTSIGNING ON 
-  ````
+## Connecting to *rsYocto* with SSH
+1. Open Linux or Windows Comand Promt (Windows 10) and insiert this command to connect to your Board:
+  ''''shell 
+  ssh root@<Boards iPv4-address>
+  ''''
+2. Use the Passwort `eit`
+  * no other autentifications are requiered
+  * The default SSH-Port (22) is here used 
+3. Now should the *rsYocto* Slapsrean apper
+
+## 
