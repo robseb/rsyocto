@@ -23,7 +23,23 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 ![Alt text](doc/symbols/rsYoctoLayers.jpg?raw=true "System Overview")
 **System Overview of rsYocto**
 
-@cat@ @python3@ @nano@
+<br>
+**pre-installed Linux commands**
+
+`ab` `arch` `arm-poky-linux-gnueabi-gcc-ar` `arm-poky-linux-gnueabi-ranlib` `autom4te`
+`aclocal` `arch.coreutils` `arm-poky-linux-gnueabi-gcc-nm` `arm-poky-linux-gnueabi-readelf` `automake`
+`aclocal-1.16` `arm-poky-linux-gnueabi-addr2line` `arm-poky-linux-gnueabi-gcc-ranlib`
+`arm-poky-linux-gnueabi-size` `automake-1.16` `addgroup` `arm-poky-linux-gnueabi-ar` 
+`arm-poky-linux-gnueabi-gprof` `arm-poky-linux-gnueabi-strings` `autopoint` `addpart` 
+`arm-poky-linux-gnueabi-as` `arm-poky-linux-gnueabi-ld` `arm-poky-linux-gnueabi-strip` `autoreconf`
+`addr2line` `autoscan` `adduser` `arm-poky-linux-gnueabi-cpp` `asc2log` `autoupdate` `agetty`
+`arm-poky-linux-gnueabi-dwp` `arm-poky-linux-gnueabi-nm` `ascii-xfr` `awk` `alias` `ash` `apachectl` `arm-poky-linux-gnueabi-g++`
+`autoconf` `ar` `arm-poky-linux-gnueabi-gcc` `autoheader`
+`b2sum` `basename.coreutils` `bg` `blkzone` `bridge` `busybox.nosuid` `bzdiff` 
+`base32` `basenc` `bind` `blockdev` `builtin` `busybox.suid` `bzegrep` `bzip2recover` `base64` `bash` `blkdiscard`
+`blockdev.util-linux` `bunzip2` `bzcat` `bzfgrep` `bzless` `base64.coreutils` `bash.bash` `blkid` `bootlogd` `bunzip2.bzip2` 
+`bzcat.bzip2` `bzgrep` `bzmore` `basename` `bcmserver` `blkid.util-linux` `break` `busybox` `bzcmp` `bzip2`
+___
 ![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote developemed IDEs")
 *poerfull remote developemed IDEs**
 <br>
