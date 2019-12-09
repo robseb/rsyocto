@@ -44,7 +44,8 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 * [meta-linaro](https://git.linaro.org/openembedded/meta-linaro.git)
 * [meta-rstools](https://github.com/robseb/meta-rstools)
 <br>
+
 # Author
-+ **Robin Sebastian**
+* **Robin Sebastian**
 *rsYocto* was developed by Robin Sebastian a year ago as an student project and for his master thesis further optimized.
 No companys were involved in this project.
