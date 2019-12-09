@@ -20,9 +20,14 @@ This guide shows how to install rsyocto on SD and boot them on Terasic DE10 FPGA
   1. Eject the SD-Card from your Computer and insird them into the SD-slot of your FPGA Board
   2. Change the MSEL-Bit switch to following setting: 
    ![Alt text](requiredMSEL.jpg?raw=true "Required MSEL-Bit Switch Selection")
-  3. Connect a USB Kabel to the FTDI Virtual COM-Port (USB CDC) and to your Computer
-  4. Open the COM-Port
-    * you can use for example the tool [MobaXterm](https://mobaxterm.mobatek.net/)
-    * Use following settings: **`115200N8 (ASCII)` **
+  3. Connect your FPGA-Board with a **Ethernet cabel to your network**
+    + Be sure that a **iPv4-DHCP** is activ on this network 
+  4. Connect a USB Kabel to the FTDI Virtual **COM-Port** (USB CDC) and to your Computer
+  5. Open the COM-Port
+    + you can use for example the tool [MobaXterm](https://mobaxterm.mobatek.net/)
+    + Use following settings: **`115200N8 (ASCII)` **
     
 ## Boot *rsYocto* on your FPGA-Baord
+  1. Power Up your FPGA Board
+  2. Now should boot **rsYocto** thorough following stages:
+     ![Alt text](BootingStep.jpg?raw=true "Boot steps of rsYocto")
