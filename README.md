@@ -32,7 +32,17 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 *required building steps for rsYocto**
 <br>
 # Built With
-* [Intel SoC FPGA Embedded Development Suite 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) 
+* [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) 
+* [Intel Quartus Prime 18.1.0 Lite Edition (Cyclone V)](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/download.html) 
+* [Intel Quartus Prime 18.1.0 Standard Edition (Arria 10)](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/download.html) 
+* [The Yocto Project](https://www.yoctoproject.org/) 
+* [meta-altera](https://github.com/kraj/meta-altera) - Official Altera BSP layer for OpenEmbedded/Yocto Project 
+* [meta-openembedded](https://github.com/openembedded/meta-openembedded) - Collection of layers for the OE-core universe
+  * [meta-python](https://github.com/openembedded/meta-openembedded/tree/master/meta-python) 
+  * [meta-webserver](https://github.com/openembedded/meta-openembedded/tree/master/meta-webserver)
+  * [meta-networking](https://github.com/openembedded/meta-openembedded/tree/master/meta-networking) 
+* [meta-linaro](https://git.linaro.org/openembedded/meta-linaro.git)
+* [meta-rstools](https://github.com/robseb/meta-rstools)
 <br>
 # Author
 + **Robin Sebastian**
