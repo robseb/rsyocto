@@ -23,18 +23,18 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 ![Alt text](doc/symbols/rsYoctoLayers.jpg?raw=true "System Overview")
 **System Overview of rsYocto**
 
-#### Implemented Yocto layers
-| Layer Name | priority | Feactures 
-|:--|:--|:--|
-| *meta* | 5  | /
-| *meta-poky* | 5  | /
-| *meta-yocto-bsp* | 5  | /
-
 ![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote developemed IDEs")
 *poerfull remote developemed IDEs**
-
 <br>
 # Mondivation
 
 ![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto Layers")
 *required building steps for rsYocto**
+<br>
+# Built With
++ [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625] (https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) 
+<br>
+# Author
++ **Robin Sebastian**
+*rsYocto* was developed by Robin Sebastian a year ago as an student project and for his master thesis further optimized.
+No companys were involved in this project.
