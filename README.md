@@ -47,5 +47,6 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 
 # Author
 * **Robin Sebastian**
+
 *rsYocto* was developed by Robin Sebastian a year ago as an student project and for his master thesis further optimized.
 No companys were involved in this project.
