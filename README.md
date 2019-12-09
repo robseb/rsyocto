@@ -40,7 +40,7 @@ ___
 `tee`  `tftp` `top` `tac.coreutils` `tcf-agent` `tail` `tcf-client` `telinit` `time` `ttytclsh` `telnet` `tar`              
 ___
 
-**Build, deployed and even debugged your applications over the network**
+**Build, deployed and debugged your applications over the network**
 
 ![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote developemed IDEs")
 **Poerfull remote developemed IDEs**
@@ -59,8 +59,20 @@ ___
 * [meta-rstools](https://github.com/robseb/meta-rstools)
 <br>
 
+# Getting started tutorial
+The entries guide in the usege and the development of rsyocto applications in parted in following levels. 
+
+| Level | Objective | Guide
+|:--|:--|:--|
+| 1 | **Booting rsyocto on your Board** | iiii
+| 2 | **Using SSH to controll and reconfige the FPGA** | iiii
+| 3 | **Debugging C++ applications remotely** | iiii
+| 4 | **Debugging Python applications remotely** | iiii
+| 5 | **Developing a new FPGA configuration**| iii
+| 6 | **Adding new Yocto layers to rsyocto** | iii
+
 # Author
 * **Robin Sebastian**
 
-*rsYocto* was developed by Robin Sebastian a year ago as an student project and futher for his master thesis optimized.
-No companys were involved in this project.
+*rsYocto* was developed a year ago as an student project and fruther for my master thesis optimized.
+No companys were involved in this project. I‘m looking for an interesting job offer up to summer 2020 witch possibly connects my mentioned workfields.
