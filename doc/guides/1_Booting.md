@@ -36,4 +36,5 @@ This guide shows how to install rsyocto on SD and boot them on Terasic DE10 FPGA
 * User Name: `admin`
 * Passwort:  `eit`
 * default MAC: d6:7d:ae:b3:0e:ba
-  
+ 
+ # Continue with the next level: [Using SSH to controll and reconfige the FPGA](2_SSH_FPGA.md)
