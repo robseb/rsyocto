@@ -1,5 +1,5 @@
-# Booting rsyocto on your Board
-This guide shows how to install rsyocto on SD and boot them on Terasic DE10 FPGA Board. 
+# Booting *rsYocto* on your Board
+This guide shows how to install *rsYocto* on SD-Card and boot them on Terasic DE10 FPGA Board. 
 
 ## Creating a bootebil SD-Card 
 1. Download the newest Image of *rsYocto* for your Board
@@ -36,5 +36,6 @@ This guide shows how to install rsyocto on SD and boot them on Terasic DE10 FPGA
 * User Name: `admin`
 * Passwort:  `eit`
 * default MAC: d6:7d:ae:b3:0e:ba
+ <br>
  
- # Continue with the next level: [Using SSH to controll and reconfige the FPGA](2_SSH_FPGA.md)
+ ## Continue with the next level: [Using SSH to controll and reconfige the FPGA](2_SSH_FPGA.md)
