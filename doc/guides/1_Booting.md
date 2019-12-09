@@ -1,4 +1,6 @@
-# Windows Kernel Mode Driver (KMDF)
+# Booting rsyocto on your Board
+This guide shows how to install rsyocto on SD and boot them on Terasic DE10 FPGA Board. 
+
 ## Installation of the WKD 
 
 + Step by Step MSDN Guide: [Debug Universal Drivers - Step-by-Step Lab (Echo Kernel Mode) - Windows drivers \| Microsoft Docs](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debug-universal-drivers---step-by-step-lab--echo-kernel-mode-)  
