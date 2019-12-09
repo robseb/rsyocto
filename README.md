@@ -45,19 +45,7 @@ ___
 ![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote developemed IDEs")
 **Poerfull remote developemed IDEs and Web server to install your web interface**
 <br>
-# Built With
-* [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) - Linux
-* [Intel Quartus Prime 18.1.0 Lite Edition](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/download.html) - Cyclone V
-* [Intel Quartus Prime 18.1.0 Standard Edition](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/download.html) - Arria 10
-* [The Yocto Project](https://www.yoctoproject.org/) 
-* [meta-altera](https://github.com/kraj/meta-altera) 
-* [meta-openembedded](https://github.com/openembedded/meta-openembedded)
-  * [meta-python](https://github.com/openembedded/meta-openembedded/tree/master/meta-python) 
-  * [meta-webserver](https://github.com/openembedded/meta-openembedded/tree/master/meta-webserver)
-  * [meta-networking](https://github.com/openembedded/meta-openembedded/tree/master/meta-networking) 
-* [meta-linaro](https://git.linaro.org/openembedded/meta-linaro.git)
-* [meta-rstools](https://github.com/robseb/meta-rstools)
-<br>
+
 
 # Getting started tutorial
 The entries guide in the usege and the development of rsyocto applications is parted in following levels: 
@@ -71,6 +59,19 @@ The entries guide in the usege and the development of rsyocto applications is pa
 | 5 | **Developing a new FPGA configuration**| iii
 | 6 | **Adding new Yocto layers to rsyocto** | iii
 
+# Built With
+* [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) - Linux
+* [Intel Quartus Prime 18.1.0 Lite Edition](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/download.html) - Cyclone V
+* [Intel Quartus Prime 18.1.0 Standard Edition](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/download.html) - Arria 10
+* [The Yocto Project](https://www.yoctoproject.org/) 
+* [meta-altera](https://github.com/kraj/meta-altera) 
+* [meta-openembedded](https://github.com/openembedded/meta-openembedded)
+  * [meta-python](https://github.com/openembedded/meta-openembedded/tree/master/meta-python) 
+  * [meta-webserver](https://github.com/openembedded/meta-openembedded/tree/master/meta-webserver)
+  * [meta-networking](https://github.com/openembedded/meta-openembedded/tree/master/meta-networking) 
+* [meta-linaro](https://git.linaro.org/openembedded/meta-linaro.git)
+* [meta-rstools](https://github.com/robseb/meta-rstools)
+<br>
 # Author
 * **Robin Sebastian**
 
