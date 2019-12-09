@@ -14,7 +14,8 @@ This guide shows how to install rsyocto on SD and boot them on Terasic DE10 FPGA
  2. Instert a Micro SD-Card (1GB or greater) into your coumputer  
  3. Use a Bootimage creating tool to create a bootebil image on the SD card
   + For example use the tool [Rufus](https://rufus.ie/) 
-  + ingonre all warning message boxes
+  + Ingonre all warning message boxes
+   ![Alt text](rufusSDbuilf.png?raw=true "rufus")
   
   ## Boot *rsYocto* on your FPGA-Baord
   1. Eject the SD-Card from your Computer and insird them into the SD-slot of your FPGA Board
