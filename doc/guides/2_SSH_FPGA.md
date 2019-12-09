@@ -3,10 +3,9 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
 
 ## Connecting to *rsYocto* with SSH
 1. Open Linux or Windows Comand Promt (Windows 10) and insiert this command to connect to your Board:
-
-```bash
-  ssh root@<Boards iPv4-address>
-  ''''
+    ```bash
+      ssh root@<Boards iPv4-address>
+    ```
 2. Use the Passwort `eit`
   * no other autentifications are requiered
   * The default SSH-Port (22) is here used 
@@ -14,22 +13,22 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
 
 ## Toogeling the HPS-LED of your Board
 1. Following turns the HPS Led on
-  '''' 
+    ```bash
     echo 100 > /sys/class/leds/hps_led0/brightness
-  ''''
-2. To turn of the LED use type this:
-  '''' 
+  ```
+2. To turn of the LED with:
+    ```bash
     echo 0 > /sys/class/leds/hps_led0/brightness
-  ''''
+  ```
 3. To toogle the LED is a *BlinkLED* Python scipt pre-installed
   * Try it out:
-    '''' 
+    ```bash 
     python3 blinkLed.py
-   ''''
+   ```
 4. With `nano`- Editor it is posible to change the script
-   '''' 
+    ```bash 
     nano blinkLed.py
-   ''''
+   ```
    * later will be a pleasant be shown (Level 4) 
    
 ## Opening *rsYocto* Info Paper 
@@ -48,17 +47,17 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
   with a "System ID Peripheral" written with ID (0xcafeacdc)
   * The Module is connected via the Lightweight-HPS-to-FPGA interface to the HPS
   * Use following command to read the System ID:
-       ''''shell 
+       ```bash
        FPGA-readBridge -lw 30
-       '''''
+       ```
     * The Suffix "-lw" selects the Lightweight-HPS-to-FPGA interface
     * "30" is the address offset to read given by the Intel Qurtus Plattorm Designer
   * The Suffix "-b" allows to use this command into a Python-,C++ or PHP application
-      ''''shell 
+       ```bash
        FPGA-readBridge -lw 30 -b
-      '''''
+      ```
   
   2. read the Status of the FPGA-fabric with follwoing command:
-       ''''shell 
+       ```bash
        FPGA-status
-       '''''
+       ```
