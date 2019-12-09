@@ -43,7 +43,7 @@ ___
 **Build, deployed and debugged your applications over the network**
 
 ![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote developemed IDEs")
-**Poerfull remote developemed IDEs**
+**Poerfull remote developemed IDEs and Web server to install your web interface**
 <br>
 # Built With
 * [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) - Linux
