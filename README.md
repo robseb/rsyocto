@@ -76,7 +76,7 @@ The entries guide in the usege and the development of rsyocto applications is pa
 
 # Development process of *rsYocto*
 
-![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpgs.jpg?raw=true "rsYocto requiered building steps")
+![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto requiered building steps")
 **Applied Build Flow to create *rsYocto* **
 
 # Author
