@@ -52,7 +52,7 @@ The entries guide in the usege and the development of rsyocto applications is pa
 
 | Level | Objective | Guide
 |:--|:--|:--|
-| 1 | **Booting rsyocto on your Board** | [**Getting started Guide**](../doc/guide/1_Booting.md)
+| 1 | **Booting rsyocto on your Board** | [**Getting started Guide**](/doc/guide/1_Booting.md)
 | 2 | **Using SSH to controll and reconfige the FPGA** | iiii
 | 3 | **Debugging C++ applications remotely** | iiii
 | 4 | **Debugging Python applications remotely** | iiii
