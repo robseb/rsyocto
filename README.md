@@ -58,6 +58,7 @@ The entries guide in the usege and the development of rsyocto applications is pa
 | 4 | **Debugging Python applications remotely** | [Guide](doc/guides/4_Python.md)
 | 5 | **Developing a new FPGA configuration**| [Guide](doc/guides/5_newFPGAconf.md)
 | 6 | **Adding new Yocto layers to rsyocto** | [Guide](doc/guides/6_AddingNewYoctoLayer.md)
+<br>
 
 # Built With
 * [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) - Linux
@@ -71,8 +72,12 @@ The entries guide in the usege and the development of rsyocto applications is pa
   * [meta-networking](https://github.com/openembedded/meta-openembedded/tree/master/meta-networking) 
 * [meta-linaro](https://git.linaro.org/openembedded/meta-linaro.git)
 * [meta-rstools](https://github.com/robseb/meta-rstools)
-
 <br>
+
+# Development process of *rsYocto*
+
+![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpgs.jpg?raw=true "rsYocto requiered building steps")
+**Applied Build Flow to create *rsYocto* **
 
 # Author
 
