@@ -15,13 +15,12 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
 1. Following turns the HPS Led on
     ```bash
     echo 100 > /sys/class/leds/hps_led0/brightness
-  ```
+    ```
 2. To turn of the LED with:
     ```bash
     echo 0 > /sys/class/leds/hps_led0/brightness
-  ```
+   ```
 3. To toogle the LED is a *BlinkLED* Python scipt pre-installed
-  * Try it out:
     ```bash 
     python3 blinkLed.py
    ```
@@ -29,7 +28,7 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
     ```bash 
     nano blinkLed.py
    ```
-   * later will be a pleasant be shown (Level 4) 
+   * later will be a pleasant way be shown (Level 4) 
    
 ## Opening *rsYocto* Info Paper 
   * For every *rsYocto*-Version is a Information Shied on the Appace Webserver installed
