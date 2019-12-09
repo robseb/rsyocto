@@ -32,7 +32,7 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 *required building steps for rsYocto**
 <br>
 # Built With
-* [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625] (https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) 
+* [Intel SoC FPGA Embedded Development Suite 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) 
 <br>
 # Author
 + **Robin Sebastian**
