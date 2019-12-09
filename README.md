@@ -53,11 +53,11 @@ The entries guide in the usege and the development of rsyocto applications is pa
 | Level | Objective | Guide
 |:--|:--|:--|
 | 1 | **Booting rsyocto on your Board** | [**Getting started Guide**](doc/guides/1_Booting.md)
-| 2 | **Using SSH to controll and reconfige the FPGA** | iiii
-| 3 | **Debugging C++ applications remotely** | iiii
-| 4 | **Debugging Python applications remotely** | iiii
-| 5 | **Developing a new FPGA configuration**| iii
-| 6 | **Adding new Yocto layers to rsyocto** | iii
+| 2 | **Using SSH to controll and reconfige the FPGA** |[Guide](doc/guides/2_SSH_FPGA.md)
+| 3 | **Debugging C++ applications remotely** | [Guide](doc/guides/3_CPP.md)
+| 4 | **Debugging Python applications remotely** | [Guide](doc/guides/4_Python.md)
+| 5 | **Developing a new FPGA configuration**| [Guide](doc/guides/5_newFPGAconf.md)
+| 6 | **Adding new Yocto layers to rsyocto** | [Guide](doc/guides/6_AddingNewYoctoLayer.md)
 
 # Built With
 * [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) - Linux
