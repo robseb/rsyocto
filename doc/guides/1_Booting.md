@@ -1,17 +1,14 @@
 # Booting rsyocto on your Board
 This guide shows how to install rsyocto on SD and boot them on Terasic DE10 FPGA Board. 
 
-## Installation of the WKD 
-
-+ Step by Step MSDN Guide: [Debug Universal Drivers - Step-by-Step Lab (Echo Kernel Mode) - Windows drivers \| Microsoft Docs](https://docs.microsoft.com/en-us/windows-hardware/drivers/debugger/debug-universal-drivers---step-by-step-lab--echo-kernel-mode-)  
-+ Requiered Compunents on the Host (machine with Visual Studio)
-  + Windows Driver Kit (WDK) (includes Plugin for Visual Studio)
-+ Requiered compunents on the traget computer (machine with the Driver under Test)
-  + Windows SDK 
-+ booth computers must be connected to a domain and looged in with the same acount
-+ open an command prompt with admin rights on the **target computer** and run folowing CMDs:
-  ````shell
-  bcdedit /set {default} DEBUG YES
-  bcdedit /set TESTSIGNING ON 
-  ````
-+ Disable on both computers the Windows Firewall
+## Creating a bootebil SD-Card 
+1. Download the newest Image of *rsYocto* for your Board
+  + The final Images are located inside the **"relase part"** of this Github repositorie
+  + Suffix decoding for the Images 
+  
+  | File Suffix | FPGA | suppored Board
+  |:--|:--|:--|
+  | *_DE10STD* | Intel Cyclone V | [Terrasic DE10-Standard](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=1081)
+  | *_D10NANO* | Intel Cyclone V | [Terrasic DE10-Nano](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=1046)
+  | *_HAN* | Intel Arria 10 | [Terrasic HAN Pilot Platform](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=228&No=1133)
+ 2. Instert a Micro SD-Card (1GB or greater) into your coumputer  
