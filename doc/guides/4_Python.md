@@ -39,7 +39,7 @@ With the following guide description Microsoft the function of Visual Studio Cod
       ``````shell 
       ssh %REMOTEHOST% "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat ~/tmp.pub >>  ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && rm -f ~/tmp.pub"
       ``````
-5. Afeter a change of the Board, *rsYocto*-Version* or the iPv4-Adress you must delate the content of folloging folder  `C:\Users\<USER Name>\.ssh)` and repaied the Steps 1-4
+5. Afeter a change of the Board, *rsYocto*-Version or the iPv4-Adress **you must be delate the content of this folder**  `C:\Users\<USER Name>\.ssh)` and repaied the Steps 1-4
 
 ### II. Installation Visual Studio Code Insider and configuration of remote access
 * Download and install the latest version of **Visual Studio Code Insider**:
@@ -66,7 +66,7 @@ With the following guide description Microsoft the function of Visual Studio Cod
   ![Alt text](VisualCodeConfig3.jpg?raw=true "Visual Studio Configuration 3")
  
 * Configure the name and Ip-Address by adding following to the conf-file
-  (change the **HostName** with the **IPv4-Adress of remote board**):
+  (change the **HostName** with the **IPv4-Adress of your board**):
 ``````shell
 Host rsYocto
     ForwardAgent yes
@@ -77,66 +77,86 @@ Host rsYocto
 * Save and close this configuration file
 * If a error occured close and restart Visual Studio Code Insider and try it again
 
-### III. Connection of the Board with Visual Studio Code insider
-* open Visual Studio Code Insider
-* select inside the side bar "**Remote SSH**" 
+### III. Connection of the Board with Visual Studio Code Insider
+* Open Visual Studio Code Insider
+* Select inside the side bar "**Remote SSH**" 
 + under the tap "**Connections**" should not appear the entries for the previously add entry with the name **"rsYocto"**
 * right click on this entry and choose **"Connect Host in current Window"**
 
   ![Alt text](VisualCodeConfig4.jpg?raw=true "Visual Studio Configuration 4")
  
-  * the first attach attempt takes a little bit longer, because the Visual Studio downloads and install the Visual Studio Code Server
-  **(Be shure that the board is connected to the internet)**
+  * The first attach attempt takes a little bit longer, because the Visual Studio downloads and install the Visual Studio Code Server
+  * **(Be shure that the board is connected to the internet)**
   * in case the connection to the board is established successfully a green button edge item with *connected symbol* should appear
 
-### IV. Accsing remotly files 
-* be sure that a proper SSH connection is established
-* select inside the side bar "**Explorer**" 
-* press here the button "**Open Folder**"
-* Visual Studio Code Insider should now ask for remote directory to add 
-  * default: *"/home/root/"* --> user root folder
-  * websever: *"/usr/share/apache2/default-site/htdocs"* --> every file inside this folder will by acessebil with a webbrauser
+### IV. Accsing the rootfs files remotly 
+*  Visual Studio Code Insider access the rootfs of *rsYocto*
+*  On *rsYocto* are some Python samples applications pre-installed
+*  Navigate on the Sidebar to **"Explorer"** click the blue **"Open Folder"**
+*  Visual Studio Code Insider should now ask for remote directory to add 
+  * default: `"/home/root/"` --> user root folder with the Python examples
+  * websever: `"/usr/share/apache2/default-site/htdocs"` --> every file inside this folder will by acessebil with a webbrauser
 * click okay
 
+ ![Alt text](VisualCodeConfig5.jpg?raw=true "Visual Studio Configuration 5")
+* Now you can acces the files of the rootfs
 
-### V.  Preparing the Python remote development
-* be shure that a proper SSH connection is established
-* select inside the sidebar "**Extension**"
+ ![Alt text](VisualCodeConfig6.jpg?raw=true "Visual Studio Configuration 6")
+
+
+### V. Preparing the Python remote development
+* Select inside the sidebar "**Extension**"
 * select the prevosly installed extension "**Python**" (by Microsoft)
-* press the green button "**Install on SSH:rs.yocto**"
-* with this imput start Visual Studio Code Server to install the requiered remote python debuging compunents
-* press the "**reload requiered**" to actavte the changes 
+* Press the green button "**Install on SSH:rsYocto**"
+
+ ![Alt text](VisualCodeConfig7.jpg?raw=true "Visual Studio Configuration 7")
+ 
+* With this imput start Visual Studio Code Server with the installation of the requiered remote python debuging compunents
+* Press then  "**reload requiered**" to actavte the changes 
 <br>
 
-* select inside the side bar "**Debug**" 
-* Add a new debugging configuration by selecting the menueiteam **"Debug/Add Configuration.."**
-* a json file should appear
-*  insiered following to this file:
-      ``````json
-      {
-      "version": "0.2.0",
-      "configurations": [
-            {
-                "type": "python",
-                "request": "launch",
-                "name": "Python curent file remotly",
-                "program": "${file}",
-                "console":"integratedTerminal"
-            }
-          ]
-      }
-      ``````
-* save and close the file
+### VI. Debugging Python Code remotly
+* Open any pre-installed Python sample
+* Navigate to the sidebar Icon **"Debug and Run"** and click on the "**Debug with Python**" Button
+* Then choose in the Drop Down Menue "**Python File**" 
 
-### VI.  Debugging Python code remotly
-*  be shure that a proper SSH connection is established
-*  open remotly any Python code file 
+ ![Alt text](VisualCodeConfig8.jpg?raw=true "Visual Studio Configuration 8")
+ 
+ * Alterevly you can configre the Debugger with following json file:
+      ``````json
+            {
+            "version": "0.2.0",
+            "configurations": [
+                  {
+                      "type": "python",
+                      "request": "launch",
+                      "name": "Python curent file remotly",
+                      "program": "${file}",
+                      "console":"integratedTerminal"
+                  }
+                ]
+            }
+      ``````
+  * The remote Debugging should start     
+  * If not: press the "**Start Debuging**" button or **F5**
+  
+       ![Alt text](VisualCodeConfig9.jpg?raw=true "Visual Studio Configuration 9")
+ 
 *  select inside the side bar "**Debug**" 
 *  choose inside the drop down menu the prevosly configuered debug configuration with the name "**Python curent file remotly**"
 *  press the "**Start Debuging**" button or **F5** to debugg the open Python code
 
-### VII.  Show system resource
-* to show the CPU load, Memory usage and more insde Visual Studio Code install the extension **"Resource Monitor"** (by mutantdino) ([Resource Monitor - Visual Studio Marketplace](https://marketplace.visualstudio.com/items?itemName=mutantdino.resourcemonitor))
-* add install this extation to remote boar with the button: "**Install on SSH:rs.yocto**"
-* reload Visual Studio Code Insider
-* now should aper at the button of the window a bar with the system resources
+### VII.  Use the Python Package Manager PiP
+* The pre-installed example "*serialEchoDemo.py*" requiers the [pySerial](https://pyserial.readthedocs.io/en/latest/shortintro.html)-module
+* "*rsYocto*" has a full suppored for Python PiP
+* You can install almost all PiP-moudles 
+* Use the PiP [Homepage](https://pypi.org/) to find a module and then run following comand to install that with *rsYocto*:
+     ````bash
+      python3 -m pip install --upgrade <moduel to install> --trusted-host pypi.org --trusted-host files.pythonhosted.org 
+     ````
+* To install *pySerial* use the String:
+     ````bash
+      python3 -m pip install --upgrade pyserial --trusted-host pypi.org --trusted-host files.pythonhosted.org 
+     ````
+
+ ## Continue with the next level: [Analyze your applications with ARM Streamline](5_Streamline.md)
