@@ -58,7 +58,6 @@ The entries guide in the usege and the development of rsyocto applications is pa
 | 4 | **Debugging Python applications remotely** | [Guide](doc/guides/4_Python.md)
 | 6 | **Analyze your applications with ARM Streamline** | [Guide](doc/guides/5_Streamline.md)
 | 7 | **Developing a new FPGA configuration**| [Guide](doc/guides/6_newFPGAconf.md)
-| 8 | **Adding new Yocto layers to rsyocto** | [Guide](doc/guides/7_AddingNewYoctoLayer.md)
 <br>
 
 # Built With
