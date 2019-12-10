@@ -59,7 +59,7 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
     * The FPGA Leds are connected via a "PIO (Parallel IP)" to the Lightweight Bus
     * run following command to turn the LEDs off
          ```bash
-           FPGA-writeBridge -lw 20 0
+         FPGA-writeBridge -lw 20 0
          ```
       * The Suffix "-lw" selects the Lightweight-HPS-to-FPGA interface
       * "30" is the (hex) address offset to write given by the Intel Qurtus Plattorm Designer
@@ -67,14 +67,14 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
   3. Put a Hex Puttern to the FPGA LEDs
     * With following comand can you write any hex pattern over the AXI-Bus 
          ```bash
-           PGA-writeBridge -lw 20 -h acdc
+         PGA-writeBridge -lw 20 -h acdc
          ```
       * The Suffix "-h" selects HEX value inputs 
   4. Control a single FPGA LED
     * Enabling or Disabling single Bits is also posible with the *rstools* 
         * Put Led No. 8 on 
          ```bash
-            FPGA-writeBridge -lw 20 -b 8 1
+         FPGA-writeBridge -lw 20 -b 8 1
          ```
       * The Suffix "-h" selects HEX value inputs 
   5. H!!! ier Python script zum Stuern der LEDs einfügen !!!!    
@@ -92,20 +92,20 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
       * The requiered *.rbf* configuration file ("gpiConf.rbf") is pre-installed on the home directery
       * we can run following command to configre the FPGA with this file:
            ```bash
-                FPGA-writeConfig  -f gpiConf.rbf
+           FPGA-writeConfig  -f gpiConf.rbf
            ```
       * Now should the be the LEDs connected with the direct 32-Bit register
       * Enable the LEDs over this way with following command:
             ```bash
-                    FPGA-gpoWrite -h acdc
+            FPGA-gpoWrite -h acdc
             ```
        * On other direction writes the FPGA the value 0xacdcacdc to the HPS
             ```bash
-                FPGA-gpiRead -h acdc
+            FPGA-gpiRead -h acdc
             ```
        * After this test we can write the orginal FPGA configurartion
        * On *rsYocto* the startup FPGA configuration is located here `/usr/rsyocto/running_bootloader_fpgaconfig.rbf`
        * Use the Suffix "-r" to install the orginal FPGA configuration 
             ```bash
-               FPGA-writeConfig -r 
+            FPGA-writeConfig -r 
             ```
