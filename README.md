@@ -56,8 +56,9 @@ The entries guide in the usege and the development of rsyocto applications is pa
 | 2 | **Using SSH to controll and reconfige the FPGA** |[Guide](doc/guides/2_SSH_FPGA.md)
 | 3 | **Debugging C++ applications remotely** | [Guide](doc/guides/3_CPP.md)
 | 4 | **Debugging Python applications remotely** | [Guide](doc/guides/4_Python.md)
-| 5 | **Developing a new FPGA configuration**| [Guide](doc/guides/5_newFPGAconf.md)
-| 6 | **Adding new Yocto layers to rsyocto** | [Guide](doc/guides/6_AddingNewYoctoLayer.md)
+| 6 | **Analyze your applications with ARM Streamline** | [Guide](doc/guides/5_Streamline.md)
+| 7 | **Developing a new FPGA configuration**| [Guide](doc/guides/6_newFPGAconf.md)
+| 8 | **Adding new Yocto layers to rsyocto** | [Guide](doc/guides/7_AddingNewYoctoLayer.md)
 <br>
 
 # Built With
