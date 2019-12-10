@@ -29,7 +29,7 @@ ___
 `adduser` `arm-poky-linux-gnueabi-cpp` `asc2log` `autoupdate` `agetty` `ash` `apachectl` 
 `arm-poky-linux-gnueabi-g++` `autoconf` `ar` `arm-poky-linux-gnueabi-gcc` `autoheader`
 `b2sum` `bg` `bzegrep` `bash` `blkdiscard` `bunzip2` `bzcat` `bzfgrep` `bzless` `basename` 
-`bcmserver``busybox` `bzcmp` `bzip2``c++` `cangen` `ccache` `chpasswd` `csplit` `cangw` `chgpasswd`
+`bcmserver` `busybox` `bzcmp` `bzip2` `c++` `cangen` `ccache` `chpasswd` `csplit` `cangw` `chgpasswd`
 `compgen` `csplit.coreutils` `canlogserver` `cfdisk` `chgrp` `chroot` `cal` `canplayer`  `chgrp.coreutils` `chroot.coreutils` `cmp.diffutils` `compopt` `ctrlaltdel` `cal.util-linux` `cansend` `chattr` `chmem` `chrt` `caller` `cansniffer` `chcon`
 `chrt.util-linux` `colcrt` `coproc` `cut.coreutils` `can-calc-bit-timing` `chcon.coreutils` `chmod.coreutils` `chsh` `colrm`
 `cvtsudoers` `canbusload` `cat` `chcpu` `choom` `cp.coreutils` `candump` `chvt` `comm` `cpio` `canfdtest` `cc` `chfn` 
