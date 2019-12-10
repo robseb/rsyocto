@@ -6,7 +6,7 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
     ```bash
       ssh root@<Boards iPv4-address>
     ```
-2. Use the Passwort `eit`
+2. Use the Passwort: `eit`
   * no other autentifications are requiered
   * The default SSH-Port (22) is here used 
 3. Now should the *rsYocto* Slapsrean apper
@@ -16,14 +16,14 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
     ```bash
     echo 100 > /sys/class/leds/hps_led0/brightness
     ```
-2. To turn of the LED with:
+2.  Turn of the LED with:
     ```bash
     echo 0 > /sys/class/leds/hps_led0/brightness
-   ```
+    ```
 3. To toogle the LED is a *BlinkLED* Python scipt pre-installed
     ```bash 
     python3 blinkLed.py
-   ```
+    ```
 4. With `nano`- Editor it is posible to change the script
     ```bash 
     nano blinkLed.py
@@ -42,21 +42,70 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
   `FPGA-status` `FPGA-writeBridge` `FPGA-writeConfig`
   * The Suffix "-h" after any comand gives you detailed informations  
   1. Try to read a AVALON-Bus Module
-  * during the Boot process is a FPGA-Configuration written with Configuration 
-  with a "System ID Peripheral" written with ID (0xcafeacdc)
-  * The Module is connected via the Lightweight-HPS-to-FPGA interface to the HPS
-  * Use following command to read the System ID:
-       ```bash
-       FPGA-readBridge -lw 30
-       ```
-    * The Suffix "-lw" selects the Lightweight-HPS-to-FPGA interface
-    * "30" is the address offset to read given by the Intel Qurtus Plattorm Designer
-  * The Suffix "-b" allows to use this command into a Python-,C++ or PHP application
-       ```bash
-       FPGA-readBridge -lw 30 -b
-      ```
-  
-  2. read the Status of the FPGA-fabric with follwoing command:
+      * during the Boot process is a FPGA-Configuration written with Configuration 
+      with a "System ID Peripheral" written with ID (0xcafeacdc)
+      * The Module is connected via the Lightweight-HPS-to-FPGA interface to the HPS
+      * Use following command to read the System ID:
+           ```bash
+           FPGA-readBridge -lw 30
+           ```
+      * The Suffix "-lw" selects the Lightweight-HPS-to-FPGA interface
+      * "30" is the (hex) address offset to read given by the Intel Qurtus Plattorm Designer
+      * The Suffix "-b" allows to use this command into a Python-,C++ or PHP application
+           ```bash
+           FPGA-readBridge -lw 30 -b
+           ```
+  2. Turn the FPGA Leds with a single comand on
+    * The FPGA Leds are connected via a "PIO (Parallel IP)" to the Lightweight Bus
+    * run following command to turn the LEDs off
+         ```bash
+           FPGA-writeBridge -lw 20 0
+         ```
+      * The Suffix "-lw" selects the Lightweight-HPS-to-FPGA interface
+      * "30" is the (hex) address offset to write given by the Intel Qurtus Plattorm Designer
+      
+  3. Put a Hex Puttern to the FPGA LEDs
+    * With following comand can you write any hex pattern over the AXI-Bus 
+         ```bash
+           PGA-writeBridge -lw 20 -h acdc
+         ```
+      * The Suffix "-h" selects HEX value inputs 
+  4. Control a single FPGA LED
+    * Enabling or Disabling single Bits is also posible with the *rstools* 
+        * Put Led No. 8 on 
+         ```bash
+            FPGA-writeBridge -lw 20 -b 8 1
+         ```
+      * The Suffix "-h" selects HEX value inputs 
+  5. H!!! ier Python script zum Stuern der LEDs einfügen !!!!    
+      
+  6. read the Status of the FPGA-fabric with follwoing command:
        ```bash
        FPGA-status
-       ```
+       ````
+      * This Status Codes are transmited by the FPGA Manager
+      * The FPGA should be in the User Mode
+7. Intel SoC-FPGAs have two 32-Bit register to interect with the FPGA directly
+      * To try this feature we can connect the FPGA LEDs with *rsYocto* 
+      * But now are the FPGA LEDs connected to LightWight Brige interface
+      * We need to change the FPGA Configuation
+      * The requiered *.rbf* configuration file ("gpiConf.rbf") is pre-installed on the home directery
+      * we can run following command to configre the FPGA with this file:
+           ```bash
+                FPGA-writeConfig  -f gpiConf.rbf
+           ```
+      * Now should the be the LEDs connected with the direct 32-Bit register
+      * Enable the LEDs over this way with following command:
+            ```bash
+                    FPGA-gpoWrite -h acdc
+            ```
+       * On other direction writes the FPGA the value 0xacdcacdc to the HPS
+            ```bash
+                FPGA-gpiRead -h acdc
+            ```
+       * After this test we can write the orginal FPGA configurartion
+       * On *rsYocto* the startup FPGA configuration is located here `/usr/rsyocto/running_bootloader_fpgaconfig.rbf`
+       * Use the Suffix "-r" to install the orginal FPGA configuration 
+            ```bash
+               FPGA-writeConfig -r 
+            ```
