@@ -40,7 +40,7 @@ ___
 `tee`  `tftp` `top` `tac.coreutils` `tcf-agent` `tail` `tcf-client` `telinit` `time` `ttytclsh` `telnet` `tar`              
 ___
 
-**Build, deployed and debugged your applications over the network**
+**Build, debug and your applications over the network**
 
 ![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote development IDEs")
 **Powerful remote development IDEs and a Web server to install your web interface**
