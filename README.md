@@ -87,7 +87,7 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 # Development process of *rsYocto*
 
 ![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto requiered building steps")
-**Complex applied Build Flow to create *rsYocto***
+**Required Build Flow to create Yocto**
 
 <br>
 
