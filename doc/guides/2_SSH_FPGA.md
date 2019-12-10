@@ -46,9 +46,9 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
       with a "System ID Peripheral" written with ID (0xcafeacdc)
     * The Module is connected via the Lightweight-HPS-to-FPGA interface to the HPS
     * Use following command to read the System ID:
-           ```bash
+        ```bash
              FPGA-readBridge -lw 30
-           ```
+        ```
       * The Suffix "-lw" selects the Lightweight-HPS-to-FPGA interface
       * "30" is the (hex) address offset to read given by the Intel Qurtus Plattorm Designer
       * The Suffix "-b" allows to use this command into a Python-,C++ or PHP application
@@ -109,4 +109,64 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
         ```bash
          FPGA-writeConfig -r 
         ```
+ ## Interact with Hard IP
+1. **I²c-Devices** 
+    * The Terasic DE10 Board have an [ADXL345](https://www.analog.com/en/products/adxl345.html)-Accelerometer on i2c0
+    * The `i2c-tools` allows to interact with this sensor
+    * Scan the i²c-Bus 0 to get the i²c-Address of the sensor 
+        ```bash
+            i2cdetect 0 
+        ```
+    * Only the i²c-address 0x53 should be found
+    * With this address we can read the Unique ID (0xE5) of the AXDL345
+        ```bash
+            i2cget -f 0 0x53 0
+        ```
+    * Format of this command: *i2cget -f <Bus Number> <i2c-Addess> <Address>*
+    * Try to read the X-Axis of the Accelerometer
+    * First we need to enable output of the Sensor
+         ```bash
+            i2cset -f 0 0x53 0x2D 8
+         ```
+    * Now we can read a X-Value 
+        ```bash
+           i2cget -f 0 0x53 0x32
+         ```
+2. **UART**     
+    * For Uart Devies is `minicom' pre-installed
+    * The following command opens the COM-Port 1
+         ```bash
+           mincom /dev/ttys1
+         ```
+    * This COM-Port is on the DE10 Board routed to FPGA I/O Pins
+    * Pres CMD+A, then Z and then Q to leave minicom 
+3. **SPI**
+    * In *rsYocto* are all driver to function as a SPI-Master
+    * Additionally the `spi-tools` are installed
+    * Please follow the documatation of the [spi-tools](https://github.com/cpb-/spi-tools)
+4. **CAN-Bus** (Intel Cylone V only)
+    * Intel Cyclone V FPGAs have two powerfull Bosch D-CAN Conntrollers embedded
+    * To interact with CAN Devices are the `can-tools` pre-installed
+    * The allow over internel network connection to read and write CAN-packes and to analaze the trafic
+    * To enable the CAN0 execute a command to enable the CAN network Port
+        ```bash
+         ip link set can0 type can 50000
+         ```
+    * "50000" are CAN Bitrate in Bit/s
+    * With next shown command it is posible to send a CAN Packes
+        ```bash
+            cansend can0 123#ADC1.ABC2
+        ```
+    * this loads a CAN-Package with the Content 0xABC1 and 0xABC2 and the ID 123 to the message FIFO
+    * Sniff the complete CAN-Bus
+         ```bash
+           cansiffer can0
+         ```
+    * Generate Dummy Payload 
+        ```bash
+        cancan can0
+        ```
+    * For more information please read the [can-tools](https://github.com/linux-can/can-utils) documentation
+    
+ 
  ## Continue with the next level: [Debugging C++ applications remotely](3_CPP.md)
