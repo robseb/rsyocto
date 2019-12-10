@@ -20,3 +20,5 @@ With ARM Streamline is a powerfull to Intel EDS included to trace debugg applica
 
 ![Alt text](StreamlineExampleRecord.jpg?raw=true "Streamline sample recourd")
 **Example: Streamline recourd during C++ compalation**
+
+ ## Continue with the next level: [Developing a new FPGA configuration](6_newFPGAconf.md)
