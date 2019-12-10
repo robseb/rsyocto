@@ -1,5 +1,5 @@
 # Booting *rsYocto* on your Board
-This guide shows how to install *rsYocto* on a **SD Card** and boot them on a Terasic FPGA development Board. 
+This guide shows how to install *rsYocto* on a **SD Card** and boot this on a Terasic FPGA development Board. 
 
 ## Create a bootable SD-Card 
 1. Download the newest Image of *rsYocto* for your Board
@@ -15,17 +15,17 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot them on a Te
  3. Use a "**Bootable SD Card Creation Tool**" to create a bootable image on the SD card
     + For example use the tool [Rufus](https://rufus.ie/) 
     + Ignore all warning message boxes
-  
+    ![Alt text](rufusSDbuilf.png?raw=true "rufus")
   ## Prepare your Board and open the console COM-Port
   1. Eject the SD Card from your Computer and insert them into the SD slot of your FPGA Board
   2. Change the MSEL-Bit switch to following setting: 
    ![Alt text](requiredMSEL.jpg?raw=true "Required MSEL-Bit Switch Selection")
   3. Connect your FPGA-Board with a **Ethernet cable to your network**
-    + Be sure that a **iPv4-DHCP** is active on this network 
-  4. Connect a USB Kabel to the FTDI Virtual **COM-Port** (USB CDC) and to your Computer
+     + Be sure that a **iPv4-DHCP** is active on this network 
+  4. Connect a USB Cable between the FTDI Virtual **COM-Port** (USB CDC) and your Computer
   5. **Open the COM-Port**
-    + You can use for example the tool [MobaXterm](https://mobaxterm.mobatek.net/)
-    + Use following settings: **`115200N8 (ASCII) with CR/LF` **
+     + You can use the tool [MobaXterm](https://mobaxterm.mobatek.net/) for example
+     + Use following settings: **`115200N8 (ASCII) with CR/LF` **
     
 ## Boot *rsYocto* on your FPGA-Board
   1. Power Up your FPGA Board
@@ -41,9 +41,9 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot them on a Te
  
  ## Find the iPv4 Address of your Board
  * Use following Linux Command to get the iPv4 Address of your Board
- ``shell
-  ifconfig
- `` 
+     ````shell
+      ifconfig
+     ```` 
  * the IP Address is also shown during the boot
  <br> 
  
