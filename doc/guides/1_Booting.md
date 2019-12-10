@@ -47,4 +47,14 @@ This guide shows how to install *rsYocto* on SD-Card and boot them on Terasic DE
  * the iP-Address is also shown during the boot
  <br>
  
+## Connecting to *rsYocto* with SSH
+1. Open Linux or Windows Comand Promt (Windows 10) and insiert this command to connect to your Board:
+    ```
+      ssh root@<Boards iPv4-address>
+    ```
+2. Use the Passwort: `eit`
+  * no other autentifications are requiered
+  * The default SSH-Port (22) is here used 
+3. Now should the *rsYocto* Slapsrean apper
+
  ## Continue with the next level: [Using SSH to controll and reconfige the FPGA](2_SSH_FPGA.md)
