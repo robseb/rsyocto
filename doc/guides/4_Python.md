@@ -107,24 +107,25 @@ Host rsYocto
 * with this imput start Visual Studio Code Server to install the requiered remote python debuging compunents
 * press the "**reload requiered**" to actavte the changes 
 <br>
+
 * select inside the side bar "**Debug**" 
 * Add a new debugging configuration by selecting the menueiteam **"Debug/Add Configuration.."**
 * a json file should appear
 *  insiered following to this file:
-``````json
-{
-"version": "0.2.0",
-"configurations": [
+      ``````json
       {
-          "type": "python",
-          "request": "launch",
-          "name": "Python curent file remotly",
-          "program": "${file}",
-          "console":"integratedTerminal"
+      "version": "0.2.0",
+      "configurations": [
+            {
+                "type": "python",
+                "request": "launch",
+                "name": "Python curent file remotly",
+                "program": "${file}",
+                "console":"integratedTerminal"
+            }
+          ]
       }
-    ]
-}
-``````
+      ``````
 * save and close the file
 
 ### VI.  Debugging Python code remotly
