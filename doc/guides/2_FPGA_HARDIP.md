@@ -1,4 +1,4 @@
-# Using SSH to controll and reconfige the FPGA
+# Using Hard IP, FPGA-IP and reconfigre the FPGA fabric
 This guide shows how to connect via SSH remotly to *rsYocto* and how simple it is to read FPGA IP and changing the FPGA configuration. 
 
 ## Toogeling the HPS-LED of your Board
