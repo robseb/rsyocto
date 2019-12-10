@@ -152,7 +152,7 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
         ```bash
           ip link set can0 type can bitrate 125000
          ```
-    * "50000" are CAN Bitrate in Bit/s
+    * "125000" are CAN Bitrate in Bit/s
     * With next shown command it is posible to send a CAN Packes
         ```bash
             cansend can0 123#ADC1.ABC2
