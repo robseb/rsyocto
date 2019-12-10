@@ -35,7 +35,7 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
   * this Papers contains informations about the configuration of the FPGA IP and there Addresses 
   * Open it by typing the iPv4-Address of your Board into a Web brauser
   
-## Interact with FPGA IP
+## Interact with FPGA
   * My *rstools*-layer make the interaction with any FPGA IP really simply
   * Type "*FPGA* and press *TAB* inside your SSH-console to see all FPGA comands:
   `FPGA-gpiRead` `FPGA-gpoWrite` `FPGA-readBridge` `FPGA-readMSEL` `FPGA-resetFabric`
