@@ -109,3 +109,4 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
         ```bash
          FPGA-writeConfig -r 
         ```
+ ## Continue with the next level: [Debugging C++ applications remotely](3_CPP.md)
