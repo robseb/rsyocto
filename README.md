@@ -96,4 +96,4 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 * **Robin Sebastian**
 
 *rsYocto* was developed a year ago as a student project by me and further for my master thesis optimized.
-No companies are involved in this project. I ‘m looking for an interesting job offer up to summer 2020 to  share and advance my shown skills. 
+No companies are involved in this project. I ‘m looking for an interesting job offer up to summer 2020 to  share and deepen my shown skills. 
