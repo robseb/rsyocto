@@ -150,21 +150,22 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
     * The allow over internel network connection to read and write CAN-packes and to analaze the trafic
     * To enable the CAN0 execute a command to enable the CAN network Port
         ```bash
-         ip link set can0 type can 50000
+          ip link set can0 type can bitrate 125000
          ```
     * "50000" are CAN Bitrate in Bit/s
     * With next shown command it is posible to send a CAN Packes
         ```bash
             cansend can0 123#ADC1.ABC2
+            ip link set up can0
         ```
     * this loads a CAN-Package with the Content 0xABC1 and 0xABC2 and the ID 123 to the message FIFO
     * Sniff the complete CAN-Bus
          ```bash
-           cansiffer can0
+           cansniffer can0
          ```
     * Generate Dummy Payload 
         ```bash
-        cancan can0
+        cangen can0
         ```
     * For more information please read the [can-tools](https://github.com/linux-can/can-utils) documentation
     
