@@ -38,3 +38,5 @@ The following ilustration shows how *rsYocto* and Microsoft Visual Studio work t
  * With the Linux Posix Comands have Microsoft Visual Stuio some iusues
  * I solved this problem by creating a special Visual Studio soulution
  * You can use this project as a templat 
+
+ ## Continue with the next level: [Debugging Python applications remotely](4_Python.md)
