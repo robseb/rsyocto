@@ -74,7 +74,7 @@ Also are here commands given to change the FPGA fabric configuration.
          ```bash
            FPGA-writeBridge -lw 20 -b 8 1
          ```
-  5. The next Python snippet demonstrated how to interact with FPGA-IP 
+  5. The next Python snippet demonstrates how to interact with FPGA-IP 
         ````python
           for count in range(1024):
             os.system('FPGA-writeBridge -lw 38 -h '+ str(count) +' -b')
