@@ -15,7 +15,9 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot this on a Te
  3. Use a "**Bootable SD Card Creation Tool**" to create a bootable image on the SD card
     + For example use the tool [Rufus](https://rufus.ie/) 
     + Ignore all warning message boxes
+    
     ![Alt text](rufusSDbuilf.png?raw=true "rufus")
+    
   ## Prepare your Board and open the console COM-Port
   1. Eject the SD Card from your Computer and insert them into the SD slot of your FPGA Board
   2. Change the MSEL-Bit switch to following setting: 
