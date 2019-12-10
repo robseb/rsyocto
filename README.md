@@ -23,7 +23,7 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 ![Alt text](doc/symbols/rsYoctoLayers.jpg?raw=true "System Overview")
 **System Overview of rsYocto**
 ___
-**Main selected pre-installed Linux commands:**
+**Selected pre-installed Linux commands:**
 
 `arch` `arm-poky-linux-gnueabi-gcc-nm` `automake` `addgroup` `arm-poky-linux-gnueabi-ar` 
 `adduser` `arm-poky-linux-gnueabi-cpp` `asc2log` `autoupdate` `agetty` `ash` `apachectl` 
