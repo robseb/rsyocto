@@ -1,11 +1,11 @@
 ![Alt text](doc/symbols/rsYoctoLogo.jpg?raw=true "rsYocto Logo")
 
-### *rsYocto* is an open-source embedded Linux System designed with the Yocto Project and optimized for Intel SoC-FPGAs (*Intel Cyclone V* and *Intel Arria 10*) to allow the best customization for the strong requirements of modern embedded applications.
+### *rsYocto* is an open-source embedded Linux System designed with the Yocto Project and optimized for Intel SoC-FPGAs (*Intel Cyclone V* and *Intel Arria 10*) to achieve the best customization for the strong requirements of modern embedded applications.
 <br>
 
-*rsYocto* implements a **modern Linux Kernel (5.1)** and brings a set of today fundamentally needed components to Intel SoC-FPGAs and help to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of Things- or deep learning applications.
+*rsYocto* implements a **modern Linux Kernel (5.1)** and brings a set of today fundamentally needed components to Intel SoC-FPGAs and help to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
 
-To realize that **Python3** with the Python Package manager **pip** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for is best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface.
+To realize that are **Python3** with the Python Package manager **pip** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for is best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface.
 
 During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. *rsYocto* application can **build, deployed and even debugged over the network**. With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* is a simple installment and quick jumpstart in the development process possible, because all required compilers run directly on *rsYocto*.
 
@@ -15,7 +15,7 @@ The “*makersYoctoSDImage*”- script allow developer to **customize the *rsYoc
 
 The final *rsYocto*-Image can be **installed** on a **SD-Card** with any commonly **used Boot-Image creating tools**. Versions are available for the **Terasic DE10 Standard-** (Cyclone V), **Terasic DE10 Nano-** (Cyclone V) and **Terasic Han Pilot** (Arria 10).
 
-On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connect clients to a Hard-IP Bus, because the HPS interfaces with the pre-installed configuration are routed to FPGA I/O-Pins. 
+On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connect external devives to a Hard-IP Bus, because the HPS interfaces with the pre-installed configuration are routed to FPGA I/O-Pins. 
 <br>
 
 # Features of *rsYocto*
@@ -23,7 +23,7 @@ On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connec
 ![Alt text](doc/symbols/rsYoctoLayers.jpg?raw=true "System Overview")
 **System Overview of rsYocto**
 ___
-**Main pre-installed Linux commands**
+**Main selected pre-installed Linux commands:**
 
 `arch` `arm-poky-linux-gnueabi-gcc-nm` `automake` `addgroup` `arm-poky-linux-gnueabi-ar` 
 `adduser` `arm-poky-linux-gnueabi-cpp` `asc2log` `autoupdate` `agetty` `ash` `apachectl` 
@@ -52,11 +52,11 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 
 | Level | Objective | Guide
 |:--|:--|:--|
-| 1 | **Booting rsyocto on your Board** | [**Getting started Guide**](doc/guides/1_Booting.md)
-| 2 | **Using Hard IP, FPGA-IP and reconfigre the FPGA fabric** |[Step by step guide 1](doc/guides/2_FPGA_HARDIP.md)
+| 1 | **Booting *rsYocto* on your Board** | [**Getting started Guide**](doc/guides/1_Booting.md)
+| 2 | **Use of Hard IP, FPGA-IP and configuration of the FPGA fabric** |[Step by step guide 1](doc/guides/2_FPGA_HARDIP.md)
 | 3 | **Debugging C++ applications remotely** | [Step by step guide 2](doc/guides/3_CPP.md)
 | 4 | **Debugging Python applications remotely** | [Step by step guide 3](doc/guides/4_Python.md)
-| 5 | **Analyze your applications with ARM Streamline** | [Step by step guide 4](doc/guides/5_Streamline.md)
+| 5 | **Analyzation of applications with ARM DS-5 Streamline** | [Step by step guide 4](doc/guides/5_Streamline.md)
 | 6 | **Developing a new FPGA configuration**| [Step by step guide 5](doc/guides/6_newFPGAconf.md)
 <br>
 
@@ -95,5 +95,5 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 
 * **Robin Sebastian**
 
-*rsYocto* Yocto was developed a year ago as a student project and further for my master thesis optimized.
-No companies were involved in this project. I ‘m looking for an interesting job offer up to summer 2020 witch possibly connects my mentioned work fields.
+*rsYocto* was developed a year ago as a student project by me and further for my master thesis optimized.
+No companies are involved in this project. I ‘m looking for an interesting job offer up to summer 2020 to  share and advance my shown skills. 
