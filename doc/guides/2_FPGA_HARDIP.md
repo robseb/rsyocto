@@ -1,8 +1,8 @@
-# Using Hard IP, FPGA-IP and reconfigre the FPGA fabric
-This guide shows how to connect via SSH remotly to *rsYocto* and how simple it is to read FPGA IP and changing the FPGA configuration. 
+# Use of Hard IP, FPGA-IP and configuration of the FPGA fabric
+This guide shows how to connect remotely to *rsYocto* via SSH and how simple it is to access FPGA IP and changing the FPGA configuration.
 
-## Toogeling the HPS-LED of your Board
-1. Following turns the HPS Led on
+## Toggling the HPS-LED of your Board
+1. Turns the HPS Led on by typing to the console:
     ```bash
       echo 100 > /sys/class/leds/hps_led0/brightness
     ```
@@ -10,11 +10,11 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
     ```bash
      echo 0 > /sys/class/leds/hps_led0/brightness
     ```
-3. To toogle the LED is a *BlinkLED* Python scipt pre-installed
+3. To Toggling the LED is a *BlinkLED* Python scipt pre-installed
     ```bash 
       python3 blinkLed.py
     ```
-4. With `nano`- Editor it is posible to change the script
+4. With `nano`- Editor it is possible to change the script
     ```bash 
      nano blinkLed.py
    ```
@@ -22,26 +22,33 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
    
 ## Opening *rsYocto* Info Paper 
   * For every *rsYocto*-Version is a Information Shied on the Appace Webserver installed
-  * this Papers contains informations about the configuration of the FPGA IP and there Addresses 
+  * This Papers contains informations about the configuration of the FPGA IP and there Addresses 
   * Open it by typing the iPv4-Address of your Board into a Web brauser
-  
-## Interact with FPGA
+  * Of cause it is posible to install any other homepage on *rsYocto*
+     * Insiert the homepage file to: `/usr/share/apache2/default-site/htdocs`
+     * Restart the Appache Server with following command
+        ````bash
+            /etc/init.d/apache2 stop
+            /etc/init.d/apache2 start
+        ````
+## Interacting with FPGA
   * My *rstools*-layer make the interaction with any FPGA IP really simply
-  * Type "*FPGA* and press *TAB* inside your SSH-console to see all FPGA comands:
+  * Type "*FPGA* and press *TAB* inside your SSH-console to see all FPGA commands:
   `FPGA-gpiRead` `FPGA-gpoWrite` `FPGA-readBridge` `FPGA-readMSEL` `FPGA-resetFabric`
   `FPGA-status` `FPGA-writeBridge` `FPGA-writeConfig`
-  * The Suffix "-h" after any comand gives you detailed informations  
-  1. Try to read a AVALON-Bus Module
-    * during the Boot process is a FPGA-Configuration written with Configuration 
-      with a "System ID Peripheral" written with ID (0xcafeacdc)
+  * The Suffix `"-h"` after any command gives you detailed information’s   
+  1. Reading a AVALON-Bus FPGA Module
+    * During the Boot process is a FPGA-Configuration written with Configuration 
+      with a "*System ID Peripheral*"-component (*ID: 0xcafeacdc*)
     * The Module is connected via the Lightweight-HPS-to-FPGA interface to the HPS
     * Use following command to read the System ID:
         ```bash
              FPGA-readBridge -lw 30
         ```
-      * The Suffix "-lw" selects the Lightweight-HPS-to-FPGA interface
-      * "30" is the (hex) address offset to read given by the Intel Qurtus Plattorm Designer
-      * The Suffix "-b" allows to use this command into a Python-,C++ or PHP application
+      * The Suffix `"-lw"` selects the Lightweight-HPS-to-FPGA interface
+      * "*30*" is the (hex) address offset to read given by the Intel Qurtus Platform Designer
+      * The Suffix `"-b"` disables an detailed output
+        * Nice for using it inside a Python-, C++ or PHP application 
            ```bash
              FPGA-readBridge -lw 30 -b
            ```
@@ -61,101 +68,105 @@ This guide shows how to connect via SSH remotly to *rsYocto* and how simple it i
         ```
        * The Suffix "-h" selects HEX value inputs 
   4. Control a single FPGA LED
-      * Enabling or Disabling single Bits is also posible with the *rstools* 
+      * Enabling or Disabling single Bits is also possible with the *rstools* 
       * Put Led No. 8 on:  
          ```bash
            FPGA-writeBridge -lw 20 -b 8 1
          ```
       * The Suffix "-h" selects HEX value inputs 
-  5. H!!! ier Python script zum Stuern der LEDs einfügen !!!!    
-      
-  6. read the Status of the FPGA-fabric with follwoing command:
+  5. The next Python snippet demonstrated how to interact with FPGA-IP 
+        ````python
+          for count in range(1024):
+            os.system('FPGA-writeBridge -lw 38 -h '+ str(count) +' -b')
+        ````
+  6. Read the Status of the FPGA-fabric with following command:
         ```bash
           FPGA-status
         ````
-      * This Status Codes are transmited by the FPGA Manager
+      * This Status Codes are transmitted by the FPGA Manager
       * The FPGA should be in the User Mode
-7. Intel SoC-FPGAs have two 32-Bit register to interect with the FPGA directly
-    * To try this feature we can connect the FPGA LEDs with *rsYocto* 
-    * But now are the FPGA LEDs connected to LightWight Brige interface
-    * We need to change the FPGA Configuation
-    * The requiered *.rbf* configuration file ("gpiConf.rbf") is pre-installed on the home directery
-    * we can run following command to configre the FPGA with this file:
+7. Using the GPI/GPO- Registers to the FPGA 
+    * Intel SoC-FPGAs have two 32-Bit register to interact directly with the FPGA 
+    * To try this feature by connecting the FPGA LEDs with the GPO-Register
+    * But now are the FPGA LEDs connected to Lightweight-HPS-to-FPGA Bridge
+    * The FPGA configuration must be changed
+    * The required `.rbf` configuration file ("*gpiConf.rbf*") is pre-installed on the home directery
+    * Execute following command to reconfigure the FPGA fabric with this file:
         ```bash
             FPGA-writeConfig  -f gpiConf.rbf
         ```
-    * Now should the be the LEDs connected with the direct 32-Bit register
-    * Enable the LEDs over this way with following command:
+    * Now should be the LEDs connected with the direct 32-Bit register
+    * Enable the LEDs over this way:
         ```bash
            FPGA-gpoWrite -h acdc
         ```
-    * On other direction writes the FPGA the value 0xacdcacdc to the HPS
+    * On other direction writes the FPGA the value *0xacdcacdc* to the HPS
         ```bash
            FPGA-gpiRead -h acdc
         ```
-     * After this test we can write the orginal FPGA configurartion
+     * After this test install the original FPGA configuration again
      * On *rsYocto* the startup FPGA configuration is located here `/usr/rsyocto/running_bootloader_fpgaconfig.rbf`
-     * Use the Suffix "-r" to install the orginal FPGA configuration 
+     * Use the Suffix `"-r"` to install the original FPGA configuration 
         ```bash
-         FPGA-writeConfig -r 
+           FPGA-writeConfig -r 
         ```
  ## Interact with Hard IP
 1. **I²c-Devices** 
-    * The Terasic DE10 Board have an [ADXL345](https://www.analog.com/en/products/adxl345.html)-Accelerometer on i2c0
-    * The `i2c-tools` allows to interact with this sensor
-    * Scan the i²c-Bus 0 to get the i²c-Address of the sensor 
+    * The Terasic DE10 Boards have an [*ADXL345*](https://www.analog.com/en/products/adxl345.html)-Accelerometer on i2c0
+    * The `i2c-tools` allow to interact with this sensor
+    * Scan the i²c-Bus 0 to get the i²c-Address of this sensor 
         ```bash
-            i2cdetect 0 
+           i2cdetect 0 
         ```
-    * Only the i²c-address 0x53 should be found
-    * With this address we can read the Unique ID (0xE5) of the AXDL345
+    * Only the i²c-address *0x53* should be found
+    * With this address we can read the Unique ID (*0xE5*) of the *AXDL345*
         ```bash
             i2cget -f 0 0x53 0
         ```
-    * Format of this command: *i2cget -f <Bus Number> <i2c-Addess> <Address>*
+        * Format here: *i2cget -f <Bus Number> <i2c-Addess> <Address>*
     * Try to read the X-Axis of the Accelerometer
-    * First we need to enable output of the Sensor
+    * First enable the output of the Sensor
          ```bash
             i2cset -f 0 0x53 0x2D 8
          ```
-    * Now we can read a X-Value 
+    * Then start to read the X-Axis
         ```bash
            i2cget -f 0 0x53 0x32
          ```
 2. **UART**     
-    * For Uart Devies is `minicom' pre-installed
-    * The following command opens the COM-Port 1
+    * For Uart devices are `minicom' pre-installed
+    * The following command opens the *COM-Port 1*
          ```bash
-           mincom /dev/ttys1
+            mincom /dev/ttys1
          ```
     * This COM-Port is on the DE10 Board routed to FPGA I/O Pins
     * Pres CMD+A, then Z and then Q to leave minicom 
 3. **SPI**
-    * In *rsYocto* are all driver to function as a SPI-Master
-    * Additionally the `spi-tools` are installed
-    * Please follow the documatation of the [spi-tools](https://github.com/cpb-/spi-tools)
-4. **CAN-Bus** (Intel Cylone V only)
-    * Intel Cyclone V FPGAs have two powerfull Bosch D-CAN Conntrollers embedded
+    * In *rsYocto* can be function as SPI-Master 
+    * Additionally, the `spi-tools` are installed
+    * Please follow the documentation of the [spi-tools](https://github.com/cpb-/spi-tools)
+4. **CAN-Bus** (*Intel Cylone V only*)
+    * Intel Cyclone V FPGAs have two powerful Bosch `D_CAN`-Controllers embedded
     * To interact with CAN Devices are the `can-tools` pre-installed
-    * The allow over internel network connection to read and write CAN-packes and to analaze the trafic
-    * To enable the CAN0 execute a command to enable the CAN network Port
+    * They allow over internal network connection to read and write CAN-Packages and monitoring the traffic 
+    * To enable the *CAN0* execute this command to enable the *CAN network Port*:
         ```bash
           ip link set can0 type can bitrate 125000
          ```
-    * "125000" are CAN Bitrate in Bit/s
-    * With next shown command it is posible to send a CAN Packes
+        * "*125000*" is the CAN Bitrate in *Bit/s*
+    *With next shown command it is possible to transmit a CAN-Packages
         ```bash
             cansend can0 123#ADC1.ABC2
             ip link set up can0
         ```
-    * this loads a CAN-Package with the Content 0xABC1 and 0xABC2 and the ID 123 to the message FIFO
+        * This loads a CAN-Package with the Content *0xABC1* and *0xABC2* and the ID *123* to the message FIFO-Box
     * Sniff the complete CAN-Bus
          ```bash
-           cansniffer can0
+            cansniffer can0
          ```
     * Generate Dummy Payload 
         ```bash
-        cangen can0
+           cangen can0
         ```
     * For more information please read the [can-tools](https://github.com/linux-can/can-utils) documentation
     
