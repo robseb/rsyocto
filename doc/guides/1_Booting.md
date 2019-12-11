@@ -1,5 +1,5 @@
 # Booting *rsYocto* on your Board
-This guide shows how to install *rsYocto* on a **SD Card** and boot this on a Terasic FPGA development Board. 
+This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Terasic FPGA development Board. 
 
 ## Create a bootable SD-Card 
 1. Download the newest Image of *rsYocto* for your Board
@@ -27,7 +27,7 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot this on a Te
   4. Connect a USB Cable between the FTDI Virtual **COM-Port** (USB CDC) and your Computer
   5. **Open the COM-Port**
      + You can use the tool [MobaXterm](https://mobaxterm.mobatek.net/) for example
-     + Use following settings: **`115200N8 (ASCII) with CR/LF` **
+     + Use following settings: `115200N8 (ASCII) with CR/LF`
     
 ## Boot *rsYocto* on your FPGA-Board
   1. Power Up your FPGA Board
