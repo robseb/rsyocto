@@ -14,7 +14,7 @@ With *ARM DS-5 Streamline* is a trace debug applications on the Hardware Level i
 3. With a click of the "IC-Symbol" it is possible to select the **ARM Cortex A9** as target CPU and events to capture
 4. Press the "record-button" to start capturing
 5. Choose a location to store the capture file
-6. Now should Streamline show the live recorded data
+6. Now should Streamline show the live data
 <br>
 
 
