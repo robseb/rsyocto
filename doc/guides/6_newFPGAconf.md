@@ -18,7 +18,7 @@
       * With this command are two configuration files for the HPS- and Menory-System and for everything else generated
         * Output: `socfpga.periph.rbf`and `socfpga.core.rbf`
         
-  2. **for the Cyclone V: **
+  2. **for the Cyclone V:**
       * For **configuration of the FPGA with *rsYocto*** use these export settings: 
         * Type: `Raw Binary File (.rbf)` 
         * Mode: `Passive Paralle x16`  
