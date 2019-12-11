@@ -40,7 +40,7 @@ Also are here commands given to change the FPGA fabric configuration.
   * The Suffix `"-h"` after any command gives you detailed information   
   
   1. Reading a AVALON-Bus FPGA Module
-      * During the Boot process is a FPGA-Configuration written with Configuration with a "*System ID Peripheral*"-component (*ID: 0xcafeacdc*)
+      * During the Boot process is a FPGA-Configuration written with a "*System ID Peripheral*"-component (*ID: 0xcafeacdc*)
       * The Module is connected via the Lightweight-HPS-to-FPGA interface to the HPS
       * Use following command to read the System ID:
         ```bash
@@ -100,7 +100,7 @@ Also are here commands given to change the FPGA fabric configuration.
         ```bash
            FPGA-gpoWrite -h acdc
         ```
-    * On other direction writes the FPGA the value *0xacdcacdc* to the HPS
+    * On the other direction writes the FPGA the value *0xacdcacdc* to the HPS
         ```bash
            FPGA-gpiRead -h acdc
         ```
@@ -123,7 +123,6 @@ Also are here commands given to change the FPGA fabric configuration.
         ```bash
             i2cget -f 0 0x53 0
         ```
-        * Format: *i2cget -f <Bus Number> <i2c-Addess> <Address>*
     * Try to read the X-Axis of the Accelerometer
         *   First enable the output of the Sensor
             ```bash
@@ -143,7 +142,7 @@ Also are here commands given to change the FPGA fabric configuration.
     * Pres CMD+A, then Z and then Q to leave minicom 
 3. **SPI**
     * *rsYocto* can be function as SPI-Master 
-    * Additionally, the `spi-tools` are installed
+    * The `spi-tools` are installed
     * Please follow the documentation of the [spi-tools](https://github.com/cpb-/spi-tools)
 4. **CAN-Bus** (*Intel Cylone V only*)
     * Intel Cyclone V FPGAs have two powerful Bosch `D_CAN`-Controllers embedded
