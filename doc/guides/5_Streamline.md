@@ -4,7 +4,7 @@ With *ARM DS-5 Streamline* is a trace debug applications on the Hardware Level i
 
 * ARM Streamline is a part of the ARM DS-5 Studio and [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html)
 * For ARM DS-5 is a Software Licence required!
-* Streamline works a server application running on the target  embedded Linux Systems called  [gatord](https://github.com/ARM-software/gator)
+* Streamline works as a server application running on the target  embedded Linux Systems called  [gatord](https://github.com/ARM-software/gator)
 * The *rsyocto* Linux kernel is configured appropriately for Streamline and the server starts automatically
 
 # Using Streamline to analyzing the system
