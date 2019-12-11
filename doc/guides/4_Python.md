@@ -2,9 +2,9 @@
 
 This Guide descripts how to install and configure *Visual Studio Code Insider* to accsess the Linux system remotely over `ssh`. Later on is shown how to use *Visual Studio Code* to remote debug Phyton applications.
 
-*Visual Studio Code* is a code editor build by Microsoft. It is a universal binary application and runs on Windows, Linux and macOS. **Visual Studio Code Insider** is a spezial beta version and extended Visual Studio Code with advands plugins. Only with *Visual Studio Insider* allow a remote access via SSH to *ARMv7A* Linux-devices.
+*Visual Studio Code* is a code editor build by Microsoft. It is a universal binary application and runs on Windows, Linux and macOS. **Visual Studio Code Insider** is a special beta version and extended Visual Studio Code with advands plugins. Only *Visual Studio Insider* allow a remote access via SSH to *ARMv7A* Linux-devices.
 
-*Visual Studio Code Insider* does allow only *SSH* access with a **SSH-Keygen**. The key must be regenerated every Board-, SD card or IP-Address switch.
+*Visual Studio Code Insider* does allow only *SSH* access with a **SSH-Keygen**. The key must be regenerated after every Board-, SD card or IP-Address switch.
 
 The following step by step guide shows how to setup *Visual Studio Code Insider* for Python application remote development and debugging on *Windows 10* PC.For other systems please follow Microsoft's instructions:
 [Visual Studio Code Remote Development Troubleshooting Tips and Tricks](https://code.visualstudio.com/docs/remote/troubleshooting)
@@ -18,17 +18,17 @@ With the following guide descripts *Microsoft* the function of *Visual Studio Co
 * Execute following Command inside the Windows Command Prompt:
 1.    **Generate a new SSH Key**
       (Windows stores the key under following directory:  `C:\Users\<USER Name>\.ssh)`
-      * Pres always ENTER (do not enter an extra password or a other name):
       ``````shell 
         ssh-keygen -t rsa -b 4096
        ``````
+        * Pres always ENTER (do not enter an extra password or a other name):
 2.    **Set the IPv4 Address of the board**
-       Here for exmaple with the IP 192.168.2.105
        ``````shell 
         SET REMOTEHOST=root@192.168.2.105
       ``````
+      * Here for exmaple with the IP 192.168.2.105
 5.    **Copy the generated SSH-Key via SSH to the board**
-      After this command should the *rsYocto* splash screen appear and the linux system should ask for the password: **eit**
+      * After this command should the *rsYocto* splash screen appear and the linux system should ask for the password: **eit**
       ``````shell       
        scp %USERPROFILE%\.ssh\id_rsa.pub %REMOTEHOST%:~/tmp.pub
       `````` 
@@ -38,7 +38,7 @@ With the following guide descripts *Microsoft* the function of *Visual Studio Co
       ssh %REMOTEHOST% "mkdir -p ~/.ssh && chmod 700 ~/.ssh && cat ~/tmp.pub >>  ~/.ssh/authorized_keys && chmod 600 ~/.ssh/authorized_keys && rm -f ~/tmp.pub"
       ``````
       
-### II. Installation *Visual Studio Code Insider* and configuration of remote access
+### II. Installation of *Visual Studio Code Insider* and configuration of remote access
 * Download and install the latest version of **Visual Studio Code Insider**:
   [Download Visual Studio Code Insiders](https://code.visualstudio.com/insiders/)
 * Follow the installation Instructions
@@ -74,14 +74,14 @@ Host rsYocto
 ### III. Connection of the *rsYocto* with *Visual Studio Code Insider*
 * Open *Visual Studio Code Insider*
 * Select on the side bar "**Remote SSH**" 
-* Under the tap "**Connections**" should not appear the entries for the previously add entry with the name **"rsYocto"**
+* Under the tap "**Connections**" should appear the entries for the previously add entry with the name **"rsYocto"**
 * Right click on this entry and choose **"Connect Host in current Window"**
 
   ![Alt text](VisualCodeConfig4.jpg?raw=true "Visual Studio Configuration 4")
  
   * The first attach attempt takes a little bit longer, because the Visual Studio downloads and install the Visual Studio Code Server
   * **(Be sure that the board is connected to the internet)**
-  * In case that the connection to the board is established successfully a green bottom edge item with **connected symbol** should appear
+  * In case that the connection to the board is established successfully a green iteam with a **connected symbol** should appear
 
 ### IV. Accessing the rootfs files remotely
 *  *Visual Studio Code Insider* can access the rootfs of *rsYocto*
@@ -141,7 +141,7 @@ ___
 
 ### VII. Use of the Python Package Manager PiP
 * The pre-installed example "*serialEchoDemo.py*" requires the [pySerial](https://pyserial.readthedocs.io/en/latest/shortintro.html)-module
-* "*rsYocto*" has a fully supported for *Python PiP*
+* "*rsYocto*" has a full supported for *Python PiP*
 * Use the PiP [Homepage](https://pypi.org/) to find a module
 * Run following command to download and install this module with *rsYocto*:
      ````bash
