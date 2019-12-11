@@ -48,7 +48,7 @@ ___
 5. On CentOS install the device Tree compiler Tool `dtc`
 6. Dowload the "**rsyocto_SDxx-Folder**" from the "**relases Part**" of this Github repository to CentOS
       
-      
+    
 | File Name | Platform / Board | Origin | Description | Internal name (inside the script)
 |:--|:--|:--|:--|:--|
 |\"makersYoctoSDImage.py\"| *all*| by hand | the automatic *rsYocto* script | *executed* | 
