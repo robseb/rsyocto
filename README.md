@@ -99,5 +99,5 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 * **Robin Sebastian**
 
 *rsYocto* a project, that I have fully developed on my own. No companies are involved in this project.
-Today I'm Master Student of electronic engineering with the major embedded systems. 
+Today I'm a Master Student of electronic engineering with the major embedded systems. 
 I ‘m looking for an interesting job offer to share and deepen my shown skills starting summer 2020.
