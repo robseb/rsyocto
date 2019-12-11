@@ -20,16 +20,16 @@ The following illustration shows how *rsYocto* and Microsoft Visual Studio work 
 ![Alt text](VisulStudioCreateNewProject.jpg?raw=true "Create new Visual Studio Project")
 3. Press "**next** and give your project a name
 4. A new *Visual Studio Solution* should appear with a getting started guide
-5. This Guide shows how to configure the connection the remote Linux machine
+5. This Guide shows how to configure the connection of the remote Linux machine
 6. Please follow this instructions with the settings
   * Platform: `ARM`
-  * Host Name: `IPv4-Address of your Board`
+  * Host Name: `IPv4-Address of your Board`: 
   * Port: `22`
   * User name: `root`
   * Authentication type: `Password`
   * Password: `eit`
   * To change later the IP-Address navigate to `Tools/Options/Cross Platform`, click there the "Remove"-Button and then "Add" 
- 7. At this point the Visual Studio ready for *rsYocto* C++ development 
+ 7. At this point the Visual Studio is ready for *rsYocto* C++ development 
  
  ![Alt text](VisualStudioDemo.jpg?raw=true "rsYocto and Visual Studio Hello World")
  
