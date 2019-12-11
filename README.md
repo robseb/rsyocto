@@ -18,7 +18,7 @@ The “*makersYoctoSDImage*”- script allow developer to **customize the *rsYoc
 
 The final *rsYocto*-Image can be **installed** on a **SD-Card** with any commonly **used Boot-Image creating tools**. Versions are available for the **Terasic DE10 Standard-** (Cyclone V), **Terasic DE10 Nano-** (Cyclone V) and **Terasic Han Pilot** (Arria 10).
 
-On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connect external devives to a Hard-IP Bus, because the HPS interfaces are with the pre-installed configuration are routed to FPGA I/O-Pins. 
+On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connect external devices to a Hard-IP Bus, because the HPS interfaces are with the pre-installed configuration are routed to FPGA I/O-Pins. 
 <br>
 
 # Features of *rsYocto*
@@ -98,6 +98,6 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 
 * **Robin Sebastian**
 
-*rsYocto* is developed on my own. No companies are involved in this project. 
+*rsYocto* a project, that I have fully developed on my own. No companies are involved in this project.
 Today I'm Master Student of electronic engineering with the major embedded systems. 
-I ‘m looking for an interesting job offer to share and deepen my shown skills up to summer 2020.
+I ‘m looking for an interesting job offer to share and deepen my shown skills starting summer 2020.
