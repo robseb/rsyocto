@@ -145,7 +145,7 @@ ___
 * Use the PiP [Homepage](https://pypi.org/) to find a module
 * Run following command to download and install this module with *rsYocto*:
      ````bash
-      python3 -m pip install --upgrade <moduel to install> --trusted-host pypi.org --trusted-host files.pythonhosted.org 
+      python3 -m pip install --upgrade <module to install> --trusted-host pypi.org --trusted-host files.pythonhosted.org 
      ````
 * To install *pySerial* use the String:
      ````bash
@@ -153,4 +153,4 @@ ___
      ````
 * Now it is possible use Python code, that are designed within large communities (e.g. Raspberry Pi-community), on a SoC-FPGA
 
- ## Continue with the next level: [Analyze your applications with ARM Streamline](5_Streamline.md)
+ ## Continue with the next level: [Analyzation of applications with ARM DS-5 Streamline](5_Streamline.md)
