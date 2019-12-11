@@ -1,7 +1,10 @@
+
 ![Alt text](doc/symbols/rsYoctoLogo.jpg?raw=true "rsYocto Logo")
 
 ### *rsYocto* is an open-source embedded Linux System designed with the Yocto Project and optimized for Intel SoC-FPGAs (*Intel Cyclone V* and *Intel Arria 10*) to achieve the best customization for the strong requirements of modern embedded applications.
 <br>
+
+# `!under constructions: Completion before Christmas!`
 
 *rsYocto* implements a **modern Linux Kernel (5.1)** and brings a set of today fundamentally needed components to Intel SoC-FPGAs and help to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
 
@@ -95,6 +98,6 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 
 * **Robin Sebastian**
 
-*rsYocto* is fully developed on me own. No companies are involved in this project. 
+*rsYocto* is developed on my own. No companies are involved in this project. 
 Today I'm Master Student of electronic engineering with the major embedded systems. 
-I ‘m looking for an interesting job offer to  share and deepen my shown skills up to summer 2020.
+I ‘m looking for an interesting job offer to share and deepen my shown skills up to summer 2020.
