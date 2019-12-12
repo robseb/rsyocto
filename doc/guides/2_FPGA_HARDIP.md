@@ -65,7 +65,7 @@ Also are here commands given to change the FPGA fabric configuration.
   3. Put a Hex pattern to the FPGA LEDs
       * With following command can be any hex pattern written over the *AXI-Bus* 
         ```bash
-         PGA-writeBridge -lw 20 -h acdc
+         FPGA-writeBridge -lw 20 -h acdc
         ```
        * The Suffix "-h" selects HEX value inputs 
   4. Control a single FPGA LED
