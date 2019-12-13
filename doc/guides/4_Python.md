@@ -1,6 +1,6 @@
 #  	Debugging Python applications remotely
 
-This Guide descripts how to install and configure *Visual Studio Code Insider* to accsess the Linux system remotely over `ssh`. Later on is shown how to use *Visual Studio Code* to remote debug Phyton applications.
+This Guide descripts how to install and configure *Visual Studio Code Insiders* to accsess the Linux system remotely over `ssh`. Later on is shown how to use *Visual Studio Code* to remote debug Phyton applications.
 
 *Visual Studio Code* is a code editor build by Microsoft. It is a universal binary application and runs on Windows, Linux and macOS. **Visual Studio Code Insider** is a special beta version and extended Visual Studio Code with advands plugins. Only *Visual Studio Insider* allow a remote access via SSH to *ARMv7A* Linux-devices.
 
