@@ -33,7 +33,7 @@
         
 ___
 ## Including the FPGA-Configuration file to the SD-Image  
-   With the *rsYocto*-"*makeAutoSDImage.py*" script is a simple way avelibil to change Image automatically given. 
+   With the *rsYocto*-"`makersYoctoSDImage.py`" script is a simple way avelibil to change Image automatically given. 
    This script uses internaly the ALTERA Script `"make_sdimage.py"`, that only works with CentOS.
    
    The following step-by-step guide shows how to setup a **CentOS VM**:
