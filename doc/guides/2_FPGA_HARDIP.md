@@ -98,11 +98,11 @@ Also are here commands given to change the FPGA fabric configuration.
     * Now should be the LEDs connected with the direct 32-Bit register
     * Enable the LEDs over this way:
         ```bash
-           FPGA-gpoWrite -h acdc
+           FPGA-gpoWrite -f acdc
         ```
     * On the other direction writes the FPGA the value *0xacdcacdc* to the HPS
         ```bash
-           FPGA-gpiRead -h acdc
+           FPGA-gpiRead -f acdc
         ```
      * After this test install the original FPGA configuration again
      * On *rsYocto* the startup FPGA configuration is located here `/usr/rsyocto/running_bootloader_fpgaconfig.rbf`
