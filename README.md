@@ -66,7 +66,6 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 |:--|:--|
 | `doc`    | Documentation  |
 | `fpga`    | Quartus Prime projects |
-|  `examples/cpp` | *rsYocto* C++ examples |
 |  `examples/python` | *rsYocto* Python examples 
 |  `building` | *rsYocto* building scripts |
 
