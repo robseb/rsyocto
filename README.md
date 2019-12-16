@@ -1,12 +1,10 @@
 
 ![Alt text](doc/symbols/rsYoctoLogo.jpg?raw=true "rsYocto Logo")
 
-### *rsYocto* is an open-source embedded Linux System designed with the Yocto Project and optimized for Intel SoC-FPGAs (*Intel Cyclone V* and *Intel Arria 10*) to achieve the best customization for the strong requirements of modern embedded applications.
+### *rsYocto* is an open-source embedded Linux System designed with the Yocto Project and optimized for Intel SoC-FPGAs (*Intel Cyclone V* and *Intel Arria 10* with a *ARM CORTEX-A9*) to achieve the best customization for the strong requirements of modern embedded applications.
 <br>
 
-# `!under constructions: Completion before Christmas!`
-
-*rsYocto* implements a **modern Linux Kernel (5.1)** and brings a set of today fundamentally needed components to Intel SoC-FPGAs and help to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
+*rsYocto* implements a **modern Linux Kernel (linux-socfpga 5.1)** and brings a set of today fundamentally needed components to Intel SoC-FPGAs and help to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
 
 To realize that are **Python3** with the Python Package manager **pip** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for is best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface.
 
@@ -69,7 +67,8 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 | `doc`    | Documentation  |
 | `fpga`    | Quartus Prime projects |
 |  `examples/cpp` | *rsYocto* C++ examples |
-|  `examples/python` | *rsYocto* Python examples |
+|  `examples/python` | *rsYocto* Python examples 
+|  `building` | *rsYocto* building scripts |
 
 `Final *Yocto* SD-Card Versions are available inside the packages-Part of this repository.`
 
@@ -92,6 +91,7 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 ![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto requiered building steps")
 **Required Build Flow to create Yocto**
 
+This illustration shows my procedure and the required complexity to create *rsYocto*.I had some issues with Intel EDS and the primary bootloader development. With this project I want to give other developers a fully functional system to reduce for them development effort.
 <br>
 
 # Author
