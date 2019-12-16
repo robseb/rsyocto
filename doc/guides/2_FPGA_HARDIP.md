@@ -136,7 +136,7 @@ Also are here commands given to change the FPGA fabric configuration.
     * For Uart devices are `minicom' pre-installed
     * The following command opens the *COM-Port 1* with *minicom*
          ```bash
-            mincom /dev/ttys1
+            minicom /dev/ttys1
          ```
     * This COM-Port is on the DE10 Boards routed to FPGA I/O Pins
     * Pres CMD+A, then Z and then Q to leave minicom 
