@@ -150,22 +150,22 @@ Also are here commands given to change the FPGA fabric configuration.
     * They allow over internal network connection to read and write CAN-Packages and monitoring the traffic 
     * To enable the *CAN0* execute this command to enable the *CAN network Port*:
         ```bash
-          ip link set can0 type can bitrate 125000
+        ip link set can0 type can bitrate 125000
+        ip link set up can0
          ```
         * "*125000*" is the CAN Bitrate in *Bit/s*
     * With next shown command it is possible to transmit a CAN-Packages
         ```bash
-            cansend can0 123#ADC1.ABC2
-            ip link set up can0
+        cansend can0 123#ADC1.ABC2
         ```
         * This loads a CAN-Package with the Content *0xABC1* and *0xABC2* and the ID *123* to the message FIFO-Box
     * Sniffing the complete CAN-Bus
          ```bash
-            cansniffer can0
+         cansniffer can0
          ```
     * Generating Dummy Payload 
         ```bash
-           cangen can0
+        cangen can0
         ```
     * For more information please read the [can-tools](https://github.com/linux-can/can-utils) documentation
     
