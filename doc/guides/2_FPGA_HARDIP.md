@@ -1,29 +1,31 @@
+[back](1_Booting.md)
+
 # Use of Hard IP, FPGA-IP and configuration of the FPGA fabric
 This guide shows how simple it is to access FPGA IP,the I²C-, the UART-Bus, the SPI-Bus or the CAN-Bus.
 Also are here commands given to change the FPGA fabric configuration.
 
 ## Toggling the HPS-LED of your Board
-1. Turn the HPS-LED on by typing to the console:
+1. **Turn the HPS-LED on by typing to the console:**
     ```bash
-      echo 100 > /sys/class/leds/hps_led0/brightness
+    echo 100 > /sys/class/leds/hps_led0/brightness
     ```
-2.  Turn off the LED with:
+2.  **Turn off the LED with:**
     ```bash
-     echo 0 > /sys/class/leds/hps_led0/brightness
+    echo 0 > /sys/class/leds/hps_led0/brightness
     ```
-3. To Toggle the LED is a *blinkLed* Python script pre-installed
+3. **To Toggle the LED is a *blinkLed* Python script pre-installed**
     ```bash 
-      python3 blinkLed.py
+   python3 blinkLed.py
     ```
-4. With `nano`- Editor it is possible to change the script
+4. **With `nano`- Editor it is possible to change the script**
     ```bash 
-     nano blinkLed.py
+   nano blinkLed.py
    ```
    * Later will be a pleasant way be shown (Level 4) 
    
 ## Opening *rsYocto* Info Paper 
   * For every *rsYocto*-Version is a Information Shied on the Apache Webserver installed
-  * This Papers contains informations about the configuration of the FPGA IP and there Addresses 
+  * This Papers contains informations about the configuration of the FPGA IP and there Addresses and the used IO Pins 
   * **Open it by typing the iPv4-Address of your Board into a Web browser**
   * Of cause it is possible  to install any other homepage on *rsYocto*
      * Insert the homepage file to: `/usr/share/apache2/default-site/htdocs`
@@ -32,6 +34,10 @@ Also are here commands given to change the FPGA fabric configuration.
             /etc/init.d/apache2 stop
             /etc/init.d/apache2 start
         ````
+     *  Info Papers
+        * [DE10 Standard](https://raw.githubusercontent.com/robseb/rsyocto/master/doc/symbols/DE10Std_pinout.png)
+        * [DE10 Nano](https://raw.githubusercontent.com/robseb/rsyocto/master/doc/symbols/DE10Nano_pinout.png)
+ 
 ## Interacting with FPGA IP
   * The *rstools*-layer make the interaction with any FPGA IP easy
   * Type "*FPGA* and press *TAB* inside your SSH-console to see all FPGA commands:
@@ -39,21 +45,21 @@ Also are here commands given to change the FPGA fabric configuration.
   `FPGA-status` `FPGA-writeBridge` `FPGA-writeConfig`
   * The Suffix `"-h"` after any command gives you detailed information   
   
-  1. Reading a AVALON-Bus FPGA Module
+  1. **Reading a AVALON-Bus FPGA Module**
       * During the Boot process is a FPGA-Configuration written with a "*System ID Peripheral*"-component (*ID: 0xcafeacdc*)
       * The Module is connected via the Lightweight-HPS-to-FPGA interface to the HPS
       * Use following command to read the System ID:
         ```bash
-             FPGA-readBridge -lw 30
+        FPGA-readBridge -lw 30
         ```
       * The Suffix `"-lw"` selects the Lightweight-HPS-to-FPGA interface
       * "*30*" is the (hex) address offset to read given by the Intel Qurtus Platform Designer
       * The Suffix `"-b"` disables an detailed output
         * Often used inside a *Python-*, *C++-* or *PHP-* application
            ```bash
-             FPGA-readBridge -lw 30 -b
+           FPGA-readBridge -lw 30 -b
            ```
-  2. Turn the FPGA LEDs with a single command off
+  2. **Turn the FPGA LEDs with a single command off**
       * The FPGA LEDs are connected via a "*PIO (Parallel IP)*"-interface to the Lightweight-HPS-to-FPGA bus
       * Run following command to turn the LEDs off
           ```bash
@@ -62,10 +68,10 @@ Also are here commands given to change the FPGA fabric configuration.
       * The Suffix "-lw" selects the Lightweight-HPS-to-FPGA interface
       * "30" is the (hex) address offset to write given by the *Intel Quartus Prime Platform Designer*
       
-  3. Put a Hex pattern to the FPGA LEDs
+  3. **Put a Hex pattern to the FPGA LEDs**
       * With following command can be any hex pattern written over the *AXI-Bus* 
         ```bash
-         FPGA-writeBridge -lw 20 -h acdc
+        FPGA-writeBridge -lw 20 -h acdc
         ```
        * The Suffix "-h" selects HEX value inputs 
   4. Control a single FPGA LED
@@ -79,36 +85,41 @@ Also are here commands given to change the FPGA fabric configuration.
           for count in range(1024):
             os.system('FPGA-writeBridge -lw 38 -h '+ str(count) +' -b')
         ````
-  6. Reading the Status of the FPGA-fabric:
+  6. **Reading the Status of the FPGA-fabric:**
         ```bash
-          FPGA-status
+        FPGA-status
         ````
       * This Status Codes are transmitted by the FPGA Manager
       * The FPGA should be in the User Mode
-7. Using the GPI/GPO- Registers to the FPGA 
+7. **Using the GPI/GPO- Registers to the FPGA** 
     * Intel SoC-FPGAs have two 32-Bit register to interact directly with the FPGA 
     * To try this feature by connecting the FPGA LEDs with the GPO-Register
     * But now are the FPGA LEDs connected to Lightweight-HPS-to-FPGA Bridge
     * The FPGA configuration must be changed
     * The required `.rbf` configuration file ("*gpiConf.rbf*") is pre-installed on the home directory
-    * Execute following command to configure the FPGA fabric with this file:
+    * Execute following command to **configure the FPGA fabric** with this file:
+        * For the Terasic DE10 Standard Board 
         ```bash
-            FPGA-writeConfig  -f gpiConf.rbf
+       FPGA-writeConfig  -f gpiConfStd.rbf
+        ```
+         * For the Terasic DE10 Nano Board 
+       ```bash
+       FPGA-writeConfig  -f gpiConfStd.rbf
         ```
     * Now should be the LEDs connected with the direct 32-Bit register
     * Enable the LEDs over this way:
         ```bash
-           FPGA-gpoWrite -f acdc
+        FPGA-gpoWrite -f acdc
         ```
     * On the other direction writes the FPGA the value *0xacdcacdc* to the HPS
         ```bash
-           FPGA-gpiRead -f acdc
+        FPGA-gpiRead -f acdc
         ```
      * After this test install the original FPGA configuration again
      * On *rsYocto* the startup FPGA configuration is located here `/usr/rsyocto/running_bootloader_fpgaconfig.rbf`
      * Use the Suffix `"-r"` to install the original FPGA configuration 
         ```bash
-           FPGA-writeConfig -r 
+       FPGA-writeConfig -r 
         ```
  ## Interacting with Hard IP
 1. **I²c-Devices** 
@@ -116,7 +127,7 @@ Also are here commands given to change the FPGA fabric configuration.
     * The `i2c-tools` allow to interact with this sensor
     * Scan the *i²c-Bus 0* to get the i²c-Address of this sensor 
         ```bash
-           i2cdetect 0 
+       i2cdetect 0 
         ```
     * Only the i²c-address *0x53* should be found
     * With this address we can read the Unique ID (*0xE5*) of the *AXDL345*
@@ -126,17 +137,17 @@ Also are here commands given to change the FPGA fabric configuration.
     * Try to read the X-Axis of the Accelerometer
         *   First enable the output of the Sensor
             ```bash
-                i2cset -f 0 0x53 0x2D 8
+            i2cset -f 0 0x53 0x2D 8
             ```
         *   Then start to read the X-Axis
             ```bash
-               i2cget -f 0 0x53 0x32
+            i2cget -f 0 0x53 0x32
             ```
 2. **UART**     
     * For Uart devices are `minicom' pre-installed
     * The following command opens the *COM-Port 1* with *minicom*
          ```bash
-            minicom /dev/ttys1
+         minicom /dev/ttys1
          ```
     * This COM-Port is on the DE10 Boards routed to FPGA I/O Pins
     * Pres CMD+A, then Z and then Q to leave minicom 
