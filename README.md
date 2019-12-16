@@ -88,7 +88,7 @@ Final *rsYocto* SD-Card Versions are available inside the **packages-Part of thi
 # Development process of *rsYocto*
 
 ![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto requiered building steps")
-**Required Build Flow to create Yocto**
+**Required Build Flow to create rsYocto**
 
 This illustration shows my procedure and the required complexity to create *rsYocto*.I had some issues with Intel EDS and the primary bootloader development. With this project I want to give other developers a fully functional system to reduce for them development effort.
 <br>
