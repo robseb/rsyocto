@@ -33,12 +33,6 @@ The following illustration shows how *rsYocto* and Microsoft Visual Studio work 
  
  ![Alt text](VisualStudioDemo.jpg?raw=true "rsYocto and Visual Studio Hello World")
  
- # Use the POSIX Library with *Visual Studio*
- * With the Linux Posix commands has Microsoft Visual Studio occasionally some iusues
- * I solved this problem by creating a special Visual Studio solution
- * Use my project as a template
-
-
 
 # Known Iusses with Viusal Studio and Linux
  * Ignore the Error Window and read only the console output
