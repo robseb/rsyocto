@@ -1,3 +1,6 @@
+[back](2_FPGA_HARDIP.md)
+
+
 #  Debugging C++ applications remotely
 This article describes how to use *Microsoft Visual Studio 2019* for *rsYocto* C++ development. 
 The newer releasees of *Visual Studio* are capable to work as embedded Linux development IDE for *ARMv7A*. *Visual Studio* can use the  `gdb-Server` and `SSH`for communicating with Linux.
