@@ -23,7 +23,7 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
     ![Alt text](rufusSDbuilf.png?raw=true "rufus")
     
   ## Prepare your Board and open the console COM-Port
-  1. Eject the SD Card from your Computer and insert them into the SD slot of your FPGA Board
+  1. Eject the SD Card from your Computer and insert it into the SD -Reader of your FPGA Board
   2. Change the MSEL-Bit switch to following setting: 
    ![Alt text](requiredMSEL.jpg?raw=true "Required MSEL-Bit Switch Selection")
   3. Connect your FPGA-Board with a **Ethernet cable to your network**
@@ -35,7 +35,7 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
     
 ## Boot *rsYocto* on your FPGA-Board
   1. Power Up your FPGA Board
-  2. Now should boot **rsYocto** thorough following stages:
+  2. Now **rsYocto** should boot through following stages:
      ![Alt text](BootingStep.jpg?raw=true "Boot steps of rsYocto")
      
    <br>
@@ -61,13 +61,13 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
  <br> 
  
 ## Connect to *rsYocto* with SSH
-1. Open Linux or Windows Comand Promt (Windows 10) and insert this command to connect to your Board: 
+1. Open Linux or *Windows Command Prompt* (Windows 10) and insert this command to connect to your Board: 
     ```
-      ssh root@<Boards iPv4-address>
+    ssh root@<Boards iPv4-address>
     ```
-2. Use the Passwort: `eit`
+2. Use following the Passwort: `eit`
   * No other authentications are required
   * The default SSH-Port (22) is used 
-3. Now should the *rsYocto* Splash screen appear
+3. Now *rsYocto* Splash screen appears
 
  ## Continue with the next level: [Use of Hard IP, FPGA-IP and configuration of the FPGA fabric](2_FPGA_HARDIP.md)
