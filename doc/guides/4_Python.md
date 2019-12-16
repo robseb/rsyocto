@@ -1,3 +1,5 @@
+[back](3_CPP.md)
+
 #  	Debugging Python applications remotely
 
 This Guide descripts how to install and configure *Visual Studio Code Insiders* to accsess the Linux system remotely over `ssh`. Later on is shown how to use *Visual Studio Code* to remote debug Phyton applications.
@@ -19,18 +21,18 @@ With the following guide descripts *Microsoft* the function of *Visual Studio Co
 1.    **Generate a new SSH Key**
       (Windows stores the key under following directory:  `C:\Users\<USER Name>\.ssh)`
       ``````shell 
-        ssh-keygen -t rsa -b 4096
+      ssh-keygen -t rsa -b 4096
        ``````
         * Pres always ENTER (do not enter an extra password or a other name):
 2.    **Set the IPv4 Address of the board**
        ``````shell 
-        SET REMOTEHOST=root@192.168.2.105
+      SET REMOTEHOST=root@192.168.2.105
       ``````
       * Here for exmaple with the IP 192.168.2.105
 5.    **Copy the generated SSH-Key via SSH to the board**
       * After this command should the *rsYocto* splash screen appear and the linux system should ask for the password: **eit**
       ``````shell       
-       scp %USERPROFILE%\.ssh\id_rsa.pub %REMOTEHOST%:~/tmp.pub
+      scp %USERPROFILE%\.ssh\id_rsa.pub %REMOTEHOST%:~/tmp.pub
       `````` 
 4.   **Authenticate and activate the SSH key** 
        Again,after this following command should the *rsYocto* splash screen appear and the linux system should ask for the password: **eit**
@@ -145,12 +147,21 @@ ___
 * Use the PiP [Homepage](https://pypi.org/) to find a module
 * Run following command to download and install this module with *rsYocto*:
      ````bash
-      python3 -m pip install --upgrade <module to install> --trusted-host pypi.org --trusted-host files.pythonhosted.org 
+     python3 -m pip install --upgrade <module to install> --trusted-host pypi.org --trusted-host files.pythonhosted.org 
      ````
 * To install *pySerial* use the String:
      ````bash
-      python3 -m pip install --upgrade pyserial --trusted-host pypi.org --trusted-host files.pythonhosted.org 
+     python3 -m pip install --upgrade pyserial --trusted-host pypi.org --trusted-host files.pythonhosted.org 
      ````
 * Now it is possible use Python code, that are designed within large communities (e.g. Raspberry Pi-community), on a SoC-FPGA
+
+___
+
+
+![Alt text](PythonDebiggingAninmation.gif?raw=true "Visual Studio Code Python Debung")
+
+**Example: Debugging the Python script *gsensorDemo.py* on a DE10 Standard Board**
+
+<br>
 
  ## Continue with the next level: [Analyzation of applications with ARM DS-5 Streamline](5_Streamline.md)
