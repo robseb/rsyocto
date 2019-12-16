@@ -36,6 +36,14 @@ The following illustration shows how *rsYocto* and Microsoft Visual Studio work 
  # Use the POSIX Library with *Visual Studio*
  * With the Linux Posix commands has Microsoft Visual Studio occasionally some iusues
  * I solved this problem by creating a special Visual Studio solution
- * Use the project as a template  
+ * Use my project as a template
+
+
+
+# Known Iusses with Viusal Studio and Linux
+ * Ignore the Error Window and read only the console output
+ * Ingore the "*rysnc could not start eror*" (rsync is installed propertly)
+ * After iusses try to **clean and the rebuild the solution**
+
 
  ## Continue with the next level: [Debugging Python applications remotely](4_Python.md)
