@@ -2,13 +2,13 @@
 
 #  	Developing a new FPGA configuration
 
-*rsYocto* allows to change the FPGA configuration with an single Linux command. That was shown in chapter 2 with:
+*rsYocto* allows to change the FPGA configuration with a single Linux command. That was shown in chapter 2 with:
   ````bash
       FPGA-writeConfig  -f gpiConf.rbf
   ````   
-   The required steps to generate with a Quartus Prine Project the right configuration file are:
+   The required steps to generate right configuration files with a Quartus Prime Project are:
    1. **for the Arria 10:**
-      * Be sure that "**Enables the HPS early release of HPS IO**" is in the Quartus Prime- and HPS- Settings enabled
+      * Be sure that "**Enables the HPS early release of HPS IO**"  in the Quartus Prime- and HPS- Settings is enabled
           ![Alt text](Arria10Conf.jpg?raw=true "Quartus connfig for Arria 10")
       * Execute following EDS-Shell command:
         ````bash
@@ -16,7 +16,7 @@
         ````
         * SOF here: `rsHAN.sof` 
         * RBF here: `socfpga.rbf`
-      * With this command are two configuration files for the HPS- and Menory-System and for everything else generated
+      * With this command two configuration files for the HPS- and Memory-System and for everything else are generated
         * Output: `socfpga.periph.rbf`and `socfpga.core.rbf`
         
   2. **for the Cyclone V:**
@@ -33,21 +33,21 @@
             ![Alt text](fpgaConfSettings2.png?raw=true "FPGA Configuration settings 2")
         
 ___
-## Including the FPGA-Configuration files and other files or to the SD-Image or chnaging the Device Tree
-   With the *rsYocto*-"`makersYoctoSDImage.py`" script is a simple way avelibil to change Image automatically given. 
-   This script uses internaly the ALTERA Script `"make_sdimage.py"`, that only works with CentOS.
+## Including the FPGA-Configuration files and other files to the SD-Image or changing the Device Tree
+   With the *rsYocto*-"`makersYoctoSDImage.py`" script a simple way of changing the Image automatically is available. 
+   This script uses internally the ALTERA Script `"make_sdimage.py"`, that only works with CentOS.
    
    The following step-by-step guide shows how to setup a **CentOS VM**:
    
 1. Download the [CentOS 6.5 64-Bit ISO Image](http://vault.centos.org/6.5/isos/x86_64/)
-2.  Install a Virtual Machine Hypervisor, like VMware Workstation Player or Virtual Box 
+2.  Install a Virtual Machine Hypervisor, like *VMware Workstation Player* or *Virtual Box* 
 3. Create a new CentOS VM 
 4.	After CentOS is installed as a Live-DVD burn it to the HDD
     *	Start the Application “Install to Hard Drive” from the Desktop
-    *	Follow the Installer Wizard of this Application with the default Settings 
-    *  At the end choose: “write changes to the Disk” and later on restart the VM manually  
+    *	Follow the Installer wizard of this Application with default Settings 
+    *  At the end choose: “*write changes to the Disk*” and later on restart the VM manually  
 5. On CentOS install the device Tree compiler Tool `dtc`
-6. Dowload the "**rsyocto_SDxx-Folder**" from the "**relases Part**" of this Github repository to CentOS
+6. Dowload the "**rsyocto_SDxx-Folder**" from the "**releases Part**" of this Github repository to CentOS
       
     
 | File Name | Platform / Board | Origin | Description | Internal name (inside the script)
@@ -75,7 +75,7 @@ ___
 |\"socfpga_std_linux.rbf\"|*DE10 Standart*| Quartus Prime | FPGA Config for written by Linux |*running_bootloader_fpgaconfig.rbf* |
 
 **The Content  of the "rsyocto_SDxx-Folder"** 
-7. With the Text-File \"infoRSyocto.txt\" it is posible to add some notes to the final image
+ 7. With the Text-File \"infoRSyocto.txt\" it is possible to add some notes to the final image
   * The MAC address can also be changed here:
      ````
      -- MAC: d6:7d:ae:b3:0e:ba
@@ -84,8 +84,8 @@ ___
 8. Replace the `.rbf-File` with a new FPGA configuration file
 9. It is also allowed to delete files for unused platforms and devices
 10. At this point it is also possible to change the `Device Tree`of *rsYocto*
-  * Open the `dts-File` with a editor 
-11. Open the Linux console and navigate into the SD folder
+  * Open the `dts-File` with an editor 
+11. Open the Linux console and navigate into the SD-folder
 12. For allocating more user memory space edit following line inside the *makersYoctoSDImage.py* script
     ````python
     #
@@ -105,8 +105,8 @@ ___
     ````bash  
     sudo python makersYoctoSDImage.py   
     ````
-11. The script will be ask for a version Number and will wait for user changes
-12. Now it is possible to pre-installed files to the Image by adding the files to:
+11. The script will be ask for a **version Number** and will wait for user changes
+12. Now it is possible to pre-install files to the Image by adding the files to:
   
   |  Folder name | Kind | Location on the rootfs
   |:--|:--|:--|
@@ -115,7 +115,7 @@ ___
   | "my_rootdir" | **Home directory** | `/home/root`|
   
 13. Press ENTER to generate the new *rsYocto"-Image 
-14. The final script can be deploded to any SD Card
+14. The final image can be deployed to any SD-Card
 
 
 
