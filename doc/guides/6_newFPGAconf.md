@@ -32,7 +32,7 @@
             ![Alt text](fpgaConfSettings2.png?raw=true "FPGA Configuration settings 2")
         
 ___
-## Including the FPGA-Configuration file to the SD-Image  
+## Including the FPGA-Configuration files and other files or to the SD-Image or chnaging the Device Tree
    With the *rsYocto*-"`makersYoctoSDImage.py`" script is a simple way avelibil to change Image automatically given. 
    This script uses internaly the ALTERA Script `"make_sdimage.py"`, that only works with CentOS.
    
@@ -74,6 +74,11 @@ ___
 |\"socfpga_std_linux.rbf\"|*DE10 Standart*| Quartus Prime | FPGA Config for written by Linux |*running_bootloader_fpgaconfig.rbf* |
 
 **The Content  of the "rsyocto_SDxx-Folder"** 
+7. With the Text-File \"infoRSyocto.txt\" it is posible to add some notes to the final image
+  * The MAC address can also be changed here:
+     ````
+     -- MAC: d6:7d:ae:b3:0e:ba
+     ````
 
 7. Replace the `.rbf-File` with a new FPGA configuration file
 8. It is also allowed to delete files for unused platforms and devices
@@ -82,7 +87,7 @@ ___
 9. Open the Linux console and navigate into the SD folder
 10. Start the building script with: 
     ````bash  
-      sudo python makersYoctoSDImage.py   
+    sudo python makersYoctoSDImage.py   
     ````
 11. The script will be ask for a version Number and will wait for user changes
 12. Now it is possible to pre-installed files to the Image by adding the files to:
