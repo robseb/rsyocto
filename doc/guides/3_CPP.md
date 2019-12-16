@@ -3,8 +3,8 @@
 
 #  Debugging C++ applications remotely
 This article describes how to use *Microsoft Visual Studio 2019* for *rsYocto* C++ development. 
-The newer releasees of *Visual Studio* are capable to work as embedded Linux development IDE for *ARMv7A*. *Visual Studio* can use the  `gdb-Server` and `SSH`for communicating with Linux.
-On *rsYocto* are all required components for Visual Studio pre-installed. 
+The newer releases of *Visual Studio* are capable to work as embedded Linux development IDE for *ARMv7A*. *Visual Studio* can use the  `gdb-Server` and `SSH`for communicating with Linux.
+On *rsYocto* all required components for Visual Studio are pre-installed. 
 
 The following illustration shows how *rsYocto* and Microsoft Visual Studio work together:
 
@@ -19,28 +19,28 @@ The following illustration shows how *rsYocto* and Microsoft Visual Studio work 
 
 # Creating a new *rsYocto* Linux project
 1. Open *Mirosoft Visual Studio 2019* and **Create a new project** 
-2. Select as langugare "**C++**" and plattform "**Linux**" and choose "**Console App**"
+2. Select as language "**C++**" and platform "**Linux**" and choose "**Console App**"
 ![Alt text](VisulStudioCreateNewProject.jpg?raw=true "Create new Visual Studio Project")
 3. Press "**next** and give your project a name
 4. A new *Visual Studio Solution* should appear with a getting started guide
 5. This Guide shows how to configure the connection of the remote Linux machine
-6. Please follow this instructions with the settings
+6. Please follow this instructions with this settings:
   * Platform: `ARM`
   * Host Name: `IPv4-Address of your Board`: 
   * Port: `22`
   * User name: `root`
   * Authentication type: `Password`
   * Password: `eit`
-  * To change later the IP-Address navigate to `Tools/Options/Cross Platform`, click there the "Remove"-Button and then "Add" 
+  * To change the IP-Address later navigate to `Tools/Options/Cross Platform`, click there the "Remove"-Button and then "Add" 
  7. At this point the Visual Studio is ready for *rsYocto* C++ development 
  
  ![Alt text](VisualStudioDemo.jpg?raw=true "rsYocto and Visual Studio Hello World")
  
 
-# Known Iusses with Viusal Studio and Linux
- * Ignore the Error Window and read only the console output
- * Ingore the "*rysnc could not start eror*" (rsync is installed propertly)
- * After iusses try to **clean and the rebuild the solution**
+# Known Issues with Visual Studio and Linux
+ * Read the console output only and ingnore the error windows 
+ * Ingore the "*rysnc could not start error*" (rsync is installed properly)
+ * After iusses try to **clean and rebuild the solution**
 
 
  ## Continue with the next level: [Debugging Python applications remotely](4_Python.md)
