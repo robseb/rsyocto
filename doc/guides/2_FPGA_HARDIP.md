@@ -99,13 +99,13 @@ Also are here commands given to change the FPGA fabric configuration.
     * The required `.rbf` configuration file ("*gpiConf.rbf*") is pre-installed on the home directory
     * Execute following command to **configure the FPGA fabric** with this file:
         * For the Terasic DE10 Standard Board 
-        ```bash
-       FPGA-writeConfig  -f gpiConfStd.rbf
-        ```
+          ```bash
+          FPGA-writeConfig  -f gpiConfStd.rbf
+          ```
          * For the Terasic DE10 Nano Board 
-       ```bash
-       FPGA-writeConfig  -f gpiConfStd.rbf
-        ```
+           ```bash
+           FPGA-writeConfig  -f gpiConfNano.rbf
+           ```
     * Now should be the LEDs connected with the direct 32-Bit register
     * Enable the LEDs over this way:
         ```bash
