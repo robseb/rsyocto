@@ -81,12 +81,27 @@ ___
      -- MAC: d6:7d:ae:b3:0e:ba
      ````
 
-7. Replace the `.rbf-File` with a new FPGA configuration file
-8. It is also allowed to delete files for unused platforms and devices
-9. At this point it is also possible to change the `Device Tree`of *rsYocto*
+8. Replace the `.rbf-File` with a new FPGA configuration file
+9. It is also allowed to delete files for unused platforms and devices
+10. At this point it is also possible to change the `Device Tree`of *rsYocto*
   * Open the `dts-File` with a editor 
-9. Open the Linux console and navigate into the SD folder
-10. Start the building script with: 
+11. Open the Linux console and navigate into the SD folder
+12. For allocating more user memory space add following line inside the *makersYoctoSDImage.py* script
+    ````python
+    #
+    # #################### CHANGE HERE THE ADDITIONAL ROOTFS SPACE FOR USER SPACE ####################
+    #
+    # Size of the available User Space in Mega Byte (MB) (is exclude changes of rootfs 
+    #   during the execution of this script)
+    #
+    USER_SPACE_SIZE_MB =600 # 600MB 
+    #
+    ###################################################################################################
+    #
+    #
+  
+    ````
+12. Start the building script with: 
     ````bash  
     sudo python makersYoctoSDImage.py   
     ````
