@@ -70,7 +70,7 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 |  `examples/python` | *rsYocto* Python examples 
 |  `building` | *rsYocto* building scripts |
 
-`Final *Yocto* SD-Card Versions are available inside the packages-Part of this repository.`
+Final *rsYocto* SD-Card Versions are available inside the **packages-Part of this repository**!
 
 # Built With
 * [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) - Linux
