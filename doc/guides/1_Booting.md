@@ -1,3 +1,5 @@
+ [Back to the startpage](https://github.com/robseb/rsyocto)
+ 
 # Booting *rsYocto* on your Board
 This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Terasic FPGA development Board. 
 
@@ -33,6 +35,13 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
   1. Power Up your FPGA Board
   2. Now should boot **rsYocto** thorough following stages:
      ![Alt text](BootingStep.jpg?raw=true "Boot steps of rsYocto")
+     
+   <br>
+   
+   
+   ![Alt text](rsYoctoArria10BootLog.gif?raw=true "rufus")
+   ***rsYocto* is booting on a Arria 10 SX**
+  
   
 ## Login to *rsYocto*
 * Default device name: `cyclone5` or `arria10` 
