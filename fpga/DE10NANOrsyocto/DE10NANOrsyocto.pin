@@ -1,0 +1,752 @@
+ -- Copyright (C) 2018  Intel Corporation. All rights reserved.
+ -- Your use of Intel Corporation's design tools, logic functions 
+ -- and other software and tools, and its AMPP partner logic 
+ -- functions, and any output files from any of the foregoing 
+ -- (including device programming or simulation files), and any 
+ -- associated documentation or information are expressly subject 
+ -- to the terms and conditions of the Intel Program License 
+ -- Subscription Agreement, the Intel Quartus Prime License Agreement,
+ -- the Intel FPGA IP License Agreement, or other applicable license
+ -- agreement, including, without limitation, that your use is for
+ -- the sole purpose of programming logic devices manufactured by
+ -- Intel and sold by Intel or its authorized distributors.  Please
+ -- refer to the applicable agreement for further details.
+ -- 
+ -- This is a Quartus Prime output file. It is for reporting purposes only, and is
+ -- not intended for use as a Quartus Prime input file. This file cannot be used
+ -- to make Quartus Prime pin assignments - for instructions on how to make pin
+ -- assignments, please see Quartus Prime help.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- NC            : No Connect. This pin has no internal connection to the device.
+ -- DNU           : Do Not Use. This pin MUST NOT be connected.
+ -- VCCPGM        : Dedicated power pin for configuration, which MUST be connected to 1.8V, 2.5V, 3.0V or 3.3V depending on the requirements of the configuration device.
+ -- VCCINT        : Dedicated power pin, which MUST be connected to VCC  (1.1V).
+ -- VCCIO         : Dedicated power pin, which MUST be connected to VCC
+ --                 of its bank.
+ --                  Bank 3A:       2.5V
+ --                  Bank 3B:       3.3V
+ --                  Bank 4A:       3.3V
+ --                  Bank 5A:       3.3V
+ --                  Bank 5B:       3.3V
+ --                  Bank 6B:       1.5V
+ --                  Bank 6A:  1.5V
+ --                  Bank 7A:  3.3V
+ --                  Bank 7B:  3.3V
+ --                  Bank 7C:  3.3V
+ --                  Bank 7D:  3.3V
+ --                  Bank 8A:  3.3V
+ --                  Bank 9A:  Dedicated configuration pins only, no VCCIO required.
+ -- RREF          : External reference resistor for the quad, MUST be connected to
+ --                 GND via a 2k Ohm resistor.
+ -- GND           : Dedicated ground pin. Dedicated GND pins MUST be connected to GND.
+ --                  It can also be used to report unused dedicated pins. The connection
+ --                  on the board for unused dedicated pins depends on whether this will
+ --                  be used in a future design. One example is device migration. When
+ --                  using device migration, refer to the device pin-tables. If it is a
+ --                  GND pin in the pin table or if it will not be used in a future design
+ --                  for another purpose the it MUST be connected to GND. If it is an unused
+ --                  dedicated pin, then it can be connected to a valid signal on the board
+ --                  (low, high, or toggling) if that signal is required for a different
+ --                  revision of the design.
+ -- GND+          : Unused input pin. It can also be used to report unused dual-purpose pins.
+ --                  This pin should be connected to GND. It may also be connected  to a
+ --                  valid signal  on the board  (low, high, or toggling)  if that signal
+ --                  is required for a different revision of the design.
+ -- GND*          : Unused  I/O  pin. Connect each pin marked GND* directly to GND
+ --                  or leave it unconnected.
+ -- RESERVED      : Unused I/O pin, which MUST be left unconnected.
+ -- RESERVED_INPUT    : Pin is tri-stated and should be connected to the board.
+ -- RESERVED_INPUT_WITH_WEAK_PULLUP    : Pin is tri-stated with internal weak pull-up resistor.
+ -- RESERVED_INPUT_WITH_BUS_HOLD       : Pin is tri-stated with bus-hold circuitry.
+ -- RESERVED_OUTPUT_DRIVEN_HIGH        : Pin is output driven high.
+ -- GXB_NC        : Unused GXB Transmitter or dedicated clock output pin. This pin
+ --                 must not be connected.
+ ---------------------------------------------------------------------------------
+
+
+
+ ---------------------------------------------------------------------------------
+ -- Pin directions (input, output or bidir) are based on device operating in user mode.
+ ---------------------------------------------------------------------------------
+
+Quartus Prime Version 18.1.0 Build 625 09/12/2018 SJ Lite Edition
+CHIP  "DE10NANOrsyocto"  ASSIGNED TO AN: 5CSEBA6U23I7
+
+Pin Name/Usage               : Location  : Dir.   : I/O Standard      : Voltage : I/O Bank  : User Assignment
+-------------------------------------------------------------------------------------------------------------
+DNU                          : A2        :        :                   :         :           :                
+GND                          : A3        : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : A4        :        :                   :         : 7C        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : A5        :        :                   :         : 7C        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : A6        :        :                   :         : 7B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : A7        :        :                   :         : 7B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : A8        :        :                   :         : 7B        :                
+HPS_ENET_RX_DATA[3]          : A9        : input  : 3.3-V LVTTL       :         : 7B        : Y              
+GND                          : A10       : gnd    :                   :         :           :                
+HPS_ENET_RX_DATA[1]          : A11       : input  : 3.3-V LVTTL       :         : 7B        : Y              
+HPS_ENET_TX_EN               : A12       : output : 3.3-V LVTTL       :         : 7B        : Y              
+HPS_ENET_MDC                 : A13       : output : 3.3-V LVTTL       :         : 7B        : Y              
+HPS_ENET_RX_DATA[0]          : A14       : input  : 3.3-V LVTTL       :         : 7B        : Y              
+HPS_ENET_TX_DATA[2]          : A15       : output : 3.3-V LVTTL       :         : 7B        : Y              
+HPS_ENET_TX_DATA[0]          : A16       : output : 3.3-V LVTTL       :         : 7B        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : A17       :        :                   :         : 7A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : A18       :        :                   :         : 7A        :                
+HPS_I2C1_SDAT                : A19       : bidir  : 3.3-V LVTTL       :         : 7A        : Y              
+HPS_LED                      : A20       : bidir  : 3.3-V LVTTL       :         : 7A        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : A21       :        :                   :         : 7A        :                
+HPS_UART_RX                  : A22       : input  : 3.3-V LVTTL       :         : 7A        : Y              
+HPS_nRST                     : A23       :        :                   :         : 7A        :                
+HPS_DDR3_ADDR[10]            : A24       : output : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_RAS_N               : A25       : output : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_CAS_N               : A26       : output : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_BA[0]               : A27       : output : SSTL-15 Class I   :         : 6A        : N              
+GND                          : AA1       : gnd    :                   :         :           :                
+GND                          : AA2       : gnd    :                   :         :           :                
+GND                          : AA3       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AA4       :        :                   :         : 3A        :                
+VCCIO3A                      : AA5       : power  :                   : 2.5V    : 3A        :                
+nCSO, DATA4                  : AA6       :        :                   :         : 3A        :                
+DCLK                         : AA8       :        :                   :         : 3A        :                
+GND                          : AA9       : gnd    :                   :         :           :                
+VCCPD3A                      : AA10      : power  :                   : 2.5V    : 3A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AA11      :        :                   :         : 3A        :                
+VCCIO3B                      : AA12      : power  :                   : 3.3V    : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AA13      :        :                   :         : 4A        :                
+VCCPD3B4A                    : AA14      : power  :                   : 3.3V    : 3B, 4A    :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AA15      :        :                   :         : 4A        :                
+VCCIO4A                      : AA16      : power  :                   : 3.3V    : 4A        :                
+GND                          : AA17      : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AA18      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AA19      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AA20      :        :                   :         : 5A        :                
+VCCA_FPLL                    : AA21      : power  :                   : 2.5V    :           :                
+LED[7]                       : AA23      : output : 3.3-V LVTTL       :         : 5A        : Y              
+LED[1]                       : AA24      : output : 3.3-V LVTTL       :         : 5A        : Y              
+VREFB5BN0                    : AA25      : power  :                   :         : 5B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AA26      :        :                   :         : 5B        :                
+HPS_DDR3_DQ[31]              : AA27      : bidir  : SSTL-15 Class I   :         : 6B        : N              
+HPS_DDR3_DQ[26]              : AA28      : bidir  : SSTL-15 Class I   :         : 6B        : N              
+GND                          : AB1       : gnd    :                   :         :           :                
+GND                          : AB2       : gnd    :                   :         :           :                
+GND                          : AB3       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AB4       :        :                   :         : 3A        :                
+TCK                          : AB5       : input  :                   :         : 3A        :                
+AS_DATA3, DATA3              : AB6       :        :                   :         : 3A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AB23      :        :                   :         : 5A        :                
+GND                          : AB24      : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AB25      :        :                   :         : 5B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AB26      :        :                   :         : 5B        :                
+GND                          : AB27      : gnd    :                   :         :           :                
+HPS_DDR3_DM[3]               : AB28      : output : SSTL-15 Class I   :         : 6B        : N              
+GND                          : AC1       : gnd    :                   :         :           :                
+GND                          : AC2       : gnd    :                   :         :           :                
+GND                          : AC3       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AC4       :        :                   :         : 3A        :                
+AS_DATA2, DATA2              : AC5       :        :                   :         : 3A        :                
+AS_DATA1, DATA1              : AC6       :        :                   :         : 3A        :                
+TMS                          : AC7       : input  :                   :         : 3A        :                
+VCC_AUX                      : AC8       : power  :                   : 2.5V    :           :                
+VCC_AUX                      : AC21      : power  :                   : 2.5V    :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AC22      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AC23      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AC24      :        :                   :         : 5A        :                
+VCCIO5A                      : AC25      : power  :                   : 3.3V    : 5A        :                
+VREFB5AN0                    : AC26      : power  :                   :         : 5A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AC27      :        :                   :         : 6B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AC28      :        :                   :         : 6B        :                
+DNU                          : AD1       :        :                   :         :           :                
+DNU                          : AD2       :        :                   :         :           :                
+GND                          : AD3       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD4       :        :                   :         : 3A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD5       :        :                   :         : 3A        :                
+GND                          : AD6       : gnd    :                   :         :           :                
+AS_DATA0, ASDO, DATA0        : AD7       :        :                   :         : 3A        :                
+GND                          : AD8       : gnd    :                   :         :           :                
+VCCPD3B4A                    : AD9       : power  :                   : 3.3V    : 3B, 4A    :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD10      :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD11      :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD12      :        :                   :         : 3B        :                
+VCCPD3B4A                    : AD13      : power  :                   : 3.3V    : 3B, 4A    :                
+GND                          : AD14      : gnd    :                   :         :           :                
+VCC_AUX                      : AD15      : power  :                   : 2.5V    :           :                
+VCCPD3B4A                    : AD16      : power  :                   : 3.3V    : 3B, 4A    :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD17      :        :                   :         : 4A        :                
+VCCPD3B4A                    : AD18      : power  :                   : 3.3V    : 3B, 4A    :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD19      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD20      :        :                   :         : 4A        :                
+VCCPD3B4A                    : AD21      : power  :                   : 3.3V    : 3B, 4A    :                
+GND                          : AD22      : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD23      :        :                   :         : 4A        :                
+VCCPGM                       : AD24      : power  :                   : 1.8V/2.5V/3.0V/3.3V :           :                
+GND                          : AD25      : gnd    :                   :         :           :                
+HPS_ENET_INT_N               : AD26      : bidir  : 3.3-V LVTTL       :         : 5A        : N              
+VCCIO6B_HPS                  : AD27      : power  :                   : 1.5V    : 6B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AD28      :        :                   :         : 6B        :                
+GND                          : AE1       : gnd    :                   :         :           :                
+GND                          : AE2       : gnd    :                   :         :           :                
+GND                          : AE3       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE4       :        :                   :         : 3B        :                
+VREFB3AN0                    : AE5       : power  :                   :         : 3A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE6       :        :                   :         : 3A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE7       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE8       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE9       :        :                   :         : 3B        :                
+VCCIO3B                      : AE10      : power  :                   : 3.3V    : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE11      :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE12      :        :                   :         : 3B        :                
+VCCIO3B                      : AE13      : power  :                   : 3.3V    : 3B        :                
+DNU                          : AE14      :        :                   :         :           :                
+ARDUINO_IO[9]                : AE15      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GND                          : AE16      : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE17      :        :                   :         : 4A        :                
+GND                          : AE18      : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE19      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE20      :        :                   :         : 4A        :                
+VCCIO4A                      : AE21      : power  :                   : 3.3V    : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE22      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE23      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE24      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE25      :        :                   :         : 5A        :                
+LED[5]                       : AE26      : output : 3.3-V LVTTL       :         : 5A        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE27      :        :                   :         : 6B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AE28      :        :                   :         : 6B        :                
+GND                          : AF1       : gnd    :                   :         :           :                
+GND                          : AF2       : gnd    :                   :         :           :                
+GND                          : AF3       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF4       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF5       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF6       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF7       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF8       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF9       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF10      :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF11      :        :                   :         : 3B        :                
+VREFB3BN0                    : AF12      : power  :                   :         : 3B        :                
+ARDUINO_IO[1]                : AF13      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+VCCIO4A                      : AF14      : power  :                   : 3.3V    : 4A        :                
+ARDUINO_IO[10]               : AF15      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+VREFB4AN0                    : AF16      : power  :                   :         : 4A        :                
+ARDUINO_IO[8]                : AF17      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF18      :        :                   :         : 4A        :                
+VCCIO4A                      : AF19      : power  :                   : 3.3V    : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF20      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF21      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF22      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF23      :        :                   :         : 4A        :                
+GND                          : AF24      : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF25      :        :                   :         : 4A        :                
+LED[4]                       : AF26      : output : 3.3-V LVTTL       :         : 5A        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF27      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AF28      :        :                   :         : 4A        :                
+GND                          : AG1       : gnd    :                   :         :           :                
+GND                          : AG2       : gnd    :                   :         :           :                
+GND                          : AG3       : gnd    :                   :         :           :                
+VCCIO3B                      : AG4       : power  :                   : 3.3V    : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG5       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG6       :        :                   :         : 3B        :                
+GND                          : AG7       : gnd    :                   :         :           :                
+ARDUINO_IO[6]                : AG8       : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+ARDUINO_IO[3]                : AG9       : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+ARDUINO_IO[2]                : AG10      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+ARDUINO_IO[15]               : AG11      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+VCCIO4A                      : AG12      : power  :                   : 3.3V    : 4A        :                
+ARDUINO_IO[0]                : AG13      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG14      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG15      :        :                   :         : 4A        :                
+ARDUINO_IO[11]               : AG16      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GND                          : AG17      : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG18      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG19      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG20      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG21      :        :                   :         : 4A        :                
+VCCIO4A                      : AG22      : power  :                   : 3.3V    : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG23      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG24      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG25      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG26      :        :                   :         : 4A        :                
+GND                          : AG27      : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AG28      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH2       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH3       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH4       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH5       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH6       :        :                   :         : 3B        :                
+ARDUINO_RESET_N              : AH7       : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+ARDUINO_IO[7]                : AH8       : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+ARDUINO_IO[14]               : AH9       : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+GND                          : AH10      : gnd    :                   :         :           :                
+ARDUINO_IO[12]               : AH11      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+ARDUINO_IO[13]               : AH12      : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH13      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH14      :        :                   :         : 4A        :                
+VCCIO4A                      : AH15      : power  :                   : 3.3V    : 4A        :                
+KEY[1]                       : AH16      : input  : 3.3-V LVTTL       :         : 4A        : Y              
+KEY[0]                       : AH17      : input  : 3.3-V LVTTL       :         : 4A        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH18      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH19      :        :                   :         : 4A        :                
+GND                          : AH20      : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH21      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH22      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH23      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH24      :        :                   :         : 4A        :                
+VCCIO4A                      : AH25      : power  :                   : 3.3V    : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH26      :        :                   :         : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : AH27      :        :                   :         : 4A        :                
+GND                          : B1        :        :                   :         :           :                
+DNU                          : B2        :        :                   :         :           :                
+GND                          : B3        : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : B4        :        :                   :         : 7C        :                
+GND                          : B5        : gnd    :                   :         :           :                
+HPS_SD_DATA[1]               : B6        : bidir  : 3.3-V LVTTL       :         : 7C        : Y              
+GND                          : B7        : gnd    :                   :         :           :                
+HPS_SD_CLK                   : B8        : output : 3.3-V LVTTL       :         : 7C        : Y              
+HPS_SD_DATA[3]               : B9        : bidir  : 3.3-V LVTTL       :         : 7C        : Y              
+VCCIO7C_HPS                  : B10       : power  :                   : 3.3V    : 7C        :                
+HPS_SD_DATA[2]               : B11       : bidir  : 3.3-V LVTTL       :         : 7C        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : B12       :        :                   :         : 7C        :                
+VCCIO7B_HPS                  : B13       : power  :                   : 3.3V    : 7B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : B14       :        :                   :         : 7B        :                
+GND                          : B15       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : B16       :        :                   :         : 7A        :                
+GND                          : B17       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : B18       :        :                   :         : 7A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : B19       :        :                   :         : 7A        :                
+GND                          : B20       : gnd    :                   :         :           :                
+HPS_UART_TX                  : B21       : output : 3.3-V LVTTL       :         : 7A        : Y              
+GND                          : B22       : gnd    :                   :         :           :                
+HPS_TDO                      : B23       :        :                   :         : 7A        :                
+HPS_DDR3_ADDR[11]            : B24       : output : SSTL-15 Class I   :         : 6A        : N              
+GND                          : B25       : gnd    :                   :         :           :                
+HPS_DDR3_ADDR[7]             : B26       : output : SSTL-15 Class I   :         : 6A        : N              
+GND                          : B27       : gnd    :                   :         :           :                
+HPS_DDR3_ADDR[1]             : B28       : output : SSTL-15 Class I   :         : 6A        : N              
+GND                          : C1        : gnd    :                   :         :           :                
+GND                          : C2        : gnd    :                   :         :           :                
+GND                          : C3        : gnd    :                   :         :           :                
+HPS_USB_DATA[3]              : C4        : bidir  : 3.3-V LVTTL       :         : 7D        : Y              
+HPS_USB_STP                  : C5        : output : 3.3-V LVTTL       :         : 7D        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : C6        :        :                   :         : 7D        :                
+HPS_USB_DATA[6]              : C7        : bidir  : 3.3-V LVTTL       :         : 7D        : Y              
+HPS_USB_DATA[4]              : C8        : bidir  : 3.3-V LVTTL       :         : 7D        : Y              
+HPS_USB_DATA[2]              : C9        : bidir  : 3.3-V LVTTL       :         : 7D        : Y              
+HPS_USB_DATA[0]              : C10       : bidir  : 3.3-V LVTTL       :         : 7D        : Y              
+GND                          : C11       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : C12       :        :                   :         : 8A        :                
+HPS_SD_DATA[0]               : C13       : bidir  : 3.3-V LVTTL       :         : 7C        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : C14       :        :                   :         : 7B        :                
+HPS_ENET_RX_DATA[2]          : C15       : input  : 3.3-V LVTTL       :         : 7B        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : C16       :        :                   :         : 7A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : C17       :        :                   :         : 7A        :                
+HPS_I2C1_SCLK                : C18       : bidir  : 3.3-V LVTTL       :         : 7A        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : C19       :        :                   :         : 7A        :                
+VCCIO7A_HPS                  : C20       : power  :                   : 3.3V    : 7A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : C21       :        :                   :         : 7A        :                
+HPS_TRST                     : C22       :        :                   :         : 7A        :                
+HPS_TMS                      : C23       :        :                   :         : 7A        :                
+HPS_DDR3_ADDR[13]            : C24       : output : SSTL-15 Class I   :         : 6A        : N              
+VCCIO6A_HPS                  : C25       : power  :                   : 1.5V    : 6A        :                
+HPS_DDR3_ADDR[6]             : C26       : output : SSTL-15 Class I   :         : 6A        : N              
+VCCIO6A_HPS                  : C27       : power  :                   : 1.5V    : 6A        :                
+HPS_DDR3_ADDR[0]             : C28       : output : SSTL-15 Class I   :         : 6A        : N              
+DNU                          : D1        :        :                   :         :           :                
+DNU                          : D2        :        :                   :         :           :                
+GND                          : D3        : gnd    :                   :         :           :                
+HPS_USB_DATA[5]              : D4        : bidir  : 3.3-V LVTTL       :         : 7D        : Y              
+HPS_USB_NXT                  : D5        : input  : 3.3-V LVTTL       :         : 7D        : Y              
+VCCIO7D_HPS                  : D6        : power  :                   : 3.3V    : 7D        :                
+VCCBAT                       : D7        : power  :                   : 1.2V    :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : D8        :        :                   :         : 8A        :                
+VREFB8AN0                    : D9        : power  :                   :         : 8A        :                
+GND                          : D10       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : D11       :        :                   :         : 8A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : D12       :        :                   :         : 8A        :                
+GND                          : D13       : gnd    :                   :         :           :                
+HPS_SD_CMD                   : D14       : bidir  : 3.3-V LVTTL       :         : 7C        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : D15       :        :                   :         : 7B        :                
+GND                          : D16       : gnd    :                   :         :           :                
+HPS_ENET_TX_DATA[3]          : D17       : output : 3.3-V LVTTL       :         : 7B        : Y              
+VCCIO7A_HPS                  : D18       : power  :                   : 3.3V    : 7A        :                
+VREFB7A7B7C7DN0_HPS          : D19       : power  :                   :         : 7A, 7B, 7C, 7D :                
+HPS_CLK2                     : D20       :        :                   :         : 7A        :                
+GND                          : D21       :        :                   :         : 7A        :                
+HPS_TDI                      : D22       :        :                   :         : 7A        :                
+DNU                          : D23       :        :                   :         :           :                
+HPS_DDR3_ADDR[12]            : D24       : output : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_RZQ                 : D25       : input  : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_ADDR[3]             : D26       : output : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_DQ[3]               : D27       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_ODT                 : D28       : output : SSTL-15 Class I   :         : 6A        : N              
+GND                          : E1        : gnd    :                   :         :           :                
+GND                          : E2        : gnd    :                   :         :           :                
+GND                          : E3        : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : E4        :        :                   :         : 7D        :                
+HPS_USB_DIR                  : E5        : input  : 3.3-V LVTTL       :         : 7D        : Y              
+nCE                          : E6        :        :                   :         : 9A        :                
+VCCIO8A                      : E7        : power  :                   : 3.3V    : 8A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : E8        :        :                   :         : 8A        :                
+GND                          : E9        : gnd    :                   :         :           :                
+VCCPD8A                      : E10       : power  :                   : 3.3V    : 8A        :                
+FPGA_CLK3_50                 : E11       : input  : 3.3-V LVTTL       :         : 8A        : Y              
+DNU                          : E12       :        :                   :         :           :                
+VCCPD7D_HPS                  : E13       : power  :                   : 3.3V    : 7D        :                
+VCCPD7C_HPS                  : E14       : power  :                   : 3.3V    : 7C        :                
+VCC_AUX                      : E15       : power  :                   : 2.5V    :           :                
+HPS_ENET_MDIO                : E16       : bidir  : 3.3-V LVTTL       :         : 7B        : Y              
+VCCPD7B_HPS                  : E17       : power  :                   : 3.3V    : 7B        :                
+HPS_PORSEL                   : E18       :        :                   :         : 7A        :                
+GND                          : E19       : gnd    :                   :         :           :                
+HPS_CLK1                     : E20       :        :                   :         : 7A        :                
+VCCPD7A_HPS                  : E21       : power  :                   : 3.3V    : 7A        :                
+GND                          : E22       : gnd    :                   :         :           :                
+GND                          : E23       :        :                   :         : 7A        :                
+GND                          : E24       : gnd    :                   :         :           :                
+HPS_DDR3_WE_N                : E25       : output : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_ADDR[2]             : E26       : output : SSTL-15 Class I   :         : 6A        : N              
+GND                          : E27       : gnd    :                   :         :           :                
+HPS_DDR3_DQ[2]               : E28       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+GND                          : F1        : gnd    :                   :         :           :                
+GND                          : F2        : gnd    :                   :         :           :                
+GND                          : F3        : gnd    :                   :         :           :                
+HPS_USB_DATA[7]              : F4        : bidir  : 3.3-V LVTTL       :         : 7D        : Y              
+HPS_USB_DATA[1]              : F5        : bidir  : 3.3-V LVTTL       :         : 7D        : Y              
+GND                          : F6        :        :                   :         : 9A        :                
+nCONFIG                      : F7        :        :                   :         : 9A        :                
+VCC_AUX                      : F8        : power  :                   : 2.5V    :           :                
+VCC_AUX_SHARED               : F21       : power  :                   : 2.5V    :           :                
+VCCRSTCLK_HPS                : F22       : power  :                   : 1.8V/2.5V/3.0V/3.3V :           :                
+GND                          : F23       :        :                   :         : 7A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : F24       :        :                   :         : 6A        :                
+HPS_DDR3_ADDR[9]             : F25       : output : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_ADDR[8]             : F26       : output : SSTL-15 Class I   :         : 6A        : N              
+VCCIO6A_HPS                  : F27       : power  :                   : 1.5V    : 6A        :                
+HPS_DDR3_DQ[7]               : F28       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+GND                          : G1        : gnd    :                   :         :           :                
+GND                          : G2        : gnd    :                   :         :           :                
+GND                          : G3        : gnd    :                   :         :           :                
+HPS_USB_CLKOUT               : G4        : input  : 3.3-V LVTTL       :         : 7D        : Y              
+VCCIO7D_HPS                  : G5        : power  :                   : 3.3V    : 7D        :                
+MSEL2                        : G6        :        :                   :         : 9A        :                
+HPS_DDR3_ADDR[14]            : G23       : output : SSTL-15 Class I   :         : 6A        : N              
+VCCIO6A_HPS                  : G24       : power  :                   : 1.5V    : 6A        :                
+HPS_DDR3_BA[2]               : G25       : output : SSTL-15 Class I   :         : 6A        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : G26       :        :                   :         : 6A        :                
+HPS_DDR3_DQ[6]               : G27       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_DM[0]               : G28       : output : SSTL-15 Class I   :         : 6A        : N              
+DNU                          : H1        :        :                   :         :           :                
+DNU                          : H2        :        :                   :         :           :                
+GND                          : H3        : gnd    :                   :         :           :                
+GND                          : H4        : gnd    :                   :         :           :                
+GND                          : H5        : gnd    :                   :         :           :                
+GND                          : H6        : gnd    :                   :         :           :                
+nSTATUS                      : H8        :        :                   :         : 9A        :                
+MSEL1                        : H9        :        :                   :         : 9A        :                
+VCCPGM                       : H10       : power  :                   : 1.8V/2.5V/3.0V/3.3V :           :                
+GND                          : H11       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : H12       :        :                   :         : 7C        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : H13       :        :                   :         : 7C        :                
+VCCIO7B_HPS                  : H14       : power  :                   : 3.3V    : 7B        :                
+GND                          : H15       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : H16       :        :                   :         : 7B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : H17       :        :                   :         : 7A        :                
+GND                          : H18       : gnd    :                   :         :           :                
+HPS_nPOR                     : H19       :        :                   :         : 7A        :                
+GND                          : H20       : gnd    :                   :         :           :                
+VCCIO6A_HPS                  : H21       : power  :                   : 1.5V    : 6A        :                
+VCCPLL_HPS                   : H23       : power  :                   : 2.5V    :           :                
+GND                          : H24       : gnd    :                   :         :           :                
+HPS_DDR3_BA[1]               : H25       : output : SSTL-15 Class I   :         : 6A        : N              
+VCCIO6A_HPS                  : H26       : power  :                   : 1.5V    : 6A        :                
+GND                          : H27       : gnd    :                   :         :           :                
+VREFB6AN0_HPS                : H28       :        :                   : 0.75V   : 6A        :                
+GND                          : J1        : gnd    :                   :         :           :                
+GND                          : J2        : gnd    :                   :         :           :                
+GND                          : J3        : gnd    :                   :         :           :                
+VCCA_FPLL                    : J4        : power  :                   : 2.5V    :           :                
+GND                          : J5        : gnd    :                   :         :           :                
+CONF_DONE                    : J8        :        :                   :         : 9A        :                
+GND                          : J9        : gnd    :                   :         :           :                
+MSEL0                        : J10       :        :                   :         : 9A        :                
+VCC                          : J11       : power  :                   : 1.1V    :           :                
+HPS_ENET_RX_CLK              : J12       : input  : 3.3-V LVTTL       :         : 7B        : Y              
+HPS_ENET_RX_DV               : J13       : input  : 3.3-V LVTTL       :         : 7B        : Y              
+HPS_ENET_TX_DATA[1]          : J14       : output : 3.3-V LVTTL       :         : 7B        : Y              
+HPS_ENET_GTX_CLK             : J15       : output : 3.3-V LVTTL       :         : 7B        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : J16       :        :                   :         : 7B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : J17       :        :                   :         : 7A        :                
+HPS_KEY                      : J18       : bidir  : 3.3-V LVTTL       :         : 7A        : Y              
+VCCRSTCLK_HPS                : J19       :        :                   :         : 7A        :                
+HPS_DDR3_ADDR[5]             : J20       : output : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_ADDR[4]             : J21       : output : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_DQ[1]               : J24       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_DQ[0]               : J25       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_DQ[4]               : J26       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_DQ[10]              : J27       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_DQ[11]              : J28       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+GND                          : K1        : gnd    :                   :         :           :                
+GND                          : K2        : gnd    :                   :         :           :                
+GND                          : K3        : gnd    :                   :         :           :                
+GND                          : K4        : gnd    :                   :         :           :                
+VCCA_FPLL                    : K5        : power  :                   : 2.5V    :           :                
+GND                          : K8        : gnd    :                   :         :           :                
+MSEL4                        : K9        :        :                   :         : 9A        :                
+MSEL3                        : K10       :        :                   :         : 9A        :                
+GND                          : K11       : gnd    :                   :         :           :                
+GND                          : K12       : gnd    :                   :         :           :                
+VCC                          : K13       : power  :                   : 1.1V    :           :                
+GND                          : K14       : gnd    :                   :         :           :                
+VCC                          : K15       : power  :                   : 1.1V    :           :                
+GND                          : K16       : gnd    :                   :         :           :                
+VCC_HPS                      : K17       : power  :                   : 1.1V    :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : K18       :        :                   :         : 7A        :                
+HPS_TCK                      : K19       :        :                   :         : 7A        :                
+GND                          : K20       : gnd    :                   :         :           :                
+VCCPD6A6B_HPS                : K21       : power  :                   : 2.5V    : 6A, 6B    :                
+VCCPD6A6B_HPS                : K24       : power  :                   : 2.5V    : 6A, 6B    :                
+HPS_DDR3_DQ[8]               : K25       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_DQ[5]               : K26       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : K27       :        :                   :         : 6A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : K28       :        :                   :         : 6A        :                
+GND                          : L1        : gnd    :                   :         :           :                
+GND                          : L2        : gnd    :                   :         :           :                
+GND                          : L3        : gnd    :                   :         :           :                
+VCC                          : L4        : power  :                   : 1.1V    :           :                
+GND                          : L5        : gnd    :                   :         :           :                
+GND                          : L8        : gnd    :                   :         :           :                
+GND                          : L9        : gnd    :                   :         :           :                
+GND                          : L10       : gnd    :                   :         :           :                
+VCC                          : L11       : power  :                   : 1.1V    :           :                
+VCC                          : L12       : power  :                   : 1.1V    :           :                
+GND                          : L13       : gnd    :                   :         :           :                
+VCC                          : L14       : power  :                   : 1.1V    :           :                
+GND                          : L15       : gnd    :                   :         :           :                
+VCC_HPS                      : L16       : power  :                   : 1.1V    :           :                
+GND                          : L17       : gnd    :                   :         :           :                
+VCC_HPS                      : L18       : power  :                   : 1.1V    :           :                
+GND                          : L19       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : L20       :        :                   :         : 6A        :                
+HPS_DDR3_CS_N                : L21       : output : SSTL-15 Class I   :         : 6A        : N              
+GND                          : L24       : gnd    :                   :         :           :                
+HPS_DDR3_DQ[9]               : L25       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+VCCIO6A_HPS                  : L26       : power  :                   : 1.5V    : 6A        :                
+GND                          : L27       : gnd    :                   :         :           :                
+HPS_DDR3_CKE                 : L28       : output : SSTL-15 Class I   :         : 6A        : N              
+DNU                          : M1        :        :                   :         :           :                
+DNU                          : M2        :        :                   :         :           :                
+GND                          : M3        : gnd    :                   :         :           :                
+VCCA_FPLL                    : M4        : power  :                   : 2.5V    :           :                
+VCC                          : M5        : power  :                   : 1.1V    :           :                
+GND                          : M8        : gnd    :                   :         :           :                
+VCC                          : M9        : power  :                   : 1.1V    :           :                
+GND                          : M10       : gnd    :                   :         :           :                
+GND                          : M11       : gnd    :                   :         :           :                
+VCC                          : M12       : power  :                   : 1.1V    :           :                
+VCC                          : M13       : power  :                   : 1.1V    :           :                
+GND                          : M14       : gnd    :                   :         :           :                
+VCC                          : M15       : power  :                   : 1.1V    :           :                
+GND                          : M16       : gnd    :                   :         :           :                
+VCC_HPS                      : M17       : power  :                   : 1.1V    :           :                
+VCC_HPS                      : M18       : power  :                   : 1.1V    :           :                
+VCC_HPS                      : M19       : power  :                   : 1.1V    :           :                
+GND                          : M20       : gnd    :                   :         :           :                
+VCCIO6A_HPS                  : M21       : power  :                   : 1.5V    : 6A        :                
+VCCPD6A6B_HPS                : M24       : power  :                   : 2.5V    : 6A, 6B    :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : M25       :        :                   :         : 6A        :                
+HPS_DDR3_DQ[13]              : M26       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_DQ[12]              : M27       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+HPS_DDR3_DQ[14]              : M28       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+GND                          : N1        : gnd    :                   :         :           :                
+GND                          : N2        : gnd    :                   :         :           :                
+GND                          : N3        : gnd    :                   :         :           :                
+GND                          : N4        : gnd    :                   :         :           :                
+VCC                          : N5        : power  :                   : 1.1V    :           :                
+GND                          : N8        : gnd    :                   :         :           :                
+VCC                          : N9        : power  :                   : 1.1V    :           :                
+VCC                          : N10       : power  :                   : 1.1V    :           :                
+VCC                          : N11       : power  :                   : 1.1V    :           :                
+VCC                          : N12       : power  :                   : 1.1V    :           :                
+GND                          : N13       : gnd    :                   :         :           :                
+VCC                          : N14       : power  :                   : 1.1V    :           :                
+GND                          : N15       : gnd    :                   :         :           :                
+VCC_HPS                      : N16       : power  :                   : 1.1V    :           :                
+GND                          : N17       : gnd    :                   :         :           :                
+VCC_HPS                      : N18       : power  :                   : 1.1V    :           :                
+GND                          : N19       : gnd    :                   :         :           :                
+HPS_DDR3_CK_N                : N20       : output : Differential 1.5-V SSTL Class I :         : 6A        : N              
+HPS_DDR3_CK_P                : N21       : output : Differential 1.5-V SSTL Class I :         : 6A        : N              
+HPS_DDR3_DQ[16]              : N24       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+HPS_DDR3_DQ[17]              : N25       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+HPS_DDR3_DQ[20]              : N26       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+HPS_DDR3_DQ[21]              : N27       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+HPS_DDR3_DQ[15]              : N28       : bidir  : SSTL-15 Class I   :         : 6A        : N              
+GND                          : P1        : gnd    :                   :         :           :                
+GND                          : P2        : gnd    :                   :         :           :                
+GND                          : P3        : gnd    :                   :         :           :                
+VCCA_FPLL                    : P4        : power  :                   : 2.5V    :           :                
+GND                          : P5        : gnd    :                   :         :           :                
+GND                          : P8        : gnd    :                   :         :           :                
+GND                          : P9        : gnd    :                   :         :           :                
+GND                          : P10       : gnd    :                   :         :           :                
+VCC                          : P11       : power  :                   : 1.1V    :           :                
+GND                          : P12       : gnd    :                   :         :           :                
+VCC                          : P13       : power  :                   : 1.1V    :           :                
+VCC                          : P14       : power  :                   : 1.1V    :           :                
+VCC                          : P15       : power  :                   : 1.1V    :           :                
+GND                          : P16       : gnd    :                   :         :           :                
+VCC_HPS                      : P17       : power  :                   : 1.1V    :           :                
+GND                          : P18       : gnd    :                   :         :           :                
+VCC_HPS                      : P19       : power  :                   : 1.1V    :           :                
+GND                          : P20       : gnd    :                   :         :           :                
+VCCPD6A6B_HPS                : P21       : power  :                   : 2.5V    : 6A, 6B    :                
+VCCPD6A6B_HPS                : P24       : power  :                   : 2.5V    : 6A, 6B    :                
+GND                          : P25       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : P26       :        :                   :         : 6B        :                
+VCCIO6B_HPS                  : P27       : power  :                   : 1.5V    : 6B        :                
+HPS_DDR3_DM[1]               : P28       : output : SSTL-15 Class I   :         : 6A        : N              
+GND                          : R1        : gnd    :                   :         :           :                
+GND                          : R2        : gnd    :                   :         :           :                
+GND                          : R3        : gnd    :                   :         :           :                
+VCCA_FPLL                    : R4        : power  :                   : 2.5V    :           :                
+VCC                          : R5        : power  :                   : 1.1V    :           :                
+GND                          : R8        : gnd    :                   :         :           :                
+VCC                          : R9        : power  :                   : 1.1V    :           :                
+VCC                          : R10       : power  :                   : 1.1V    :           :                
+GND                          : R11       : gnd    :                   :         :           :                
+VCC                          : R12       : power  :                   : 1.1V    :           :                
+GND                          : R13       : gnd    :                   :         :           :                
+VCC                          : R14       : power  :                   : 1.1V    :           :                
+GND                          : R15       : gnd    :                   :         :           :                
+HPS_DDR3_DQS_N[0]            : R16       : bidir  : Differential 1.5-V SSTL Class I :         : 6A        : N              
+HPS_DDR3_DQS_P[0]            : R17       : bidir  : Differential 1.5-V SSTL Class I :         : 6A        : N              
+HPS_DDR3_DQS_N[1]            : R18       : bidir  : Differential 1.5-V SSTL Class I :         : 6A        : N              
+HPS_DDR3_DQS_P[1]            : R19       : bidir  : Differential 1.5-V SSTL Class I :         : 6A        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : R20       :        :                   :         : 6A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : R21       :        :                   :         : 6A        :                
+HPS_DDR3_DQ[28]              : R24       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+HPS_DDR3_DQ[25]              : R25       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+HPS_DDR3_DQ[24]              : R26       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+HPS_DDR3_DQ[22]              : R27       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : R28       :        :                   :         : 6B        :                
+DNU                          : T1        :        :                   :         :           :                
+DNU                          : T2        :        :                   :         :           :                
+GND                          : T3        : gnd    :                   :         :           :                
+VCC                          : T4        : power  :                   : 1.1V    :           :                
+VCC                          : T5        : power  :                   : 1.1V    :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : T8        :        :                   :         : 3A        :                
+VCC                          : T9        : power  :                   : 1.1V    :           :                
+GND                          : T10       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : T11       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : T12       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : T13       :        :                   :         : 3B        :                
+GND                          : T14       : gnd    :                   :         :           :                
+VCC                          : T15       : power  :                   : 1.1V    :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : T16       :        :                   :         : 6B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : T17       :        :                   :         : 6B        :                
+HPS_DDR3_DQS_N[2]            : T18       : bidir  : Differential 1.5-V SSTL Class I :         : 6B        : N              
+HPS_DDR3_DQS_P[2]            : T19       : bidir  : Differential 1.5-V SSTL Class I :         : 6B        : N              
+HPS_DDR3_DQS_N[3]            : T20       : bidir  : Differential 1.5-V SSTL Class I :         : 6B        : N              
+VCCIO6B_HPS                  : T21       : power  :                   : 1.5V    : 6B        :                
+HPS_DDR3_DQ[29]              : T24       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+VCCIO6B_HPS                  : T25       : power  :                   : 1.5V    : 6B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : T26       :        :                   :         : 6B        :                
+VREFB6BN0_HPS                : T27       :        :                   : 0.75V   : 6B        :                
+HPS_DDR3_DQ[18]              : T28       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+GND                          : U1        : gnd    :                   :         :           :                
+GND                          : U2        : gnd    :                   :         :           :                
+GND                          : U3        : gnd    :                   :         :           :                
+VCCA_FPLL                    : U4        : power  :                   : 2.5V    :           :                
+GND                          : U5        : gnd    :                   :         :           :                
+DNU                          : U8        :        :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : U9        :        :                   :         : 3A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : U10       :        :                   :         : 3A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : U11       :        :                   :         : 3B        :                
+GND                          : U12       : gnd    :                   :         :           :                
+ARDUINO_IO[5]                : U13       : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+ARDUINO_IO[4]                : U14       : bidir  : 3.3-V LVTTL       :         : 4A        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : U15       :        :                   :         : 6B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : U16       :        :                   :         : 6B        :                
+GND                          : U17       : gnd    :                   :         :           :                
+VCCIO6B_HPS                  : U18       : power  :                   : 1.5V    : 6B        :                
+HPS_DDR3_DQS_P[3]            : U19       : bidir  : Differential 1.5-V SSTL Class I :         : 6B        : N              
+GND                          : U20       : gnd    :                   :         :           :                
+VCC_HPS                      : U21       : power  :                   : 1.1V    :           :                
+GND                          : U24       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : U25       :        :                   :         : 6B        :                
+VCC                          : U26       : power  :                   : 1.1V    :           :                
+GND                          : U27       : gnd    :                   :         :           :                
+HPS_DDR3_DQ[19]              : U28       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+GND                          : V1        : gnd    :                   :         :           :                
+GND                          : V2        : gnd    :                   :         :           :                
+GND                          : V3        : gnd    :                   :         :           :                
+GND                          : V4        : gnd    :                   :         :           :                
+GND                          : V5        : gnd    :                   :         :           :                
+GND                          : V8        : gnd    :                   :         :           :                
+GND                          : V9        : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : V10       :        :                   :         : 3A        :                
+FPGA_CLK1_50                 : V11       : input  : 3.3-V LVTTL       :         : 3B        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : V12       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : V13       :        :                   :         : 4A        :                
+GND                          : V14       : gnd    :                   :         :           :                
+LED[3]                       : V15       : output : 3.3-V LVTTL       :         : 5A        : Y              
+LED[2]                       : V16       : output : 3.3-V LVTTL       :         : 5A        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : V17       :        :                   :         : 6B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : V18       :        :                   :         : 6B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : V19       :        :                   :         : 6B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : V20       :        :                   :         : 6B        :                
+GND                          : V21       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : V24       :        :                   :         : 6B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : V25       :        :                   :         : 6B        :                
+GND                          : V26       : gnd    :                   :         :           :                
+HPS_DDR3_DQ[23]              : V27       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+HPS_DDR3_RESET_N             : V28       : output : SSTL-15 Class I   :         : 6B        : N              
+GND                          : W1        : gnd    :                   :         :           :                
+GND                          : W2        : gnd    :                   :         :           :                
+GND                          : W3        : gnd    :                   :         :           :                
+GND                          : W4        : gnd    :                   :         :           :                
+VCCA_FPLL                    : W5        : power  :                   : 2.5V    :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : W8        :        :                   :         : 3A        :                
+VCCIO3A                      : W9        : power  :                   : 2.5V    : 3A        :                
+TDI                          : W10       : input  :                   :         : 3A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : W11       :        :                   :         : 3B        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : W12       :        :                   :         : 3B        :                
+VCCIO4A                      : W13       : power  :                   : 3.3V    : 4A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : W14       :        :                   :         : 4A        :                
+LED[0]                       : W15       : output : 3.3-V LVTTL       :         : 5A        : Y              
+GND                          : W16       : gnd    :                   :         :           :                
+VCCIO5A                      : W17       : power  :                   : 3.3V    : 5A        :                
+GND                          : W18       : gnd    :                   :         :           :                
+VCCPD5B                      : W19       : power  :                   : 3.3V    : 5B        :                
+SW[3]                        : W20       : input  : 3.3-V LVTTL       :         : 5B        : Y              
+SW[2]                        : W21       : input  : 3.3-V LVTTL       :         : 5B        : Y              
+SW[1]                        : W24       : input  : 3.3-V LVTTL       :         : 5B        : Y              
+VCCIO5B                      : W25       : power  :                   : 3.3V    : 5B        :                
+HPS_DDR3_DQ[27]              : W26       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+VCCIO6B_HPS                  : W27       : power  :                   : 1.5V    : 6B        :                
+HPS_DDR3_DM[2]               : W28       : output : SSTL-15 Class I   :         : 6B        : N              
+DNU                          : Y1        :        :                   :         :           :                
+DNU                          : Y2        :        :                   :         :           :                
+GND                          : Y3        : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y4        :        :                   :         : 3A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y5        :        :                   :         : 3A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y8        :        :                   :         : 3A        :                
+TDO                          : Y9        : output :                   :         : 3A        :                
+VCCPGM                       : Y10       : power  :                   : 1.8V/2.5V/3.0V/3.3V :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y11       :        :                   :         : 3A        :                
+GND                          : Y12       : gnd    :                   :         :           :                
+FPGA_CLK2_50                 : Y13       : input  : 3.3-V LVTTL       :         : 4A        : Y              
+GND                          : Y14       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y15       :        :                   :         : 4A        :                
+LED[6]                       : Y16       : output : 3.3-V LVTTL       :         : 5A        : Y              
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y17       :        :                   :         : 5A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y18       :        :                   :         : 5A        :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y19       :        :                   :         : 5A        :                
+GND                          : Y20       : gnd    :                   :         :           :                
+VCCPD5A                      : Y21       : power  :                   : 3.3V    : 5A        :                
+SW[0]                        : Y24       : input  : 3.3-V LVTTL       :         : 5B        : Y              
+GND                          : Y25       : gnd    :                   :         :           :                
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y26       :        :                   :         : 6B        :                
+HPS_DDR3_DQ[30]              : Y27       : bidir  : SSTL-15 Class I   :         : 6B        : N              
+RESERVED_INPUT_WITH_WEAK_PULLUP : Y28       :        :                   :         : 6B        :                
