@@ -6,17 +6,17 @@
 
 *rsYocto* implements a **modern Linux Kernel (linux-socfpga 5.1)** and brings a set of today fundamentally needed components to Intel SoC-FPGAs and help to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
 
-To realize that are **Python3** with the Python Package manager **pip** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for is best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface.
+To realize that **Python3** with the Python Package manager **pip** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for it's best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface.
 
 During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. *rsYocto* application can **build, deployed and even debugged over the network**. With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* is a simple installment and quick jumpstart in the development process possible, because all required compilers run directly on *rsYocto*.
 
-It is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C, CAN,…**) and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for development of industrial connected solutions. With a single command is *rsYocto* capable to **load a new FPGA configuration** or to **read and write the AXI-Bridge Interface to the FPGA**.
+It is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C, CAN,…**) and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for development of industrial connected solutions. With a single command *rsYocto* is capable to **load a new FPGA configuration** or to **read and write the AXI-Bridge Interface to the FPGA**.
 
-The “*makersYoctoSDImage*”- script allow developer to **customize the *rsYocto*-image** with the installment of their own software files or **FPGA configuration file, that will be configured on the FPGA fabric before the Linux boots**.
+The “*makersYoctoSDImage*”- script allows developer to **customize the *rsYocto*-image** with the installment of their own software files or **FPGA configuration files, that will be configured on the FPGA fabric before the Linux boots**.
 
 The final *rsYocto*-Image can be **installed** on a **SD-Card** with any commonly **used Boot-Image creating tools**. Versions are available for the **Terasic DE10 Standard-** (Cyclone V), **Terasic DE10 Nano-** (Cyclone V) and **Terasic Han Pilot** (Arria 10).
 
-On the Terasic DE10 Nano board can be the  **Arduino Uno header** used to connect external devices to a Hard-IP Bus, because the HPS interfaces are with the pre-installed configuration are routed to FPGA I/O-Pins. 
+On the Terasic DE10 Nano board the **Arduino Uno header** can be used to connect external devices to a Hard-IP Bus, because the HPS interfaces with the pre-installed configuration are routed to FPGA I/O-Pins. 
 <br>
 
 # Features of *rsYocto*
@@ -90,7 +90,7 @@ Final *rsYocto* SD-Card Versions are available inside the **packages-Part of thi
 ![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto requiered building steps")
 **Required Build Flow to create rsYocto**
 
-This illustration shows my procedure and the required complexity to create *rsYocto*.I had some issues with Intel EDS and the primary bootloader development. With this project I want to give other developers a fully functional system to reduce for them development effort.
+This illustration shows my procedure and the required complexity to create *rsYocto*. With this project I want to give other developers a fully functional system to reduce their development effort.
 <br>
 
 # Author
