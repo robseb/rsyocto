@@ -86,7 +86,7 @@ ___
 10. At this point it is also possible to change the `Device Tree`of *rsYocto*
   * Open the `dts-File` with a editor 
 11. Open the Linux console and navigate into the SD folder
-12. For allocating more user memory space add following line inside the *makersYoctoSDImage.py* script
+12. For allocating more user memory space edit following line inside the *makersYoctoSDImage.py* script
     ````python
     #
     # #################### CHANGE HERE THE ADDITIONAL ROOTFS SPACE FOR USER SPACE ####################
