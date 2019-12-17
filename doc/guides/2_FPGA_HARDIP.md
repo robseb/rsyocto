@@ -37,6 +37,7 @@ Here are also commands given to change the FPGA fabric configuration.
      *  Info Papers
         * [DE10 Standard](https://raw.githubusercontent.com/robseb/rsyocto/master/doc/symbols/DE10Std_pinout.png)
         * [DE10 Nano](https://raw.githubusercontent.com/robseb/rsyocto/master/doc/symbols/DE10Nano_pinout.png)
+        * [HAN Pilot (Arria 10)](https://raw.githubusercontent.com/robseb/rsyocto/master/doc/symbols/HANPilot_pinout.png)
  
 ## Interacting with FPGA IP
   * The *rstools*-layer implifies interaction the interaction with any FPGA IP easy
