@@ -22,8 +22,9 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
     + For example use the tool [Rufus](https://rufus.ie/) 
     + Rufus can also use the ZIP-archive directly (that is even faster)
     + Ignore all warning message boxes
-    
-    ![Alt text](rufusSDbuilf.png?raw=true "rufus")
+
+      
+    ![Alt text](rufusSDbuilf2.png?raw=true "rufus")
     
   ## Prepare your Board and open the console COM-Port
   1. Eject the SD Card from your Computer and insert it into the SD -Reader of your FPGA Board
