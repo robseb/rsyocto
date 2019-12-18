@@ -216,6 +216,17 @@ if __name__ == '__main__':
             print("Error the Input is value is not vailed")
             ays.exit()
 
+        BoardNano = False
+        BoardStandard  = False
+        BoardHan = False 
+
+        if(BoardType == 1):
+            BoardNano =True
+        elif(BoardType == 2):
+            BoardStandard=True
+        else:
+            BoardHan = True
+
     print ('This script will generate the image for following Board/s: ' + str(BoardName[BoardType]))
 
     print('Selected Available User space: '+str(USER_SPACE_SIZE_MB)+' MB\n')
