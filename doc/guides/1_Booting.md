@@ -20,6 +20,7 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
  2. Insert a **Micro SD Card** (1GB or greater) into your computer  
  3. Use a "**Bootable SD Card Creation Tool**" to create a bootable image on the SD card
     + For example use the tool [Rufus](https://rufus.ie/) 
+    + Rufus can also use a ZIP-archive directly (that is even faster)
     + Ignore all warning message boxes
     
     ![Alt text](rufusSDbuilf.png?raw=true "rufus")
