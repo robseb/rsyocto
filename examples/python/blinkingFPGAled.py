@@ -17,7 +17,7 @@ if __name__ == '__main__':
         # Trun the FPGA LED 8 ON 
         os.system("FPGA-writeBridge -lw 20 -b 8 1 -b")
         time.sleep(.50)
-        # Trun the FPGA LED 8 ON 
+        # Trun the FPGA LED 8 OFF
         os.system("FPGA-writeBridge -lw 20 -b 8 0 -b")
         time.sleep(.50)
     print('End...')
