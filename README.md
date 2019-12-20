@@ -115,7 +115,7 @@ Final *rsYocto* SD-Card Versions are available inside the **packages-Part of thi
 * [meta-rstools](https://github.com/robseb/meta-rstools)
 <br>
 
-# Development process of *rsYocto*
+# Development process
 
 ![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto requiered building steps")
 **Required Build Flow to create rsYocto**
