@@ -7,12 +7,13 @@
 
 <p align="center">
  <img src="https://img.shields.io/static/v1?label=Status&message=work+in+progress&color=orange">
+ <a href="https://github.com/robseb/rsyocto/releases">
  <img src="https://img.shields.io/badge/download-latest-brightgreen.svg" alt="download">
  <img src="https://img.shields.io/static/v1?label=stabile+Version&message=1.02&color=write">
- <a href="https://github.com/robseb/rsyocto/releases">
+
  <img src="https://img.shields.io/static/v1?label=Supported+SocFPGA&message=Intel+Arria10+and+Cyclone+V&color=blue">
  <img src="https://img.shields.io/badge/License-MIT%20-yellow.svg" alt="license">
-	</a>
+</a>
 </p>
  
 
