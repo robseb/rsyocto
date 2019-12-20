@@ -127,7 +127,7 @@ This illustration shows my procedure and the required complexity to create *rsYo
 # Author
 * **Robin Sebastian**
 
-*rsYocto* a project, that I have fully developed on my own. I is a academic project.
+*rsYocto* a project, that I have fully developed on my own. It is a academic project.
 Today I'm a Master Student of electronic engineering with the major embedded systems. 
 I ‘m looking for an interesting job offer to share and deepen my shown skills starting summer 2020.
 
