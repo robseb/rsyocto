@@ -8,15 +8,12 @@
 <p align="center">
  <img src="https://img.shields.io/static/v1?label=Status&message=work+in+progress&color=orange">
  <a href="https://github.com/robseb/rsyocto/releases">
- <img src="https://img.shields.io/badge/download-latest-brightgreen.svg" alt="download">
- <img src="https://img.shields.io/static/v1?label=stabile+Version&message=1.02&color=write">
-
- <img src="https://img.shields.io/static/v1?label=Supported+SocFPGA&message=Intel+Arria10+and+Cyclone+V&color=blue">
- <img src="https://img.shields.io/badge/License-MIT%20-yellow.svg" alt="license">
-</a>
+	 <img src="https://img.shields.io/badge/download-latest-brightgreen.svg" alt="download">
+</a>	 
+	 <img src="https://img.shields.io/static/v1?label=Supported+SocFPGA&message=Intel+Arria10+and+Cyclone+V&color=blue">
+	 <img src="https://img.shields.io/badge/License-MIT%20-yellow.svg" alt="license">
+	<img alt="Bitbucket open issues" src="https://img.shields.io/bitbucket/issues-raw/robseb/rsyocto">
 </p>
- 
-
 <br>
 
 *rsYocto* implements a **modern Linux Kernel (linux-socfpga 5.1)** and brings a set of today fundamentally needed components to Intel SoC-FPGAs and help to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
