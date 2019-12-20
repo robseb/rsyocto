@@ -6,13 +6,18 @@
 ### *rsYocto* is an open-source embedded Linux System designed with the Yocto Project and optimized for Intel SoC-FPGAs (*Intel Cyclone V* and *Intel Arria 10* with a *ARM CORTEX-A9*) to achieve the best customization for the strong requirements of modern embedded applications.
 
 <p align="center">
- <img src="https://img.shields.io/static/v1?label=Status&message=work+in+progress&color=orange">
- <a href="https://github.com/robseb/rsyocto/releases">
-	 <img src="https://img.shields.io/badge/download-latest-brightgreen.svg" alt="download">
-</a>	 
+	 <img src="https://img.shields.io/static/v1?label=Status&message=work+in+progress&color=orange">
+	 <a href="https://github.com/robseb/rsyocto/releases">
+		 <img src="https://img.shields.io/badge/download-latest-brightgreen.svg" alt="download">
+	</a>	 
+	 <img alt="GitHub Releases" src="https://img.shields.io/github/downloads/robseb/rsyocto/latest/total">
+	<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/robseb/rsyocto">
 	 <img src="https://img.shields.io/static/v1?label=Supported+SocFPGA&message=Intel+Arria10+and+Cyclone+V&color=blue">
+	 <a href="https://github.com/robseb/rsyocto/issues">
+		<img alt="GitHub issues" src="https://img.shields.io/github/issues/robseb/rsyocto">
+	 </a>
 	 <img src="https://img.shields.io/badge/License-MIT%20-yellow.svg" alt="license">
-	<img alt="Bitbucket open issues" src="https://img.shields.io/bitbucket/issues-raw/robseb/rsyocto">
+
 </p>
 <br>
 
