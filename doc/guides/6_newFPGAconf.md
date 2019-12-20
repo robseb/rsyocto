@@ -2,14 +2,18 @@
 
 #  	Developing a new FPGA configuration
 
-*rsYocto* allows to change the FPGA configuration with a single Linux command. That was shown in chapter 2 with:
+*rsYocto* allows with the layer `meta-rstools` to change the FPGA configuration with a single Linux command. That was shown in chapter 2 with:
   ````bash
       FPGA-writeConfig  -f gpiConf.rbf
   ````   
-   The required steps to generate right configuration files with a Quartus Prime Project are:
+  
+   **The required steps to generate right configuration files with a Quartus Prime Project are:**
    1. **for the Arria 10:**
       * Be sure that "**Enables the HPS early release of HPS IO**"  in the Quartus Prime- and HPS- Settings is enabled
-          ![Alt text](Arria10Conf.jpg?raw=true "Quartus connfig for Arria 10")
+           * Parts the configuration in a peripheral- and the core- configuration 
+           * This allows to hold for example the memory configuration of the HPS during FPGA configuration changes 
+           * For more information please visit the [Intel Arria 10 documentation](https://www.intel.com/content/www/us/en/programmable/documentation/mzh1527115949958.html) page
+              ![Alt text](Arria10Conf.jpg?raw=true "Quartus connfig for Arria 10")
       * Execute following EDS-Shell command:
         ````bash
           quartus_cpf -c --hps -o bitstream_compression=on rsHAN.sof socfpga.rbf
@@ -20,7 +24,7 @@
         * Output: `socfpga.periph.rbf`and `socfpga.core.rbf`
         
   2. **for the Cyclone V:**
-      * For **configuration of the FPGA with *rsYocto*** use these export settings: 
+      * For **configuration of the FPGA with *Linux*** use these export settings: 
         * Type: `Raw Binary File (.rbf)` 
         * Mode: `Passive Paralle x16`  
        
@@ -75,6 +79,7 @@ ___
 |\"socfpga_std_linux.rbf\"|*DE10 Standart*| Quartus Prime | FPGA Config for written by Linux |*running_bootloader_fpgaconfig.rbf* |
 
 **The Content  of the "rsyocto_SDxx-Folder"** 
+
  7. With the Text-File \"infoRSyocto.txt\" it is possible to add some notes to the final image
   * The MAC address can also be changed here:
      ````
