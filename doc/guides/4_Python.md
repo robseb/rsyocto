@@ -16,21 +16,21 @@ With the following guide *Microsoft* descripts the remote debugging function of 
 [Developing on Remote Machines using SSH and Visual Studio Code](https://code.visualstudio.com/docs/remote/ssh)
 
 ### I. Generation of the SSH Key with Windows 10
-* Open the Windows "**Command Prompt**" (without admin rights)
+* Open the Windows "**Command Prompt**" (admin rights not requiered)
 * Execute following Command inside the Windows Command Prompt:
 1.    **Generate a new SSH Key**
-      (Windows stores the key inside following directory:  `C:\Users\<USER Name>\.ssh)`
+      * Windows stores the key inside following directory:  `C:\Users\<USER Name>\.ssh`
       ``````shell 
       ssh-keygen -t rsa -b 4096
        ``````
-        * Always press ENTER (do not enter an extra password or an other name):
+        * Always press **ENTER** (do not enter an extra password or an other name):
 2.    **Set the IPv4 Address of the board**
        ``````shell 
       SET REMOTEHOST=root@192.168.2.105
       ``````
-      * Here for example with the IP 192.168.2.105
+      * Here for example with the IP *192.168.2.105*
 5.    **Copy the generated SSH-Key via SSH to the board**
-      * After this command the *rsYocto* splash screen appears and the *rsYocto* system asks for the password: **eit**
+      * After this command the *rsYocto* splash screen appears and the Linux system asks for the password: **eit**
       ``````shell       
       scp %USERPROFILE%\.ssh\id_rsa.pub %REMOTEHOST%:~/tmp.pub
       `````` 
@@ -86,12 +86,12 @@ Host rsYocto
   * In case that the connection to the board is established successfully a green icon with a **connected symbol** should appear
 
 ### IV. Accessing the rootfs files remotely
-*  *Visual Studio Code Insider* can access the rootfs of *rsYocto*
-*   Are some Python sample applications pre-installed on *rsYocto*
+*  *Visual Studio Code Insider* can access the rootfs of the embedded Linux systems
+*  Some Python sample applications pre-installed on *rsYocto*
 *  Navigate on the Sidebar to **"Explorer"** click the blue **"Open Folder"**
 *  *Visual Studio Code Insider* should now ask for a remote directory to add 
-  * Default: `"/home/root/"` --> user *root folder* with the Python examples
-  * Web sever: `"/usr/share/apache2/default-site/htdocs"` --> every file inside this folder will be accessible with a web browser
+      * Default: `"/home/root/"` --> user *root folder* with the Python examples
+      * Web sever: `"/usr/share/apache2/default-site/htdocs"` --> every file inside this folder will be accessible with a web browser
 * Click okay
 
  ![Alt text](VisualCodeConfig5.jpg?raw=true "Visual Studio Configuration 5")
@@ -108,7 +108,7 @@ Host rsYocto
  ![Alt text](VisualCodeConfig7.jpg?raw=true "Visual Studio Configuration 7")
  
 * With this input *Visual Studio Code Server* starts with the installation of the required remote python debugging components
-* Press  "**reload required**" to activate the changes
+* Press  "**reload required**" to activate this changes
 <br>
 
 ### VI. Debugging Python Code remotely
@@ -135,7 +135,7 @@ Host rsYocto
       ``````
   * The remote Debugging should start     
   * If not: press the "**Start Debugging**" button or **F5**
-  * Now Visual Studio Code is configured to write and debug any python Code directly on *rsYocto*
+  * Now Visual Studio Code is configured to write and debug any python Code directly on the embedded Linux
   
        ![Alt text](VisualCodeConfig9.jpg?raw=true "Visual Studio Configuration 9")
        
@@ -160,7 +160,7 @@ ___
 
 ![Alt text](PythonDebiggingAninmation.gif?raw=true "Visual Studio Code Python Debung")
 
-**Example: Debugging the Python script *gsensorDemo.py* on a DE10 Standard Board**
+**Example: Debugging the Python script "*gsensorDemo.py*" on a DE10 Standard Board**
 
 <br>
 
