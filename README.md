@@ -35,11 +35,10 @@ The final *rsYocto*-Image can be **installed** on a **SD-Card** with any commonl
 On the Terasic DE10 Nano board the **Arduino Uno header** can be used to connect external devices to a Hard-IP Bus, because the HPS interfaces with the pre-installed configuration are routed to FPGA I/O-Pins. 
 
 <br>
-For my FPGA design with a Terasic DE10 board I want to use a modern embedded Linux with a Web interface for controlling and configuring the FPGA. That would help me developing the FPGA application and brings fundamental required features to my project. 
-I noticed that only desktop Linux systems, like *Ubuntu*, are available for free. They are not designed for embedded SoC-FPGAs and therefore, they cannot be considered for long-term embedded systems.
+I noticed that right now only desktop Linux systems, like *Ubuntu*, are available for free. They are not designed for embedded SoC-FPGAs and therefore, they cannot be considered for long-term embedded systems.
 
 That was for me the starting point to try to develop my own fully optimized Linux distribution. Shortly after, I announced that the *Intel* development tools and documentations for HPS development are not nearly as good as those for the FPGA part. I noticed that *Intel's EDS* is  in my opinion, only tested to work with *golden reference designs* properly and the documentation is on the other hand often incomplete. At the beginning it was really complicated to get anything running. 
-After a hard time, I'm able to present the first working project. To get there, **I designed my own built flow with my own scripts**.
+After a hard time, I'm able to present this first working project. To get there, **I designed my own built flow with my own scripts**.
 
 I think everybody will have the same problems that I had during the development. For that reason, **I try to give everybody a solution for their rapid prototyping**.
 I'm also **working on a final step by step guide to show every point of the development process** of *rsYocto* with the Yocto-Project.
@@ -123,8 +122,6 @@ Final *rsYocto* SD-Card Versions are available inside the **packages-Part of thi
 
 This illustration shows my procedure and the required complexity to create *rsYocto*. With this project I want to give other developers a fully functional system to reduce their development effort.
 <br>
-
-# Project Motivation
 
 
 # Author
