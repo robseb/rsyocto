@@ -17,7 +17,7 @@ The following illustration shows how *Linux* and Microsoft Visual Studio work to
 ![Alt text](VisualStudioInstalation.png?raw=true "Visual Studio installation")
 3. Finish the installation
 
-# Creating a new *rsYocto* Linux project
+# Creating a new Linux project
 1. Open *Mirosoft Visual Studio 2019* and **Create a new project** 
 2. Select as language "**C++**" and platform "**Linux**" and choose "**Console App**"
 ![Alt text](VisulStudioCreateNewProject.jpg?raw=true "Create new Visual Studio Project")
