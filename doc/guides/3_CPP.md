@@ -6,9 +6,9 @@ This article describes how to use *Microsoft Visual Studio 2019* for *rsYocto* C
 The newer releases of *Visual Studio* are capable to work as embedded Linux development IDE for *ARMv7A*. *Visual Studio* can use the  `gdb-Server` and `SSH`for communicating with Linux.
 On *rsYocto* all required components for Visual Studio are pre-installed. 
 
-The following illustration shows how *rsYocto* and Microsoft Visual Studio work together:
+The following illustration shows how *Linux* and Microsoft Visual Studio work together:
 
-![Alt text](IneractionRsYoctoVisalStudio.jpg?raw=true "rsYocto and Visual Studio")
+![Alt text](IneractionRsYoctoVisalStudio.jpg?raw=true "Linux and Visual Studio")
 <br>
 
 # Installing Microsoft Visual Studio for Linux development
@@ -25,14 +25,14 @@ The following illustration shows how *rsYocto* and Microsoft Visual Studio work 
 4. A new *Visual Studio Solution* should appear with a getting started guide
 5. This Guide shows how to configure the connection of the remote Linux machine
 6. Please follow this instructions with this settings:
-  * Platform: `ARM`
-  * Host Name: `IPv4-Address of your Board`: 
-  * Port: `22`
-  * User name: `root`
-  * Authentication type: `Password`
-  * Password: `eit`
-  * To change the IP-Address later navigate to `Tools/Options/Cross Platform`, click there the "Remove"-Button and then "Add" 
- 7. At this point the Visual Studio is ready for *rsYocto* C++ development 
+   * Platform: `ARM`
+   * Host Name: `IPv4-Address of your Board`: 
+   * Port: `22`
+   * User name: `root`
+   * Authentication type: `Password`
+   * Password: `eit`
+   * **To change the IP-Address later** navigate to `Tools/Options/Cross Platform`, click there the "Remove"-Button and then "Add" 
+ 7. At this point the Visual Studio is ready for Linux C++ development 
  
  ![Alt text](VisualStudioDemo.jpg?raw=true "rsYocto and Visual Studio Hello World")
  
