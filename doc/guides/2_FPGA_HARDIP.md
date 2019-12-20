@@ -27,7 +27,7 @@ Here are also commands given to change the FPGA fabric configuration.
   * For every *rsYocto*-Version  a Information Shied on the Apache Webserver is installed
   * This Paper contains informations about the configuration of the FPGA IP and there Addresses and the used I/O Pins 
   * **Open it by typing the iPv4-Address of your Board into a Web browser**
-  * Of cause it is possible  to install any other homepage on *rsYocto*
+  * Of cause it is possible  to install any other homepage
      * Insert the homepage files to: `/usr/share/apache2/default-site/htdocs`
      * Restart the Apache Server with following command:
         ````bash
@@ -62,7 +62,7 @@ Here are also commands given to change the FPGA fabric configuration.
            ```
   2. **Turn off the FPGA LEDs with a single command**
       * The FPGA LEDs are connected via a "*PIO (Parallel IP)*"-interface to the Lightweight-HPS-to-FPGA bus
-      * Turn the LEDs off run following command
+      * For turning the LEDs off run following command
           ```bash
            FPGA-writeBridge -lw 20 0
           ```
@@ -75,13 +75,13 @@ Here are also commands given to change the FPGA fabric configuration.
         FPGA-writeBridge -lw 20 -h acdc
         ```
        * The Suffix "-h" selects HEX value inputs 
-  4. Control a single FPGA LED
+  4. **Control a single FPGA LED**
       * Enabling or Disabling single Bits is also possible with the *rstools* 
       * Put Led No. 8 on:  
          ```bash
            FPGA-writeBridge -lw 20 -b 8 1
          ```
-  5. The next Python snippet demonstrates how to interact with FPGA-IP 
+  5. **The next Python snippet demonstrates how to interact with FPGA-IP** 
         ````python
           for count in range(1024):
             os.system('FPGA-writeBridge -lw 38 -h '+ str(count) +' -b')
@@ -145,7 +145,7 @@ Here are also commands given to change the FPGA fabric configuration.
             i2cget -f 0 0x53 0x32
             ```
 2. **UART**     
-    * For Uart devices are `minicom' pre-installed
+    * For Uart devices are `minicom` pre-installed
     * The following command opens the *COM-Port 1* with *minicom*
          ```bash
          minicom /dev/ttys1
