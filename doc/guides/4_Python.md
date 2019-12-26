@@ -147,11 +147,11 @@ ___
 * Use the PiP [Homepage](https://pypi.org/) to find a module
 * Run following command to download and install this module with *rsYocto*:
      ````bash
-     python3 -m pip install --upgrade <module to install> --trusted-host pypi.org --trusted-host files.pythonhosted.org 
+     python3 -m pip install --user "module_name"
      ````
 * To install *pySerial* use the String:
      ````bash
-     python3 -m pip install --upgrade pyserial --trusted-host pypi.org --trusted-host files.pythonhosted.org 
+      python3 -m pip install --user "pySerial"
      ````
 * Now it is possible to use Python package, witch are designed by large communities (e.g. Raspberry Pi-community), on a SoC-FPGA
 
