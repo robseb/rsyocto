@@ -23,6 +23,7 @@ With the following guide *Microsoft* descripts the remote debugging function of 
       ``````shell 
       ssh-keygen -t rsa -b 4096
        ``````
+       ![Alt text](CreatingSSHwithCMD.jpg?raw=true "Windows CMD and SSH") 
         * Always press **ENTER** (do not enter an extra password or an other name):
 2.    **Set the IPv4 Address of the board**
        ``````shell 
