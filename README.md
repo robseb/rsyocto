@@ -37,7 +37,7 @@ On the Terasic DE10 Nano board the **Arduino Uno header** can be used to connect
 <br>
 I noticed that right now only desktop Linux systems, like Ubuntu, are available for free. They are not designed for embedded SoC-FPGAs and therefore, they cannot be considered for long-term embedded systems.
 
-That was for me the starting point to try to develop my own fully optimized Linux distribution. Shortly after, I announced that the *Intel* development tools and documentations for HPS development are not nearly as good as those for the FPGA part. I noticed that *Intel's EDS* is  in my opinion, only tested to work with *golden reference designs* properly and the documentation is on the other hand often incomplete. At the beginning it was really complicated to get anything running. 
+That was for me the starting point to try to develop my own fully optimized Linux distribution. Shortly after, I announced that the *Intel* development tools and documentations for HPS development are not nearly as good as those for the FPGA part. At the beginning it was really complicated to get anything running. 
 After a hard time, I'm able to present this first working project. To get there, **I designed my own built flow with my own scripts**.
 
 I think everybody will have the same problems that I had during the development. For that reason, **I try to give everybody a solution for their rapid prototyping**.
