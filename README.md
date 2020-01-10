@@ -42,7 +42,6 @@ After a hard time, I'm able to present this first working project. To get there,
 
 I think everybody will have the same problems that I had during the development. For that reason, **I try to give everybody a solution for their rapid prototyping**.
 I'm also **working on a final step by step guide to show every point of the development process** of *rsYocto* with the Yocto-Project.
-**I will mark every founded issue with the Intel development tools** with the hope that I can help Intel to improve their software.  
 
 **This project is by far not finished and issue free. I will continue my work and upload newer versions. I invite everybody to submit issues, comments and ideas.**
 
