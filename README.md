@@ -106,7 +106,7 @@ Final *rsYocto* SD-Card Versions are available inside the **packages-Part of thi
 * [Intel Quartus Prime 18.1.0 Lite Edition](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/download.html) - Cyclone V
 * [Intel Quartus Prime 18.1.0 Standard Edition](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/download.html) - Arria 10
 * [The Yocto Project](https://www.yoctoproject.org/) 
-* [meta-altera](https://github.com/kraj/meta-altera) 
+* [meta-altera](https://github.com/robseb/meta-altera) 
 * [meta-openembedded](https://github.com/openembedded/meta-openembedded)
   * [meta-python](https://github.com/openembedded/meta-openembedded/tree/master/meta-python) 
   * [meta-webserver](https://github.com/openembedded/meta-openembedded/tree/master/meta-webserver)
@@ -120,7 +120,22 @@ Final *rsYocto* SD-Card Versions are available inside the **packages-Part of thi
 ![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto requiered building steps")
 **Required Build Flow to create rsYocto**
 
-This illustration shows my procedure and the required complexity to create *rsYocto*. With this project I want to give other developers a fully functional system to reduce their development effort.
+This illustration shows my development procedure and the required complexity to create *rsYocto*. With this project I want to give other developers a fully functional system to reduce their development effort. 
+
+Also is the `rsyoctoMakingSDscript` recognizable, that on a running CentOS-Computer **put all components, like the rootFs, Bootloaders or own applications, together to create a bootable image file**. This tool allows developer to do decent parts within a simple step, that were only possible previously with the Yocto project itself. 
+
+### How to get started with requiered Bootloader creation with the Intel Embedded Development Suite (EDS)?
+
+To show how to **map FPGA I/O Pins with HPS Hard IP components, like I²C- or CAN-Bus,** I wrote [**this step by step guide**](https://github.com/robseb/HPS2FPGAmapping). Here is also a **description of the development of all necessary bootloader and a bootloader script  Intel Embedded Development Suite (EDS)**.
+
+### How to get started with the Yocto Project for Intel SoC-FPGAs?
+Inside my forked [meta-altera BSP layer](https://github.com/robseb/meta-altera) I describe in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
+
+Also I published a Yocto project [*meta layer (meta-rstools)*](https://github.com/robseb/meta-rstools) to bring **tools to update the FPGA configuration with the running Linux and to interact with simple command with the FPGA fabric.**
+
+### Example of the usage of the *rsYocto*-building script to add own components to a *rsYocto*
+This is shown within my "[maping FPGA I/O Pins with HPS Hard IP components](https://github.com/robseb/HPS2FPGAmapping)"-guide as well.
+
 <br>
 
 
