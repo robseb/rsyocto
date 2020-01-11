@@ -140,14 +140,14 @@ Also is the `rsyoctoMakingSDscript` recognizable, that on a running CentOS-Compu
 To show how to **map FPGA I/O Pins with HPS Hard IP components, like I²C- or CAN-Bus,** I wrote [**this step by step guide**](https://github.com/robseb/HPS2FPGAmapping). Here is also a **description of the development of all necessary bootloader and a bootloader script  Intel Embedded Development Suite (EDS)**.
 
 ### How to get started with the Yocto Project for Intel SoC-FPGAs?
-Inside my forked [meta-altera BSP layer](https://github.com/robseb/meta-altera) I describe in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
+Inside my forked [`meta-altera` BSP layer](https://github.com/robseb/meta-altera) I describe in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
 
-Also I published a Yocto project [*meta layer (meta-rstools)*](https://github.com/robseb/meta-rstools) to bring **tools to update the FPGA configuration with the running Linux and to interact with simple command with the FPGA fabric.**
+Also I published a Yocto project [*meta layer (`meta-rstools`)*](https://github.com/robseb/meta-rstools) to bring **tools to update the FPGA configuration with the running Linux and to interact with simple command with the FPGA fabric.**
 
 ### How to import Python pip packages or setup scripts with the Yocto Project
 I designed a simple python script to pre-install Python pip (PyPI)- Packages within a final Yocto Project Linux Image (see [here](https://github.com/robseb/PiP2Bitbake).
 
-For the implementation of custum startup script to the boot process ...
+For the implementation of custum startup script to the boot process of an embedded Linux with Yocto project I added also a simple way to my [`meta-rstools`layer](https://github.com/robseb/meta-rstools).
 
 ### Example of the usage of the *rsYocto*-building script to add own components to a *rsYocto*
 This is shown within my "[maping FPGA I/O Pins with HPS Hard IP components](https://github.com/robseb/HPS2FPGAmapping)"-guide as well.
