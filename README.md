@@ -138,7 +138,16 @@ This is shown within my "[maping FPGA I/O Pins with HPS Hard IP components](http
 
 <br>
 
+# Continuation
 
+**I will continue my work and upload newer versions. I invite everybody to submit issues, comments and ideas.**
+
+Currently I working on a Windows 10 .net Desktop application to manage FPGA configurations and to allow to record data via the network. To release that I will design a server task, running on *rsYocto*, that can send python- and C++-values with TCP to the desktop. The following screenshot shows the development state of this project.
+
+![Alt text](doc/symbols/destopSoftwareAlphaState.jpg?raw=true "rsYocto requiered building steps")
+
+
+<br>
 
 # Author
 * **Robin Sebastian**
