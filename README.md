@@ -98,6 +98,9 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 | No. | Objective | Guide
 |:--|:--|:--|
 | 1 | **Transmitting CAN-Bus packages with python** | CAN 
+| 2 | **Developing a Django web application for accessing FPGA fabric** | DJANGO
+| 3 | **Writing a Linux Startup script** | SCRIPT
+
 
 # Folder structure 
 | Folder | Content
@@ -140,6 +143,11 @@ To show how to **map FPGA I/O Pins with HPS Hard IP components, like I²C- or CA
 Inside my forked [meta-altera BSP layer](https://github.com/robseb/meta-altera) I describe in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
 
 Also I published a Yocto project [*meta layer (meta-rstools)*](https://github.com/robseb/meta-rstools) to bring **tools to update the FPGA configuration with the running Linux and to interact with simple command with the FPGA fabric.**
+
+### How to import Python pip packages or setup scripts with the Yocto Project
+I designed a simple python script to pre-install Python pip (PyPI)- Packages within a final Yocto Project Linux Image (see [here](https://github.com/robseb/PiP2Bitbake).
+
+For the implementation of custum startup script to the boot process ...
 
 ### Example of the usage of the *rsYocto*-building script to add own components to a *rsYocto*
 This is shown within my "[maping FPGA I/O Pins with HPS Hard IP components](https://github.com/robseb/HPS2FPGAmapping)"-guide as well.
