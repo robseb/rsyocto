@@ -60,6 +60,9 @@ It is a part of my "*Mapping HPS Peripherals, like I²C or CAN, over the FPGA fa
     ```python 
     python3 sendCanPackage.py
     ````
+  * **Debugging of this code with *Visual Studio Code Insider***
+  	![Alt text](CANdebugging.jpg?raw=true "visual Studio Code debuging")
+   
   * Now the Cyclone V SoC-FPGA **transmits a CAN package through the Arduino header with the ID 0xAC and the Payload 0xABACADAE**:
   	````bash
 	root@cyclone5:~# python3 sendCanPackage.py
@@ -70,6 +73,7 @@ It is a part of my "*Mapping HPS Peripherals, like I²C or CAN, over the FPGA fa
 <br>
 
 If **no one acknowledged** this package the *Bosch CAN-Controller* ***re-transmit*** the package with the maximum available resources automatically until an ACK happens.
+
 The embedded *Bosch CAN-Controller* can also **detect linkage errors**. 
 I case of a missing connection to a CAN-Bus member a Kernel Message will be triggered and the **CAN Controller shuts down**.
 Use the following command to **restart the CAN-Controller**:
@@ -88,5 +92,6 @@ ifconfig can0
 **In the same way it is also possible to communicate via UART,SPI or I²C. On *rsYocto* python scripts for these usecases are pre-installed.**
 
 <br>
+
 ___
- [Back to the startpage](https://github.com/robseb/rsyocto)
+[Back to the startpage](https://github.com/robseb/rsyocto)
