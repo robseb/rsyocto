@@ -149,7 +149,7 @@ ___
   ```console
     #!/bin/sh
     # Run script
-    # This script will be call when the system has booted
+    # This script will be called when the system has booted
     echo "*********************************"
     echo "rsYocto run script: started!"
 
