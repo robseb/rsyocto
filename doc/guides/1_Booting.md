@@ -61,7 +61,7 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
    | 16 | **User Commmand inputs after password authentication** |
    <br>
  
-  ### **The Linux requests a iPv4-Address by a DHCP-derver**
+  ### **The Linux requests a iPv4-Address by a DHCP-server**
   ### **After the system has booted properly and a network connection is established -> HPS LED trurns ON**
   <br>
   
