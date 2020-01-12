@@ -24,10 +24,10 @@ For this reason, three possible ways to activate startup scripts are shown.
 
 ## 2. Adding of a startup durning image creation
 With the *rsYocto* building script it is posibile to add startup scripts into image file. 
-That was shown in chapter 5
+That was shown in chapter 5.
 
 ## 3. Adding of a startup with the Yocto project
-For the development of *rsYocto* I designed a simple way import startup scripts with the yocto project. This is now a part of the `meta-rstools`-layer ([see here](https://github.com/robseb/meta-rstools))
+For the development of *rsYocto* I designed a simple way import startup scripts with the yocto project. This is now a part of the `meta-rstools`-layer ([see here](https://github.com/robseb/meta-rstools)).
 
 ___
  [Back to the startpage](https://github.com/robseb/rsyocto)
