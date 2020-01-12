@@ -21,15 +21,15 @@
 
 ___
 
-*rsYocto* implements a **modern Linux Kernel (linux-socfpga 5.3)** and brings a set of today fundamentally needed components to Intel SoC-FPGAs and help to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
+*rsYocto* implements a **modern Linux Kernel (linux-socfpga 5.3)** and brings a set of today fundamentally needed components to **Intel SoC-FPGAs** and helps to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
 
-To realize that **Python3** with the Python Package manager **pip (PyPI)**  and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for it's best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface. For that is the python Web framework **Django 3.0** with **AdminLTE** Dashboard pre-installed.
+To realize that **Python3** with the Python Package manager **pip (PyPI)** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for its best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface. For that is the python Web framework **Django 3.0** with the **AdminLTE** Dashboard pre-installed.
 
-During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsYocto* application and parts can **build, deployed and even debugged over the network** (fully routable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* is a simple installment and quick jumpstart in the development process possible, because all required compilers run directly on *rsYocto*.
+During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsYocto* applications and parts can **build, deployed and even debugged over the network** (fully routable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* is a simple installment and quick jumpstart in the development process possible, because all required compilers run directly on *rsYocto*.
 
-It is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C, CAN,…**) and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for development of industrial connected solutions. With a single command *rsYocto* is capable to **load a new FPGA configuration** or to **read and write the AXI-Bridge Interface to the FPGA**.
+It is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C-, CAN-BUS,…**) and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for the development of industrial connected solutions. With a single command *rsYocto* is capable to **load a new FPGA configuration** or to **read and write the AXI-Bridge Interface to the FPGA fabric**.
 
-The “*makersYoctoSDImage*”- script allows developer to **customize the *rsYocto*-image** with the installment of their own software files, scripts or **FPGA configuration files, that will be configured on the FPGA fabric before the Linux boots**.
+The “*makersYoctoSDImage*”- script allows developer to **customize the *rsYocto*-image** with the installment of their own **applications**, **scripts** or **FPGA configuration files, that will be configured on the FPGA fabric before the Linux boots**.
 
 The final *rsYocto*-Image can be **installed** on a **SD-Card** with any commonly **used Boot-Image creating tools**. Versions are available for the **Terasic DE10 Standard-** (Cyclone V), **Terasic DE10 Nano-** (Cyclone V) and **Terasic Han Pilot** (Arria 10).
 
@@ -41,9 +41,8 @@ I noticed that right now only desktop Linux systems, like Ubuntu, are available 
 That was for me the starting point to try to develop my own fully optimized Linux distribution. Shortly after, I announced that the *Intel* development tools and documentations for HPS development are not nearly as good as those for the FPGA part. At the beginning it was really complicated to get anything running. 
 After a hard time, I'm able to present this first working project. To get there, **I designed my own built flow with my own scripts**.
 
-I think everybody will have the same problems that I had during the development. For that reason, **I try to give everybody a solution for their rapid prototyping**.
-I'm also **working on a final step by step guide to show every point of the development process** of *rsYocto* with the Yocto-Project.
-
+I think nearly everybody will have the same problems that I had during the development. For that reason, **I try to give everybody a solution for their rapid prototyping**.
+Within this repository I also integrated a step by step guide to show my solution with the Yocto project and the Intel EDS.
 
 **This project is by far not finished and issue free. I will continue my work and upload newer versions. I invite everybody to submit issues, comments and ideas.**
 
@@ -64,21 +63,21 @@ ___
 
 # Key Advantages
 
-* **Embedded Linux special developed for Intel SoC-FPGAs**
+* **Embedded Linux specially developed for Intel SoC-FPGAs**
 * Full **usage of the Dual-Core ARM Cortex A9** with
 	* the **NEON-Engine**
 	* the **vector floating point unit (VFP)** 
 	* the **Thumb-2 instruction set**
-* For the best optimization and performance completely custom optimized **GUI less**
-	* **Console based** with `Busybox`
+* For the best optimization and performance completely custom optimized 
+* **Console based** (**GUI less**) with `Busybox`
 * **Watchdog** timer is enabled    
 <br>
 
-* **FPGA fabric configuration during boot and with a single Linux command**
+* **FPGA fabric configuration during the boot and with a single Linux command**
 * **Tools to interact with the FPGA fabric via the HPS to FPGA bridges**
-* **Acsess the FPGA fabric with Shell scripts, C++-, Python-Applications or PHP or Django web applications**
+* **Access the FPGA fabric with Shell scripts, C++-, Python-Applications or PHP or Django web applications**
 * **HPS Hard IP components (I²C-,SPI-, CAN-BUS or UART) are routed to FPGA I/O
-	* Ready for connecting different devices to it 
+	* Ready for connecting different devices 
 		* e.g. **Arduino Uno shields**
 * Console based Bus test tools (e.g. `can-utils`)
 <br>
@@ -93,18 +92,18 @@ ___
 
 * **`Python`**
 * `Apache` webserver with `PHP` and `SQLite`
-* **Newest `Django` Version pre-installed for python-based web framework development**
-* **The `adminLTE` web dashboard can bring modern complex web applications to SoC-FPGAs** ([example](https://adminlte.io/themes/dev/AdminLTE/index.html)
+* **Newest `Django` version pre-installed for python-based web framework development**
+* **The `adminLTE` web dashboard can bring modern complex web applications to SoC-FPGAs** ([example](https://adminlte.io/themes/dev/AdminLTE/index.html))
 <br>
 
 * `git`,`curl` and `wget` **download manager**
 * **Full integrated python `pip` package manager**
-* `opkg` **package manger 
+* `opkg` **package manager** 
 <br>
 
-* **`Building system` to add following to deployable and shareable image**
-	* Own Applications
-	* Own Software Library’s 
+* **`Building system` to add the following to deployable and shareable images**
+	* Applications
+	* Software Librarys 
 	* Web sites 
 	* Startup scripts 
 	* Info splash screen
@@ -119,7 +118,6 @@ ___
 <br>
 
 # Tutorials 
-The entries Guide in the usage and the development of *rsYocto* applications is parted in following levels:
 
 ### Getting Started Guides
 
