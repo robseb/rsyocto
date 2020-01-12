@@ -53,12 +53,11 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
    | 8 | **Linux Kernel** | Execution of the startup scripts from the rootFs starts | 
    | 9 | **startup-script** | **Excecution of by the user configurable startup script** |
    | 10 | **Network Interface** | Activation of the Network interface | Waiting for an DHCP reception with an iPv4-Address
-   | 11 | **YYYYYYXXXXXXXXXXX **| RNG, .... | 
    | 12 | **OpenSSH** | *OpenSSH* SSH Server  | Starting
-   | 13 | **Apache** | *Apache* Web Server  | Starting
-   | 14 | **run-script** | **Excecution of by the user configurable startup script** | Time Syncronisation via HTTP
-   | 15 | **BusyBox** | *BusyBox* Linux console interface | 
-   | 16 | **User Commmand input after password authentication** |
+   | 12 | **Apache** | *Apache* Web Server  | Starting
+   | 13 | **run-script** | **Excecution of by the user configurable startup script** | Time Syncronisation via HTTP
+   | 14 | **BusyBox** | *BusyBox* Linux console interface | 
+   | 15 | **User Commmand input after password authentication** |
    <br>
  
   ### **The Linux requests an iPv4-Address by a DHCP-server**
