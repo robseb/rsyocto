@@ -77,7 +77,7 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 | 6 | **Developing a new FPGA configuration**| [Step by step guide 5](doc/guides/6_newFPGAconf.md)
 <br>
 
-### Application application-specific guides
+### Application-specific guides
 
 | No. | Objective | Guide
 |:--|:--|:--|
@@ -115,23 +115,23 @@ Final *rsYocto* SD-Card Versions are available inside the **packages-Part of thi
 ![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto requiered building steps")
 **Required Build Flow to create rsYocto**
 
-This illustration shows my development procedure and the required complexity to create *rsYocto*. With this project I want to give other developers a fully functional system to reduce their development effort. 
+This illustration shows my development procedure and the required complexity to create *rsYocto*. With this project I want to give other developers a full-functional system to reduce their development effort. 
 
-Also is the `rsyoctoMakingSDscript` recognizable, that on a running CentOS-Computer **put all components, like the rootFs, Bootloaders or own applications, together to create a bootable image file**. This tool allows developer to do decent parts within a simple step, that were only possible previously with the Yocto project itself. 
+Also the `rsyoctoMakingSDscript` is recognizable, that on a running CentOS-Computer **put all components, like the rootFs, bootloaders or own applications, together to create a bootable image file**. This tool allows developer to do decent parts within a simple step, that was previously only possible with the Yocto project itself. 
 
-### How to get started with requiered Bootloader creation with the Intel Embedded Development Suite (EDS)?
+### How to get started with requiered bootloader creation with the Intel Embedded Development Suite (EDS)?
 
-To show how to **map FPGA I/O Pins with HPS Hard IP components, like I²C- or CAN-Bus,** I wrote [**this step by step guide**](https://github.com/robseb/HPS2FPGAmapping). Here is also a **description of the development of all necessary bootloader and a bootloader script  Intel Embedded Development Suite (EDS)**.
+To show how to **map FPGA I/O Pins with HPS Hard IP components, like I²C- or CAN-Bus,** I wrote [**this step by step guide**](https://github.com/robseb/HPS2FPGAmapping). Here also a **description of the development of all necessary bootloaders and a bootloader script wih the Intel Embedded Development Suite (EDS)** is available.
 
 ### How to get started with the Yocto Project for Intel SoC-FPGAs?
-Inside my forked [`meta-altera` BSP layer](https://github.com/robseb/meta-altera) I describe in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
+Inside my forked [`meta-altera` BSP layer](https://github.com/robseb/meta-altera) I described in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
 
-Also I published a Yocto project [*meta layer (`meta-rstools`)*](https://github.com/robseb/meta-rstools) to bring **tools to update the FPGA configuration with the running Linux and to interact with simple command with the FPGA fabric.**
+Also I published a Yocto project [*meta layer (`meta-rstools`)*](https://github.com/robseb/meta-rstools) to bring **tools to update the FPGA configuration with the running Linux and to interact with simple commands with the FPGA fabric.**
 
 ### How to import Python pip packages or setup scripts with the Yocto Project
 I designed a simple python script to pre-install Python pip (PyPI)- Packages within a final Yocto Project Linux Image (see [here](https://github.com/robseb/PiP2Bitbake).
 
-For the implementation of custum startup script to the boot process of an embedded Linux with Yocto project I added also a simple way to my [`meta-rstools`layer](https://github.com/robseb/meta-rstools).
+For the implementation of custom startup scripts to the boot process of an embedded Linux with Yocto project I added also a simple way to my [`meta-rstools`layer](https://github.com/robseb/meta-rstools).
 
 ### Example of the usage of the *rsYocto*-building script to add own components to a *rsYocto*
 This is shown within my "[maping FPGA I/O Pins with HPS Hard IP components](https://github.com/robseb/HPS2FPGAmapping)"-guide as well.
@@ -142,7 +142,7 @@ This is shown within my "[maping FPGA I/O Pins with HPS Hard IP components](http
 
 **I will continue my work and upload newer versions. I invite everybody to submit issues, comments and ideas.**
 
-Currently I working on a Windows 10 .net Desktop application to manage FPGA configurations and to allow to record data via the network. To release that I will design a server task, running on *rsYocto*, that can send python- and C++-values with TCP to the desktop. The following screenshot shows the development state of this project.
+Currently I am working on a Windows 10 .net Desktop application to manage FPGA configurations and to allow to record data via the network. To release that I will design a server task, running on *rsYocto*, that can send python- or C++-values with TCP to the desktop. The following screenshot shows the development state of this project.
 
 ![Alt text](doc/symbols/destopSoftwareAlphaState.jpg?raw=true "rsYocto requiered building steps")
 
