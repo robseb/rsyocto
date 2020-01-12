@@ -23,9 +23,9 @@ ___
 
 *rsYocto* implements a **modern Linux Kernel (linux-socfpga 5.3)** and brings a set of today fundamentally needed components to Intel SoC-FPGAs and help to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
 
-To realize that **Python3** with the Python Package manager **pip (PyPI)**  and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for it's best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface. For that reason is the python webframework **Django 3** YYYYYY 
+To realize that **Python3** with the Python Package manager **pip (PyPI)**  and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for it's best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface. For that is the python Web framework **Django 3.0** with **AdminLTE** Dashboard pre-installed.
 
-During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. *rsYocto* application can **build, deployed and even debugged over the network**. With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* is a simple installment and quick jumpstart in the development process possible, because all required compilers run directly on *rsYocto*.
+During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsYocto* application and parts can **build, deployed and even debugged over the network** (fully routable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* is a simple installment and quick jumpstart in the development process possible, because all required compilers run directly on *rsYocto*.
 
 It is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C, CAN,…**) and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for development of industrial connected solutions. With a single command *rsYocto* is capable to **load a new FPGA configuration** or to **read and write the AXI-Bridge Interface to the FPGA**.
 
@@ -36,7 +36,7 @@ The final *rsYocto*-Image can be **installed** on a **SD-Card** with any commonl
 On the Terasic DE10 Nano board the **Arduino Uno header** can be used to connect external devices to a Hard-IP Bus, because the HPS interfaces with the pre-installed configuration are routed to FPGA I/O-Pins. 
 
 <br>
-I noticed that right now only desktop Linux systems, like Ubuntu, are available for free. In my opinion are not designed for embedded SoC-FPGAs and therefore, they cannot be considered for long-term embedded systems.
+I noticed that right now only desktop Linux systems, like Ubuntu, are available for free. In my opinion they are not designed for embedded SoC-FPGAs and therefore, they cannot be considered for long-term embedded systems.
 
 That was for me the starting point to try to develop my own fully optimized Linux distribution. Shortly after, I announced that the *Intel* development tools and documentations for HPS development are not nearly as good as those for the FPGA part. At the beginning it was really complicated to get anything running. 
 After a hard time, I'm able to present this first working project. To get there, **I designed my own built flow with my own scripts**.
@@ -50,10 +50,9 @@ I'm also **working on a final step by step guide to show every point of the deve
 <br>
 
 
-# Features of *rsYocto*
+# System Overview of rsYocto
 
 ![Alt text](doc/symbols/rsYoctoLayers.jpg?raw=true "System Overview")
-**System Overview of rsYocto**
 ___
 
 **Build, debug and deploy your applications over the network**
@@ -63,10 +62,66 @@ ___
 <br>
 <br>
 
-# Tutorials 
-The entries guide in the usage and the development of *rsYocto* applications is parted in following levels:
+# Key Advantages
 
-### Getting started guides
+* **Embedded Linux special developed for Intel SoC-FPGAs**
+* Full **usage of the Dual-Core ARM Cortex A9** with
+	* the **NEON-Engine**
+	* the **vector floating point unit (VFP)** 
+	* the **Thumb-2 instruction set**
+* For the best optimization and performance completely custom optimized **GUI less**
+	* **Console based** with `Busybox`
+* **Watchdog** timer is enabled    
+<br>
+
+* **FPGA fabric configuration during boot and with a single Linux command**
+* **Tools to interact with the FPGA fabric via the HPS to FPGA bridges**
+* **Acsess the FPGA fabric with Shell scripts, C++-, Python-Applications or PHP or Django web applications**
+* **HPS Hard IP components (I²C-,SPI-, CAN-BUS or UART) are routed to FPGA I/O
+	* Ready for connecting different devices to it 
+		* e.g. **Arduino Uno shields**
+* Console based Bus test tools (e.g. `can-utils`)
+<br>
+
+* Ethernet with **dynamic and static iPv4** is supported
+* **SSH-Server** starts automatically
+* **Support for remote based development IDEs pre-installed**
+	* *Visual Studio Code* for **remote python debugging**
+	* *Visual Studio* for **remote C++ debugging**  
+• `gcc-compiler` and `gdb-server`
+<br>
+
+* **`Python`**
+* `Apache` webserver with `PHP` and `SQLite`
+* **Newest `Django` Version pre-installed for python-based web framework development**
+* **The `adminLTE` web dashboard can bring modern complex web applications to SoC-FPGAs** ([example](https://adminlte.io/themes/dev/AdminLTE/index.html)
+<br>
+
+* `git`,`curl` and `wget` **download manager**
+* **Full integrated python `pip` package manager**
+* `opkg` **package manger 
+<br>
+
+* **`Building system` to add following to deployable and shareable image**
+	* Own Applications
+	* Own Software Library’s 
+	* Web sites 
+	* Startup scripts 
+	* Info splash screen
+	* Network Interface settings 
+<br>
+
+* **Full supported boards**
+	* **Terasic DE10-Standard** (Intel Cyclone V)
+	* **Terasic DE10-Nano** (Intel Cyclone V)
+	* **Terasic HAN-Pilot** (Intel Arria 10 SX)
+
+<br>
+
+# Tutorials 
+The entries Guide in the usage and the development of *rsYocto* applications is parted in following levels:
+
+### Getting Started Guides
 
 | Level | Objective | Guide
 |:--|:--|:--|
@@ -78,16 +133,16 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 | 6 | **Developing a new FPGA configuration**| [Step by step guide 5](doc/guides/6_newFPGAconf.md)
 <br>
 
-### Application-specific guides
+### Application-specific Guides
 
 | No. | Objective | Guide
 |:--|:--|:--|
-| 1 | **Transmitting CAN-Bus packages with python** | [guide](doc/appSpecificGuides/1_TransmittingCAN.md)
-| 2 | **Developing a Django web application for accessing FPGA fabric** | [guide](doc/appSpecificGuides/2_DjangoWebApps.md)
-| 3 | **Writing a Linux Startup script** | [guide](doc/appSpecificGuides/3_LinuxStartUpScript.md)
+| 1 | **Transmitting CAN-Bus packages with python** | [Guide](doc/appSpecificGuides/1_TransmittingCAN.md)
+| 2 | **Developing a Django web application for accessing FPGA fabric** | [Guide](doc/appSpecificGuides/2_DjangoWebApps.md)
+| 3 | **Writing a Linux Startup script** | [Guide](doc/appSpecificGuides/3_LinuxStartUpScript.md)
 
 
-# Folder structure 
+# Folder Structure 
 | Folder | Content
 |:--|:--|
 | `doc`    | Documentation  |
@@ -95,7 +150,7 @@ The entries guide in the usage and the development of *rsYocto* applications is 
 |  `examples/python` | *rsYocto* Python examples 
 |  `building` | *rsYocto* building scripts |
 
-Final *rsYocto* SD-Card Versions are available inside the **packages-Part of this repository**!
+The final *rsYocto* Versions are available inside the **packages-Part of this repository**!
 
 # Built With
 * [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) - Linux
@@ -111,7 +166,7 @@ Final *rsYocto* SD-Card Versions are available inside the **packages-Part of thi
 * [meta-rstools](https://github.com/robseb/meta-rstools)
 <br>
 
-# Development process
+# Development Process
 
 ![Alt text](doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsYocto requiered building steps")
 **Required Build Flow to create rsYocto**
@@ -119,6 +174,8 @@ Final *rsYocto* SD-Card Versions are available inside the **packages-Part of thi
 This illustration shows my development procedure and the required complexity to create *rsYocto*. With this project I want to give other developers a full-functional system to reduce their development effort. 
 
 Also the `rsyoctoMakingSDscript` is recognizable, that on a running CentOS-Computer **put all components, like the rootFs, bootloaders or own applications, together to create a bootable image file**. This tool allows developer to do decent parts within a simple step, that was previously only possible with the Yocto project itself. 
+
+<br>
 
 ### How to get started with requiered bootloader creation with the Intel Embedded Development Suite (EDS)?
 
