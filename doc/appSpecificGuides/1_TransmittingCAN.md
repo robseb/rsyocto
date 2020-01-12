@@ -1,8 +1,8 @@
  [Back to the startpage](https://github.com/robseb/rsyocto)
 
 # Writing a python script to transmit CAN-packages
-**In this guide shows how simple it is to transmit CAN-packages within a Python script on a running embbeded Linux system.**
-It is a part of my "*Mapping HPS Peripherals, like I²C or CAN, over the FPGA fabric to FPGA I/O and using embedded Linux to control them*"-guide, were I show the **complete development process** with the FPGA design and bootloader creation (see [here](https://github.com/robseb/HPS2FPGAmapping)
+**This guide shows how simple it is to transmit CAN-packages within a Python script on a running embbeded Linux system.**
+It is a part of my "*Mapping HPS Peripherals, like I²C or CAN, over the FPGA fabric to FPGA I/O and using embedded Linux to control them*"-guide, where I show the **complete development process** with the FPGA design and bootloader creation (see [here](https://github.com/robseb/HPS2FPGAmapping)
 
 * To **start the CAN0** execute this command on *rsYocto* to **enable the CAN network Port**:
   ````bash 
@@ -14,7 +14,7 @@ It is a part of my "*Mapping HPS Peripherals, like I²C or CAN, over the FPGA fa
   pip install python-can
   ````
  Use *Visual Studio Code Insider* to **debug** this *python-can* application remotely (see [here](https://github.com/robseb/rsyocto/blob/master/doc/guides/4_Python.md)). 
- Or to use the onboard `nano`editor to write the python code.
+ Or use the onboard `nano`editor to write the python code.
  
  * Create a new Python file, for example:
    ````bash
@@ -69,7 +69,7 @@ It is a part of my "*Mapping HPS Peripherals, like I²C or CAN, over the FPGA fa
   	![Alt text](CANoszigram.png?raw=true "CAN Osci")
 <br>
 
-If **no one acknowledged** this package the *Bosch CAN-Controller* ***re-transmit*** the package with the maximum available resources automatically until a ACK happen.
+If **no one acknowledged** this package the *Bosch CAN-Controller* ***re-transmit*** the package with the maximum available resources automatically until an ACK happens.
 The embedded *Bosch CAN-Controller* can also **detect linkage errors**. 
 I case of a missing connection to a CAN-Bus member a Kernel Message will be triggered and the **CAN Controller shuts down**.
 Use the following command to **restart the CAN-Controller**:
@@ -85,7 +85,7 @@ ifconfig can0
 
 <br>
 
-**In the same way it is also possible to communicate via UART,SPI or I²C. On rsYocto python scripts for these usecases are pre-installed.**
+**In the same way it is also possible to communicate via UART,SPI or I²C. On *rsYocto* python scripts for these usecases are pre-installed.**
 
 <br>
 ___
