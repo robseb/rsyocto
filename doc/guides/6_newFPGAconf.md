@@ -86,13 +86,13 @@ ___
      ````
      -- MAC: d6:7d:ae:b3:0e:ba
      ````
-8. Change if necessary the network configurations by aiding the *network_interfaces.text*. This file will by used as Linux */etc/network/interfaces* file
-  * For using a **static iPv4-Address** instead a dynamic one:
-    * Remove following line form the *network_interfaces.txt*-file:
+8. Change if necessary the network configurations by adding the *network_interfaces.text*. This file will be used as Linux */etc/network/interfaces* file
+  * For using a **static iPv4-Address** instead of a dynamic one:
+    * Remove following line from the *network_interfaces.txt*-file:
       ````txt 
       iface eth0 inet dhcp
       ````
-    * Insert instead (here with the iPv4-Address *192.168.0.150* and the gateway *192.168.0.100*):
+    * Insert instead of (here with the iPv4-Address *192.168.0.150* and the gateway *192.168.0.100*):
       ````txt
       iface eth0 inet static
         address 192.168.0.150
@@ -101,18 +101,17 @@ ___
         gateway 192.168.0.100
       ````
 9. **Replacing the pre-installed *rsYocto* files with your files**
-  * It is also allowed to **delete files for unused platforms and devices** or to **replace other self developet files**
-  * For example chnaging the `Device Tree`
-    * Open the `dts-File` with an editor 
-  * A example about this topic is avalibile [here](https://github.com/robseb/HPS2FPGAmapping)  
+  * It is also allowed to **delete files for unused platforms and devices** or to **replace other self developed files**
+    * For example for changing the `Device Tree`
+      * Open the `dts-File` with an editor 
+  * An example is available [here](https://github.com/robseb/HPS2FPGAmapping)  
 10. **Open the Linux console and navigate into the SD-folder**
-11. For allocating more user memory space edit following line inside the *makersYoctoSDImage.py* script
+11. For allocating more **user memory space** edit the following line inside the *makersYoctoSDImage.py* script
     ````python
     #
     # #################### CHANGE HERE THE ADDITIONAL ROOTFS SPACE FOR USER SPACE ####################
     #
-    # Size of the available User Space in Mega Byte (MB) (is exclude changes of rootfs 
-    #   during the execution of this script)
+    # Size of the available User Space in Mega Byte (MB) 
     #
     USER_SPACE_SIZE_MB =600 # 600MB 
     #
@@ -125,7 +124,7 @@ ___
     ````bash  
     sudo python makersYoctoSDImage.py   
     ````
-13. The script will be ask for a **version Number** and will wait for user changes
+13. The script will ask for a **version Number** and will wait for user changes
 14. Now it is possible to **pre-install files to the image** by adding the files to:
   
   |  **Folder name** | **Kind** | **Location on the rootfs**
@@ -140,11 +139,11 @@ ___
     | **Script name** | **Execution position** |
     |:--|:--|
     | *"my_startUpScripts/start_script.sh"* | *Before the NIC has started* | 
-    | *"my_startUpScripts/run_script.sh"* | *Before the NIC has started* | 
+    | *"my_startUpScripts/run_script.sh"* | *After the network connection with SSH is established * | 
     
-  * **Note:** For more information about the execution position look the table chapter 1
+  * **Note:** For more information about the execution position look at the table on chapter 1
   
-  *For example is content of the pre-installed *run_script.sh* here attached, that shows how it is possible to **interact in a easy way with the FPGA fabric**
+  *For example the content of the pre-installed *run_script.sh* is attached here, that shows how it is possible to **interact in a easy way with the FPGA fabric**
 
   ```console
     #!/bin/sh
