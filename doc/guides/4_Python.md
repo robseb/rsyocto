@@ -142,20 +142,24 @@ Host rsYocto
        
 ___
 
-### VII. Use of the Python Package Manager PiP
+### VII. Use of the Python Package Manager pip (PyPI)
 * The pre-installed example "*serialEchoDemo.py*" requires the [pySerial](https://pyserial.readthedocs.io/en/latest/shortintro.html)-module
-* "*rsYocto*" has a full support for *Python PiP*
+* "*rsYocto*" has a full support all *Python pip* versions
 * Use the PiP [Homepage](https://pypi.org/) to find a module
 * Run following command to download and install this module with *rsYocto*:
      ````bash
-     python3 -m pip install --user "module_name"
+     pip install "module_name"
      ````
 * To install *pySerial* use the String:
      ````bash
-      python3 -m pip install --user "pySerial"
+     pip install "pySerial"
      ````
 * Now it is possible to use Python package, witch are designed by large communities (e.g. Raspberry Pi-community), on a SoC-FPGA
 
+* To the all pre-installed Python PiP
+     ````bash
+     pip list
+     ````
 ___
 
 
