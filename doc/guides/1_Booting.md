@@ -4,7 +4,7 @@
 This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Terasic FPGA development Board. 
 
 ## Create a bootable SD-Card 
-1. Download the newest Image for your Board
+1. **Download the newest Image for your Board**
     + The final Images are located inside the **"release part"** of this Github repository 
        ![Alt text](releasepart2.png?raw=true "relase part")
     
@@ -16,7 +16,7 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
       | *_D10NANO* | Intel Cyclone V | [Terasic DE10-Nano](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=1046)
       | *_HAN* | Intel Arria 10 | [Terasic HAN Pilot Platform](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=228&No=1133)
       
-      Note: *rsyocto_SD ...* is the associated SD-Card folder for the relase (see Part 5) 
+      **Note:** *rsyocto_SD ...* is the associated SD-Card folder for the relase (see Part 5) 
  2. Insert a **Micro SD Card** (1GB or greater) into your computer  
  3. Use a "**Bootable SD Card Creation Tool**" to create a bootable image on the SD card
     + For example use the tool [Rufus](https://rufus.ie/) 
@@ -39,12 +39,31 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
     
 ## Boot *rsYocto* on your FPGA-Board
   1. Power Up your FPGA Board
-  2. Now **rsYocto** should boot through following stages:
-     ![Alt text](BootingStep.jpg?raw=true "Boot steps of rsYocto")
-     
+  2. Now **rsYocto** boots through following stages:
+  
+   | No | Stage | Description | Taks 
+   |:--|:--|:--|:--|
+   | 1 | **Primary Bootloader** | pre-configuration of the **FPGA configuration** (*Arria 10 SX only*) | Connecting HPS to FPGA SDRAM-Controller 
+   | 2 | **Primary Bootloader** | Booting of primary bootloader | Hardware check and startup (SDRAM,...)
+   | 3 | **Secoundary Bootloader** | Booting of *u-boot* | Loading and execution of the bootloader script
+   | 4 | **Bootloader script** | Secoundary bootloader script execution | Writing the **FPGA configuration** and loading of the Linux Kernel
+   | 5 | **Secoundary Bootloader** | Booting of *u-boot* | Loading and execution of the bootloader script
+   | 6 | **Linux Kernel** | Booting of the Linux Kernel starts |  
+   | 7 | **Linux Kernel** | Reading the Device Tree | The Kernel reads the device tree and loads the drivers 
+   | 8 | **Linux Kernel** | Execution of the startup scripts from the rootFs starts | 
+   | 9 | **startup-script** | **Excecution of by the user configurabil startup script** |
+   | 10 | **Network Interface** | Activation of the Network interface | Waiting for an DHCO reception with a iPv4-Address
+   | 11 | **YYYYYYXXXXXXXXXXX **| RNG, .... | 
+   | 12 | **OpenSSH** | *OpenSSH* SSH Server  | Starting
+   | 13 | **Apache** | *Apache* Web Server  | Starting
+   | 14 | **run-script** | **Excecution of by the user configurabil startup script** | Time Syncronisation via HTTP
+   | 15 | **BusyBox** | *BusyBox* Linux console interface | 
+   | 16 | **User Commmand inputs after password authentication** |
    <br>
-   
-   
+ 
+  ### **After the system has booted properly and a network connection is established -> HPS LED trurns ON**
+  <br>
+  
    ![Alt text](rsYoctoArria10BootLog.gif?raw=true "rufus")
    ***rsYocto* is booting on a Arria 10 SX**
   
