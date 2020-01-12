@@ -77,7 +77,16 @@ Use the following command to **restart the CAN-Controller**:
 link set down can0
 ip link set up can0
 ````
+
+For reading the **CAN-BUS network statistics** type:
+````bash
+ifconfig can0
+````
+
 <br>
 
+**In the same way it is also possible to communicate via UART,SPI or I²C. On rsYocto python scripts for these usecases are pre-installed.**
+
+<br>
 ___
  [Back to the startpage](https://github.com/robseb/rsyocto)
