@@ -56,9 +56,10 @@ ___
     
 | File Name | Platform / Board | Origin | Description | Internal name (inside the script)
 |:--|:--|:--|:--|:--|
-|\"makersYoctoSDImage.py\"| *all*| by hand | the automatic *rsYocto* script | *executed* | 
+|\"makersYoctoSDImage.py\"| *all*| by hand | the automatic *rsYocto* buliding script | *executed* | 
 |\"make_sdimage.py\"|*all*| wget | Altera SD image making script | *executed* | 
 |\"infoRSyocto.txt\"|*all*| by hand | rsYocto splech screen Infos | *integreted* | 
+|\"network_interfaces.txt\"|*all*| by hand | the Linux Network Interface configuration file (*/etc/network/interfaces*) | *interfaces* | 
 | \"rootfs_a10 .tar.gz\"|*all*| Yocto Project |compresed rootFs file for Arria 10 | *unziping* |
 | \"rootfs_cy5.tar.gz\"|*all*| Yocto Project |compresed rootFs file for Cyclone V | *unziping* |       
 |\"preloader_cy5.bin\"|*CY5*| EDS | prestage bootloader | *preloader-mkpimage.bin* | 
@@ -85,13 +86,27 @@ ___
      ````
      -- MAC: d6:7d:ae:b3:0e:ba
      ````
-
-8. Replace the `.rbf-File` with a new FPGA configuration file
-9. It is also allowed to delete files for unused platforms and devices
-10. At this point it is also possible to change the `Device Tree`of *rsYocto*
-  * Open the `dts-File` with an editor 
-11. Open the Linux console and navigate into the SD-folder
-12. For allocating more user memory space edit following line inside the *makersYoctoSDImage.py* script
+8. Change if necessary the network configurations by aiding the *network_interfaces.text*. This file will by used as Linux */etc/network/interfaces* file
+  * For using a **static iPv4-Address** instead a dynamic one:
+    * Remove following line form the *network_interfaces.txt*-file:
+      ````txt 
+      iface eth0 inet dhcp
+      ````
+    * Insert instead (here with the iPv4-Address *192.168.0.150* and the gateway *192.168.0.100*):
+      ````txt
+      iface eth0 inet static
+        address 192.168.0.150
+        netmask 255.255.255.0
+        network 192.168.0.0
+        gateway 192.168.0.100
+      ````
+9. **Replacing the pre-installed *rsYocto* files with your files**
+  * It is also allowed to **delete files for unused platforms and devices** or to **replace other self developet files**
+  * For example chnaging the `Device Tree`
+    * Open the `dts-File` with an editor 
+  * A example about this topic is avalibile [here](https://github.com/robseb/HPS2FPGAmapping)  
+10. **Open the Linux console and navigate into the SD-folder**
+11. For allocating more user memory space edit following line inside the *makersYoctoSDImage.py* script
     ````python
     #
     # #################### CHANGE HERE THE ADDITIONAL ROOTFS SPACE FOR USER SPACE ####################
@@ -106,21 +121,49 @@ ___
     #
   
     ````
-12. Start the building script with: 
+12. **Start the building script with:**
     ````bash  
     sudo python makersYoctoSDImage.py   
     ````
-11. The script will be ask for a **version Number** and will wait for user changes
-12. Now it is possible to pre-install files to the Image by adding the files to:
+13. The script will be ask for a **version Number** and will wait for user changes
+14. Now it is possible to **pre-install files to the image** by adding the files to:
   
-  |  Folder name | Kind | Location on the rootfs
+  |  **Folder name** | **Kind** | **Location on the rootfs**
   |:--|:--|:--|
   | "my_homepage" | **Homepages and web interfaces** | `/usr/share/apache2/default-site/htdocs`|
   | "my_includes" | **C++ libraries**  | `/usr/include`|
   | "my_rootdir" | **Home directory** | `/home/root`|
   
+15. At this point it is also possible to **change Linux startup scripts** 
+  * If necessary edit following script files
+  
+    | **Script name** | **Execution position** |
+    |:--|:--|
+    | *"my_startUpScripts/start_script.sh"* | *Before the NIC has started | 
+    | *"my_startUpScripts/run_script.sh"* | *Before the NIC has started | 
+    
+  * **Note:** For more information about the execution position look the table chapter 1
+  
+  *For example is content of the pre-installed *run_script.sh* here attached, that shows how it is possible to **interact in a easy way with the FPGA fabric**
+    ````sh
+    # Run script
+    # This script will be call when the system has booted
+    echo "*********************************"
+    echo "rsYocto run script: started!"
+
+    echo " Synchronization of the system time with a HTTP Server"
+    htpdate -d -t -b -s www.linux.org
+    echo "Time sync. done"
+
+    # NW Up? => Turn HPS LED ON
+    if grep -qF "up" /sys/class/net/eth0/operstate; then
+       echo 100 > /sys/class/leds/hps_led0/brightness
+       FPGA-writeBridge -lw 20 -h 01 -b
+    fi
+    ````
+
 13. Press ENTER to generate the new *rsYocto"-Image 
-14. The final image can be deployed to any SD-Card
+14. The final image can be deployed to any SD-Card as shown in chapter 1
 
 
 
