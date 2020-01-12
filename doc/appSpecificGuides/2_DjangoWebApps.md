@@ -1,3 +1,5 @@
+ [Back to the startpage](https://github.com/robseb/rsyocto)
+
 # Developing Django Web applications
 
 The latest [Django](https://www.djangoproject.com/) version for python-based web framework development with the adminLTE web dashboard is pre-installed.
@@ -37,3 +39,6 @@ Use *Visual Studio Code Insider* as remote Django development IDE.
   ````python
   success = call('FPGA-writeBridge -lw 20 -b 7 1 -b', shell=True)
   ````
+
+___
+ [Back to the startpage](https://github.com/robseb/rsyocto)
