@@ -43,21 +43,21 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
   
    | No | Stage | Description | Taks 
    |:--|:--|:--|:--|
-   | 1 | **Primary Bootloader** | Pre-configuration of the **FPGA configuration** (*Arria 10 SX only*) | Connecting HPS to FPGA SDRAM-Controller 
-   | 2 | **Primary Bootloader** | Booting of primary bootloader | Hardware check and startup (SDRAM,...)
-   | 3 | **Secoundary Bootloader** | Booting of *u-boot* | Loading and execution of the bootloader script
-   | 4 | **Bootloader script** | Secoundary bootloader script execution | Writing the **FPGA configuration** and loading of the Linux Kernel
-   | 5 | **Secoundary Bootloader** | Booting of *u-boot* | Loading and execution of the bootloader script
-   | 6 | **Linux Kernel** | Booting of the Linux Kernel starts |  
-   | 7 | **Linux Kernel** | Reading the Device Tree | The Kernel reads the device tree and loads the drivers 
-   | 8 | **Linux Kernel** | Execution of the startup scripts from the rootFs starts | 
-   | 9 | **startup-script** | **Excecution of by the user configurable startup script** |
-   | 10 | **Network Interface** | Activation of the Network interface | Waiting for an DHCP reception with an iPv4-Address
-   | 12 | **OpenSSH** | *OpenSSH* SSH Server  | Starting
-   | 12 | **Apache** | *Apache* Web Server  | Starting
-   | 13 | **run-script** | **Excecution of by the user configurable startup script** | Time Syncronisation via HTTP
-   | 14 | **BusyBox** | *BusyBox* Linux console interface | 
-   | 15 | **User Commmand input after password authentication** |
+   | **1** | **Primary Bootloader** | Pre-configuration of the **FPGA configuration** (*Arria 10 SX only*) | Connecting HPS to FPGA SDRAM-Controller 
+   | **2** | **Primary Bootloader** | Booting of primary bootloader | Hardware check and startup (SDRAM,...)
+   | **3** | **Secoundary Bootloader** | Booting of *u-boot* | Loading and execution of the bootloader script
+   | **4** | **Bootloader script** | Secoundary bootloader script execution | Writing the **FPGA configuration** and loading of the Linux Kernel
+   | **5** | **Secoundary Bootloader** | Booting of *u-boot* | Loading and execution of the bootloader script
+   | **6** | **Linux Kernel** | Booting of the Linux Kernel starts |  
+   | **7** | **Linux Kernel** | Reading the Device Tree | The Kernel reads the device tree and loads the drivers 
+   | **8** | **Linux Kernel** | Execution of the startup scripts from the rootFs starts | 
+   | **9** | **startup-script** | **Excecution of by the user configurable startup script** |
+   | **10** | **Network Interface** | Activation of the Network interface | Waiting for an DHCP reception with an iPv4-Address
+   | **11** | **OpenSSH** | *OpenSSH* SSH Server  | Starting
+   | **12** | **Apache** | *Apache* Web Server  | Starting
+   | **13** | **run-script** | **Excecution of by the user configurable startup script** | Time Syncronisation via HTTP
+   | **14** | **BusyBox** | *BusyBox* Linux console interface | 
+   | **15** | **User Commmand input after password authentication** |
    <br>
  
   ### **The Linux requests an iPv4-Address by a DHCP-server**
