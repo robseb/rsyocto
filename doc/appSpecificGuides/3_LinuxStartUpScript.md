@@ -22,7 +22,7 @@ For this reason, three possible ways to activate startup scripts are shown.
   chmod +x /etc/init.d/myScript.h
   update-rc.d myScript.h defaults 100
 
-## 2. Adding of a startup durning image creation
+## 2. Adding of a startup during image creation
 With the *rsYocto* building script it is posibile to add startup scripts into image file. 
 That was shown in chapter 5.
 
