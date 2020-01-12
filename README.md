@@ -6,7 +6,7 @@
 ### *rsYocto* is an open embedded Linux System designed with the Yocto Project and optimized for Intel SoC-FPGAs (*Intel Cyclone V* and *Intel Arria 10* with a *ARM CORTEX-A9*) to achieve the best customization for the strong requirements of modern embedded applications.
 
 <p align="center">
-	 <img src="https://img.shields.io/static/v1?label=Status&message=work+in+progress&color=orange">
+	 <img src="https://img.shields.io/static/v1?label=Status&message=active&color=orange">
 	 <a href="https://github.com/robseb/rsyocto/releases">
 	 	<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/robseb/rsyocto">
 	 </a>	 
