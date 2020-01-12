@@ -52,7 +52,7 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
    | 7 | **Linux Kernel** | Reading the Device Tree | The Kernel reads the device tree and loads the drivers 
    | 8 | **Linux Kernel** | Execution of the startup scripts from the rootFs starts | 
    | 9 | **startup-script** | **Excecution of by the user configurabil startup script** |
-   | 10 | **Network Interface** | Activation of the Network interface | Waiting for an DHCO reception with a iPv4-Address
+   | 10 | **Network Interface** | Activation of the Network interface | Waiting for an DHCP reception with a iPv4-Address
    | 11 | **YYYYYYXXXXXXXXXXX **| RNG, .... | 
    | 12 | **OpenSSH** | *OpenSSH* SSH Server  | Starting
    | 13 | **Apache** | *Apache* Web Server  | Starting
@@ -61,6 +61,7 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
    | 16 | **User Commmand inputs after password authentication** |
    <br>
  
+  ### **The Linux requests a iPv4-Address by a DHCP-derver**
   ### **After the system has booted properly and a network connection is established -> HPS LED trurns ON**
   <br>
   
