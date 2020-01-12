@@ -82,7 +82,7 @@ ___
 **The Content  of the "rsyocto_SDxx-Folder"** 
 
  7. With the Text-File \"infoRSyocto.txt\" it is possible to add some notes to the final image
-  * The MAC address can also be changed here:
+  * The **MAC address** can also be changed here:
      ````
      -- MAC: d6:7d:ae:b3:0e:ba
      ````
@@ -139,13 +139,15 @@ ___
   
     | **Script name** | **Execution position** |
     |:--|:--|
-    | *"my_startUpScripts/start_script.sh"* | *Before the NIC has started | 
-    | *"my_startUpScripts/run_script.sh"* | *Before the NIC has started | 
+    | *"my_startUpScripts/start_script.sh"* | *Before the NIC has started* | 
+    | *"my_startUpScripts/run_script.sh"* | *Before the NIC has started* | 
     
   * **Note:** For more information about the execution position look the table chapter 1
   
   *For example is content of the pre-installed *run_script.sh* here attached, that shows how it is possible to **interact in a easy way with the FPGA fabric**
-    ````sh
+
+  ```console
+    #!/bin/sh
     # Run script
     # This script will be call when the system has booted
     echo "*********************************"
@@ -160,7 +162,7 @@ ___
        echo 100 > /sys/class/leds/hps_led0/brightness
        FPGA-writeBridge -lw 20 -h 01 -b
     fi
-    ````
+  ````
 
 13. Press ENTER to generate the new *rsYocto"-Image 
 14. The final image can be deployed to any SD-Card as shown in chapter 1
