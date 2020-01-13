@@ -139,11 +139,11 @@ ___
     | **Script name** | **Execution position** |
     |:--|:--|
     | *"my_startUpScripts/start_script.sh"* | *Before the NIC has started* | 
-    | *"my_startUpScripts/run_script.sh"* | *After the network connection with SSH is established * | 
+    | *"my_startUpScripts/run_script.sh"* | *After the network connection with SSH is established* | 
     
   * **Note:** For more information about the execution position look at the table on chapter 1
   
-  *For example the content of the pre-installed *run_script.sh* is attached here, that shows how it is possible to **interact in a easy way with the FPGA fabric**
+  * For example the content of the pre-installed *run_script.sh* is attached here, that shows how it is possible to **interact in a easy way with the FPGA fabric**
 
   ```console
     #!/bin/sh
