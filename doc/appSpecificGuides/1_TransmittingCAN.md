@@ -2,7 +2,7 @@
 
 # Writing a python script to transmit CAN-packages
 **This guide shows how simple it is to transmit CAN-packages within a Python script on a running embbeded Linux system.**
-It is a part of my "*Mapping HPS Peripherals, like I²C or CAN, over the FPGA fabric to FPGA I/O and using embedded Linux to control them*"-guide, where I show the **complete development process** with the FPGA design and bootloader creation (see [here](https://github.com/robseb/HPS2FPGAmapping)
+It is a part of my "*Mapping HPS Peripherals, like I²C or CAN, over the FPGA fabric to FPGA I/O and using embedded Linux to control them*"-guide, where I show the **complete development process** with the FPGA design and bootloader creation (see [here](https://github.com/robseb/HPS2FPGAmapping)).
 
 * To **start the CAN0** execute this command on *rsYocto* to **enable the CAN network Port**:
   ````bash 
