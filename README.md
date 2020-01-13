@@ -76,7 +76,7 @@ ___
 * **FPGA fabric configuration during the boot and with a single Linux command**
 * **Tools to interact with the FPGA fabric via the HPS to FPGA bridges**
 * **Access the FPGA fabric with Shell scripts, C++-, Python-Applications or PHP or Django web applications**
-* **HPS Hard IP components (I²C-,SPI-, CAN-BUS or UART) are routed to FPGA I/O
+* **HPS Hard IP components (I²C-,SPI-, CAN-BUS or UART) are routed to FPGA I/O**
 	* Ready for connecting different devices 
 		* e.g. **Arduino Uno shields**
 * Console based Bus test tools (e.g. `can-utils`)
