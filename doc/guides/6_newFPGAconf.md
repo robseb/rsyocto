@@ -139,7 +139,7 @@ ___
     | **Script name** | **Execution position** |
     |:--|:--|
     | *"my_startUpScripts/start_script.sh"* | *Before the NIC has started* | 
-    | *"my_startUpScripts/run_script.sh"* | *After the network connection with SSH is established* | 
+    | *"my_startUpScripts/run_script.sh"* | *After the network connection with SSH is established* (run level 5) | 
     
   * **Note:** For more information about the execution position look at the table on chapter 1
   
