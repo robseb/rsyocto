@@ -1,4 +1,6 @@
 #!/usr/bin/env python
+# coding: utf-8
+
 #
 #            ########   ######     ##    ##  #######   ######  ########  #######                  
 #            ##     ## ##    ##     ##  ##  ##     ## ##    ##    ##    ##     ##           
@@ -7,21 +9,24 @@
 #            ##   ##         ##       ##    ##     ## ##          ##    ##     ##      
 #            ##    ##  ##    ##       ##    ##     ## ##    ##    ##    ##     ##        
 #            ##     ##  ######        ##     #######   ######     ##     #######         
-#
-#
+#      ___          _   _      _   _                   ___              _          _   
+#     | _ )  _  _  (_) | |  __| | (_)  _ _    __ _    / __|  __   _ _  (_)  _ __  | |_ 
+#     | _ \ | || | | | | | / _` | | | | ' \  / _` |   \__ \ / _| | '_| | | | '_ \ |  _|
+#     |___/  \_,_| |_| |_| \__,_| |_| |_||_| \__, |   |___/ \__| |_|   |_| | .__/  \__|
+#                                             |___/                         |_|            
 #
 # Robin Sebstian (https://github.com/robseb)
 #
 # 22-05-2019 (Vers. 1.2) 
-# Python Script for automatic SD Card image Build with all necessary files
+# Python Script for automatic SD Card image built with all necessary files
 # with automatic rootfs changes 
-# with SSH change to user mode 
+# 
 #
 #10-08-2019 (Vers. 1.4)
-# Splach screen integration  
+# Splash screen integration  
 #
 #11-08-2019 (Vers. 1.5)
-# Suppored for multibile target Boards 
+# Support for multiple target Boards 
 #
 #14-08-2019 (Vers. 1.6)
 # Importation of the Bootloader FPGA configuration (16-Bit parallel) to 
@@ -37,17 +42,25 @@
 # Adding Device Tree Compilation with MAC integration 
 #
 #
-#02-12-2012 (Vers. 2.0)
+#02-12-2019 (Vers. 2.0)
 #  Github ready version
 # 
-
-version = "2.0"
+#25-12-2019 (Vers. 2.01)
+#  Auto remove of the hwrng 
+#
+#09-01-2019 (Vers. 2.02)
+#  Overjump MAC-Address inserting if the dts file is not valid
+#
+#
+#11-01-2020 (Vers. 2.03)
+# Copying network interface settings to the rootfs
+#
+version = "2.03"
 
 #
 # #################### CHANGE HERE THE ADDITIONAL ROOTFS SPACE FOR USER SPACE ####################
 #
-# Size of the available User Space in Mega Byte (MB) (is exclude changes of rootfs 
-#   during the execution of this script)
+# Size of the available User Space in Mega Byte (MB) 
 #
 USER_SPACE_SIZE_MB =600 # 600MB 
 #
@@ -106,16 +119,17 @@ def extractAll(zipName):
 USER_SPACE_SIZE    = USER_SPACE_SIZE_MB * 1000000
 
 if __name__ == '__main__':
-    print("AUTOMATIC SCRIPT FOR BUILDING A SD CARD IMAGE with rsYocto")
+    print("AUTOMATIC SCRIPT FOR BUILDING A SD CARD IMAGE for rsYocto")
     print(" by Robin Sebastian (https://github.com/robseb) Vers.: "+version)
     print("This script requires a SD-Card folder\n\n")
 
     filesthere = True
     a10detect = False
     includeLinuxRbf = True
+    nwifcopy = False 
 
     ################################################ Input Check ################################################
-    #############  check if all necessary are at this path ###################
+    #############  check if all necessary files are at this path ###################
 
     if os.path.isfile("preloader_a10.bin") and os.path.isfile("rootfs_a10.tar.gz"):
         a10detect=True
@@ -164,10 +178,11 @@ if __name__ == '__main__':
         print("Warning: The File \"socfpga_nano_linux.rbf\" or \"socfpga_std_linux.rbf\"  is not there!")
         includeLinuxRbf = False
 
+
     if not filesthere: 
         print("------------------------------------------------------")
         print("Insert the missing files to this folder and try again!")
-        print("For more information's please follow the rsYocto documentation\n")
+        print("For further information please follow the rsYocto documentation\n")
         print("https://github.com/robseb/rsyocto\n")
         sys.exit()
     ################################################ Detect the board Type ################################################
@@ -213,7 +228,7 @@ if __name__ == '__main__':
         BoardType = input('Please input a version Number:')
 
         if(not ((BoardType >0) and ((BoardNano) and  (BoardType == 1)) or ((BoardStandard) and  (BoardType == 2 )) or ((BoardHan) and  (BoardType == 3 )) )):
-            print("Error the Input is value is not vailed")
+            print("ERROR: the Input value is not valid")
             ays.exit()
 
         BoardNano = False
@@ -227,11 +242,15 @@ if __name__ == '__main__':
         else:
             BoardHan = True
 
-    print ('This script will generate the image for following Board/s: ' + str(BoardName[BoardType]))
+    print ('This script will generate the image for following Board: ' + str(BoardName[BoardType]))
 
-    print('Selected Available User space: '+str(USER_SPACE_SIZE_MB)+' MB\n')
+    print('Selected available user space: '+str(USER_SPACE_SIZE_MB)+' MB\n')
 
-    ################################################ unzip of the rootFs archive  ################################################
+     # Copy new network interface file to the rootfs only if the file is inside the folder
+    if (os.path.isfile("network_interfaces.txt")) :
+        nwifcopy = True
+
+    ################################################ Unzip of the rootFs archive  ################################################
 
     ###### rename the rootfs folder ###### 
     if(BoardNano or BoardStandard):
@@ -241,18 +260,11 @@ if __name__ == '__main__':
 
     #############  create rootfs folder ###################
     
-    # delate an old rootfs folder
-    
+    # delete the old rootfs folder
     if os.path.isdir("rootfs"):
-    #    try:  
-    #        os.removedirs("rootfs")
-    #    except OSError:  
-    #        print ("ERROR: Deleting of the old \"rootfs\" folder failed!")
-    #        sys.exit()
         os.system("sudo rm -r rootfs")
 
     if os.path.isfile("rootfs.tar.gz"):
-         # for the standard tar.gz format directly from Yocto's output
         try:  
             os.mkdir("rootfs")
         except OSError:  
@@ -269,7 +281,7 @@ if __name__ == '__main__':
     else :
         os.rename('rootfs.tar.gz', 'rootfs_a10.tar.gz') 
 
-    #############  input the name of final Image ###################
+    #############  input the name of the final image ###################
 
     nb = input('Please input a version Number:')
     print ('Name of the final image: rsYocto_%s \n' % (nb))
@@ -281,7 +293,7 @@ if __name__ == '__main__':
 
     #############  create user interaction folder for the webpage and root folder ###################
 
-    #check if the "my_homepage" folder is there 
+    # Check if the "my_homepage" folder is there 
     if not os.path.isdir("my_homepage"):
         try:  
             os.mkdir("my_homepage")
@@ -289,7 +301,7 @@ if __name__ == '__main__':
             print ("Creation of the new directory \"my_homepage\" failed!")
             sys.exit()
 
-    #check if the "my_rootdir" folder is there 
+    # Check if the "my_rootdir" folder is there 
     if not os.path.isdir("my_rootdir"):
         try:  
             os.mkdir("my_rootdir")
@@ -297,7 +309,7 @@ if __name__ == '__main__':
             print ("Creation of the new directory \"my_rootdir\" failed!")
             sys.exit()
 
-    #check if the "my_includes" folder is there 
+    # Check if the "my_includes" folder is there 
     if not os.path.isdir("my_includes"):
         try:  
             os.mkdir("my_includes")
@@ -305,54 +317,67 @@ if __name__ == '__main__':
             print ("Creation of the new directory \"my_includes\" failed!")
             sys.exit()
 
+    # Check if the "my_includes" folder is there 
+    if not os.path.isdir("my_startUpScripts"):
+        try:  
+            os.mkdir("my_startUpScripts")
+        except OSError:  
+            print ("Creation of the new directory \"my_startUpScripts\" failed!")
+            sys.exit()
 
- #   cur_dir = os.system("pwd")
+    # Create the top-level Linux startUp scripts
+    if not os.path.isfile("my_startUpScripts/startup_script.sh"):
+        with open("my_startUpScripts/startup_script.sh", "a") as f:
+            f.write("#!/bin/sh\n")
+            f.write("# Startup script\n")
+            f.write('# This script will be execute before the system starts the NIC\n')
+            f.write('echo "rsYocto Startup script: started!"\n')
+            f.write('# ...\n')
+            f.write('# Map RNG to the driver\n')
+            f.write('RNGD_OPTS="-r /dev/random"\n')
+            f.write('echo "Startup script: end!"\n')
 
- #   print("\n------------------------------------------------------\n\n")
- #   print ("\n Press Enter to start the File-Explorer with Admin right.\n")
- #   print("In this window you can drag and drop your own website via the path \n \'")
- #   print( str(cur_dir)+ "/my_homepage\' or your own files and programs via the address ")
- #   print("\'.../my_rootdir\' to the final image !\n")
- #   print("Navigate over: /home/eit/Desktop ...") 
+    if not os.path.isfile("my_startUpScripts/run_script.sh"):
+        with open("my_startUpScripts/run_script.sh", "a") as f:
+            f.write("#!/bin/sh\n")
+            f.write("# Run script\n")
+            f.write('# This script will be called when the system booted\n')
+            f.write('echo "*********************************"\n')
+            f.write('echo "rsYocto run script: started!"\n')
+            f.write('\n')
+            f.write('echo " Synchronization of the system time with a HTTP Server"\n')
+            f.write('htpdate -d -t -b -s www.linux.org\n')
+            f.write('echo "Time sync. done"\n')
+            f.write('\n')
+            f.write('# NW Up? => Turn HPS LED ON\n')
+            f.write('if grep -qF "up" /sys/class/net/eth0/operstate; then\n')
+            f.write('   echo 100 > /sys/class/leds/hps_led0/brightness\n')
+            f.write('   FPGA-writeBridge -lw 20 -h 01 -b\n')
+            f.write('fi\n')
 
-  #  raw_input ("PRESS ENTER to show the Explorer Window...\n\n")
-    #open both folders with nautilus (root rights)
-  
- #   cur_dir_str = 'sudo nautilus '+str(cur_dir)
- #   os.system(cur_dir_str.strip('0'))
-
-#    raw_input (" CLOSE this explorer Window and PRESS ENTER to continue after your changes...\n\n")
  
     # copy the user changes to the rootfs folder
     print("------------------------------------------------------\n\n")
-    print("--> Copying of your homepage to the rootfs: \n")
+    print("--> Copying your homepage to the rootfs: \n")
     os.system("sudo cp -vr my_homepage/. rootfs/usr/share/apache2/default-site/htdocs")
 
-    print("--> Copying of your rootDir to the rootfs: \n")
+    print("--> Copying your root folder to the rootfs: \n")
     os.system("sudo cp -vr my_rootdir/. rootfs/home/root")
 
-    print("--> Copying of your includes to the include: \n")
+    print("--> Copying your includes to the include: \n")
     os.system("sudo cp -vr my_includes/. rootfs/usr/include")
 
     ####################################### Script based ROOTFS Changes #######################################
 
-    ################### chnaging the SSH authentication to "Linux User Password" ###################
+    ################### Changing the SSH authentication to "Linux User Password" ###################
 
-    print("\n\nChnaging the SSH authentication to \"Linux User Password \"")
+    print("\n\nChanging the SSH authentication to \"Linux User Password \"")
     
     with open("rootfs/etc/ssh/sshd_config", "a") as f:
         f.write("\nPermitRootLogin yes\n")
         f.write("Banner etc/issue")
 
-    #   print("\n\Setup SSH key authentication ")
-    #   with open("rootfs/etc/ssh/sshd_config", "a") as f:
-    #       f.write("\nHostKey /etc/ssh/ssh_key_rsyocto\n")
-    #
-    #   os.system("sudo cp ssh_key_rsyocto rootfs/etc/ssh/")
-    #  os.system("sudo cp ssh_key_rsyocto.pub rootfs/etc/ssh/")
-
-
-    # check if the rsYocto folder is inside the rootfs
+    # Check if the rsYocto folder is inside the rootfs
     if not os.path.isdir("rootfs/usr/rsyocto"):
         try:  
             os.mkdir("rootfs/usr/rsyocto")
@@ -360,16 +385,21 @@ if __name__ == '__main__':
             print ("Creation of the new directory \"rsYocto\" inside the rootfs failed!")
             sys.exit()
     
-    #write the Version No to the rootfs
-    print ("--> writing the Version Number to the rootFs\n")    
+    # Write the Version No to the rootfs
+    print ("--> Writing the Version Number to the rootFs\n")    
     try:
         fp = open('rootfs/usr/rsyocto/version.txt')
     except IOError:
-        # If not exists, create the file
+        # If it do not exist, create the file
         fp = open('rootfs/usr/rsyocto/version.txt', 'w+')
 
     with open("rootfs/usr/rsyocto/version.txt", "a") as f:   
         f.write(str(nb))    
+
+    # Copy a new network interface file to the rootfs only when the file is there
+    if nwifcopy: 
+        shutil.copyfile('network_interfaces.txt', 'rootfs/etc/network/interfaces') 
+        print ("--> the network interface settings are written\n")    
 
     ## Board Selection 
     print("--> Decoding the Board selection\n")
@@ -393,15 +423,15 @@ if __name__ == '__main__':
 
 
 
-    print('\n ***************\ GENERATING INMAGE FOR  '+BoardName[BoardGenCounter]+" ***************\n")
+    print('\n ***************\ GENERATING IMAGE FOR  '+BoardName[BoardGenCounter]+" ***************\n")
 
-    ################### add the Bootoader FPGA Configuration to the rootfs ###################
+    ################### add the Bootloader FPGA Configuration to the rootfs ###################
 
-    # Wrting the name of the supported Board to the file System
+    # Writing the name of the supported Board to the file System
     try:
         fp = open('rootfs/usr/rsyocto/suppBoard.txt')
     except IOError:
-        # If not exists, create the file
+        # If it does not exist, create the file
         fp = open('rootfs/usr/rsyocto/suppBoard.txt', 'w+')
 
     print('-->  Writing the name of the supported board to the rootfs\n')
@@ -419,8 +449,56 @@ if __name__ == '__main__':
             print ("Renaming of the Bootloader FPGA Configuration file failed!")
             sys.exit()
 
+   # Add the two scripts to the rootFs 
+    if  os.path.isfile("my_startUpScripts/startup_script.sh"):
+        shutil.copyfile('my_startUpScripts/startup_script.sh', 'rootfs/etc/init.d/startup-script') 
+        print('-->  Writing the startup script to the rootFs done\n')
+    else:
+        print('WARNING: Failed to change the startup script\n')
 
-    ################### generate splash boot screan for each Board ###################
+    if  os.path.isfile("my_startUpScripts/run_script.sh"):
+        shutil.copyfile('my_startUpScripts/run_script.sh', 'rootfs/etc/init.d/run-script') 
+        print('-->  Writing the run script to the rootFs done\n')
+    else:
+        print('WARNING: Failed to change the run script\n')
+
+
+    # Enable NETBIOS with the machine name
+    if  os.path.isfile("rootfs/etc/nsswitch.conf"):
+        print('enable the NETBIOS\n')
+
+        fd=open("rootfs/etc/nsswitch.conf",'r+') 
+        dnsraw=''
+        dnstartPos =0
+
+        for x in fd.readlines():
+            dnsraw= dnsraw+x
+
+        dnstartPos = dnsraw.find('files dns')
+        
+        if not (dnstartPos > -1):
+            print("WARNING: The /etc/nsswitch.conf file is not in the right format\n")
+        else:
+            dnsrawNew = dnsraw[:dnstartPos] +" files dns wins \n"+dnsraw[dnstartPos+10:]
+            fd.truncate(0) # need '0' when using r+
+            fd.close()
+
+            with open("rootfs/etc/nsswitch.conf", "a") as f3:
+                f3.write(dnsrawNew)
+
+            print('-->  Enabling NETBIOS name is done\n')
+    else:
+        print("WARNING: The /etc/nsswitch.conf file is not available!\n")
+
+    # Remove the HWCLOCK Init script from the rootFs 
+    if os.path.isfile("rootfs/etc/init.d/hwclock.sh") : 
+        print('-->  Removing the hwclock.sh init script\n')
+        try:
+            os.remove("rootfs/etc/init.d/hwclock.sh")
+        except IOError:
+            print ("WARNING: Removing \"hwclock.sh\" failed!\n")
+
+    ################### generate splash boot screen for each Board ###################
     print("\n--> Generaing the boot splash screen\n")
     open('rootfs/etc/issue', 'w').close()
 
@@ -437,7 +515,7 @@ if __name__ == '__main__':
         f.write("*                     ##     ##  ######        ##     #######   ######     ##     #######                *\n") 
         f.write("*                                                                                                        *\n")
         f.write("*                    --    Embedded Yocto based Linux System for Intel SoC-FPGAs          --             *\n")
-        f.write("*                    ---        created by Robin Sebastian (github.com/robseb)            ---            *\n")
+        f.write("*                    ---        created by Robin Sebastian (github.com/robseb)           ---             *\n")
         f.write("**********************************************************************************************************\n")   
         f.write("\n")
         f.write("-- Git Repository: https://github.com/robseb/rsyocto\n")
@@ -453,15 +531,15 @@ if __name__ == '__main__':
         f1.close()
         f.write("***********************************************************************************************************\n\n")   
             
-    #############  allow manual rootFs chnages ###################
+    #############  allow manual rootFs changes ###################
 
-    print("\n --> Now manual rootFs changes for specific of the Board: "+BoardName[BoardGenCounter]+" posibile!\n")
+    print("\n --> Now manual rootFs changes for the Board: "+BoardName[BoardGenCounter]+" are possible!\n")
     raw_input("PRESS ENTER to continue...\n")
     print("------------------------------------------------------\n\n") 
 
     ################################################  Build the Device Tree  ################################################
 
-    #############  reade the MAC of the info File #############
+    #############  read the MAC-Address of the info File #############
     f1=open('infoRSyocto.txt') 
 
     print("-> Change the Device Tree MAC-Address with the \"infoRSyocto.txt\"-MAC Address\n") 
@@ -469,7 +547,7 @@ if __name__ == '__main__':
     rsInfoLine = f1.readline()
     f1.close()             # -- MAC: d6:7d:ae:b3:0e:ba
     if  (not rsInfoLine.find('-- MAC: ') == 0):
-        print("ERROR: The Mac Address inside the info file is not right format\n")
+        print("ERROR: The Mac Address inside the info file is not in the right format\n")
         exit()
 
     macStr = rsInfoLine[8:]
@@ -477,7 +555,7 @@ if __name__ == '__main__':
     macDtsStr = macStr.replace(':',' ')
     macDtsStr = macDtsStr.replace('\n','')
 
-    print("    Opening the Device Tree File and inserting the new  MAC Address")
+    print("    Opening the Device Tree File and inserting the new MAC-Address")
     f3=open(FileNmaeDts[BoardGenCounter],'r+') 
     dtsraw=''
 
@@ -491,46 +569,46 @@ if __name__ == '__main__':
         # device tree file for Cyclone V 
         ethstartPos = dtsraw.find('ethernet@ff702000 {')
 
+    change_dts = True
+
     if not (ethstartPos > -1):
-        print("ERROR: The DTS File is not in the right format\n")
-        print("Deleting of the local rootFs Folder")
-        os.system("sudo rm -r rootfs")
-        print('Program stops with error!')
-        exit()
+        print("WARNING: The DTS File is not in the right format\n")
+        print("Changing the MAC-Address inside the Device Tree is not possible! ")
+        change_dts= False
 
-    macstartPos =  dtsraw.find('mac-address = [',ethstartPos)
-    
-    if not (macstartPos > -1):
-        print("ERROR: The DTS File is not right format (2)\n\n")
-        print("Deleting of the local rootFs Folder")
-        os.system("sudo rm -r rootfs")
-        print('Program stops with error!')
-        exit()
-    
-    macendPos =  dtsraw.find('];',macstartPos)
-            
-    if not (macstartPos > -1):
-        print("ERROR: The DTS File is not right format (2)\n\n")
-        print("Deleting of the local rootFs Folder")
-        os.system("sudo rm -r rootfs")
-        print('Program stops with error!')
-        exit()
+    if change_dts: 
+        macstartPos =  dtsraw.find('mac-address = [',ethstartPos)
+        if not (macstartPos > -1):
+            print("ERROR: The DTS File is not in the right format (2)\n\n")
+            print("Deleting of the local rootFs Folder")
+            os.system("sudo rm -r rootfs")
+            print('Program stops with error!')
+            exit()
+        
+        macendPos =  dtsraw.find('];',macstartPos)
+                
+        if not (macstartPos > -1):
+            print("ERROR: The DTS File is not in the right format (2)\n\n")
+            print("Deleting of the local rootFs Folder")
+            os.system("sudo rm -r rootfs")
+            print('Program stops with error!')
+            exit()
 
-    dtsrawNew = dtsraw[:macstartPos+15] +' '+macDtsStr+ dtsraw[macendPos:]
-    
-    f3.truncate(0) # need '0' when using r+
-    f3.close()
+        dtsrawNew = dtsraw[:macstartPos+15] +' '+macDtsStr+ dtsraw[macendPos:]
+        
+        f3.truncate(0) # need '0' when using r+
+        f3.close()
 
-    with open(FileNmaeDts[BoardGenCounter], "a") as f3:
-        f3.write(dtsrawNew)
+        with open(FileNmaeDts[BoardGenCounter], "a") as f3:
+            f3.write(dtsrawNew)
 
-    print('     MAC Address is included to Device Tree \n')
+        print('     MAC-Address is included in the Device Tree \n')
 
     #### Compiling the Device Tree ####
 
-    print('--> Begin to compile the Device Tree\n')
+    print('--> start compiling the Device Tree\n')
 
-    #Delate old device Tree bin file
+    #delete old device Tree binary file
     if (os.path.isfile("socfpga_a10.dtb") and (BoardGenCounter == 3) ):
         os.remove("socfpga_a10.dtb")
     elif (os.path.isfile("socfpga_cy5.dtb") and (not (BoardGenCounter == 3)) ):
@@ -560,7 +638,7 @@ if __name__ == '__main__':
     print('    Device Tree compilation is done \n')
 
 
-    ################################################  Callcation of the required size for the partions ################################################
+    ################################################  Calculation of the required sizes of the partitions ################################################
     
     sizeError = False
     print('--> Begin to calculate the partition sizes\n')
@@ -599,25 +677,25 @@ if __name__ == '__main__':
 
         pat3_size = convert_size(pat3_sizeRaw)
 
-    # Check if the sizes are vialed 
+    # Check if the sizes are valid 
     if not pat1_size.find("K") :
-        print("ERROR: The size of the Pattison 1 is to small! (>1K)")
+        print("ERROR: The size of the Partition 1 is too small! (>1K)")
         sizeError = True
     
     if not pat2_size.find("M") :
-        print("ERROR: The size of the Pattison 2 is to small! (>1M)")
+        print("ERROR: The size of the Partition 2 is too small! (>1M)")
         sizeError = True
 
     # if  pat2_size.find("G") :
-    #     print("ERROR: The size of the Pattison 2 is to great! (<1G)")
+    #     print("ERROR: The size of the Partition 2 is too large! (<1G)")
     #     sizeError = True
 
     if not pat2_size.find("M") :
-        print("ERROR: The size of the Pattison 3 is to small! (>1M)")
+        print("ERROR: The size of the Partition 3 is to small! (>1M)")
         sizeError = True
 
     # if  pat3_size.find("G") :
-    #     print("ERROR: The size of the Pattison 3 is to great! (<1G)")
+    #     print("ERROR: The size of the Partition 3 is too large! (<1G)")
     #     sizeError = True
 
     if sizeError :
@@ -630,7 +708,7 @@ if __name__ == '__main__':
 
     #############  Calculate required part sizes ###################
     
-    # calculate the final partion sizes 
+    # calculate the final partition sizes 
     if (not (BoardGenCounter == 3)):
         # CY5
         print('--> Calculating sizes for Cyclone V\n')
@@ -653,7 +731,7 @@ if __name__ == '__main__':
     print("PAT2 (rootfs)               - size: "+str(pat2_size)+" | offset: "+str(pat2_offsetStr)+" | final: "+str(pat2_final))
     print("PAT3 (secondary +FPGA ... ) - size: "+str(pat3_size)+" | offset: "+str(pat3_offsetStr)+" | final: "+str(pat3_final))
 
-    # Calcuate the complite size 
+    # Calculate the complete size 
     if (not (BoardGenCounter == 3)) :
         # CY5
         compl_size = convert_size((os.path.getsize("preloader_cy5.bin")+ pat1_offset+ \
@@ -665,7 +743,7 @@ if __name__ == '__main__':
 
     compl_size = compl_size.replace(" ","")
 
-    print("\nComplite offset: "+str(comp_offsetStr)+" size:"+str(compl_size)+"\n")
+    print("\nComplete offset: "+str(comp_offsetStr)+" size:"+str(compl_size)+"\n")
     print("---- --------------- ----")
 
 
@@ -678,7 +756,7 @@ if __name__ == '__main__':
         os.rename('uboot_cy5.scr','u-boot.scr')
         os.rename('uboot_cy5.img','u-boot.img')  
         
-        #############  Build the Image  for Cyclone V ###################
+        #############  Build the Image for Cyclone V ###################
 
         print("The Syntax of the Altera Script (CY5) for the run: ")
         print("sudo python ./make_sdimage.py -f \n"+ \
@@ -706,7 +784,7 @@ if __name__ == '__main__':
         os.rename('socfpga.dtb','socfpga_cy5.dtb') 
 
     else :      
-        #############  Build the Image  for Arria 10 ###################
+        #############  Build the Image for Arria 10 ###################
         os.rename('zImage_a10','zImage')
         os.rename('socfpga_han_periph.rbf','socfpga.periph.rbf')   
         os.rename('socfpga_han_core.rbf','ghrd_10as066n2.core.rbf') 
@@ -745,7 +823,7 @@ if __name__ == '__main__':
         os.rename('u-boot.img','uboot_a10.img')
         os.rename('u-boot.scr','uboot_a10.scr') 
 
-    # Check if the ALTERA script execution was succsesful 
+    # Check if the ALTERA script execution was successful 
     if not (os.path.isfile("rsYocto_"+str(nb)+BoardImageSuffix[BoardGenCounter]+".img")): 
         print("\n\nERROR: The execution of the ALTERA Script failed!")
         print('Please follow the report of the ALTERA Script\n\n')
@@ -755,8 +833,9 @@ if __name__ == '__main__':
     print('\n ***************\ END GENERATING INMAGE FOR  '+BoardName[BoardGenCounter]+" ***************\n\n\n")
     print("\n\nend")
 
-    #############  Delate rootFs Folder  ###################
-    print("--> Delating of the local rootFs Folder n")
+    #############  Delete rootFs Folder  ###################
+    print("--> Deleting the local rootFs Folder n")
     os.system("sudo rm -r rootfs")
-    print(" New custum rsYocto Image is created SCUCCESSFUL!\n")
+    print(" New custom rsYocto Image is created SUCCESSFULLY!\n")
+    print("File name: rsYocto_"+str(nb)+BoardImageSuffix[BoardGenCounter]+".img")
     print(" Use any command boot-image-creating tool to boot this rsYocto-version\n")
