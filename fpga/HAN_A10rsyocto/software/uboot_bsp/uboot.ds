@@ -1,0 +1,37 @@
+############################################################
+#
+# Copyright Altera 2015
+# All Rights Reserved
+# File: uboot.ds
+#
+############################################################
+
+#
+# stop processor if running
+#  and then reset processor
+#
+stop
+wait 5s
+reset system
+stop
+wait 5s
+
+set trust-ro-sections-for-opcodes off
+
+# Load uboot elf
+loadfile $sdir/uboot-socfpga/u-boot 0x0
+start
+wait
+
+restore $sdir/devicetree.dtb binary &_end
+
+#
+# set a breakpoint on board_init function
+#
+tbreak board_init
+
+# tell target to continue executing
+continue
+
+# wait for breakpoint
+wait 60s

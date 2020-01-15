@@ -1,0 +1,2212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<system name="$${FILENAME}">
+ <component
+   name="$${FILENAME}"
+   displayName="$${FILENAME}"
+   version="1.0"
+   description=""
+   tags=""
+   categories="System" />
+ <parameter name="bonusData"><![CDATA[bonusData 
+{
+   element ILC
+   {
+      datum _sortIndex
+      {
+         value = "14";
+         type = "int";
+      }
+   }
+   element ILC.avalon_slave
+   {
+      datum baseAddress
+      {
+         value = "0";
+         type = "String";
+      }
+   }
+   element arria10_hps
+   {
+      datum _sortIndex
+      {
+         value = "3";
+         type = "int";
+      }
+   }
+   element arria10_hps.f2h_axi_slave
+   {
+      datum baseAddress
+      {
+         value = "0";
+         type = "String";
+      }
+   }
+   element arria10_hps.f2sdram0_data
+   {
+      datum baseAddress
+      {
+         value = "0";
+         type = "String";
+      }
+   }
+   element button_pio
+   {
+      datum _sortIndex
+      {
+         value = "12";
+         type = "int";
+      }
+   }
+   element button_pio.s1
+   {
+      datum baseAddress
+      {
+         value = "272";
+         type = "String";
+      }
+   }
+   element clk_100
+   {
+      datum _sortIndex
+      {
+         value = "1";
+         type = "int";
+      }
+   }
+   element clk_50
+   {
+      datum _sortIndex
+      {
+         value = "0";
+         type = "int";
+      }
+   }
+   element dipsw_pio
+   {
+      datum _sortIndex
+      {
+         value = "13";
+         type = "int";
+      }
+   }
+   element dipsw_pio.s1
+   {
+      datum baseAddress
+      {
+         value = "256";
+         type = "String";
+      }
+   }
+   element emif_a10_hps
+   {
+      datum _sortIndex
+      {
+         value = "4";
+         type = "int";
+      }
+   }
+   element f2sdram_m
+   {
+      datum _sortIndex
+      {
+         value = "6";
+         type = "int";
+      }
+   }
+   element fancmd
+   {
+      datum _sortIndex
+      {
+         value = "17";
+         type = "int";
+      }
+   }
+   element fancmd.avalon_slave_0_1
+   {
+      datum baseAddress
+      {
+         value = "8";
+         type = "String";
+      }
+   }
+   element fpga_m
+   {
+      datum _sortIndex
+      {
+         value = "7";
+         type = "int";
+      }
+   }
+   element h2fw_ClockBridge
+   {
+      datum _sortIndex
+      {
+         value = "18";
+         type = "int";
+      }
+   }
+   element h2fw_ClockBridge.s0
+   {
+      datum baseAddress
+      {
+         value = "0";
+         type = "String";
+      }
+   }
+   element hps_m
+   {
+      datum _sortIndex
+      {
+         value = "5";
+         type = "int";
+      }
+   }
+   element issp
+   {
+      datum _sortIndex
+      {
+         value = "15";
+         type = "int";
+      }
+   }
+   element led_pio
+   {
+      datum _sortIndex
+      {
+         value = "11";
+         type = "int";
+      }
+   }
+   element led_pio.s1
+   {
+      datum baseAddress
+      {
+         value = "288";
+         type = "String";
+      }
+   }
+   element onchip_memory2
+   {
+      datum _sortIndex
+      {
+         value = "8";
+         type = "int";
+      }
+   }
+   element onchip_memory2.s1
+   {
+      datum baseAddress
+      {
+         value = "16777216";
+         type = "String";
+      }
+   }
+   element pb_lwh2f
+   {
+      datum _sortIndex
+      {
+         value = "9";
+         type = "int";
+      }
+   }
+   element pb_lwh2f.s0
+   {
+      datum baseAddress
+      {
+         value = "0";
+         type = "String";
+      }
+   }
+   element reset_bridge
+   {
+      datum _sortIndex
+      {
+         value = "2";
+         type = "int";
+      }
+   }
+   element sevensig
+   {
+      datum _sortIndex
+      {
+         value = "16";
+         type = "int";
+      }
+      datum sopceditor_expanded
+      {
+         value = "1";
+         type = "boolean";
+      }
+   }
+   element sevensig.avalon_slave_0
+   {
+      datum baseAddress
+      {
+         value = "0";
+         type = "String";
+      }
+   }
+   element sysid_qsys
+   {
+      datum _sortIndex
+      {
+         value = "10";
+         type = "int";
+      }
+   }
+   element sysid_qsys.control_slave
+   {
+      datum baseAddress
+      {
+         value = "304";
+         type = "String";
+      }
+   }
+}
+]]></parameter>
+ <parameter name="clockCrossingAdapter" value="HANDSHAKE" />
+ <parameter name="device" value="10AS066K3F40E2SG" />
+ <parameter name="deviceFamily" value="Arria 10" />
+ <parameter name="deviceSpeedGrade" value="2" />
+ <parameter name="fabricMode" value="QSYS" />
+ <parameter name="generateLegacySim" value="false" />
+ <parameter name="generationId" value="0" />
+ <parameter name="globalResetBus" value="false" />
+ <parameter name="hdlLanguage" value="VERILOG" />
+ <parameter name="hideFromIPCatalog" value="false" />
+ <parameter name="lockedInterfaceDefinition" value="" />
+ <parameter name="maxAdditionalLatency" value="1" />
+ <parameter name="projectName" value="a10s.qpf" />
+ <parameter name="sopcBorderPoints" value="false" />
+ <parameter name="systemHash" value="0" />
+ <parameter name="testBenchDutName" value="" />
+ <parameter name="timeStamp" value="0" />
+ <parameter name="useTestBenchNamingPattern" value="false" />
+ <instanceScript></instanceScript>
+ <interface
+   name="button_pio_external_connection"
+   internal="button_pio.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface name="clk_100" internal="clk_100.clk_in" type="clock" dir="end" />
+ <interface name="clk_50" internal="clk_50.clk_in" type="clock" dir="end" />
+ <interface
+   name="dipsw_pio_external_connection"
+   internal="dipsw_pio.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface name="emif_a10_hps_mem" internal="emif_a10_hps.mem" />
+ <interface
+   name="emif_a10_hps_mem_conduit_end"
+   internal="emif_a10_hps.mem_conduit_end"
+   type="conduit"
+   dir="end" />
+ <interface name="emif_a10_hps_oct" internal="emif_a10_hps.oct" />
+ <interface
+   name="emif_a10_hps_oct_conduit_end"
+   internal="emif_a10_hps.oct_conduit_end"
+   type="conduit"
+   dir="end" />
+ <interface name="emif_a10_hps_pll_ref_clk" internal="emif_a10_hps.pll_ref_clk" />
+ <interface
+   name="emif_a10_hps_pll_ref_clk_clock_sink"
+   internal="emif_a10_hps.pll_ref_clk_clock_sink"
+   type="clock"
+   dir="end" />
+ <interface
+   name="f2h_cold_reset_req"
+   internal="arria10_hps.f2h_cold_reset_req"
+   type="reset"
+   dir="end" />
+ <interface
+   name="f2h_debug_reset_req"
+   internal="arria10_hps.f2h_debug_reset_req"
+   type="reset"
+   dir="end" />
+ <interface
+   name="f2h_stm_hw_events"
+   internal="arria10_hps.f2h_stm_hw_events"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="f2h_warm_reset_req"
+   internal="arria10_hps.f2h_warm_reset_req"
+   type="reset"
+   dir="end" />
+ <interface
+   name="fancmd_fan_alert"
+   internal="fancmd.FAN_ALERT"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="fancmd_io_i2c_scl"
+   internal="fancmd.IO_I2C_SCL"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="fancmd_io_i2c_sda"
+   internal="fancmd.IO_I2C_SDA"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="fancmd_status_led"
+   internal="fancmd.STATUS_LED"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="hps_fpga_reset"
+   internal="reset_bridge.out_reset"
+   type="reset"
+   dir="start" />
+ <interface name="hps_io" internal="arria10_hps.hps_io" type="conduit" dir="end" />
+ <interface
+   name="issp_hps_resets"
+   internal="issp.sources"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="led_pio_external_connection"
+   internal="led_pio.external_connection"
+   type="conduit"
+   dir="end" />
+ <interface name="reset" internal="clk_100.clk_in_reset" type="reset" dir="end" />
+ <interface
+   name="sevensig_io_hex_d0"
+   internal="sevensig.IO_HEX_D0"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="sevensig_io_hex_d1"
+   internal="sevensig.IO_HEX_D1"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="sevensig_io_hex_dp0"
+   internal="sevensig.IO_HEX_DP0"
+   type="conduit"
+   dir="end" />
+ <interface
+   name="sevensig_io_hex_dp1"
+   internal="sevensig.IO_HEX_DP1"
+   type="conduit"
+   dir="end" />
+ <module
+   name="ILC"
+   kind="interrupt_latency_counter"
+   version="18.1"
+   enabled="1">
+  <parameter name="CLOCK_RATE" value="100000000" />
+  <parameter name="INTR_TYPE" value="0" />
+  <parameter name="IRQ_PORT_CNT" value="2" />
+ </module>
+ <module
+   name="arria10_hps"
+   kind="altera_arria10_hps"
+   version="18.1"
+   enabled="1">
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="2" />
+  <parameter name="BOOT_FROM_FPGA_Enable" value="false" />
+  <parameter name="BSEL" value="1" />
+  <parameter name="BSEL_EN" value="false" />
+  <parameter name="CLK_EMACA_SOURCE" value="1" />
+  <parameter name="CLK_EMACB_SOURCE" value="1" />
+  <parameter name="CLK_EMAC_PTP_SOURCE" value="1" />
+  <parameter name="CLK_GPIO_SOURCE" value="1" />
+  <parameter name="CLK_HMC_PLL_SOURCE" value="0" />
+  <parameter name="CLK_MAIN_PLL_SOURCE2" value="0" />
+  <parameter name="CLK_MPU_CNT" value="0" />
+  <parameter name="CLK_MPU_SOURCE" value="0" />
+  <parameter name="CLK_NOC_CNT" value="0" />
+  <parameter name="CLK_NOC_SOURCE" value="0" />
+  <parameter name="CLK_PERI_PLL_SOURCE2" value="0" />
+  <parameter name="CLK_S2F_USER0_SOURCE" value="0" />
+  <parameter name="CLK_S2F_USER1_SOURCE" value="0" />
+  <parameter name="CLK_SDMMC_SOURCE" value="1" />
+  <parameter name="CM_Mode" value="N/A" />
+  <parameter name="CM_PinMuxing" value="Unused" />
+  <parameter name="CTI_Enable" value="false" />
+  <parameter name="CUSTOM_MPU_CLK" value="800" />
+  <parameter name="DEBUG_APB_Enable" value="false" />
+  <parameter name="DISABLE_PERI_PLL" value="false" />
+  <parameter name="DMA_Enable">No,No,No,No,No,No,No,No</parameter>
+  <parameter name="EMAC0_CLK" value="250" />
+  <parameter name="EMAC0_Mode" value="RGMII_with_MDIO" />
+  <parameter name="EMAC0_PTP" value="false" />
+  <parameter name="EMAC0_PinMuxing" value="IO" />
+  <parameter name="EMAC0_SWITCH_Enable" value="false" />
+  <parameter name="EMAC1_CLK" value="250" />
+  <parameter name="EMAC1_Mode" value="N/A" />
+  <parameter name="EMAC1_PTP" value="false" />
+  <parameter name="EMAC1_PinMuxing" value="Unused" />
+  <parameter name="EMAC1_SWITCH_Enable" value="false" />
+  <parameter name="EMAC2_CLK" value="250" />
+  <parameter name="EMAC2_Mode" value="N/A" />
+  <parameter name="EMAC2_PTP" value="false" />
+  <parameter name="EMAC2_PinMuxing" value="Unused" />
+  <parameter name="EMAC2_SWITCH_Enable" value="false" />
+  <parameter name="EMAC_PTP_REF_CLK" value="100" />
+  <parameter name="EMIF_BYPASS_CHECK" value="false" />
+  <parameter name="EMIF_CONDUIT_Enable" value="true" />
+  <parameter name="F2H_AXI_CLOCK_FREQ" value="100000000" />
+  <parameter name="F2H_COLD_RST_Enable" value="true" />
+  <parameter name="F2H_DBG_RST_Enable" value="true" />
+  <parameter name="F2H_FREE_CLK_Enable" value="false" />
+  <parameter name="F2H_FREE_CLK_FREQ" value="200" />
+  <parameter name="F2H_SDRAM0_CLOCK_FREQ" value="100" />
+  <parameter name="F2H_SDRAM1_CLOCK_FREQ" value="100" />
+  <parameter name="F2H_SDRAM2_CLOCK_FREQ" value="100" />
+  <parameter name="F2H_SDRAM3_CLOCK_FREQ" value="100" />
+  <parameter name="F2H_SDRAM4_CLOCK_FREQ" value="100" />
+  <parameter name="F2H_SDRAM5_CLOCK_FREQ" value="100" />
+  <parameter name="F2H_WARM_RST_Enable" value="true" />
+  <parameter name="F2SDRAM0_ENABLED" value="true" />
+  <parameter name="F2SDRAM1_ENABLED" value="false" />
+  <parameter name="F2SDRAM2_DELAY" value="4" />
+  <parameter name="F2SDRAM2_ENABLED" value="false" />
+  <parameter name="F2SDRAM_ADDRESS_WIDTH" value="32" />
+  <parameter name="F2SDRAM_PORT_CONFIG" value="6" />
+  <parameter name="F2SDRAM_READY_LATENCY" value="false" />
+  <parameter name="F2SINTERRUPT_Enable" value="true" />
+  <parameter name="F2S_Width" value="6" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_EMAC0_RX_CLK_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_EMAC0_TX_CLK_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_EMAC1_RX_CLK_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_EMAC1_TX_CLK_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_EMAC2_RX_CLK_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_EMAC2_TX_CLK_IN" value="100" />
+  <parameter
+     name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_EMAC_PTP_REF_CLOCK"
+     value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_I2C0_SCL_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_I2C1_SCL_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_I2CEMAC0_SCL_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_I2CEMAC1_SCL_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_I2CEMAC2_SCL_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_SDMMC_CLK_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_SPIS0_SCLK_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_SPIS1_SCLK_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_USB0_CLK_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_INPUT_CLOCK_FREQ_USB1_CLK_IN" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_EMAC0_GTX_CLK" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_EMAC0_MD_CLK" value="2.5" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_EMAC1_GTX_CLK" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_EMAC1_MD_CLK" value="2.5" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_EMAC2_GTX_CLK" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_EMAC2_MD_CLK" value="2.5" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_I2C0_CLK" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_I2C1_CLK" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_I2CEMAC0_CLK" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_I2CEMAC1_CLK" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_I2CEMAC2_CLK" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_QSPI_SCLK_OUT" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_SDMMC_CCLK" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_SPIM0_SCLK_OUT" value="100" />
+  <parameter name="FPGA_PERIPHERAL_OUTPUT_CLOCK_FREQ_SPIM1_SCLK_OUT" value="100" />
+  <parameter name="GPIO_REF_CLK" value="4" />
+  <parameter name="GP_Enable" value="false" />
+  <parameter name="H2F_AXI_CLOCK_FREQ" value="100000000" />
+  <parameter name="H2F_COLD_RST_Enable" value="false" />
+  <parameter name="H2F_CTI_CLOCK_FREQ" value="100" />
+  <parameter name="H2F_DEBUG_APB_CLOCK_FREQ" value="100" />
+  <parameter name="H2F_LW_AXI_CLOCK_FREQ" value="100000000" />
+  <parameter name="H2F_PENDING_RST_Enable" value="false" />
+  <parameter name="H2F_TPIU_CLOCK_IN_FREQ" value="100" />
+  <parameter name="H2F_USER0_CLK_Enable" value="false" />
+  <parameter name="H2F_USER0_CLK_FREQ" value="400" />
+  <parameter name="H2F_USER1_CLK_Enable" value="false" />
+  <parameter name="H2F_USER1_CLK_FREQ" value="400" />
+  <parameter name="HMC_PLL_REF_CLK" value="800" />
+  <parameter name="HPS_DIV_GPIO_FREQ" value="125" />
+  <parameter name="HPS_IO_Enable">SDMMC:D0,SDMMC:CMD,SDMMC:CCLK,SDMMC:D1,SDMMC:D2,SDMMC:D3,NONE,NONE,GPIO,GPIO,GPIO,GPIO,UART1:TX,UART1:RX,USB0:CLK,USB0:STP,USB0:DIR,USB0:DATA0,USB0:DATA1,USB0:NXT,USB0:DATA2,USB0:DATA3,USB0:DATA4,USB0:DATA5,USB0:DATA6,USB0:DATA7,EMAC0:TX_CLK,EMAC0:TX_CTL,EMAC0:RX_CLK,EMAC0:RX_CTL,EMAC0:TXD0,EMAC0:TXD1,EMAC0:RXD0,EMAC0:RXD1,EMAC0:TXD2,EMAC0:TXD3,EMAC0:RXD2,EMAC0:RXD3,NONE,GPIO,I2C0:SDA,I2C0:SCL,GPIO,NONE,NONE,NONE,NONE,NONE,MDIO0:MDIO,MDIO0:MDC,NONE,NONE,NONE,NONE,NONE,NONE,NONE,NONE,NONE,NONE,NONE,NONE</parameter>
+  <parameter name="I2C0_Mode" value="default" />
+  <parameter name="I2C0_PinMuxing" value="IO" />
+  <parameter name="I2C1_Mode" value="N/A" />
+  <parameter name="I2C1_PinMuxing" value="Unused" />
+  <parameter name="I2CEMAC0_Mode" value="N/A" />
+  <parameter name="I2CEMAC0_PinMuxing" value="Unused" />
+  <parameter name="I2CEMAC1_Mode" value="N/A" />
+  <parameter name="I2CEMAC1_PinMuxing" value="Unused" />
+  <parameter name="I2CEMAC2_Mode" value="N/A" />
+  <parameter name="I2CEMAC2_PinMuxing" value="Unused" />
+  <parameter name="INTERNAL_OSCILLATOR_ENABLE" value="60" />
+  <parameter name="JTAG_Enable" value="false" />
+  <parameter name="L3_MAIN_FREE_CLK" value="200" />
+  <parameter name="L4_SYS_FREE_CLK" value="1" />
+  <parameter name="LWH2F_Enable" value="2" />
+  <parameter name="MPU_CLK_VCCL" value="0" />
+  <parameter name="MPU_EVENTS_Enable" value="false" />
+  <parameter name="NAND_Mode" value="N/A" />
+  <parameter name="NAND_PinMuxing" value="Unused" />
+  <parameter name="NOCDIV_CS_ATCLK" value="0" />
+  <parameter name="NOCDIV_CS_PDBGCLK" value="1" />
+  <parameter name="NOCDIV_CS_TRACECLK" value="0" />
+  <parameter name="NOCDIV_L4MAINCLK" value="0" />
+  <parameter name="NOCDIV_L4MPCLK" value="0" />
+  <parameter name="NOCDIV_L4SPCLK" value="2" />
+  <parameter name="OVERIDE_PERI_PLL" value="false" />
+  <parameter name="PERI_PLL_MANUAL_VCO_FREQ" value="2000" />
+  <parameter name="PLL_CLK0" value="Unused" />
+  <parameter name="PLL_CLK1" value="Unused" />
+  <parameter name="PLL_CLK2" value="Unused" />
+  <parameter name="PLL_CLK3" value="Unused" />
+  <parameter name="PLL_CLK4" value="Unused" />
+  <parameter name="QSPI_Mode" value="N/A" />
+  <parameter name="QSPI_PinMuxing" value="Unused" />
+  <parameter name="RUN_INTERNAL_BUILD_CHECKS" value="0" />
+  <parameter name="S2FINTERRUPT_CLOCKPERIPHERAL_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_CTI_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_DMA_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_EMAC0_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_EMAC1_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_EMAC2_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_FPGAMANAGER_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_GPIO_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_HMC_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_I2C0_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_I2C1_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_I2CEMAC0_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_I2CEMAC1_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_I2CEMAC2_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_L4TIMER_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_NAND_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_QSPI_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_SDMMC_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_SPIM0_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_SPIM1_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_SPIS0_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_SPIS1_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_SYSTEMMANAGER_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_SYSTIMER_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_UART0_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_UART1_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_USB0_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_USB1_Enable" value="false" />
+  <parameter name="S2FINTERRUPT_WATCHDOG_Enable" value="false" />
+  <parameter name="S2F_Width" value="2" />
+  <parameter name="SDMMC_Mode" value="4-bit" />
+  <parameter name="SDMMC_PinMuxing" value="IO" />
+  <parameter name="SDMMC_REF_CLK" value="200" />
+  <parameter name="SECURITY_MODULE_Enable" value="false" />
+  <parameter name="SPIM0_Mode" value="N/A" />
+  <parameter name="SPIM0_PinMuxing" value="Unused" />
+  <parameter name="SPIM1_Mode" value="N/A" />
+  <parameter name="SPIM1_PinMuxing" value="Unused" />
+  <parameter name="SPIS0_Mode" value="N/A" />
+  <parameter name="SPIS0_PinMuxing" value="Unused" />
+  <parameter name="SPIS1_Mode" value="N/A" />
+  <parameter name="SPIS1_PinMuxing" value="Unused" />
+  <parameter name="STM_Enable" value="true" />
+  <parameter name="TESTIOCTRL_DEBUGCLKSEL" value="16" />
+  <parameter name="TESTIOCTRL_MAINCLKSEL" value="8" />
+  <parameter name="TESTIOCTRL_PERICLKSEL" value="8" />
+  <parameter name="TEST_Enable" value="false" />
+  <parameter name="TRACE_Mode" value="N/A" />
+  <parameter name="TRACE_PinMuxing" value="Unused" />
+  <parameter name="UART0_Mode" value="N/A" />
+  <parameter name="UART0_PinMuxing" value="Unused" />
+  <parameter name="UART1_Mode" value="No_flow_control" />
+  <parameter name="UART1_PinMuxing" value="IO" />
+  <parameter name="USB0_Mode" value="default" />
+  <parameter name="USB0_PinMuxing" value="IO" />
+  <parameter name="USB1_Mode" value="N/A" />
+  <parameter name="USB1_PinMuxing" value="Unused" />
+  <parameter name="USE_DEFAULT_MPU_CLK" value="false" />
+  <parameter name="device_name" value="10AS066K3F40E2SG" />
+  <parameter name="eosc1_clk_mhz" value="25.0" />
+  <parameter name="quartus_ini_hps_ip_boot_from_fpga_ready" value="false" />
+  <parameter name="quartus_ini_hps_ip_enable_a10_advanced_options" value="false" />
+  <parameter name="quartus_ini_hps_ip_enable_jtag" value="false" />
+  <parameter name="quartus_ini_hps_ip_enable_sdmmc_clk_in" value="false" />
+  <parameter name="quartus_ini_hps_ip_enable_test_interface" value="false" />
+  <parameter name="quartus_ini_hps_ip_overide_f2sdram_delay" value="false" />
+  <parameter name="quartus_ini_hps_ip_override_sdmmc_4bit" value="false" />
+ </module>
+ <module name="button_pio" kind="altera_avalon_pio" version="18.1" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="true" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="true" />
+  <parameter name="clockRate" value="100000000" />
+  <parameter name="direction" value="Input" />
+  <parameter name="edgeType" value="FALLING" />
+  <parameter name="generateIRQ" value="true" />
+  <parameter name="irqType" value="EDGE" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="2" />
+ </module>
+ <module name="clk_100" kind="clock_source" version="18.1" enabled="1">
+  <parameter name="clockFrequency" value="100000000" />
+  <parameter name="clockFrequencyKnown" value="true" />
+  <parameter name="inputClockFrequency" value="0" />
+  <parameter name="resetSynchronousEdges" value="NONE" />
+ </module>
+ <module name="clk_50" kind="clock_source" version="18.1" enabled="1">
+  <parameter name="clockFrequency" value="50000000" />
+  <parameter name="clockFrequencyKnown" value="true" />
+  <parameter name="inputClockFrequency" value="0" />
+  <parameter name="resetSynchronousEdges" value="NONE" />
+ </module>
+ <module name="dipsw_pio" kind="altera_avalon_pio" version="18.1" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="true" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="true" />
+  <parameter name="clockRate" value="100000000" />
+  <parameter name="direction" value="Input" />
+  <parameter name="edgeType" value="ANY" />
+  <parameter name="generateIRQ" value="true" />
+  <parameter name="irqType" value="EDGE" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="2" />
+ </module>
+ <module
+   name="emif_a10_hps"
+   kind="altera_emif_a10_hps"
+   version="18.1"
+   enabled="1">
+  <parameter name="BOARD_DDR3_AC_TO_CK_SKEW_NS" value="0.0" />
+  <parameter name="BOARD_DDR3_BRD_SKEW_WITHIN_AC_NS" value="0.02" />
+  <parameter name="BOARD_DDR3_BRD_SKEW_WITHIN_DQS_NS" value="0.02" />
+  <parameter name="BOARD_DDR3_DQS_TO_CK_SKEW_NS" value="0.02" />
+  <parameter name="BOARD_DDR3_IS_SKEW_WITHIN_AC_DESKEWED" value="true" />
+  <parameter name="BOARD_DDR3_IS_SKEW_WITHIN_DQS_DESKEWED" value="false" />
+  <parameter name="BOARD_DDR3_MAX_CK_DELAY_NS" value="0.6" />
+  <parameter name="BOARD_DDR3_MAX_DQS_DELAY_NS" value="0.6" />
+  <parameter name="BOARD_DDR3_PKG_BRD_SKEW_WITHIN_AC_NS" value="0.02" />
+  <parameter name="BOARD_DDR3_PKG_BRD_SKEW_WITHIN_DQS_NS" value="0.02" />
+  <parameter name="BOARD_DDR3_SKEW_BETWEEN_DIMMS_NS" value="0.05" />
+  <parameter name="BOARD_DDR3_SKEW_BETWEEN_DQS_NS" value="0.02" />
+  <parameter name="BOARD_DDR3_USER_AC_ISI_NS" value="0.0" />
+  <parameter name="BOARD_DDR3_USER_AC_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_DDR3_USER_CK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_DDR3_USER_RCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_DDR3_USER_RCLK_SLEW_RATE" value="5.0" />
+  <parameter name="BOARD_DDR3_USER_RDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_DDR3_USER_RDATA_SLEW_RATE" value="2.5" />
+  <parameter name="BOARD_DDR3_USER_WCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_DDR3_USER_WCLK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_DDR3_USER_WDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_DDR3_USER_WDATA_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_DDR3_USE_DEFAULT_ISI_VALUES" value="true" />
+  <parameter name="BOARD_DDR3_USE_DEFAULT_SLEW_RATES" value="true" />
+  <parameter name="BOARD_DDR4_AC_TO_CK_SKEW_NS" value="-8.83595E-5" />
+  <parameter name="BOARD_DDR4_BRD_SKEW_WITHIN_AC_NS" value="0.02" />
+  <parameter name="BOARD_DDR4_BRD_SKEW_WITHIN_DQS_NS" value="0.02" />
+  <parameter name="BOARD_DDR4_DQS_TO_CK_SKEW_NS" value="-0.08659949" />
+  <parameter name="BOARD_DDR4_IS_SKEW_WITHIN_AC_DESKEWED" value="true" />
+  <parameter name="BOARD_DDR4_IS_SKEW_WITHIN_DQS_DESKEWED" value="true" />
+  <parameter name="BOARD_DDR4_MAX_CK_DELAY_NS" value="0.60460588" />
+  <parameter name="BOARD_DDR4_MAX_DQS_DELAY_NS" value="0.566834552" />
+  <parameter name="BOARD_DDR4_PKG_BRD_SKEW_WITHIN_AC_NS" value="0.002694888" />
+  <parameter name="BOARD_DDR4_PKG_BRD_SKEW_WITHIN_DQS_NS" value="0.00142042" />
+  <parameter name="BOARD_DDR4_SKEW_BETWEEN_DIMMS_NS" value="0.05" />
+  <parameter name="BOARD_DDR4_SKEW_BETWEEN_DQS_NS" value="0.098106304" />
+  <parameter name="BOARD_DDR4_USER_AC_ISI_NS" value="0.0" />
+  <parameter name="BOARD_DDR4_USER_AC_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_DDR4_USER_CK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_DDR4_USER_RCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_DDR4_USER_RCLK_SLEW_RATE" value="8.0" />
+  <parameter name="BOARD_DDR4_USER_RDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_DDR4_USER_RDATA_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_DDR4_USER_WCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_DDR4_USER_WCLK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_DDR4_USER_WDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_DDR4_USER_WDATA_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_DDR4_USE_DEFAULT_ISI_VALUES" value="true" />
+  <parameter name="BOARD_DDR4_USE_DEFAULT_SLEW_RATES" value="true" />
+  <parameter name="BOARD_LPDDR3_AC_TO_CK_SKEW_NS" value="0.0" />
+  <parameter name="BOARD_LPDDR3_BRD_SKEW_WITHIN_AC_NS" value="0.02" />
+  <parameter name="BOARD_LPDDR3_BRD_SKEW_WITHIN_DQS_NS" value="0.02" />
+  <parameter name="BOARD_LPDDR3_DQS_TO_CK_SKEW_NS" value="0.02" />
+  <parameter name="BOARD_LPDDR3_IS_SKEW_WITHIN_AC_DESKEWED" value="true" />
+  <parameter name="BOARD_LPDDR3_IS_SKEW_WITHIN_DQS_DESKEWED" value="false" />
+  <parameter name="BOARD_LPDDR3_MAX_CK_DELAY_NS" value="0.6" />
+  <parameter name="BOARD_LPDDR3_MAX_DQS_DELAY_NS" value="0.6" />
+  <parameter name="BOARD_LPDDR3_PKG_BRD_SKEW_WITHIN_AC_NS" value="0.02" />
+  <parameter name="BOARD_LPDDR3_PKG_BRD_SKEW_WITHIN_DQS_NS" value="0.02" />
+  <parameter name="BOARD_LPDDR3_SKEW_BETWEEN_DIMMS_NS" value="0.05" />
+  <parameter name="BOARD_LPDDR3_SKEW_BETWEEN_DQS_NS" value="0.02" />
+  <parameter name="BOARD_LPDDR3_USER_AC_ISI_NS" value="0.0" />
+  <parameter name="BOARD_LPDDR3_USER_AC_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_LPDDR3_USER_CK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_LPDDR3_USER_RCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_LPDDR3_USER_RCLK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_LPDDR3_USER_RDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_LPDDR3_USER_RDATA_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_LPDDR3_USER_WCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_LPDDR3_USER_WCLK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_LPDDR3_USER_WDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_LPDDR3_USER_WDATA_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_LPDDR3_USE_DEFAULT_ISI_VALUES" value="true" />
+  <parameter name="BOARD_LPDDR3_USE_DEFAULT_SLEW_RATES" value="true" />
+  <parameter name="BOARD_QDR2_AC_TO_K_SKEW_NS" value="0.0" />
+  <parameter name="BOARD_QDR2_BRD_SKEW_WITHIN_AC_NS" value="0.02" />
+  <parameter name="BOARD_QDR2_BRD_SKEW_WITHIN_D_NS" value="0.02" />
+  <parameter name="BOARD_QDR2_BRD_SKEW_WITHIN_Q_NS" value="0.02" />
+  <parameter name="BOARD_QDR2_IS_SKEW_WITHIN_AC_DESKEWED" value="true" />
+  <parameter name="BOARD_QDR2_IS_SKEW_WITHIN_D_DESKEWED" value="false" />
+  <parameter name="BOARD_QDR2_IS_SKEW_WITHIN_Q_DESKEWED" value="false" />
+  <parameter name="BOARD_QDR2_MAX_K_DELAY_NS" value="0.6" />
+  <parameter name="BOARD_QDR2_PKG_BRD_SKEW_WITHIN_AC_NS" value="0.02" />
+  <parameter name="BOARD_QDR2_PKG_BRD_SKEW_WITHIN_D_NS" value="0.02" />
+  <parameter name="BOARD_QDR2_PKG_BRD_SKEW_WITHIN_Q_NS" value="0.02" />
+  <parameter name="BOARD_QDR2_USER_AC_ISI_NS" value="0.0" />
+  <parameter name="BOARD_QDR2_USER_AC_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_QDR2_USER_K_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_QDR2_USER_RCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_QDR2_USER_RCLK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_QDR2_USER_RDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_QDR2_USER_RDATA_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_QDR2_USER_WCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_QDR2_USER_WDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_QDR2_USER_WDATA_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_QDR2_USE_DEFAULT_ISI_VALUES" value="true" />
+  <parameter name="BOARD_QDR2_USE_DEFAULT_SLEW_RATES" value="true" />
+  <parameter name="BOARD_QDR4_AC_TO_CK_SKEW_NS" value="0.0" />
+  <parameter name="BOARD_QDR4_BRD_SKEW_WITHIN_AC_NS" value="0.02" />
+  <parameter name="BOARD_QDR4_BRD_SKEW_WITHIN_QK_NS" value="0.02" />
+  <parameter name="BOARD_QDR4_DK_TO_CK_SKEW_NS" value="-0.02" />
+  <parameter name="BOARD_QDR4_IS_SKEW_WITHIN_AC_DESKEWED" value="true" />
+  <parameter name="BOARD_QDR4_IS_SKEW_WITHIN_QK_DESKEWED" value="true" />
+  <parameter name="BOARD_QDR4_MAX_CK_DELAY_NS" value="0.6" />
+  <parameter name="BOARD_QDR4_MAX_DK_DELAY_NS" value="0.6" />
+  <parameter name="BOARD_QDR4_PKG_BRD_SKEW_WITHIN_AC_NS" value="0.02" />
+  <parameter name="BOARD_QDR4_PKG_BRD_SKEW_WITHIN_QK_NS" value="0.02" />
+  <parameter name="BOARD_QDR4_SKEW_BETWEEN_DIMMS_NS" value="0.05" />
+  <parameter name="BOARD_QDR4_SKEW_BETWEEN_DK_NS" value="0.02" />
+  <parameter name="BOARD_QDR4_USER_AC_ISI_NS" value="0.0" />
+  <parameter name="BOARD_QDR4_USER_AC_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_QDR4_USER_CK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_QDR4_USER_RCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_QDR4_USER_RCLK_SLEW_RATE" value="5.0" />
+  <parameter name="BOARD_QDR4_USER_RDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_QDR4_USER_RDATA_SLEW_RATE" value="2.5" />
+  <parameter name="BOARD_QDR4_USER_WCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_QDR4_USER_WCLK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_QDR4_USER_WDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_QDR4_USER_WDATA_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_QDR4_USE_DEFAULT_ISI_VALUES" value="true" />
+  <parameter name="BOARD_QDR4_USE_DEFAULT_SLEW_RATES" value="true" />
+  <parameter name="BOARD_RLD3_AC_TO_CK_SKEW_NS" value="0.0" />
+  <parameter name="BOARD_RLD3_BRD_SKEW_WITHIN_AC_NS" value="0.02" />
+  <parameter name="BOARD_RLD3_BRD_SKEW_WITHIN_QK_NS" value="0.02" />
+  <parameter name="BOARD_RLD3_DK_TO_CK_SKEW_NS" value="-0.02" />
+  <parameter name="BOARD_RLD3_IS_SKEW_WITHIN_AC_DESKEWED" value="true" />
+  <parameter name="BOARD_RLD3_IS_SKEW_WITHIN_QK_DESKEWED" value="false" />
+  <parameter name="BOARD_RLD3_MAX_CK_DELAY_NS" value="0.6" />
+  <parameter name="BOARD_RLD3_MAX_DK_DELAY_NS" value="0.6" />
+  <parameter name="BOARD_RLD3_PKG_BRD_SKEW_WITHIN_AC_NS" value="0.02" />
+  <parameter name="BOARD_RLD3_PKG_BRD_SKEW_WITHIN_QK_NS" value="0.02" />
+  <parameter name="BOARD_RLD3_SKEW_BETWEEN_DIMMS_NS" value="0.05" />
+  <parameter name="BOARD_RLD3_SKEW_BETWEEN_DK_NS" value="0.02" />
+  <parameter name="BOARD_RLD3_USER_AC_ISI_NS" value="0.0" />
+  <parameter name="BOARD_RLD3_USER_AC_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_RLD3_USER_CK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_RLD3_USER_RCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_RLD3_USER_RCLK_SLEW_RATE" value="7.0" />
+  <parameter name="BOARD_RLD3_USER_RDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_RLD3_USER_RDATA_SLEW_RATE" value="3.5" />
+  <parameter name="BOARD_RLD3_USER_WCLK_ISI_NS" value="0.0" />
+  <parameter name="BOARD_RLD3_USER_WCLK_SLEW_RATE" value="4.0" />
+  <parameter name="BOARD_RLD3_USER_WDATA_ISI_NS" value="0.0" />
+  <parameter name="BOARD_RLD3_USER_WDATA_SLEW_RATE" value="2.0" />
+  <parameter name="BOARD_RLD3_USE_DEFAULT_ISI_VALUES" value="true" />
+  <parameter name="BOARD_RLD3_USE_DEFAULT_SLEW_RATES" value="true" />
+  <parameter name="CAL_DEBUG_CLOCK_FREQUENCY" value="50000000" />
+  <parameter name="CTRL_DDR3_ADDR_ORDER_ENUM">DDR3_CTRL_ADDR_ORDER_CS_R_B_C</parameter>
+  <parameter name="CTRL_DDR3_AUTO_POWER_DOWN_CYCS" value="32" />
+  <parameter name="CTRL_DDR3_AUTO_POWER_DOWN_EN" value="false" />
+  <parameter name="CTRL_DDR3_AUTO_PRECHARGE_EN" value="false" />
+  <parameter name="CTRL_DDR3_AVL_PROTOCOL_ENUM">CTRL_AVL_PROTOCOL_ST</parameter>
+  <parameter name="CTRL_DDR3_ECC_AUTO_CORRECTION_EN" value="false" />
+  <parameter name="CTRL_DDR3_ECC_EN" value="false" />
+  <parameter name="CTRL_DDR3_MMR_EN" value="false" />
+  <parameter name="CTRL_DDR3_RD_TO_RD_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_DDR3_RD_TO_WR_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_DDR3_RD_TO_WR_SAME_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_DDR3_REORDER_EN" value="true" />
+  <parameter name="CTRL_DDR3_SELF_REFRESH_EN" value="false" />
+  <parameter name="CTRL_DDR3_STARVE_LIMIT" value="10" />
+  <parameter name="CTRL_DDR3_USER_PRIORITY_EN" value="false" />
+  <parameter name="CTRL_DDR3_USER_REFRESH_EN" value="false" />
+  <parameter name="CTRL_DDR3_WR_TO_RD_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_DDR3_WR_TO_RD_SAME_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_DDR3_WR_TO_WR_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_DDR4_ADDR_ORDER_ENUM">DDR4_CTRL_ADDR_ORDER_CS_R_B_C_BG</parameter>
+  <parameter name="CTRL_DDR4_AUTO_POWER_DOWN_CYCS" value="32" />
+  <parameter name="CTRL_DDR4_AUTO_POWER_DOWN_EN" value="false" />
+  <parameter name="CTRL_DDR4_AUTO_PRECHARGE_EN" value="false" />
+  <parameter name="CTRL_DDR4_AVL_PROTOCOL_ENUM">CTRL_AVL_PROTOCOL_ST</parameter>
+  <parameter name="CTRL_DDR4_ECC_AUTO_CORRECTION_EN" value="false" />
+  <parameter name="CTRL_DDR4_ECC_EN" value="false" />
+  <parameter name="CTRL_DDR4_MMR_EN" value="false" />
+  <parameter name="CTRL_DDR4_RD_TO_RD_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_DDR4_RD_TO_WR_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_DDR4_RD_TO_WR_SAME_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_DDR4_REORDER_EN" value="true" />
+  <parameter name="CTRL_DDR4_SELF_REFRESH_EN" value="false" />
+  <parameter name="CTRL_DDR4_STARVE_LIMIT" value="10" />
+  <parameter name="CTRL_DDR4_USER_PRIORITY_EN" value="false" />
+  <parameter name="CTRL_DDR4_USER_REFRESH_EN" value="false" />
+  <parameter name="CTRL_DDR4_WR_TO_RD_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_DDR4_WR_TO_RD_SAME_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_DDR4_WR_TO_WR_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_LPDDR3_ADDR_ORDER_ENUM">LPDDR3_CTRL_ADDR_ORDER_CS_R_B_C</parameter>
+  <parameter name="CTRL_LPDDR3_AUTO_POWER_DOWN_CYCS" value="32" />
+  <parameter name="CTRL_LPDDR3_AUTO_POWER_DOWN_EN" value="false" />
+  <parameter name="CTRL_LPDDR3_AUTO_PRECHARGE_EN" value="false" />
+  <parameter name="CTRL_LPDDR3_AVL_PROTOCOL_ENUM">CTRL_AVL_PROTOCOL_ST</parameter>
+  <parameter name="CTRL_LPDDR3_MMR_EN" value="false" />
+  <parameter name="CTRL_LPDDR3_RD_TO_RD_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_LPDDR3_RD_TO_WR_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_LPDDR3_RD_TO_WR_SAME_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_LPDDR3_REORDER_EN" value="true" />
+  <parameter name="CTRL_LPDDR3_SELF_REFRESH_EN" value="false" />
+  <parameter name="CTRL_LPDDR3_STARVE_LIMIT" value="10" />
+  <parameter name="CTRL_LPDDR3_USER_PRIORITY_EN" value="false" />
+  <parameter name="CTRL_LPDDR3_USER_REFRESH_EN" value="false" />
+  <parameter name="CTRL_LPDDR3_WR_TO_RD_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_LPDDR3_WR_TO_RD_SAME_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_LPDDR3_WR_TO_WR_DIFF_CHIP_DELTA_CYCS" value="0" />
+  <parameter name="CTRL_QDR2_AVL_ENABLE_POWER_OF_TWO_BUS" value="false" />
+  <parameter name="CTRL_QDR2_AVL_MAX_BURST_COUNT" value="4" />
+  <parameter name="CTRL_QDR2_AVL_PROTOCOL_ENUM">CTRL_AVL_PROTOCOL_MM</parameter>
+  <parameter name="CTRL_QDR4_ADD_RAW_TURNAROUND_DELAY_CYC" value="0" />
+  <parameter name="CTRL_QDR4_ADD_WAR_TURNAROUND_DELAY_CYC" value="0" />
+  <parameter name="CTRL_QDR4_AVL_ENABLE_POWER_OF_TWO_BUS" value="false" />
+  <parameter name="CTRL_QDR4_AVL_MAX_BURST_COUNT" value="4" />
+  <parameter name="CTRL_QDR4_AVL_PROTOCOL_ENUM">CTRL_AVL_PROTOCOL_MM</parameter>
+  <parameter name="CTRL_RLD2_AVL_PROTOCOL_ENUM">CTRL_AVL_PROTOCOL_MM</parameter>
+  <parameter name="CTRL_RLD3_ADDR_ORDER_ENUM">RLD3_CTRL_ADDR_ORDER_CS_R_B_C</parameter>
+  <parameter name="CTRL_RLD3_AVL_PROTOCOL_ENUM">CTRL_AVL_PROTOCOL_MM</parameter>
+  <parameter name="DIAG_BOARD_DELAY_CONFIG_STR" value="" />
+  <parameter name="DIAG_DDR3_ABSTRACT_PHY" value="false" />
+  <parameter name="DIAG_DDR3_BYPASS_DEFAULT_PATTERN" value="false" />
+  <parameter name="DIAG_DDR3_BYPASS_REPEAT_STAGE" value="true" />
+  <parameter name="DIAG_DDR3_BYPASS_STRESS_STAGE" value="true" />
+  <parameter name="DIAG_DDR3_BYPASS_USER_STAGE" value="true" />
+  <parameter name="DIAG_DDR3_CAL_ADDR0" value="0" />
+  <parameter name="DIAG_DDR3_CAL_ADDR1" value="8" />
+  <parameter name="DIAG_DDR3_CAL_ENABLE_NON_DES" value="false" />
+  <parameter name="DIAG_DDR3_CAL_FULL_CAL_ON_RESET" value="true" />
+  <parameter name="DIAG_DDR3_CA_LEVEL_EN" value="false" />
+  <parameter name="DIAG_DDR3_EFFICIENCY_MONITOR">EFFMON_MODE_DISABLED</parameter>
+  <parameter name="DIAG_DDR3_EXPORT_SEQ_AVALON_MASTER" value="false" />
+  <parameter name="DIAG_DDR3_EXPORT_SEQ_AVALON_SLAVE">CAL_DEBUG_EXPORT_MODE_DISABLED</parameter>
+  <parameter name="DIAG_DDR3_EX_DESIGN_ISSP_EN" value="true" />
+  <parameter name="DIAG_DDR3_EX_DESIGN_NUM_OF_SLAVES" value="1" />
+  <parameter name="DIAG_DDR3_EX_DESIGN_SEPARATE_RZQS" value="false" />
+  <parameter name="DIAG_DDR3_INTERFACE_ID" value="0" />
+  <parameter name="DIAG_DDR3_SEPARATE_READ_WRITE_ITFS" value="false" />
+  <parameter name="DIAG_DDR3_SIM_CAL_MODE_ENUM" value="SIM_CAL_MODE_SKIP" />
+  <parameter name="DIAG_DDR3_TG_BE_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_DDR3_TG_DATA_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_DDR3_USE_TG_AVL_2" value="false" />
+  <parameter name="DIAG_DDR4_ABSTRACT_PHY" value="false" />
+  <parameter name="DIAG_DDR4_BYPASS_DEFAULT_PATTERN" value="false" />
+  <parameter name="DIAG_DDR4_BYPASS_REPEAT_STAGE" value="true" />
+  <parameter name="DIAG_DDR4_BYPASS_STRESS_STAGE" value="true" />
+  <parameter name="DIAG_DDR4_BYPASS_USER_STAGE" value="true" />
+  <parameter name="DIAG_DDR4_CAL_ADDR0" value="0" />
+  <parameter name="DIAG_DDR4_CAL_ADDR1" value="8" />
+  <parameter name="DIAG_DDR4_CAL_ENABLE_NON_DES" value="false" />
+  <parameter name="DIAG_DDR4_CAL_FULL_CAL_ON_RESET" value="true" />
+  <parameter name="DIAG_DDR4_EFFICIENCY_MONITOR">EFFMON_MODE_DISABLED</parameter>
+  <parameter name="DIAG_DDR4_EXPORT_SEQ_AVALON_MASTER" value="false" />
+  <parameter name="DIAG_DDR4_EXPORT_SEQ_AVALON_SLAVE">CAL_DEBUG_EXPORT_MODE_DISABLED</parameter>
+  <parameter name="DIAG_DDR4_EX_DESIGN_ISSP_EN" value="false" />
+  <parameter name="DIAG_DDR4_EX_DESIGN_NUM_OF_SLAVES" value="1" />
+  <parameter name="DIAG_DDR4_EX_DESIGN_SEPARATE_RZQS" value="false" />
+  <parameter name="DIAG_DDR4_INTERFACE_ID" value="0" />
+  <parameter name="DIAG_DDR4_SEPARATE_READ_WRITE_ITFS" value="false" />
+  <parameter name="DIAG_DDR4_SIM_CAL_MODE_ENUM" value="SIM_CAL_MODE_SKIP" />
+  <parameter name="DIAG_DDR4_SKIP_CA_DESKEW" value="false" />
+  <parameter name="DIAG_DDR4_SKIP_CA_LEVEL" value="false" />
+  <parameter name="DIAG_DDR4_SKIP_VREF_CAL" value="false" />
+  <parameter name="DIAG_DDR4_TG_BE_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_DDR4_TG_DATA_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_DDR4_USE_TG_AVL_2" value="false" />
+  <parameter name="DIAG_ECLIPSE_DEBUG" value="false" />
+  <parameter name="DIAG_ENABLE_HPS_EMIF_DEBUG" value="false" />
+  <parameter name="DIAG_ENABLE_JTAG_UART" value="false" />
+  <parameter name="DIAG_ENABLE_JTAG_UART_HEX" value="false" />
+  <parameter name="DIAG_EXPORT_VJI" value="false" />
+  <parameter name="DIAG_EXPOSE_DFT_SIGNALS" value="false" />
+  <parameter name="DIAG_EXTRA_CONFIGS" value="" />
+  <parameter name="DIAG_EXT_DOCS" value="false" />
+  <parameter name="DIAG_EX_DESIGN_ADD_TEST_EMIFS" value="" />
+  <parameter name="DIAG_EX_DESIGN_SEPARATE_RESETS" value="false" />
+  <parameter name="DIAG_FAST_SIM_OVERRIDE">FAST_SIM_OVERRIDE_DEFAULT</parameter>
+  <parameter name="DIAG_LPDDR3_ABSTRACT_PHY" value="false" />
+  <parameter name="DIAG_LPDDR3_BYPASS_DEFAULT_PATTERN" value="false" />
+  <parameter name="DIAG_LPDDR3_BYPASS_REPEAT_STAGE" value="true" />
+  <parameter name="DIAG_LPDDR3_BYPASS_STRESS_STAGE" value="true" />
+  <parameter name="DIAG_LPDDR3_BYPASS_USER_STAGE" value="true" />
+  <parameter name="DIAG_LPDDR3_EFFICIENCY_MONITOR">EFFMON_MODE_DISABLED</parameter>
+  <parameter name="DIAG_LPDDR3_EXPORT_SEQ_AVALON_MASTER" value="false" />
+  <parameter name="DIAG_LPDDR3_EXPORT_SEQ_AVALON_SLAVE">CAL_DEBUG_EXPORT_MODE_DISABLED</parameter>
+  <parameter name="DIAG_LPDDR3_EX_DESIGN_ISSP_EN" value="true" />
+  <parameter name="DIAG_LPDDR3_EX_DESIGN_NUM_OF_SLAVES" value="1" />
+  <parameter name="DIAG_LPDDR3_EX_DESIGN_SEPARATE_RZQS" value="false" />
+  <parameter name="DIAG_LPDDR3_INTERFACE_ID" value="0" />
+  <parameter name="DIAG_LPDDR3_SEPARATE_READ_WRITE_ITFS" value="false" />
+  <parameter name="DIAG_LPDDR3_SIM_CAL_MODE_ENUM" value="SIM_CAL_MODE_SKIP" />
+  <parameter name="DIAG_LPDDR3_SKIP_CA_DESKEW" value="false" />
+  <parameter name="DIAG_LPDDR3_SKIP_CA_LEVEL" value="false" />
+  <parameter name="DIAG_LPDDR3_TG_BE_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_LPDDR3_TG_DATA_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_LPDDR3_USE_TG_AVL_2" value="false" />
+  <parameter name="DIAG_QDR2_ABSTRACT_PHY" value="false" />
+  <parameter name="DIAG_QDR2_BYPASS_DEFAULT_PATTERN" value="false" />
+  <parameter name="DIAG_QDR2_BYPASS_REPEAT_STAGE" value="true" />
+  <parameter name="DIAG_QDR2_BYPASS_STRESS_STAGE" value="true" />
+  <parameter name="DIAG_QDR2_BYPASS_USER_STAGE" value="true" />
+  <parameter name="DIAG_QDR2_EFFICIENCY_MONITOR">EFFMON_MODE_DISABLED</parameter>
+  <parameter name="DIAG_QDR2_EXPORT_SEQ_AVALON_MASTER" value="false" />
+  <parameter name="DIAG_QDR2_EXPORT_SEQ_AVALON_SLAVE">CAL_DEBUG_EXPORT_MODE_DISABLED</parameter>
+  <parameter name="DIAG_QDR2_EX_DESIGN_ISSP_EN" value="true" />
+  <parameter name="DIAG_QDR2_EX_DESIGN_NUM_OF_SLAVES" value="1" />
+  <parameter name="DIAG_QDR2_EX_DESIGN_SEPARATE_RZQS" value="false" />
+  <parameter name="DIAG_QDR2_INTERFACE_ID" value="0" />
+  <parameter name="DIAG_QDR2_SEPARATE_READ_WRITE_ITFS" value="false" />
+  <parameter name="DIAG_QDR2_SIM_CAL_MODE_ENUM" value="SIM_CAL_MODE_SKIP" />
+  <parameter name="DIAG_QDR2_TG_BE_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_QDR2_TG_DATA_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_QDR2_USE_TG_AVL_2" value="false" />
+  <parameter name="DIAG_QDR4_ABSTRACT_PHY" value="false" />
+  <parameter name="DIAG_QDR4_BYPASS_DEFAULT_PATTERN" value="false" />
+  <parameter name="DIAG_QDR4_BYPASS_REPEAT_STAGE" value="true" />
+  <parameter name="DIAG_QDR4_BYPASS_STRESS_STAGE" value="true" />
+  <parameter name="DIAG_QDR4_BYPASS_USER_STAGE" value="true" />
+  <parameter name="DIAG_QDR4_EFFICIENCY_MONITOR">EFFMON_MODE_DISABLED</parameter>
+  <parameter name="DIAG_QDR4_EXPORT_SEQ_AVALON_MASTER" value="false" />
+  <parameter name="DIAG_QDR4_EXPORT_SEQ_AVALON_SLAVE">CAL_DEBUG_EXPORT_MODE_DISABLED</parameter>
+  <parameter name="DIAG_QDR4_EX_DESIGN_ISSP_EN" value="true" />
+  <parameter name="DIAG_QDR4_EX_DESIGN_NUM_OF_SLAVES" value="1" />
+  <parameter name="DIAG_QDR4_EX_DESIGN_SEPARATE_RZQS" value="false" />
+  <parameter name="DIAG_QDR4_INTERFACE_ID" value="0" />
+  <parameter name="DIAG_QDR4_SEPARATE_READ_WRITE_ITFS" value="false" />
+  <parameter name="DIAG_QDR4_SIM_CAL_MODE_ENUM" value="SIM_CAL_MODE_SKIP" />
+  <parameter name="DIAG_QDR4_SKIP_VREF_CAL" value="false" />
+  <parameter name="DIAG_QDR4_TG_BE_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_QDR4_TG_DATA_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_QDR4_USE_TG_AVL_2" value="false" />
+  <parameter name="DIAG_RLD2_ABSTRACT_PHY" value="false" />
+  <parameter name="DIAG_RLD2_BYPASS_DEFAULT_PATTERN" value="false" />
+  <parameter name="DIAG_RLD2_BYPASS_REPEAT_STAGE" value="true" />
+  <parameter name="DIAG_RLD2_BYPASS_STRESS_STAGE" value="true" />
+  <parameter name="DIAG_RLD2_BYPASS_USER_STAGE" value="true" />
+  <parameter name="DIAG_RLD2_EFFICIENCY_MONITOR">EFFMON_MODE_DISABLED</parameter>
+  <parameter name="DIAG_RLD2_EXPORT_SEQ_AVALON_MASTER" value="false" />
+  <parameter name="DIAG_RLD2_EXPORT_SEQ_AVALON_SLAVE">CAL_DEBUG_EXPORT_MODE_DISABLED</parameter>
+  <parameter name="DIAG_RLD2_EX_DESIGN_ISSP_EN" value="true" />
+  <parameter name="DIAG_RLD2_EX_DESIGN_NUM_OF_SLAVES" value="1" />
+  <parameter name="DIAG_RLD2_EX_DESIGN_SEPARATE_RZQS" value="false" />
+  <parameter name="DIAG_RLD2_INTERFACE_ID" value="0" />
+  <parameter name="DIAG_RLD2_SEPARATE_READ_WRITE_ITFS" value="false" />
+  <parameter name="DIAG_RLD2_SIM_CAL_MODE_ENUM" value="SIM_CAL_MODE_SKIP" />
+  <parameter name="DIAG_RLD2_TG_BE_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_RLD2_TG_DATA_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_RLD2_USE_TG_AVL_2" value="false" />
+  <parameter name="DIAG_RLD3_ABSTRACT_PHY" value="false" />
+  <parameter name="DIAG_RLD3_BYPASS_DEFAULT_PATTERN" value="false" />
+  <parameter name="DIAG_RLD3_BYPASS_REPEAT_STAGE" value="true" />
+  <parameter name="DIAG_RLD3_BYPASS_STRESS_STAGE" value="true" />
+  <parameter name="DIAG_RLD3_BYPASS_USER_STAGE" value="true" />
+  <parameter name="DIAG_RLD3_EFFICIENCY_MONITOR">EFFMON_MODE_DISABLED</parameter>
+  <parameter name="DIAG_RLD3_EXPORT_SEQ_AVALON_MASTER" value="false" />
+  <parameter name="DIAG_RLD3_EXPORT_SEQ_AVALON_SLAVE">CAL_DEBUG_EXPORT_MODE_DISABLED</parameter>
+  <parameter name="DIAG_RLD3_EX_DESIGN_ISSP_EN" value="true" />
+  <parameter name="DIAG_RLD3_EX_DESIGN_NUM_OF_SLAVES" value="1" />
+  <parameter name="DIAG_RLD3_EX_DESIGN_SEPARATE_RZQS" value="false" />
+  <parameter name="DIAG_RLD3_INTERFACE_ID" value="0" />
+  <parameter name="DIAG_RLD3_SEPARATE_READ_WRITE_ITFS" value="false" />
+  <parameter name="DIAG_RLD3_SIM_CAL_MODE_ENUM" value="SIM_CAL_MODE_SKIP" />
+  <parameter name="DIAG_RLD3_TG_BE_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_RLD3_TG_DATA_PATTERN_LENGTH" value="8" />
+  <parameter name="DIAG_RLD3_USE_TG_AVL_2" value="false" />
+  <parameter name="DIAG_RS232_UART_BAUDRATE" value="57600" />
+  <parameter name="DIAG_SIM_REGTEST_MODE" value="false" />
+  <parameter name="DIAG_SOFT_NIOS_CLOCK_FREQUENCY" value="100" />
+  <parameter name="DIAG_SOFT_NIOS_MODE">SOFT_NIOS_MODE_DISABLED</parameter>
+  <parameter name="DIAG_SYNTH_FOR_SIM" value="false" />
+  <parameter name="DIAG_TG_AVL_2_EXPORT_CFG_INTERFACE" value="false" />
+  <parameter name="DIAG_TG_AVL_2_NUM_CFG_INTERFACES" value="0" />
+  <parameter name="DIAG_TIMING_REGTEST_MODE" value="false" />
+  <parameter name="DIAG_USE_BOARD_DELAY_MODEL" value="false" />
+  <parameter name="DIAG_USE_RS232_UART" value="false" />
+  <parameter name="DIAG_VERBOSE_IOAUX" value="false" />
+  <parameter name="EX_DESIGN_GUI_DDR3_GEN_SIM" value="true" />
+  <parameter name="EX_DESIGN_GUI_DDR3_GEN_SYNTH" value="true" />
+  <parameter name="EX_DESIGN_GUI_DDR3_HDL_FORMAT" value="HDL_FORMAT_VERILOG" />
+  <parameter name="EX_DESIGN_GUI_DDR3_PREV_PRESET" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_DDR3_SEL_DESIGN">AVAIL_EX_DESIGNS_GEN_DESIGN</parameter>
+  <parameter name="EX_DESIGN_GUI_DDR3_TARGET_DEV_KIT" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_DDR4_GEN_SIM" value="true" />
+  <parameter name="EX_DESIGN_GUI_DDR4_GEN_SYNTH" value="true" />
+  <parameter name="EX_DESIGN_GUI_DDR4_HDL_FORMAT" value="HDL_FORMAT_VERILOG" />
+  <parameter name="EX_DESIGN_GUI_DDR4_PREV_PRESET" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_DDR4_SEL_DESIGN">AVAIL_EX_DESIGNS_GEN_DESIGN</parameter>
+  <parameter name="EX_DESIGN_GUI_DDR4_TARGET_DEV_KIT" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_LPDDR3_GEN_SIM" value="true" />
+  <parameter name="EX_DESIGN_GUI_LPDDR3_GEN_SYNTH" value="true" />
+  <parameter name="EX_DESIGN_GUI_LPDDR3_HDL_FORMAT" value="HDL_FORMAT_VERILOG" />
+  <parameter name="EX_DESIGN_GUI_LPDDR3_PREV_PRESET" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_LPDDR3_SEL_DESIGN">AVAIL_EX_DESIGNS_GEN_DESIGN</parameter>
+  <parameter
+     name="EX_DESIGN_GUI_LPDDR3_TARGET_DEV_KIT"
+     value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_QDR2_GEN_SIM" value="true" />
+  <parameter name="EX_DESIGN_GUI_QDR2_GEN_SYNTH" value="true" />
+  <parameter name="EX_DESIGN_GUI_QDR2_HDL_FORMAT" value="HDL_FORMAT_VERILOG" />
+  <parameter name="EX_DESIGN_GUI_QDR2_PREV_PRESET" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_QDR2_SEL_DESIGN">AVAIL_EX_DESIGNS_GEN_DESIGN</parameter>
+  <parameter name="EX_DESIGN_GUI_QDR2_TARGET_DEV_KIT" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_QDR4_GEN_SIM" value="true" />
+  <parameter name="EX_DESIGN_GUI_QDR4_GEN_SYNTH" value="true" />
+  <parameter name="EX_DESIGN_GUI_QDR4_HDL_FORMAT" value="HDL_FORMAT_VERILOG" />
+  <parameter name="EX_DESIGN_GUI_QDR4_PREV_PRESET" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_QDR4_SEL_DESIGN">AVAIL_EX_DESIGNS_GEN_DESIGN</parameter>
+  <parameter name="EX_DESIGN_GUI_QDR4_TARGET_DEV_KIT" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_RLD2_GEN_SIM" value="true" />
+  <parameter name="EX_DESIGN_GUI_RLD2_GEN_SYNTH" value="true" />
+  <parameter name="EX_DESIGN_GUI_RLD2_HDL_FORMAT" value="HDL_FORMAT_VERILOG" />
+  <parameter name="EX_DESIGN_GUI_RLD2_PREV_PRESET" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_RLD2_SEL_DESIGN">AVAIL_EX_DESIGNS_GEN_DESIGN</parameter>
+  <parameter name="EX_DESIGN_GUI_RLD2_TARGET_DEV_KIT" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_RLD3_GEN_SIM" value="true" />
+  <parameter name="EX_DESIGN_GUI_RLD3_GEN_SYNTH" value="true" />
+  <parameter name="EX_DESIGN_GUI_RLD3_HDL_FORMAT" value="HDL_FORMAT_VERILOG" />
+  <parameter name="EX_DESIGN_GUI_RLD3_PREV_PRESET" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="EX_DESIGN_GUI_RLD3_SEL_DESIGN">AVAIL_EX_DESIGNS_GEN_DESIGN</parameter>
+  <parameter name="EX_DESIGN_GUI_RLD3_TARGET_DEV_KIT" value="TARGET_DEV_KIT_NONE" />
+  <parameter name="INTERNAL_TESTING_MODE" value="false" />
+  <parameter name="IS_ED_SLAVE" value="false" />
+  <parameter name="MEM_DDR3_ALERT_N_DQS_GROUP" value="0" />
+  <parameter name="MEM_DDR3_ALERT_N_PLACEMENT_ENUM">DDR3_ALERT_N_PLACEMENT_AC_LANES</parameter>
+  <parameter name="MEM_DDR3_ASR_ENUM" value="DDR3_ASR_MANUAL" />
+  <parameter name="MEM_DDR3_ATCL_ENUM" value="DDR3_ATCL_DISABLED" />
+  <parameter name="MEM_DDR3_BANK_ADDR_WIDTH" value="3" />
+  <parameter name="MEM_DDR3_BL_ENUM" value="DDR3_BL_BL8" />
+  <parameter name="MEM_DDR3_BT_ENUM" value="DDR3_BT_SEQUENTIAL" />
+  <parameter name="MEM_DDR3_CKE_PER_DIMM" value="1" />
+  <parameter name="MEM_DDR3_CK_WIDTH" value="1" />
+  <parameter name="MEM_DDR3_COL_ADDR_WIDTH" value="10" />
+  <parameter name="MEM_DDR3_DISCRETE_CS_WIDTH" value="1" />
+  <parameter name="MEM_DDR3_DISCRETE_MIRROR_ADDRESSING_EN" value="false" />
+  <parameter name="MEM_DDR3_DLL_EN" value="true" />
+  <parameter name="MEM_DDR3_DM_EN" value="true" />
+  <parameter name="MEM_DDR3_DQ_PER_DQS" value="8" />
+  <parameter name="MEM_DDR3_DQ_WIDTH" value="32" />
+  <parameter name="MEM_DDR3_DRV_STR_ENUM" value="DDR3_DRV_STR_RZQ_7" />
+  <parameter name="MEM_DDR3_FORMAT_ENUM" value="MEM_FORMAT_UDIMM" />
+  <parameter name="MEM_DDR3_HIDE_ADV_MR_SETTINGS" value="true" />
+  <parameter name="MEM_DDR3_LRDIMM_EXTENDED_CONFIG" value="000000000000000000" />
+  <parameter name="MEM_DDR3_MIRROR_ADDRESSING_EN" value="true" />
+  <parameter name="MEM_DDR3_NUM_OF_DIMMS" value="1" />
+  <parameter name="MEM_DDR3_PD_ENUM" value="DDR3_PD_OFF" />
+  <parameter name="MEM_DDR3_RANKS_PER_DIMM" value="1" />
+  <parameter name="MEM_DDR3_RDIMM_CONFIG" value="0000000000000000" />
+  <parameter name="MEM_DDR3_ROW_ADDR_WIDTH" value="15" />
+  <parameter name="MEM_DDR3_RTT_NOM_ENUM">DDR3_RTT_NOM_ODT_DISABLED</parameter>
+  <parameter name="MEM_DDR3_RTT_WR_ENUM" value="DDR3_RTT_WR_RZQ_4" />
+  <parameter name="MEM_DDR3_R_ODT0_1X1" value="off" />
+  <parameter name="MEM_DDR3_R_ODT0_2X2" value="off,off" />
+  <parameter name="MEM_DDR3_R_ODT0_4X2" value="off,off,on,on" />
+  <parameter name="MEM_DDR3_R_ODT0_4X4" value="off,off,off,off" />
+  <parameter name="MEM_DDR3_R_ODT1_2X2" value="off,off" />
+  <parameter name="MEM_DDR3_R_ODT1_4X2" value="on,on,off,off" />
+  <parameter name="MEM_DDR3_R_ODT1_4X4" value="off,off,on,on" />
+  <parameter name="MEM_DDR3_R_ODT2_4X4" value="off,off,off,off" />
+  <parameter name="MEM_DDR3_R_ODT3_4X4" value="on,on,off,off" />
+  <parameter name="MEM_DDR3_R_ODTN_1X1" value="Rank 0" />
+  <parameter name="MEM_DDR3_R_ODTN_2X2" value="Rank 0,Rank 1" />
+  <parameter name="MEM_DDR3_R_ODTN_4X2">Rank 0,Rank 1,Rank 2,Rank 3</parameter>
+  <parameter name="MEM_DDR3_R_ODTN_4X4">Rank 0,Rank 1,Rank 2,Rank 3</parameter>
+  <parameter name="MEM_DDR3_SPEEDBIN_ENUM" value="DDR3_SPEEDBIN_2133" />
+  <parameter name="MEM_DDR3_SRT_ENUM" value="DDR3_SRT_NORMAL" />
+  <parameter name="MEM_DDR3_TCL" value="14" />
+  <parameter name="MEM_DDR3_TDH_DC_MV" value="100" />
+  <parameter name="MEM_DDR3_TDH_PS" value="55" />
+  <parameter name="MEM_DDR3_TDQSCK_PS" value="180" />
+  <parameter name="MEM_DDR3_TDQSQ_PS" value="75" />
+  <parameter name="MEM_DDR3_TDQSS_CYC" value="0.27" />
+  <parameter name="MEM_DDR3_TDSH_CYC" value="0.18" />
+  <parameter name="MEM_DDR3_TDSS_CYC" value="0.18" />
+  <parameter name="MEM_DDR3_TDS_AC_MV" value="135" />
+  <parameter name="MEM_DDR3_TDS_PS" value="53" />
+  <parameter name="MEM_DDR3_TFAW_NS" value="25.0" />
+  <parameter name="MEM_DDR3_TIH_DC_MV" value="100" />
+  <parameter name="MEM_DDR3_TIH_PS" value="95" />
+  <parameter name="MEM_DDR3_TINIT_US" value="500" />
+  <parameter name="MEM_DDR3_TIS_AC_MV" value="135" />
+  <parameter name="MEM_DDR3_TIS_PS" value="60" />
+  <parameter name="MEM_DDR3_TMRD_CK_CYC" value="4" />
+  <parameter name="MEM_DDR3_TQH_CYC" value="0.38" />
+  <parameter name="MEM_DDR3_TQSH_CYC" value="0.4" />
+  <parameter name="MEM_DDR3_TRAS_NS" value="33.0" />
+  <parameter name="MEM_DDR3_TRCD_NS" value="13.09" />
+  <parameter name="MEM_DDR3_TREFI_US" value="7.8" />
+  <parameter name="MEM_DDR3_TRFC_NS" value="160.0" />
+  <parameter name="MEM_DDR3_TRP_NS" value="13.09" />
+  <parameter name="MEM_DDR3_TRRD_CYC" value="6" />
+  <parameter name="MEM_DDR3_TRTP_CYC" value="8" />
+  <parameter name="MEM_DDR3_TWLH_PS" value="125.0" />
+  <parameter name="MEM_DDR3_TWLS_PS" value="125.0" />
+  <parameter name="MEM_DDR3_TWR_NS" value="15.0" />
+  <parameter name="MEM_DDR3_TWTR_CYC" value="8" />
+  <parameter name="MEM_DDR3_USE_DEFAULT_ODT" value="true" />
+  <parameter name="MEM_DDR3_WTCL" value="10" />
+  <parameter name="MEM_DDR3_W_ODT0_1X1" value="on" />
+  <parameter name="MEM_DDR3_W_ODT0_2X2" value="on,off" />
+  <parameter name="MEM_DDR3_W_ODT0_4X2" value="off,off,on,on" />
+  <parameter name="MEM_DDR3_W_ODT0_4X4" value="on,on,off,off" />
+  <parameter name="MEM_DDR3_W_ODT1_2X2" value="off,on" />
+  <parameter name="MEM_DDR3_W_ODT1_4X2" value="on,on,off,off" />
+  <parameter name="MEM_DDR3_W_ODT1_4X4" value="off,off,on,on" />
+  <parameter name="MEM_DDR3_W_ODT2_4X4" value="off,off,on,on" />
+  <parameter name="MEM_DDR3_W_ODT3_4X4" value="on,on,off,off" />
+  <parameter name="MEM_DDR3_W_ODTN_1X1" value="Rank 0" />
+  <parameter name="MEM_DDR3_W_ODTN_2X2" value="Rank 0,Rank 1" />
+  <parameter name="MEM_DDR3_W_ODTN_4X2">Rank 0,Rank 1,Rank 2,Rank 3</parameter>
+  <parameter name="MEM_DDR3_W_ODTN_4X4">Rank 0,Rank 1,Rank 2,Rank 3</parameter>
+  <parameter name="MEM_DDR4_AC_PARITY_LATENCY">DDR4_AC_PARITY_LATENCY_DISABLE</parameter>
+  <parameter name="MEM_DDR4_AC_PERSISTENT_ERROR" value="false" />
+  <parameter name="MEM_DDR4_ALERT_N_AC_LANE" value="0" />
+  <parameter name="MEM_DDR4_ALERT_N_AC_PIN" value="0" />
+  <parameter name="MEM_DDR4_ALERT_N_DQS_GROUP" value="0" />
+  <parameter name="MEM_DDR4_ALERT_N_PLACEMENT_ENUM">DDR4_ALERT_N_PLACEMENT_DATA_LANES</parameter>
+  <parameter name="MEM_DDR4_ALERT_PAR_EN" value="true" />
+  <parameter name="MEM_DDR4_ASR_ENUM">DDR4_ASR_MANUAL_NORMAL</parameter>
+  <parameter name="MEM_DDR4_ATCL_ENUM" value="DDR4_ATCL_DISABLED" />
+  <parameter name="MEM_DDR4_BANK_ADDR_WIDTH" value="2" />
+  <parameter name="MEM_DDR4_BANK_GROUP_WIDTH" value="1" />
+  <parameter name="MEM_DDR4_BL_ENUM" value="DDR4_BL_BL8" />
+  <parameter name="MEM_DDR4_BT_ENUM" value="DDR4_BT_SEQUENTIAL" />
+  <parameter name="MEM_DDR4_CAL_MODE" value="0" />
+  <parameter name="MEM_DDR4_CHIP_ID_WIDTH" value="0" />
+  <parameter name="MEM_DDR4_CKE_PER_DIMM" value="1" />
+  <parameter name="MEM_DDR4_CK_WIDTH" value="1" />
+  <parameter name="MEM_DDR4_COL_ADDR_WIDTH" value="10" />
+  <parameter name="MEM_DDR4_DB_DQ_DRV_ENUM">DDR4_DB_DRV_STR_RZQ_7</parameter>
+  <parameter name="MEM_DDR4_DB_RTT_NOM_ENUM">DDR4_DB_RTT_NOM_ODT_DISABLED</parameter>
+  <parameter name="MEM_DDR4_DB_RTT_PARK_ENUM">DDR4_DB_RTT_PARK_ODT_DISABLED</parameter>
+  <parameter name="MEM_DDR4_DB_RTT_WR_ENUM">DDR4_DB_RTT_WR_RZQ_3</parameter>
+  <parameter name="MEM_DDR4_DEFAULT_VREFOUT" value="true" />
+  <parameter name="MEM_DDR4_DISCRETE_CS_WIDTH" value="1" />
+  <parameter name="MEM_DDR4_DISCRETE_MIRROR_ADDRESSING_EN" value="false" />
+  <parameter name="MEM_DDR4_DLL_EN" value="true" />
+  <parameter name="MEM_DDR4_DM_EN" value="true" />
+  <parameter name="MEM_DDR4_DQ_PER_DQS" value="8" />
+  <parameter name="MEM_DDR4_DQ_WIDTH" value="32" />
+  <parameter name="MEM_DDR4_DRV_STR_ENUM" value="DDR4_DRV_STR_RZQ_7" />
+  <parameter name="MEM_DDR4_FINE_GRANULARITY_REFRESH">DDR4_FINE_REFRESH_FIXED_1X</parameter>
+  <parameter name="MEM_DDR4_FORMAT_ENUM" value="MEM_FORMAT_DISCRETE" />
+  <parameter name="MEM_DDR4_GEARDOWN" value="DDR4_GEARDOWN_HR" />
+  <parameter name="MEM_DDR4_HIDE_ADV_MR_SETTINGS" value="true" />
+  <parameter name="MEM_DDR4_INTERNAL_VREFDQ_MONITOR" value="false" />
+  <parameter name="MEM_DDR4_LRDIMM_ODT_LESS_BS" value="true" />
+  <parameter name="MEM_DDR4_LRDIMM_ODT_LESS_BS_PARK_OHM" value="240" />
+  <parameter name="MEM_DDR4_LRDIMM_VREFDQ_VALUE" value="" />
+  <parameter name="MEM_DDR4_MAX_POWERDOWN" value="false" />
+  <parameter name="MEM_DDR4_MIRROR_ADDRESSING_EN" value="true" />
+  <parameter name="MEM_DDR4_MPR_READ_FORMAT">DDR4_MPR_READ_FORMAT_SERIAL</parameter>
+  <parameter name="MEM_DDR4_NUM_OF_DIMMS" value="1" />
+  <parameter name="MEM_DDR4_ODT_IN_POWERDOWN" value="true" />
+  <parameter name="MEM_DDR4_PER_DRAM_ADDR" value="false" />
+  <parameter name="MEM_DDR4_RANKS_PER_DIMM" value="1" />
+  <parameter name="MEM_DDR4_RCD_CA_IBT_ENUM" value="DDR4_RCD_CA_IBT_100" />
+  <parameter name="MEM_DDR4_RCD_CKE_IBT_ENUM">DDR4_RCD_CKE_IBT_100</parameter>
+  <parameter name="MEM_DDR4_RCD_CS_IBT_ENUM" value="DDR4_RCD_CS_IBT_100" />
+  <parameter name="MEM_DDR4_RCD_ODT_IBT_ENUM">DDR4_RCD_ODT_IBT_100</parameter>
+  <parameter name="MEM_DDR4_READ_DBI" value="true" />
+  <parameter name="MEM_DDR4_READ_PREAMBLE" value="2" />
+  <parameter name="MEM_DDR4_READ_PREAMBLE_TRAINING" value="false" />
+  <parameter name="MEM_DDR4_ROW_ADDR_WIDTH" value="15" />
+  <parameter name="MEM_DDR4_RTT_NOM_ENUM" value="DDR4_RTT_NOM_RZQ_4" />
+  <parameter name="MEM_DDR4_RTT_PARK">DDR4_RTT_PARK_ODT_DISABLED</parameter>
+  <parameter name="MEM_DDR4_RTT_WR_ENUM">DDR4_RTT_WR_ODT_DISABLED</parameter>
+  <parameter name="MEM_DDR4_R_ODT0_1X1" value="off" />
+  <parameter name="MEM_DDR4_R_ODT0_2X2" value="off,off" />
+  <parameter name="MEM_DDR4_R_ODT0_4X2" value="off,off,on,on" />
+  <parameter name="MEM_DDR4_R_ODT0_4X4" value="off,off,off,off" />
+  <parameter name="MEM_DDR4_R_ODT1_2X2" value="off,off" />
+  <parameter name="MEM_DDR4_R_ODT1_4X2" value="on,on,off,off" />
+  <parameter name="MEM_DDR4_R_ODT1_4X4" value="off,off,on,on" />
+  <parameter name="MEM_DDR4_R_ODT2_4X4" value="off,off,off,off" />
+  <parameter name="MEM_DDR4_R_ODT3_4X4" value="on,on,off,off" />
+  <parameter name="MEM_DDR4_R_ODTN_1X1" value="Rank 0" />
+  <parameter name="MEM_DDR4_R_ODTN_2X2" value="Rank 0,Rank 1" />
+  <parameter name="MEM_DDR4_R_ODTN_4X2">Rank 0,Rank 1,Rank 2,Rank 3</parameter>
+  <parameter name="MEM_DDR4_R_ODTN_4X4">Rank 0,Rank 1,Rank 2,Rank 3</parameter>
+  <parameter name="MEM_DDR4_SELF_RFSH_ABORT" value="false" />
+  <parameter name="MEM_DDR4_SPD_133_RCD_DB_VENDOR_LSB" value="0" />
+  <parameter name="MEM_DDR4_SPD_134_RCD_DB_VENDOR_MSB" value="0" />
+  <parameter name="MEM_DDR4_SPD_135_RCD_REV" value="0" />
+  <parameter name="MEM_DDR4_SPD_137_RCD_CA_DRV" value="101" />
+  <parameter name="MEM_DDR4_SPD_138_RCD_CK_DRV" value="5" />
+  <parameter name="MEM_DDR4_SPD_139_DB_REV" value="0" />
+  <parameter name="MEM_DDR4_SPD_140_DRAM_VREFDQ_R0" value="29" />
+  <parameter name="MEM_DDR4_SPD_141_DRAM_VREFDQ_R1" value="29" />
+  <parameter name="MEM_DDR4_SPD_142_DRAM_VREFDQ_R2" value="29" />
+  <parameter name="MEM_DDR4_SPD_143_DRAM_VREFDQ_R3" value="29" />
+  <parameter name="MEM_DDR4_SPD_144_DB_VREFDQ" value="37" />
+  <parameter name="MEM_DDR4_SPD_145_DB_MDQ_DRV" value="21" />
+  <parameter name="MEM_DDR4_SPD_148_DRAM_DRV" value="0" />
+  <parameter name="MEM_DDR4_SPD_149_DRAM_RTT_WR_NOM" value="20" />
+  <parameter name="MEM_DDR4_SPD_152_DRAM_RTT_PARK" value="39" />
+  <parameter name="MEM_DDR4_SPEEDBIN_ENUM" value="DDR4_SPEEDBIN_2400" />
+  <parameter name="MEM_DDR4_TCCD_L_CYC" value="6" />
+  <parameter name="MEM_DDR4_TCCD_S_CYC" value="4" />
+  <parameter name="MEM_DDR4_TCL" value="20" />
+  <parameter name="MEM_DDR4_TDIVW_DJ_CYC" value="0.1" />
+  <parameter name="MEM_DDR4_TDIVW_TOTAL_UI" value="0.2" />
+  <parameter name="MEM_DDR4_TDQSCK_PS" value="175" />
+  <parameter name="MEM_DDR4_TDQSQ_PS" value="66" />
+  <parameter name="MEM_DDR4_TDQSQ_UI" value="0.17" />
+  <parameter name="MEM_DDR4_TDQSS_CYC" value="0.27" />
+  <parameter name="MEM_DDR4_TDSH_CYC" value="0.18" />
+  <parameter name="MEM_DDR4_TDSS_CYC" value="0.18" />
+  <parameter name="MEM_DDR4_TDVWP_UI" value="0.72" />
+  <parameter name="MEM_DDR4_TEMP_CONTROLLED_RFSH_ENA" value="false" />
+  <parameter name="MEM_DDR4_TEMP_CONTROLLED_RFSH_RANGE">DDR4_TEMP_CONTROLLED_RFSH_NORMAL</parameter>
+  <parameter name="MEM_DDR4_TEMP_SENSOR_READOUT" value="false" />
+  <parameter name="MEM_DDR4_TFAW_NS" value="30.0" />
+  <parameter name="MEM_DDR4_TIH_DC_MV" value="75" />
+  <parameter name="MEM_DDR4_TIH_PS" value="87" />
+  <parameter name="MEM_DDR4_TINIT_US" value="500" />
+  <parameter name="MEM_DDR4_TIS_AC_MV" value="100" />
+  <parameter name="MEM_DDR4_TIS_PS" value="62" />
+  <parameter name="MEM_DDR4_TMRD_CK_CYC" value="8" />
+  <parameter name="MEM_DDR4_TQH_CYC" value="0.38" />
+  <parameter name="MEM_DDR4_TQH_UI" value="0.74" />
+  <parameter name="MEM_DDR4_TQSH_CYC" value="0.4" />
+  <parameter name="MEM_DDR4_TRAS_NS" value="32.0" />
+  <parameter name="MEM_DDR4_TRCD_NS" value="14.16" />
+  <parameter name="MEM_DDR4_TREFI_US" value="7.8" />
+  <parameter name="MEM_DDR4_TRFC_NS" value="260.0" />
+  <parameter name="MEM_DDR4_TRP_NS" value="14.16" />
+  <parameter name="MEM_DDR4_TRRD_L_CYC" value="8" />
+  <parameter name="MEM_DDR4_TRRD_S_CYC" value="7" />
+  <parameter name="MEM_DDR4_TWLH_PS" value="108.0" />
+  <parameter name="MEM_DDR4_TWLS_PS" value="108.0" />
+  <parameter name="MEM_DDR4_TWR_NS" value="15.0" />
+  <parameter name="MEM_DDR4_TWTR_L_CYC" value="9" />
+  <parameter name="MEM_DDR4_TWTR_S_CYC" value="3" />
+  <parameter name="MEM_DDR4_USER_VREFDQ_TRAINING_RANGE">DDR4_VREFDQ_TRAINING_RANGE_1</parameter>
+  <parameter name="MEM_DDR4_USER_VREFDQ_TRAINING_VALUE" value="72.9" />
+  <parameter name="MEM_DDR4_USE_DEFAULT_ODT" value="true" />
+  <parameter name="MEM_DDR4_VDIVW_TOTAL" value="130" />
+  <parameter name="MEM_DDR4_WRITE_CRC" value="false" />
+  <parameter name="MEM_DDR4_WRITE_DBI" value="false" />
+  <parameter name="MEM_DDR4_WRITE_PREAMBLE" value="1" />
+  <parameter name="MEM_DDR4_WTCL" value="16" />
+  <parameter name="MEM_DDR4_W_ODT0_1X1" value="on" />
+  <parameter name="MEM_DDR4_W_ODT0_2X2" value="on,off" />
+  <parameter name="MEM_DDR4_W_ODT0_4X2" value="off,off,on,on" />
+  <parameter name="MEM_DDR4_W_ODT0_4X4" value="on,on,off,off" />
+  <parameter name="MEM_DDR4_W_ODT1_2X2" value="off,on" />
+  <parameter name="MEM_DDR4_W_ODT1_4X2" value="on,on,off,off" />
+  <parameter name="MEM_DDR4_W_ODT1_4X4" value="off,off,on,on" />
+  <parameter name="MEM_DDR4_W_ODT2_4X4" value="off,off,on,on" />
+  <parameter name="MEM_DDR4_W_ODT3_4X4" value="on,on,off,off" />
+  <parameter name="MEM_DDR4_W_ODTN_1X1" value="Rank 0" />
+  <parameter name="MEM_DDR4_W_ODTN_2X2" value="Rank 0,Rank 1" />
+  <parameter name="MEM_DDR4_W_ODTN_4X2">Rank 0,Rank 1,Rank 2,Rank 3</parameter>
+  <parameter name="MEM_DDR4_W_ODTN_4X4">Rank 0,Rank 1,Rank 2,Rank 3</parameter>
+  <parameter name="MEM_LPDDR3_BANK_ADDR_WIDTH" value="3" />
+  <parameter name="MEM_LPDDR3_BL" value="LPDDR3_BL_BL8" />
+  <parameter name="MEM_LPDDR3_CK_WIDTH" value="1" />
+  <parameter name="MEM_LPDDR3_COL_ADDR_WIDTH" value="10" />
+  <parameter name="MEM_LPDDR3_DATA_LATENCY" value="LPDDR3_DL_RL12_WL6" />
+  <parameter name="MEM_LPDDR3_DISCRETE_CS_WIDTH" value="1" />
+  <parameter name="MEM_LPDDR3_DM_EN" value="true" />
+  <parameter name="MEM_LPDDR3_DQODT">LPDDR3_DQODT_DISABLE</parameter>
+  <parameter name="MEM_LPDDR3_DQ_WIDTH" value="32" />
+  <parameter name="MEM_LPDDR3_DRV_STR">LPDDR3_DRV_STR_40D_40U</parameter>
+  <parameter name="MEM_LPDDR3_PDODT">LPDDR3_PDODT_DISABLED</parameter>
+  <parameter name="MEM_LPDDR3_ROW_ADDR_WIDTH" value="15" />
+  <parameter name="MEM_LPDDR3_R_ODT0_1X1" value="off" />
+  <parameter name="MEM_LPDDR3_R_ODT0_2X2" value="off,off" />
+  <parameter name="MEM_LPDDR3_R_ODT0_4X4" value="off,off,off,off" />
+  <parameter name="MEM_LPDDR3_R_ODT1_2X2" value="off,off" />
+  <parameter name="MEM_LPDDR3_R_ODT1_4X4" value="off,off,off,off" />
+  <parameter name="MEM_LPDDR3_R_ODT2_4X4" value="off,off,off,off" />
+  <parameter name="MEM_LPDDR3_R_ODT3_4X4" value="off,off,off,off" />
+  <parameter name="MEM_LPDDR3_R_ODTN_1X1" value="Rank 0" />
+  <parameter name="MEM_LPDDR3_R_ODTN_2X2" value="Rank 0,Rank 1" />
+  <parameter name="MEM_LPDDR3_R_ODTN_4X4">Rank 0,Rank 1,Rank 2,Rank 3</parameter>
+  <parameter name="MEM_LPDDR3_SPEEDBIN_ENUM">LPDDR3_SPEEDBIN_1600</parameter>
+  <parameter name="MEM_LPDDR3_TDH_DC_MV" value="100" />
+  <parameter name="MEM_LPDDR3_TDH_PS" value="100" />
+  <parameter name="MEM_LPDDR3_TDQSCKDL" value="614" />
+  <parameter name="MEM_LPDDR3_TDQSQ_PS" value="135" />
+  <parameter name="MEM_LPDDR3_TDQSS_CYC" value="1.25" />
+  <parameter name="MEM_LPDDR3_TDSH_CYC" value="0.2" />
+  <parameter name="MEM_LPDDR3_TDSS_CYC" value="0.2" />
+  <parameter name="MEM_LPDDR3_TDS_AC_MV" value="150" />
+  <parameter name="MEM_LPDDR3_TDS_PS" value="75" />
+  <parameter name="MEM_LPDDR3_TFAW_NS" value="50.0" />
+  <parameter name="MEM_LPDDR3_TIH_DC_MV" value="100" />
+  <parameter name="MEM_LPDDR3_TIH_PS" value="100" />
+  <parameter name="MEM_LPDDR3_TINIT_US" value="500" />
+  <parameter name="MEM_LPDDR3_TIS_AC_MV" value="150" />
+  <parameter name="MEM_LPDDR3_TIS_PS" value="75" />
+  <parameter name="MEM_LPDDR3_TMRR_CK_CYC" value="4" />
+  <parameter name="MEM_LPDDR3_TMRW_CK_CYC" value="10" />
+  <parameter name="MEM_LPDDR3_TQH_CYC" value="0.38" />
+  <parameter name="MEM_LPDDR3_TQSH_CYC" value="0.38" />
+  <parameter name="MEM_LPDDR3_TRAS_NS" value="42.5" />
+  <parameter name="MEM_LPDDR3_TRCD_NS" value="18.0" />
+  <parameter name="MEM_LPDDR3_TREFI_US" value="3.9" />
+  <parameter name="MEM_LPDDR3_TRFC_NS" value="210.0" />
+  <parameter name="MEM_LPDDR3_TRP_NS" value="18.0" />
+  <parameter name="MEM_LPDDR3_TRRD_CYC" value="8" />
+  <parameter name="MEM_LPDDR3_TRTP_CYC" value="6" />
+  <parameter name="MEM_LPDDR3_TWLH_PS" value="175.0" />
+  <parameter name="MEM_LPDDR3_TWLS_PS" value="175.0" />
+  <parameter name="MEM_LPDDR3_TWR_NS" value="15.0" />
+  <parameter name="MEM_LPDDR3_TWTR_CYC" value="6" />
+  <parameter name="MEM_LPDDR3_USE_DEFAULT_ODT" value="true" />
+  <parameter name="MEM_LPDDR3_W_ODT0_1X1" value="on" />
+  <parameter name="MEM_LPDDR3_W_ODT0_2X2" value="on,on" />
+  <parameter name="MEM_LPDDR3_W_ODT0_4X4" value="on,on,on,on" />
+  <parameter name="MEM_LPDDR3_W_ODT1_2X2" value="off,off" />
+  <parameter name="MEM_LPDDR3_W_ODT1_4X4" value="off,off,off,off" />
+  <parameter name="MEM_LPDDR3_W_ODT2_4X4" value="off,off,off,off" />
+  <parameter name="MEM_LPDDR3_W_ODT3_4X4" value="off,off,off,off" />
+  <parameter name="MEM_LPDDR3_W_ODTN_1X1" value="Rank 0" />
+  <parameter name="MEM_LPDDR3_W_ODTN_2X2" value="Rank 0,Rank 1" />
+  <parameter name="MEM_LPDDR3_W_ODTN_4X4">Rank 0,Rank 1,Rank 2,Rank 3</parameter>
+  <parameter name="MEM_QDR2_ADDR_WIDTH" value="19" />
+  <parameter name="MEM_QDR2_BL" value="4" />
+  <parameter name="MEM_QDR2_BWS_EN" value="true" />
+  <parameter name="MEM_QDR2_DATA_PER_DEVICE" value="36" />
+  <parameter name="MEM_QDR2_INTERNAL_JITTER_NS" value="0.08" />
+  <parameter name="MEM_QDR2_SPEEDBIN_ENUM" value="QDR2_SPEEDBIN_633" />
+  <parameter name="MEM_QDR2_TCCQO_NS" value="0.45" />
+  <parameter name="MEM_QDR2_TCQDOH_NS" value="-0.09" />
+  <parameter name="MEM_QDR2_TCQD_NS" value="0.09" />
+  <parameter name="MEM_QDR2_TCQH_NS" value="0.71" />
+  <parameter name="MEM_QDR2_THA_NS" value="0.18" />
+  <parameter name="MEM_QDR2_THD_NS" value="0.18" />
+  <parameter name="MEM_QDR2_TRL_CYC" value="2.5" />
+  <parameter name="MEM_QDR2_TSA_NS" value="0.23" />
+  <parameter name="MEM_QDR2_TSD_NS" value="0.23" />
+  <parameter name="MEM_QDR2_WIDTH_EXPANDED" value="false" />
+  <parameter name="MEM_QDR4_AC_ODT_MODE_ENUM" value="QDR4_ODT_25_PCT" />
+  <parameter name="MEM_QDR4_ADDR_INV_ENA" value="false" />
+  <parameter name="MEM_QDR4_ADDR_WIDTH" value="21" />
+  <parameter name="MEM_QDR4_CK_ODT_MODE_ENUM" value="QDR4_ODT_25_PCT" />
+  <parameter name="MEM_QDR4_DATA_INV_ENA" value="true" />
+  <parameter name="MEM_QDR4_DATA_ODT_MODE_ENUM" value="QDR4_ODT_25_PCT" />
+  <parameter name="MEM_QDR4_DQ_PER_PORT_PER_DEVICE" value="36" />
+  <parameter name="MEM_QDR4_PD_OUTPUT_DRIVE_MODE_ENUM">QDR4_OUTPUT_DRIVE_25_PCT</parameter>
+  <parameter name="MEM_QDR4_PU_OUTPUT_DRIVE_MODE_ENUM">QDR4_OUTPUT_DRIVE_25_PCT</parameter>
+  <parameter name="MEM_QDR4_SPEEDBIN_ENUM" value="QDR4_SPEEDBIN_2133" />
+  <parameter name="MEM_QDR4_TASH_PS" value="170" />
+  <parameter name="MEM_QDR4_TCKDK_MAX_PS" value="150" />
+  <parameter name="MEM_QDR4_TCKDK_MIN_PS" value="-150" />
+  <parameter name="MEM_QDR4_TCKQK_MAX_PS" value="225" />
+  <parameter name="MEM_QDR4_TCSH_PS" value="170" />
+  <parameter name="MEM_QDR4_TISH_PS" value="150" />
+  <parameter name="MEM_QDR4_TQH_CYC" value="0.4" />
+  <parameter name="MEM_QDR4_TQKQ_MAX_PS" value="75" />
+  <parameter name="MEM_QDR4_WIDTH_EXPANDED" value="false" />
+  <parameter name="MEM_RLD2_ADDR_WIDTH" value="21" />
+  <parameter name="MEM_RLD2_BANK_ADDR_WIDTH" value="3" />
+  <parameter name="MEM_RLD2_BL" value="4" />
+  <parameter name="MEM_RLD2_CONFIG_ENUM">RLD2_CONFIG_TRC_8_TRL_8_TWL_9</parameter>
+  <parameter name="MEM_RLD2_DM_EN" value="true" />
+  <parameter name="MEM_RLD2_DQ_PER_DEVICE" value="9" />
+  <parameter name="MEM_RLD2_DRIVE_IMPEDENCE_ENUM">RLD2_DRIVE_IMPEDENCE_INTERNAL_50</parameter>
+  <parameter name="MEM_RLD2_ODT_MODE_ENUM" value="RLD2_ODT_ON" />
+  <parameter name="MEM_RLD2_REFRESH_INTERVAL_US" value="0.24" />
+  <parameter name="MEM_RLD2_SPEEDBIN_ENUM" value="RLD2_SPEEDBIN_18" />
+  <parameter name="MEM_RLD2_TAH_NS" value="0.3" />
+  <parameter name="MEM_RLD2_TAS_NS" value="0.3" />
+  <parameter name="MEM_RLD2_TCKDK_MAX_NS" value="0.3" />
+  <parameter name="MEM_RLD2_TCKDK_MIN_NS" value="-0.3" />
+  <parameter name="MEM_RLD2_TCKH_CYC" value="0.45" />
+  <parameter name="MEM_RLD2_TCKQK_MAX_NS" value="0.2" />
+  <parameter name="MEM_RLD2_TDH_NS" value="0.17" />
+  <parameter name="MEM_RLD2_TDS_NS" value="0.17" />
+  <parameter name="MEM_RLD2_TQKH_HCYC" value="0.9" />
+  <parameter name="MEM_RLD2_TQKQ_MAX_NS" value="0.12" />
+  <parameter name="MEM_RLD2_TQKQ_MIN_NS" value="-0.12" />
+  <parameter name="MEM_RLD2_WIDTH_EXPANDED" value="false" />
+  <parameter name="MEM_RLD3_ADDR_WIDTH" value="20" />
+  <parameter name="MEM_RLD3_AREF_PROTOCOL_ENUM" value="RLD3_AREF_BAC" />
+  <parameter name="MEM_RLD3_BANK_ADDR_WIDTH" value="4" />
+  <parameter name="MEM_RLD3_BL" value="2" />
+  <parameter name="MEM_RLD3_DATA_LATENCY_MODE_ENUM" value="RLD3_DL_RL16_WL17" />
+  <parameter name="MEM_RLD3_DEPTH_EXPANDED" value="false" />
+  <parameter name="MEM_RLD3_DM_EN" value="true" />
+  <parameter name="MEM_RLD3_DQ_PER_DEVICE" value="36" />
+  <parameter name="MEM_RLD3_ODT_MODE_ENUM" value="RLD3_ODT_40" />
+  <parameter name="MEM_RLD3_OUTPUT_DRIVE_MODE_ENUM">RLD3_OUTPUT_DRIVE_40</parameter>
+  <parameter name="MEM_RLD3_SPEEDBIN_ENUM" value="RLD3_SPEEDBIN_093E" />
+  <parameter name="MEM_RLD3_TCKDK_MAX_CYC" value="0.27" />
+  <parameter name="MEM_RLD3_TCKDK_MIN_CYC" value="-0.27" />
+  <parameter name="MEM_RLD3_TCKQK_MAX_PS" value="135" />
+  <parameter name="MEM_RLD3_TDH_DC_MV" value="100" />
+  <parameter name="MEM_RLD3_TDH_PS" value="5" />
+  <parameter name="MEM_RLD3_TDS_AC_MV" value="150" />
+  <parameter name="MEM_RLD3_TDS_PS" value="-30" />
+  <parameter name="MEM_RLD3_TIH_DC_MV" value="100" />
+  <parameter name="MEM_RLD3_TIH_PS" value="65" />
+  <parameter name="MEM_RLD3_TIS_AC_MV" value="150" />
+  <parameter name="MEM_RLD3_TIS_PS" value="85" />
+  <parameter name="MEM_RLD3_TQH_CYC" value="0.38" />
+  <parameter name="MEM_RLD3_TQKQ_MAX_PS" value="75" />
+  <parameter name="MEM_RLD3_T_RC_MODE_ENUM" value="RLD3_TRC_9" />
+  <parameter name="MEM_RLD3_WIDTH_EXPANDED" value="false" />
+  <parameter name="MEM_RLD3_WRITE_PROTOCOL_ENUM" value="RLD3_WRITE_1BANK" />
+  <parameter name="PHY_DDR3_CAL_ADDR0" value="0" />
+  <parameter name="PHY_DDR3_CAL_ADDR1" value="8" />
+  <parameter name="PHY_DDR3_CAL_ENABLE_NON_DES" value="false" />
+  <parameter name="PHY_DDR3_CONFIG_ENUM">CONFIG_PHY_AND_HARD_CTRL</parameter>
+  <parameter name="PHY_DDR3_CORE_CLKS_SHARING_ENUM">CORE_CLKS_SHARING_DISABLED</parameter>
+  <parameter name="PHY_DDR3_DEFAULT_IO" value="true" />
+  <parameter name="PHY_DDR3_DEFAULT_REF_CLK_FREQ" value="true" />
+  <parameter name="PHY_DDR3_HPS_ENABLE_EARLY_RELEASE" value="false" />
+  <parameter name="PHY_DDR3_IO_VOLTAGE" value="1.5" />
+  <parameter name="PHY_DDR3_MEM_CLK_FREQ_MHZ" value="1066.667" />
+  <parameter name="PHY_DDR3_RATE_ENUM" value="RATE_HALF" />
+  <parameter name="PHY_DDR3_REF_CLK_JITTER_PS" value="10.0" />
+  <parameter name="PHY_DDR3_USER_AC_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_DDR3_USER_AC_MODE_ENUM" value="unset" />
+  <parameter name="PHY_DDR3_USER_AC_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_DDR3_USER_AUTO_STARTING_VREFIN_EN" value="true" />
+  <parameter name="PHY_DDR3_USER_CK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_DDR3_USER_CK_MODE_ENUM" value="unset" />
+  <parameter name="PHY_DDR3_USER_CK_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_DDR3_USER_DATA_IN_MODE_ENUM" value="unset" />
+  <parameter name="PHY_DDR3_USER_DATA_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_DDR3_USER_DATA_OUT_MODE_ENUM" value="unset" />
+  <parameter name="PHY_DDR3_USER_PERIODIC_OCT_RECAL_ENUM">PERIODIC_OCT_RECAL_AUTO</parameter>
+  <parameter name="PHY_DDR3_USER_PING_PONG_EN" value="false" />
+  <parameter name="PHY_DDR3_USER_PLL_REF_CLK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_DDR3_USER_REF_CLK_FREQ_MHZ" value="-1.0" />
+  <parameter name="PHY_DDR3_USER_RZQ_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_DDR3_USER_STARTING_VREFIN" value="70.0" />
+  <parameter name="PHY_DDR4_CONFIG_ENUM">CONFIG_PHY_AND_HARD_CTRL</parameter>
+  <parameter name="PHY_DDR4_CORE_CLKS_SHARING_ENUM">CORE_CLKS_SHARING_DISABLED</parameter>
+  <parameter name="PHY_DDR4_DEFAULT_IO" value="false" />
+  <parameter name="PHY_DDR4_DEFAULT_REF_CLK_FREQ" value="true" />
+  <parameter name="PHY_DDR4_HPS_ENABLE_EARLY_RELEASE" value="true" />
+  <parameter name="PHY_DDR4_IO_VOLTAGE" value="1.2" />
+  <parameter name="PHY_DDR4_MEM_CLK_FREQ_MHZ" value="1066.666" />
+  <parameter name="PHY_DDR4_RATE_ENUM" value="RATE_HALF" />
+  <parameter name="PHY_DDR4_REF_CLK_JITTER_PS" value="10.0" />
+  <parameter name="PHY_DDR4_USER_AC_IO_STD_ENUM" value="IO_STD_SSTL_12" />
+  <parameter name="PHY_DDR4_USER_AC_MODE_ENUM" value="OUT_OCT_40_CAL" />
+  <parameter name="PHY_DDR4_USER_AC_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_DDR4_USER_AUTO_STARTING_VREFIN_EN" value="true" />
+  <parameter name="PHY_DDR4_USER_CK_IO_STD_ENUM" value="IO_STD_SSTL_12" />
+  <parameter name="PHY_DDR4_USER_CK_MODE_ENUM" value="OUT_OCT_40_CAL" />
+  <parameter name="PHY_DDR4_USER_CK_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_DDR4_USER_DATA_IN_MODE_ENUM" value="IN_OCT_60_CAL" />
+  <parameter name="PHY_DDR4_USER_DATA_IO_STD_ENUM" value="IO_STD_POD_12" />
+  <parameter name="PHY_DDR4_USER_DATA_OUT_MODE_ENUM" value="OUT_OCT_48_CAL" />
+  <parameter name="PHY_DDR4_USER_PERIODIC_OCT_RECAL_ENUM">PERIODIC_OCT_RECAL_AUTO</parameter>
+  <parameter name="PHY_DDR4_USER_PING_PONG_EN" value="false" />
+  <parameter name="PHY_DDR4_USER_PLL_REF_CLK_IO_STD_ENUM" value="IO_STD_LVDS" />
+  <parameter name="PHY_DDR4_USER_REF_CLK_FREQ_MHZ" value="266.667" />
+  <parameter name="PHY_DDR4_USER_RZQ_IO_STD_ENUM" value="IO_STD_CMOS_12" />
+  <parameter name="PHY_DDR4_USER_STARTING_VREFIN" value="70.0" />
+  <parameter name="PHY_LPDDR3_CONFIG_ENUM">CONFIG_PHY_AND_HARD_CTRL</parameter>
+  <parameter name="PHY_LPDDR3_CORE_CLKS_SHARING_ENUM">CORE_CLKS_SHARING_DISABLED</parameter>
+  <parameter name="PHY_LPDDR3_DEFAULT_IO" value="true" />
+  <parameter name="PHY_LPDDR3_DEFAULT_REF_CLK_FREQ" value="true" />
+  <parameter name="PHY_LPDDR3_HPS_ENABLE_EARLY_RELEASE" value="false" />
+  <parameter name="PHY_LPDDR3_IO_VOLTAGE" value="1.2" />
+  <parameter name="PHY_LPDDR3_MEM_CLK_FREQ_MHZ" value="800.0" />
+  <parameter name="PHY_LPDDR3_RATE_ENUM" value="RATE_HALF" />
+  <parameter name="PHY_LPDDR3_REF_CLK_JITTER_PS" value="10.0" />
+  <parameter name="PHY_LPDDR3_USER_AC_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_LPDDR3_USER_AC_MODE_ENUM" value="unset" />
+  <parameter name="PHY_LPDDR3_USER_AC_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_LPDDR3_USER_AUTO_STARTING_VREFIN_EN" value="true" />
+  <parameter name="PHY_LPDDR3_USER_CK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_LPDDR3_USER_CK_MODE_ENUM" value="unset" />
+  <parameter name="PHY_LPDDR3_USER_CK_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_LPDDR3_USER_DATA_IN_MODE_ENUM" value="unset" />
+  <parameter name="PHY_LPDDR3_USER_DATA_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_LPDDR3_USER_DATA_OUT_MODE_ENUM" value="unset" />
+  <parameter name="PHY_LPDDR3_USER_PERIODIC_OCT_RECAL_ENUM">PERIODIC_OCT_RECAL_AUTO</parameter>
+  <parameter name="PHY_LPDDR3_USER_PING_PONG_EN" value="false" />
+  <parameter name="PHY_LPDDR3_USER_PLL_REF_CLK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_LPDDR3_USER_REF_CLK_FREQ_MHZ" value="-1.0" />
+  <parameter name="PHY_LPDDR3_USER_RZQ_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_LPDDR3_USER_STARTING_VREFIN" value="70.0" />
+  <parameter name="PHY_QDR2_CONFIG_ENUM">CONFIG_PHY_AND_SOFT_CTRL</parameter>
+  <parameter name="PHY_QDR2_CORE_CLKS_SHARING_ENUM">CORE_CLKS_SHARING_DISABLED</parameter>
+  <parameter name="PHY_QDR2_DEFAULT_IO" value="true" />
+  <parameter name="PHY_QDR2_DEFAULT_REF_CLK_FREQ" value="true" />
+  <parameter name="PHY_QDR2_HPS_ENABLE_EARLY_RELEASE" value="false" />
+  <parameter name="PHY_QDR2_IO_VOLTAGE" value="1.5" />
+  <parameter name="PHY_QDR2_MEM_CLK_FREQ_MHZ" value="633.333" />
+  <parameter name="PHY_QDR2_RATE_ENUM" value="RATE_HALF" />
+  <parameter name="PHY_QDR2_REF_CLK_JITTER_PS" value="10.0" />
+  <parameter name="PHY_QDR2_USER_AC_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_QDR2_USER_AC_MODE_ENUM" value="unset" />
+  <parameter name="PHY_QDR2_USER_AC_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_QDR2_USER_AUTO_STARTING_VREFIN_EN" value="true" />
+  <parameter name="PHY_QDR2_USER_CK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_QDR2_USER_CK_MODE_ENUM" value="unset" />
+  <parameter name="PHY_QDR2_USER_CK_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_QDR2_USER_DATA_IN_MODE_ENUM" value="unset" />
+  <parameter name="PHY_QDR2_USER_DATA_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_QDR2_USER_DATA_OUT_MODE_ENUM" value="unset" />
+  <parameter name="PHY_QDR2_USER_PERIODIC_OCT_RECAL_ENUM">PERIODIC_OCT_RECAL_AUTO</parameter>
+  <parameter name="PHY_QDR2_USER_PING_PONG_EN" value="false" />
+  <parameter name="PHY_QDR2_USER_PLL_REF_CLK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_QDR2_USER_REF_CLK_FREQ_MHZ" value="-1.0" />
+  <parameter name="PHY_QDR2_USER_RZQ_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_QDR2_USER_STARTING_VREFIN" value="70.0" />
+  <parameter name="PHY_QDR4_CONFIG_ENUM">CONFIG_PHY_AND_SOFT_CTRL</parameter>
+  <parameter name="PHY_QDR4_CORE_CLKS_SHARING_ENUM">CORE_CLKS_SHARING_DISABLED</parameter>
+  <parameter name="PHY_QDR4_DEFAULT_IO" value="true" />
+  <parameter name="PHY_QDR4_DEFAULT_REF_CLK_FREQ" value="true" />
+  <parameter name="PHY_QDR4_HPS_ENABLE_EARLY_RELEASE" value="false" />
+  <parameter name="PHY_QDR4_IO_VOLTAGE" value="1.2" />
+  <parameter name="PHY_QDR4_MEM_CLK_FREQ_MHZ" value="1066.667" />
+  <parameter name="PHY_QDR4_RATE_ENUM" value="RATE_QUARTER" />
+  <parameter name="PHY_QDR4_REF_CLK_JITTER_PS" value="10.0" />
+  <parameter name="PHY_QDR4_USER_AC_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_QDR4_USER_AC_MODE_ENUM" value="unset" />
+  <parameter name="PHY_QDR4_USER_AC_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_QDR4_USER_AUTO_STARTING_VREFIN_EN" value="true" />
+  <parameter name="PHY_QDR4_USER_CK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_QDR4_USER_CK_MODE_ENUM" value="unset" />
+  <parameter name="PHY_QDR4_USER_CK_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_QDR4_USER_DATA_IN_MODE_ENUM" value="unset" />
+  <parameter name="PHY_QDR4_USER_DATA_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_QDR4_USER_DATA_OUT_MODE_ENUM" value="unset" />
+  <parameter name="PHY_QDR4_USER_PERIODIC_OCT_RECAL_ENUM">PERIODIC_OCT_RECAL_AUTO</parameter>
+  <parameter name="PHY_QDR4_USER_PING_PONG_EN" value="false" />
+  <parameter name="PHY_QDR4_USER_PLL_REF_CLK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_QDR4_USER_REF_CLK_FREQ_MHZ" value="-1.0" />
+  <parameter name="PHY_QDR4_USER_RZQ_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_QDR4_USER_STARTING_VREFIN" value="70.0" />
+  <parameter name="PHY_RLD2_CONFIG_ENUM">CONFIG_PHY_AND_SOFT_CTRL</parameter>
+  <parameter name="PHY_RLD2_CORE_CLKS_SHARING_ENUM">CORE_CLKS_SHARING_DISABLED</parameter>
+  <parameter name="PHY_RLD2_DEFAULT_IO" value="true" />
+  <parameter name="PHY_RLD2_DEFAULT_REF_CLK_FREQ" value="true" />
+  <parameter name="PHY_RLD2_HPS_ENABLE_EARLY_RELEASE" value="false" />
+  <parameter name="PHY_RLD2_IO_VOLTAGE" value="1.8" />
+  <parameter name="PHY_RLD2_MEM_CLK_FREQ_MHZ" value="533.333" />
+  <parameter name="PHY_RLD2_RATE_ENUM" value="RATE_HALF" />
+  <parameter name="PHY_RLD2_REF_CLK_JITTER_PS" value="10.0" />
+  <parameter name="PHY_RLD2_USER_AC_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_RLD2_USER_AC_MODE_ENUM" value="unset" />
+  <parameter name="PHY_RLD2_USER_AC_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_RLD2_USER_AUTO_STARTING_VREFIN_EN" value="true" />
+  <parameter name="PHY_RLD2_USER_CK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_RLD2_USER_CK_MODE_ENUM" value="unset" />
+  <parameter name="PHY_RLD2_USER_CK_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_RLD2_USER_DATA_IN_MODE_ENUM" value="unset" />
+  <parameter name="PHY_RLD2_USER_DATA_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_RLD2_USER_DATA_OUT_MODE_ENUM" value="unset" />
+  <parameter name="PHY_RLD2_USER_PERIODIC_OCT_RECAL_ENUM">PERIODIC_OCT_RECAL_AUTO</parameter>
+  <parameter name="PHY_RLD2_USER_PING_PONG_EN" value="false" />
+  <parameter name="PHY_RLD2_USER_PLL_REF_CLK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_RLD2_USER_REF_CLK_FREQ_MHZ" value="-1.0" />
+  <parameter name="PHY_RLD2_USER_RZQ_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_RLD2_USER_STARTING_VREFIN" value="70.0" />
+  <parameter name="PHY_RLD3_CONFIG_ENUM" value="CONFIG_PHY_ONLY" />
+  <parameter name="PHY_RLD3_CORE_CLKS_SHARING_ENUM">CORE_CLKS_SHARING_DISABLED</parameter>
+  <parameter name="PHY_RLD3_DEFAULT_IO" value="true" />
+  <parameter name="PHY_RLD3_DEFAULT_REF_CLK_FREQ" value="true" />
+  <parameter name="PHY_RLD3_HPS_ENABLE_EARLY_RELEASE" value="false" />
+  <parameter name="PHY_RLD3_IO_VOLTAGE" value="1.2" />
+  <parameter name="PHY_RLD3_MEM_CLK_FREQ_MHZ" value="1066.667" />
+  <parameter name="PHY_RLD3_RATE_ENUM" value="RATE_QUARTER" />
+  <parameter name="PHY_RLD3_REF_CLK_JITTER_PS" value="10.0" />
+  <parameter name="PHY_RLD3_USER_AC_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_RLD3_USER_AC_MODE_ENUM" value="unset" />
+  <parameter name="PHY_RLD3_USER_AC_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_RLD3_USER_AUTO_STARTING_VREFIN_EN" value="true" />
+  <parameter name="PHY_RLD3_USER_CK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_RLD3_USER_CK_MODE_ENUM" value="unset" />
+  <parameter name="PHY_RLD3_USER_CK_SLEW_RATE_ENUM" value="SLEW_RATE_FAST" />
+  <parameter name="PHY_RLD3_USER_DATA_IN_MODE_ENUM" value="unset" />
+  <parameter name="PHY_RLD3_USER_DATA_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_RLD3_USER_DATA_OUT_MODE_ENUM" value="unset" />
+  <parameter name="PHY_RLD3_USER_PERIODIC_OCT_RECAL_ENUM">PERIODIC_OCT_RECAL_AUTO</parameter>
+  <parameter name="PHY_RLD3_USER_PING_PONG_EN" value="false" />
+  <parameter name="PHY_RLD3_USER_PLL_REF_CLK_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_RLD3_USER_REF_CLK_FREQ_MHZ" value="-1.0" />
+  <parameter name="PHY_RLD3_USER_RZQ_IO_STD_ENUM" value="unset" />
+  <parameter name="PHY_RLD3_USER_STARTING_VREFIN" value="70.0" />
+  <parameter name="PLL_ADD_EXTRA_CLKS" value="0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_DUTY_CYCLE_GUI_5" value="50.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_DUTY_CYCLE_GUI_6" value="50.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_DUTY_CYCLE_GUI_7" value="50.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_DUTY_CYCLE_GUI_8" value="50.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_GUI_5" value="100.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_GUI_6" value="100.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_GUI_7" value="100.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_FREQ_MHZ_GUI_8" value="100.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_PHASE_DEG_GUI_5" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_PHASE_DEG_GUI_6" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_PHASE_DEG_GUI_7" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_PHASE_DEG_GUI_8" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_PHASE_PS_GUI_5" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_PHASE_PS_GUI_6" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_PHASE_PS_GUI_7" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_ACTUAL_PHASE_PS_GUI_8" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_DUTY_CYCLE_GUI_5" value="50.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_DUTY_CYCLE_GUI_6" value="50.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_DUTY_CYCLE_GUI_7" value="50.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_DUTY_CYCLE_GUI_8" value="50.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_FREQ_MHZ_GUI_5" value="100.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_FREQ_MHZ_GUI_6" value="100.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_FREQ_MHZ_GUI_7" value="100.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_FREQ_MHZ_GUI_8" value="100.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_PHASE_GUI_5" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_PHASE_GUI_6" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_PHASE_GUI_7" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_DESIRED_PHASE_GUI_8" value="0.0" />
+  <parameter name="PLL_EXTRA_CLK_PHASE_SHIFT_UNIT_GUI_0" value="0" />
+  <parameter name="PLL_EXTRA_CLK_PHASE_SHIFT_UNIT_GUI_1" value="0" />
+  <parameter name="PLL_EXTRA_CLK_PHASE_SHIFT_UNIT_GUI_2" value="0" />
+  <parameter name="PLL_EXTRA_CLK_PHASE_SHIFT_UNIT_GUI_3" value="0" />
+  <parameter name="PLL_EXTRA_CLK_PHASE_SHIFT_UNIT_GUI_4" value="0" />
+  <parameter name="PLL_EXTRA_CLK_PHASE_SHIFT_UNIT_GUI_5" value="0" />
+  <parameter name="PLL_EXTRA_CLK_PHASE_SHIFT_UNIT_GUI_6" value="0" />
+  <parameter name="PLL_EXTRA_CLK_PHASE_SHIFT_UNIT_GUI_7" value="0" />
+  <parameter name="PLL_EXTRA_CLK_PHASE_SHIFT_UNIT_GUI_8" value="0" />
+  <parameter name="PLL_USER_NUM_OF_EXTRA_CLKS" value="0" />
+  <parameter name="PROTOCOL_ENUM" value="PROTOCOL_DDR4" />
+  <parameter name="SHORT_QSYS_INTERFACE_NAMES" value="false" />
+  <parameter name="SYS_INFO_DEVICE" value="10AS066K3F40E2SG" />
+  <parameter name="SYS_INFO_DEVICE_FAMILY" value="Arria 10" />
+  <parameter name="SYS_INFO_DEVICE_SPEEDGRADE" value="2" />
+  <parameter name="SYS_INFO_UNIQUE_ID">$${FILENAME}_emif_a10_hps</parameter>
+  <parameter name="TRAIT_SUPPORTS_VID" value="0" />
+ </module>
+ <module
+   name="f2sdram_m"
+   kind="altera_jtag_avalon_master"
+   version="18.1"
+   enabled="1">
+  <parameter name="AUTO_DEVICE" value="10AS066K3F40E2SG" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Arria 10" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="2" />
+  <parameter name="COMPONENT_CLOCK" value="0" />
+  <parameter name="FAST_VER" value="0" />
+  <parameter name="FIFO_DEPTHS" value="2" />
+  <parameter name="PLI_PORT" value="50000" />
+  <parameter name="USE_PLI" value="0" />
+ </module>
+ <module name="fancmd" kind="HAN_FanControll" version="1.0" enabled="1" />
+ <module
+   name="fpga_m"
+   kind="altera_jtag_avalon_master"
+   version="18.1"
+   enabled="1">
+  <parameter name="AUTO_DEVICE" value="10AS066K3F40E2SG" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Arria 10" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="2" />
+  <parameter name="COMPONENT_CLOCK" value="0" />
+  <parameter name="FAST_VER" value="0" />
+  <parameter name="FIFO_DEPTHS" value="2" />
+  <parameter name="PLI_PORT" value="50000" />
+  <parameter name="USE_PLI" value="0" />
+ </module>
+ <module
+   name="h2fw_ClockBridge"
+   kind="altera_avalon_mm_clock_crossing_bridge"
+   version="18.1"
+   enabled="1">
+  <parameter name="ADDRESS_UNITS" value="SYMBOLS" />
+  <parameter name="ADDRESS_WIDTH" value="10" />
+  <parameter name="COMMAND_FIFO_DEPTH" value="4" />
+  <parameter name="DATA_WIDTH" value="32" />
+  <parameter name="MASTER_SYNC_DEPTH" value="2" />
+  <parameter name="MAX_BURST_SIZE" value="1" />
+  <parameter name="RESPONSE_FIFO_DEPTH" value="4" />
+  <parameter name="SLAVE_SYNC_DEPTH" value="2" />
+  <parameter name="SYMBOL_WIDTH" value="8" />
+  <parameter name="SYSINFO_ADDR_WIDTH" value="4" />
+  <parameter name="USE_AUTO_ADDRESS_WIDTH" value="0" />
+ </module>
+ <module
+   name="hps_m"
+   kind="altera_jtag_avalon_master"
+   version="18.1"
+   enabled="1">
+  <parameter name="AUTO_DEVICE" value="10AS066K3F40E2SG" />
+  <parameter name="AUTO_DEVICE_FAMILY" value="Arria 10" />
+  <parameter name="AUTO_DEVICE_SPEEDGRADE" value="2" />
+  <parameter name="COMPONENT_CLOCK" value="0" />
+  <parameter name="FAST_VER" value="0" />
+  <parameter name="FIFO_DEPTHS" value="2" />
+  <parameter name="PLI_PORT" value="50000" />
+  <parameter name="USE_PLI" value="0" />
+ </module>
+ <module
+   name="issp"
+   kind="altera_in_system_sources_probes"
+   version="18.1"
+   enabled="1">
+  <parameter name="create_source_clock" value="true" />
+  <parameter name="create_source_clock_enable" value="false" />
+  <parameter name="device_family" value="Arria 10" />
+  <parameter name="gui_use_auto_index" value="true" />
+  <parameter name="instance_id" value="RST" />
+  <parameter name="probe_width" value="0" />
+  <parameter name="sld_instance_index" value="0" />
+  <parameter name="source_initial_value" value="0" />
+  <parameter name="source_width" value="3" />
+ </module>
+ <module name="led_pio" kind="altera_avalon_pio" version="18.1" enabled="1">
+  <parameter name="bitClearingEdgeCapReg" value="false" />
+  <parameter name="bitModifyingOutReg" value="false" />
+  <parameter name="captureEdge" value="false" />
+  <parameter name="clockRate" value="100000000" />
+  <parameter name="direction" value="Output" />
+  <parameter name="edgeType" value="RISING" />
+  <parameter name="generateIRQ" value="false" />
+  <parameter name="irqType" value="LEVEL" />
+  <parameter name="resetValue" value="0" />
+  <parameter name="simDoTestBenchWiring" value="false" />
+  <parameter name="simDrivenValue" value="0" />
+  <parameter name="width" value="2" />
+ </module>
+ <module
+   name="onchip_memory2"
+   kind="altera_avalon_onchip_memory2"
+   version="18.1"
+   enabled="1">
+  <parameter name="allowInSystemMemoryContentEditor" value="false" />
+  <parameter name="autoInitializationFileName">$${FILENAME}_onchip_memory2</parameter>
+  <parameter name="blockType" value="AUTO" />
+  <parameter name="copyInitFile" value="false" />
+  <parameter name="dataWidth" value="8" />
+  <parameter name="dataWidth2" value="32" />
+  <parameter name="deviceFamily" value="Arria 10" />
+  <parameter name="deviceFeatures">ADDRESS_STALL 0 ADVANCED_INFO 0 ALLOWS_COMPILING_OTHER_FAMILY_IP 0 ANY_QFP 0 CELL_LEVEL_BACK_ANNOTATION_DISABLED 0 COMPILER_SUPPORT 1 DSP 1 DSP_SHIFTER_BLOCK 0 DUMP_ASM_LAB_BITS_FOR_POWER 0 EMUL 0 ENABLE_ADVANCED_IO_ANALYSIS_GUI_FEATURES 1 ENABLE_PIN_PLANNER 0 ENGINEERING_SAMPLE 0 EPCS 0 ESB 0 FAKE1 0 FAKE2 0 FAKE3 0 FAMILY_LEVEL_INSTALLATION_ONLY 0 FASTEST 0 FINAL_TIMING_MODEL 0 FITTER_USE_FALLING_EDGE_DELAY 0 FPP_COMPLETELY_PLACES_AND_ROUTES_PERIPHERY 1 GENERATE_DC_ON_CURRENT_WARNING_FOR_INTERNAL_CLAMPING_DIODE 0 HARDCOPY 0 HAS_18_BIT_MULTS 0 HAS_ACE_SUPPORT 1 HAS_ACTIVE_PARALLEL_FLASH_SUPPORT 0 HAS_ADJUSTABLE_OUTPUT_IO_TIMING_MEAS_POINT 1 HAS_ADVANCED_IO_INVERTED_CORNER 0 HAS_ADVANCED_IO_POWER_SUPPORT 1 HAS_ADVANCED_IO_TIMING_SUPPORT 1 HAS_ALM_SUPPORT 1 HAS_ATOM_AND_ROUTING_POWER_MODELED_TOGETHER 0 HAS_AUTO_DERIVE_CLOCK_UNCERTAINTY_SUPPORT 1 HAS_AUTO_FIT_SUPPORT 1 HAS_BALANCED_OPT_TECHNIQUE_SUPPORT 1 HAS_BENEFICIAL_SKEW_SUPPORT 0 HAS_BITLEVEL_DRIVE_STRENGTH_CONTROL 0 HAS_BSDL_FILE_GENERATION 0 HAS_CDB_RE_NETWORK_PRESERVATION_SUPPORT 1 HAS_CGA_SUPPORT 1 HAS_CHECK_NETLIST_SUPPORT 0 HAS_CLOCK_REGION_CHECKER_ENABLED 0 HAS_CORE_JUNCTION_TEMP_DERATING 0 HAS_CROSSTALK_SUPPORT 0 HAS_CUSTOM_REGION_SUPPORT 0 HAS_DAP_JTAG_FROM_HPS 0 HAS_DATA_DRIVEN_ACVQ_HSSI_SUPPORT 1 HAS_DDB_FDI_SUPPORT 1 HAS_DESIGN_ANALYZER_SUPPORT 0 HAS_DETAILED_IO_RAIL_POWER_MODEL 1 HAS_DETAILED_LEIM_STATIC_POWER_MODEL 0 HAS_DETAILED_LE_POWER_MODEL 0 HAS_DETAILED_ROUTING_MUX_STATIC_POWER_MODEL 0 HAS_DETAILED_THERMAL_CIRCUIT_PARAMETER_SUPPORT 1 HAS_DEVICE_MIGRATION_SUPPORT 1 HAS_DIAGONAL_MIGRATION_SUPPORT 0 HAS_EMIF_TOOLKIT_SUPPORT 1 HAS_ERROR_DETECTION_SUPPORT 1 HAS_FAMILY_VARIANT_MIGRATION_SUPPORT 0 HAS_FANOUT_FREE_NODE_SUPPORT 1 HAS_FAST_FIT_SUPPORT 0 HAS_FITTER_ECO_SUPPORT 0 HAS_FIT_NETLIST_OPT_RETIME_SUPPORT 1 HAS_FIT_NETLIST_OPT_SUPPORT 1 HAS_FORMAL_VERIFICATION_SUPPORT 0 HAS_FPGA_XCHANGE_SUPPORT 0 HAS_FSAC_LUTRAM_REGISTER_PACKING_SUPPORT 1 HAS_FULL_DAT_MIN_TIMING_SUPPORT 1 HAS_FULL_INCREMENTAL_DESIGN_SUPPORT 1 HAS_FUNCTIONAL_SIMULATION_SUPPORT 0 HAS_FUNCTIONAL_VERILOG_SIMULATION_SUPPORT 1 HAS_FUNCTIONAL_VHDL_SIMULATION_SUPPORT 1 HAS_GLITCH_FILTERING_SUPPORT 1 HAS_HARDCOPYII_SUPPORT 0 HAS_HC_READY_SUPPORT 0 HAS_HIGH_SPEED_LOW_POWER_TILE_SUPPORT 1 HAS_HOLD_TIME_AVOIDANCE_ACROSS_CLOCK_SPINE_SUPPORT 0 HAS_HSPICE_WRITER_SUPPORT 0 HAS_HSSI_POWER_CALCULATOR 1 HAS_IBISO_WRITER_SUPPORT 0 HAS_ICD_DATA_IP 1 HAS_IDB_SUPPORT 1 HAS_INCREMENTAL_DAT_SUPPORT 1 HAS_INCREMENTAL_SYNTHESIS_SUPPORT 1 HAS_IO_ASSIGNMENT_ANALYSIS_SUPPORT 1 HAS_IO_DECODER 1 HAS_IO_PLACEMENT_OPTIMIZATION_SUPPORT 0 HAS_IO_PLACEMENT_USING_GEOMETRY_RULE 0 HAS_IO_PLACEMENT_USING_PHYSIC_RULE 0 HAS_IO_SMART_RECOMPILE_SUPPORT 0 HAS_JITTER_SUPPORT 1 HAS_JTAG_SLD_HUB_SUPPORT 1 HAS_LOGIC_LOCK_SUPPORT 1 HAS_MICROPROCESSOR 0 HAS_MIF_SMART_COMPILE_SUPPORT 1 HAS_MINMAX_TIMING_MODELING_SUPPORT 0 HAS_MIN_TIMING_ANALYSIS_SUPPORT 0 HAS_MUX_RESTRUCTURE_SUPPORT 1 HAS_NADDER_STYLE_CLOCKING 0 HAS_NADDER_STYLE_FF 0 HAS_NADDER_STYLE_LCELL_COMB 0 HAS_NEW_CDB_NAME_FOR_M20K_SCLR 0 HAS_NEW_HC_FLOW_SUPPORT 0 HAS_NEW_SERDES_MAX_RESOURCE_COUNT_REPORTING_SUPPORT 0 HAS_NEW_VPR_SUPPORT 1 HAS_NONSOCKET_TECHNOLOGY_MIGRATION_SUPPORT 0 HAS_NO_HARDBLOCK_PARTITION_SUPPORT 1 HAS_NO_JTAG_USERCODE_SUPPORT 0 HAS_OPERATING_SETTINGS_AND_CONDITIONS_REPORTING_SUPPORT 1 HAS_PAD_LOCATION_ASSIGNMENT_SUPPORT 0 HAS_PARTIAL_RECONFIG_SUPPORT 1 HAS_PASSIVE_PARALLEL_SUPPORT 0 HAS_PDN_MODEL_STATUS 1 HAS_PHYSICAL_DESIGN_PLANNER_SUPPORT 1 HAS_PHYSICAL_NETLIST_OUTPUT 0 HAS_PHYSICAL_ROUTING_SUPPORT 1 HAS_PIN_SPECIFIC_VOLTAGE_SUPPORT 1 HAS_PLDM_REF_SUPPORT 0 HAS_POWER_BINNING_LIMITS_DATA 1 HAS_POWER_ESTIMATION_SUPPORT 1 HAS_PRELIMINARY_CLOCK_UNCERTAINTY_NUMBERS 0 HAS_PRE_FITTER_FPP_SUPPORT 1 HAS_PRE_FITTER_LUTRAM_NETLIST_CHECKER_ENABLED 1 HAS_PVA_SUPPORT 1 HAS_QUARTUS_HIERARCHICAL_DESIGN_SUPPORT 1 HAS_RAPID_RECOMPILE_SUPPORT 1 HAS_RCF_SUPPORT 1 HAS_RCF_SUPPORT_FOR_DEBUGGING 0 HAS_RED_BLACK_SEPARATION_SUPPORT 0 HAS_RE_LEVEL_TIMING_GRAPH_SUPPORT 1 HAS_RISEFALL_DELAY_SUPPORT 1 HAS_SIGNAL_PROBE_SUPPORT 0 HAS_SIGNAL_TAP_SUPPORT 1 HAS_SIMULATOR_SUPPORT 0 HAS_SPLIT_IO_SUPPORT 1 HAS_SPLIT_LC_SUPPORT 1 HAS_STRICT_PRESERVATION_SUPPORT 0 HAS_SYNTHESIS_ON_ATOMS 1 HAS_SYNTH_FSYN_NETLIST_OPT_SUPPORT 1 HAS_SYNTH_NETLIST_OPT_RETIME_SUPPORT 0 HAS_SYNTH_NETLIST_OPT_SUPPORT 1 HAS_TCL_FITTER_SUPPORT 1 HAS_TECHNOLOGY_MIGRATION_SUPPORT 0 HAS_TEMPLATED_REGISTER_PACKING_SUPPORT 1 HAS_TIME_BORROWING_SUPPORT 1 HAS_TIMING_DRIVEN_SYNTHESIS_SUPPORT 1 HAS_TIMING_INFO_SUPPORT 1 HAS_TIMING_OPERATING_CONDITIONS 1 HAS_TIMING_SIMULATION_SUPPORT 0 HAS_TITAN_BASED_MAC_REGISTER_PACKER_SUPPORT 0 HAS_U2B2_SUPPORT 1 HAS_USER_HIGH_SPEED_LOW_POWER_TILE_SUPPORT 1 HAS_USE_FITTER_INFO_SUPPORT 0 HAS_VCCPD_POWER_RAIL 1 HAS_VERTICAL_MIGRATION_SUPPORT 1 HAS_VIEWDRAW_SYMBOL_SUPPORT 0 HAS_VIO_SUPPORT 1 HAS_VIRTUAL_DEVICES 0 HAS_WYSIWYG_DFFEAS_SUPPORT 1 HAS_XIBISO2_WRITER_SUPPORT 1 HAS_XIBISO_WRITER_SUPPORT 0 IFP_USE_LEGACY_IO_CHECKER 0 INCREMENTAL_DESIGN_SUPPORTS_COMPATIBLE_CONSTRAINTS 1 INSTALLED 0 INTERNAL_POF_SUPPORT_ENABLED 0 INTERNAL_USE_ONLY 0 ISSUE_MILITARY_TEMPERATURE_WARNING 0 IS_BARE_DIE 0 IS_CONFIG_ROM 0 IS_DEFAULT_FAMILY 0 IS_FOR_INTERNAL_TESTING_ONLY 0 IS_HARDCOPY_FAMILY 0 IS_HBGA_PACKAGE 0 IS_HIGH_CURRENT_PART 0 IS_JW_NEW_BINNING_PLAN 0 IS_LOW_POWER_PART 0 IS_REVE_SILICON 0 IS_SDM_ONLY_PACKAGE 0 IS_SMI_PART 0 LOAD_BLK_TYPE_DATA_FROM_ATOM_WYS_INFO 0 LVDS_IO 1 M10K_MEMORY 0 M144K_MEMORY 0 M20K_MEMORY 1 M4K_MEMORY 0 M512_MEMORY 0 M9K_MEMORY 0 MLAB_MEMORY 1 MRAM_MEMORY 0 NOT_LISTED 0 NOT_MIGRATABLE 0 NO_FITTER_DELAY_CACHE_GENERATED 0 NO_PIN_OUT 0 NO_POF 0 NO_RPE_SUPPORT 0 NO_SUPPORT_FOR_LOGICLOCK_CONTENT_BACK_ANNOTATION 1 NO_SUPPORT_FOR_STA_CLOCK_UNCERTAINTY_CHECK 0 NO_TDC_SUPPORT 0 POSTFIT_BAK_DATABASE_EXPORT_ENABLED 0 POSTMAP_BAK_DATABASE_EXPORT_ENABLED 0 PROGRAMMER_ONLY 0 PROGRAMMER_SUPPORT 1 PVA_SUPPORTS_ONLY_SUBSET_OF_ATOMS 1 QFIT_IN_DEVELOPMENT 0 QMAP_IN_DEVELOPMENT 0 RAM_LOGICAL_NAME_CHECKING_IN_CUT_ENABLED 0 REPORTS_METASTABILITY_MTBF 1 REQUIRES_INSTALLATION_PATCH 0 REQUIRES_LIST_OF_TEMPERATURE_AND_VOLTAGE_OPERATING_CONDITIONS 1 REQUIRE_QUARTUS_HIERARCHICAL_DESIGN 0 REQUIRE_SPECIAL_HANDLING_FOR_LOCAL_LABLINE 0 RESERVES_SIGNAL_PROBE_PINS 0 RESOLVE_MAX_FANOUT_EARLY 1 RESOLVE_MAX_FANOUT_LATE 0 RESPECTS_FIXED_SIZED_LOCKED_LOCATION_LOGICLOCK 0 RESTRICTED_USER_SELECTION 0 RESTRICT_PARTIAL_RECONFIG 0 RISEFALL_SUPPORT_IS_HIDDEN 0 SHOW_HIDDEN_FAMILY_IN_PROGRAMMER 0 STRICT_TIMING_DB_CHECKS 0 SUPPORTS_1P0V_IOSTD 0 SUPPORTS_ADDITIONAL_OPTIONS_FOR_UNUSED_IO 0 SUPPORTS_CRC 1 SUPPORTS_DIFFERENTIAL_AIOT_BOARD_TRACE_MODEL 1 SUPPORTS_DSP_BALANCING_BACK_ANNOTATION 0 SUPPORTS_GENERATION_OF_EARLY_POWER_ESTIMATOR_FILE 1 SUPPORTS_GLOBAL_SIGNAL_BACK_ANNOTATION 0 SUPPORTS_HIPI_RETIMING 0 SUPPORTS_LICENSE_FREE_PARTIAL_RECONFIG 1 SUPPORTS_MAC_CHAIN_OUT_ADDER 0 SUPPORTS_NEW_BINNING_PLAN 0 SUPPORTS_RAM_PACKING_BACK_ANNOTATION 0 SUPPORTS_REG_PACKING_BACK_ANNOTATION 0 SUPPORTS_SIGNALPROBE_REGISTER_PIPELINING 0 SUPPORTS_SINGLE_ENDED_AIOT_BOARD_TRACE_MODEL 1 SUPPORTS_USER_MANUAL_LOGIC_DUPLICATION 1 SUPPORTS_VID 0 SUPPORT_HIGH_SPEED_HPS 0 TMV_RUN_CUSTOMIZABLE_VIEWER 0 TMV_RUN_INTERNAL_DETAILS 1 TMV_RUN_INTERNAL_DETAILS_ON_IO 0 TMV_RUN_INTERNAL_DETAILS_ON_IOBUF 1 TMV_RUN_INTERNAL_DETAILS_ON_LCELL 0 TMV_RUN_INTERNAL_DETAILS_ON_LRAM 0 TRANSCEIVER_3G_BLOCK 0 TRANSCEIVER_6G_BLOCK 0 USES_ACV_FOR_FLED 0 USES_ADB_FOR_BACK_ANNOTATION 1 USES_ALTERA_LNSIM 0 USES_ASIC_ROUTING_POWER_CALCULATOR 0 USES_DATA_DRIVEN_PLL_COMPUTATION_UTIL 0 USES_DEV 1 USES_ICP_FOR_ECO_FITTER 0 USES_LIBERTY_TIMING 0 USES_NETWORK_ROUTING_POWER_CALCULATOR 1 USES_PART_INFO_FOR_DISPLAYING_CORE_VOLTAGE_VALUE 1 USES_POWER_SIGNAL_ACTIVITIES 1 USES_PVAFAM2 1 USES_SECOND_GENERATION_PART_INFO 1 USES_SECOND_GENERATION_POWER_ANALYZER 1 USES_THIRD_GENERATION_TIMING_MODELS_TIS 1 USES_U2B2_TIMING_MODELS 1 USES_XML_FORMAT_FOR_EMIF_PIN_MAP_FILE 1 USE_ADVANCED_IO_POWER_BY_DEFAULT 1 USE_ADVANCED_IO_TIMING_BY_DEFAULT 1 USE_BASE_FAMILY_DDB_PATH 0 USE_OCT_AUTO_CALIBRATION 1 USE_RELAX_IO_ASSIGNMENT_RULES 0 USE_RISEFALL_ONLY 1 USE_SEPARATE_LIST_FOR_TECH_MIGRATION 0 USE_SINGLE_COMPILER_PASS_PLL_MIF_FILE_WRITER 0 USE_TITAN_IO_BASED_IO_REGISTER_PACKER_UTIL 1 USING_28NM_OR_OLDER_TIMING_METHODOLOGY 0 WYSIWYG_BUS_WIDTH_CHECKING_IN_CUT_ENABLED 0</parameter>
+  <parameter name="dualPort" value="false" />
+  <parameter name="ecc_enabled" value="false" />
+  <parameter name="enPRInitMode" value="false" />
+  <parameter name="enableDiffWidth" value="false" />
+  <parameter name="initMemContent" value="true" />
+  <parameter name="initializationFileName" value="onchip_mem.hex" />
+  <parameter name="instanceID" value="NONE" />
+  <parameter name="memorySize" value="262144" />
+  <parameter name="readDuringWriteMode" value="DONT_CARE" />
+  <parameter name="resetrequest_enabled" value="true" />
+  <parameter name="simAllowMRAMContentsFile" value="false" />
+  <parameter name="simMemInitOnlyFilename" value="0" />
+  <parameter name="singleClockOperation" value="false" />
+  <parameter name="slave1Latency" value="1" />
+  <parameter name="slave2Latency" value="1" />
+  <parameter name="useNonDefaultInitFile" value="false" />
+  <parameter name="useShallowMemBlocks" value="false" />
+  <parameter name="writable" value="true" />
+ </module>
+ <module
+   name="pb_lwh2f"
+   kind="altera_avalon_mm_bridge"
+   version="18.1"
+   enabled="1">
+  <parameter name="ADDRESS_UNITS" value="SYMBOLS" />
+  <parameter name="ADDRESS_WIDTH" value="10" />
+  <parameter name="DATA_WIDTH" value="32" />
+  <parameter name="LINEWRAPBURSTS" value="0" />
+  <parameter name="MAX_BURST_SIZE" value="1" />
+  <parameter name="MAX_PENDING_RESPONSES" value="1" />
+  <parameter name="PIPELINE_COMMAND" value="1" />
+  <parameter name="PIPELINE_RESPONSE" value="1" />
+  <parameter name="SYMBOL_WIDTH" value="8" />
+  <parameter name="SYSINFO_ADDR_WIDTH" value="9" />
+  <parameter name="USE_AUTO_ADDRESS_WIDTH" value="1" />
+  <parameter name="USE_RESPONSE" value="0" />
+ </module>
+ <module
+   name="reset_bridge"
+   kind="altera_reset_bridge"
+   version="18.1"
+   enabled="1">
+  <parameter name="ACTIVE_LOW_RESET" value="0" />
+  <parameter name="AUTO_CLK_CLOCK_RATE" value="100000000" />
+  <parameter name="NUM_RESET_OUTPUTS" value="1" />
+  <parameter name="SYNCHRONOUS_EDGES" value="deassert" />
+  <parameter name="USE_RESET_REQUEST" value="0" />
+ </module>
+ <module name="sevensig" kind="SevenSigmentDisplay" version="1.0" enabled="1" />
+ <module
+   name="sysid_qsys"
+   kind="altera_avalon_sysid_qsys"
+   version="18.1"
+   enabled="1">
+  <parameter name="id" value="0" />
+ </module>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="arria10_hps.h2f_axi_master"
+   end="h2fw_ClockBridge.s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="arria10_hps.h2f_axi_master"
+   end="onchip_memory2.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x01000000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="arria10_hps.h2f_lw_axi_master"
+   end="pb_lwh2f.s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="pb_lwh2f.m0"
+   end="ILC.avalon_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="h2fw_ClockBridge.m0"
+   end="sevensig.avalon_slave_0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="h2fw_ClockBridge.m0"
+   end="fancmd.avalon_slave_0_1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0008" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="pb_lwh2f.m0"
+   end="sysid_qsys.control_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0130" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection kind="avalon" version="18.1" start="pb_lwh2f.m0" end="led_pio.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0120" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection kind="avalon" version="18.1" start="pb_lwh2f.m0" end="button_pio.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0110" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection kind="avalon" version="18.1" start="pb_lwh2f.m0" end="dipsw_pio.s1">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0100" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="hps_m.master"
+   end="arria10_hps.f2h_axi_slave">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="avalon"
+   version="18.1"
+   start="f2sdram_m.master"
+   end="arria10_hps.f2sdram0_data">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection kind="avalon" version="18.1" start="fpga_m.master" end="pb_lwh2f.s0">
+  <parameter name="arbitrationPriority" value="1" />
+  <parameter name="baseAddress" value="0x0000" />
+  <parameter name="defaultConnection" value="false" />
+ </connection>
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_100.clk"
+   end="reset_bridge.clk" />
+ <connection kind="clock" version="18.1" start="clk_100.clk" end="hps_m.clk" />
+ <connection kind="clock" version="18.1" start="clk_100.clk" end="f2sdram_m.clk" />
+ <connection kind="clock" version="18.1" start="clk_100.clk" end="fpga_m.clk" />
+ <connection kind="clock" version="18.1" start="clk_100.clk" end="pb_lwh2f.clk" />
+ <connection kind="clock" version="18.1" start="clk_100.clk" end="sysid_qsys.clk" />
+ <connection kind="clock" version="18.1" start="clk_100.clk" end="led_pio.clk" />
+ <connection kind="clock" version="18.1" start="clk_100.clk" end="button_pio.clk" />
+ <connection kind="clock" version="18.1" start="clk_100.clk" end="dipsw_pio.clk" />
+ <connection kind="clock" version="18.1" start="clk_100.clk" end="ILC.clk" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_100.clk"
+   end="onchip_memory2.clk1" />
+ <connection kind="clock" version="18.1" start="clk_50.clk" end="sevensig.clock50" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_50.clk"
+   end="fancmd.clock50Mhz" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_100.clk"
+   end="arria10_hps.f2h_axi_clock" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_100.clk"
+   end="arria10_hps.f2sdram0_clock" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_100.clk"
+   end="arria10_hps.h2f_axi_clock" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_100.clk"
+   end="arria10_hps.h2f_lw_axi_clock" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_100.clk"
+   end="h2fw_ClockBridge.m0_clk" />
+ <connection
+   kind="clock"
+   version="18.1"
+   start="clk_50.clk"
+   end="h2fw_ClockBridge.s0_clk" />
+ <connection kind="clock" version="18.1" start="clk_100.clk" end="issp.source_clk" />
+ <connection
+   kind="conduit"
+   version="18.1"
+   start="emif_a10_hps.hps_emif_conduit_end"
+   end="arria10_hps.emif">
+  <parameter name="endPort" value="" />
+  <parameter name="endPortLSB" value="0" />
+  <parameter name="startPort" value="" />
+  <parameter name="startPortLSB" value="0" />
+  <parameter name="width" value="0" />
+ </connection>
+ <connection
+   kind="interrupt"
+   version="18.1"
+   start="arria10_hps.f2h_irq0"
+   end="button_pio.irq">
+  <parameter name="irqNumber" value="0" />
+ </connection>
+ <connection
+   kind="interrupt"
+   version="18.1"
+   start="arria10_hps.f2h_irq0"
+   end="dipsw_pio.irq">
+  <parameter name="irqNumber" value="1" />
+ </connection>
+ <connection kind="interrupt" version="18.1" start="ILC.irq" end="button_pio.irq">
+  <parameter name="irqNumber" value="0" />
+ </connection>
+ <connection kind="interrupt" version="18.1" start="ILC.irq" end="dipsw_pio.irq">
+  <parameter name="irqNumber" value="1" />
+ </connection>
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="clk_50.clk_in_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="hps_m.clk_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="f2sdram_m.clk_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="fpga_m.clk_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="arria10_hps.f2h_axi_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="arria10_hps.f2sdram0_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="emif_a10_hps.global_reset_reset_sink" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="arria10_hps.h2f_axi_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="arria10_hps.h2f_lw_axi_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="reset_bridge.in_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="h2fw_ClockBridge.m0_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="pb_lwh2f.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="sysid_qsys.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="led_pio.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="button_pio.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="dipsw_pio.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_50.clk_reset"
+   end="fancmd.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_50.clk_reset"
+   end="sevensig.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="onchip_memory2.reset1" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_100.clk_reset"
+   end="ILC.reset_n" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="clk_50.clk_reset"
+   end="h2fw_ClockBridge.s0_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="hps_m.clk_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="f2sdram_m.clk_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="fpga_m.clk_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="arria10_hps.f2h_axi_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="arria10_hps.h2f_lw_axi_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="reset_bridge.in_reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="pb_lwh2f.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="sysid_qsys.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="led_pio.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="button_pio.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="dipsw_pio.reset" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="onchip_memory2.reset1" />
+ <connection
+   kind="reset"
+   version="18.1"
+   start="arria10_hps.h2f_reset"
+   end="ILC.reset_n" />
+ <interconnectRequirement for="$system" name="qsys_mm.clockCrossingAdapter" value="HANDSHAKE" />
+ <interconnectRequirement for="$system" name="qsys_mm.enableEccProtection" value="FALSE" />
+ <interconnectRequirement for="$system" name="qsys_mm.insertDefaultSlave" value="FALSE" />
+ <interconnectRequirement for="$system" name="qsys_mm.maxAdditionalLatency" value="1" />
+</system>

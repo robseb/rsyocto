@@ -1,0 +1,11 @@
+Analysis & Elaboration Status : Successful - Mon Dec 16 18:02:56 2019
+Quartus Prime Version : 18.1.0 Build 625 09/12/2018 SJ Standard Edition
+Revision Name : a10s
+Top-level Entity Name : a10s
+Family : Arria 10
+Logic utilization (in ALMs) : N/A until Partition Merge
+Total registers : N/A until Partition Merge
+Total pins : N/A until Partition Merge
+Total virtual pins : N/A until Partition Merge
+Total block memory bits : N/A until Partition Merge
+Total PLLs : N/A until Partition Merge
