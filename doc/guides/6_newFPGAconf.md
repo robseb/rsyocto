@@ -20,6 +20,7 @@
         ````
         * SOF here: `rsHAN.sof` 
         * RBF here: `socfpga.rbf`
+        * Name:     `socfpga_nano` or `socfpga_std`
       * With this command two configuration files for the HPS- and Memory-System and for everything else are generated
         * Output: `socfpga.periph.rbf`and `socfpga.core.rbf`
         
@@ -27,6 +28,7 @@
       * For **configuration of the FPGA with *Linux*** use these export settings: 
         * Type: `Raw Binary File (.rbf)` 
         * Mode: `Passive Paralle x16`  
+        * Name:     `socfpga_nano_linux` or `socfpga_std_linux`
        
             ![Alt text](fpgaConfSettings1.png?raw=true "FPGA Configuration settings 1")
             
