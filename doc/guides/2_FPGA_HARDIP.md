@@ -166,11 +166,6 @@ Here are also commands given to change the FPGA fabric configuration.
         ip link set up can0
          ```
         * "*125000*" is the CAN Bitrate in *Bit/s*
-    * With next shown command it is possible to transmit a CAN-Package
-        ```bash
-        cansend can0 123#ADC1.ABC2
-        ```
-        * This loads a CAN-Package with the Content *0xABC1* and *0xABC2* and the ID *123* to the message FIFO-Box
     * Sniffing the complete CAN-Bus
          ```bash
          cansniffer can0
@@ -180,6 +175,7 @@ Here are also commands given to change the FPGA fabric configuration.
         cangen can0
         ```
     * For more information please read the [can-tools](https://github.com/linux-can/can-utils) documentation
+    * A Python example show how to send a CAN-package with python is also given [here](https://github.com/robseb/rsyocto/blob/rsYocto-1.03/doc/appSpecificGuides/1_TransmittingCAN.md)
     
  
  ## Continue with the next level: [Debugging C++ applications remotely](3_CPP.md)
