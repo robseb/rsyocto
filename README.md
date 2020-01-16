@@ -146,7 +146,7 @@ ___
 | `doc`    | Documentation  |
 | `fpga`    | Quartus Prime projects |
 |  `examples/python` | *rsYocto* Python examples 
-|  `building` | *rsYocto* building scripts |
+|  `buildingSystem` | *rsYocto* building scripts |
 
 The final *rsYocto* Versions are available inside the **packages-Part of this repository**!
 
