@@ -20,7 +20,7 @@ import time
 import devmem
 
 # Demo duration  
-TEST_DURATIONS  =300
+TEST_DURATIONS  =12
 
 # 
 # This demo uses the python pip package "processbar2" please install this package with the following command:

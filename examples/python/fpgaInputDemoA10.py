@@ -28,8 +28,8 @@ TEST_DURATIONS  =50
 HPS_LW_ADRS_OFFSET = 0xFF200000 
 
 # The offset address input devices 
-HPS_LW_ADRS_OFFSET_SYSID = 0x140 # const system id with 0xCADEABCD
-HPS_LW_ADRS_OFFSET_KEYS  = 0x100 # 2 key button input values 
+HPS_LW_ADRS_OFFSET_SYSID = 0x140    # const system id with 0xCADEABCD
+HPS_LW_ADRS_OFFSET_KEYS  = 0x100    # 2 key button input values 
 HPS_LW_ADRS_OFFSET_SWI   = 0x110    # 2 switch button input values
 
 ledValue = 0

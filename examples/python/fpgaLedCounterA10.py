@@ -19,7 +19,7 @@ import time
 import devmem
 
 # demo duration  
-TEST_DURATIONS  =300
+TEST_DURATIONS  =16
 
 
 from time import sleep
