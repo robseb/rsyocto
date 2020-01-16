@@ -83,6 +83,8 @@ ___
 
 **The Content  of the "rsyocto_SDxx-Folder"** 
 
+![Alt text](BuildingScriptActivityDia.jpg?raw=true "Build Script activity diagram")
+
  7. With the Text-File \"infoRSyocto.txt\" it is possible to add some notes to the final image
   * The **MAC address** can also be changed here:
      ````
