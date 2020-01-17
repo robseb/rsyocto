@@ -6,7 +6,13 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
 ## Create a bootable SD-Card 
 1. **Download the newest Image for your Board**
     + The final Images are located inside the **"release part"** of this Github repository 
-       ![Alt text](releasepart2.png?raw=true "relase part")
+       <p align="center">
+        <a href="https://github.com/robseb/rsyocto/releases">
+         <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/robseb/rsyocto">
+        </a>	 
+       </p>
+       
+      ![Alt text](releasepart2.png?raw=true "relase part")
     
     + Suffix decoding for the Image-Names:
     
