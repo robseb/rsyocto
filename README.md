@@ -213,6 +213,5 @@ Currently I am working on a Windows 10 .net Desktop application to manage FPGA c
 Today I'm a Master Student of electronic engineering with the major embedded systems. 
 I ‘m looking for an interesting job offer to share and deepen my shown skills starting summer 2020.
 
-
-[![Join the chat at https://gitter.im/rsyocto/community#](https://badges.gitter.im/rsyocto/BlockPets.svg)](https://gitter.im/rsyocto/community#)
+[![Gitter](https://badges.gitter.im/rsyocto/community.svg)](https://gitter.im/rsyocto/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Email me!](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](mailto:mail@robseb.de)
