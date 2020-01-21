@@ -68,7 +68,7 @@ ___
 	* the **NEON-Engine**
 	* the **vector floating point unit (VFP)** 
 	* the **Thumb-2 instruction set**
-* For the best optimization and performance completely custom optimized 
+* For the best performance completely custom optimized 
 * **Console based** (**GUI less**) with `Busybox`
 * **Watchdog** timer is enabled    
 <br>
@@ -88,11 +88,12 @@ ___
 	* *Visual Studio Code* for **remote python debugging**
 	* *Visual Studio* for **remote C++ debugging**  
 • `gcc-compiler` and `gdb-server`
+* **ARM DS-5 Streamline** pre-installed and immediately after start ready for **trace analysis**
 <br>
 
-* **`Python`**
+* **`Python3`**,**`Python3-dev`**
 * `Apache` webserver with `PHP` and `SQLite`
-* **Newest `Django` version pre-installed for python-based web framework development**
+* **Latest `Django` version pre-installed for python-based web framework development**
 * **The `adminLTE` web dashboard can bring modern complex web applications to SoC-FPGAs** ([example](https://adminlte.io/themes/dev/AdminLTE/index.html))
 <br>
 
@@ -212,4 +213,5 @@ Currently I am working on a Windows 10 .net Desktop application to manage FPGA c
 Today I'm a Master Student of electronic engineering with the major embedded systems. 
 I ‘m looking for an interesting job offer to share and deepen my shown skills starting summer 2020.
 
-[![Ask Me Anything !](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](mailto:mail@robseb.de)
+[![Gitter](https://badges.gitter.im/rsyocto/community.svg)](https://gitter.im/rsyocto/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![Email me!](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](mailto:mail@robseb.de)

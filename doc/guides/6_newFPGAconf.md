@@ -103,6 +103,8 @@ ___
         netmask 255.255.255.0
         network 192.168.0.0
         gateway 192.168.0.100
+        dns-nameservers 192.168.0.100
+        broadcast 192.168.0.255
       ````
 9. **Replacing the pre-installed *rsYocto* files with your files**
   * It is also allowed to **delete files for unused platforms and devices** or to **replace other self developed files**

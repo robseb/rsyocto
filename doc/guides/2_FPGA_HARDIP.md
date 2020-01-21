@@ -77,9 +77,9 @@ Here are also commands given to change the FPGA fabric configuration.
        * The Suffix "-h" selects HEX value inputs 
   4. **Control a single FPGA LED**
       * Enabling or Disabling single Bits is also possible with the *rstools* 
-      * Put Led No. 8 on:  
+      * Put Led No. 7 on:  
          ```bash
-           FPGA-writeBridge -lw 20 -b 8 1
+           FPGA-writeBridge -lw 20 -b 7 1
          ```
   5. **The next Python snippet demonstrates how to interact with FPGA-IP** 
         ````python
@@ -110,11 +110,11 @@ Here are also commands given to change the FPGA fabric configuration.
     * Now should be the LEDs connected with the direct 32-Bit register
     * Enable the LEDs over this way:
         ```bash
-        FPGA-gpoWrite -f acdc
+        FPGA-gpoWrite -h acdc
         ```
     * On the other direction the FPGA writes the value *0xacdcacdc* to the HPS
         ```bash
-        FPGA-gpiRead -f acdc
+        FPGA-gpiRead -h acdc
         ```
      * After this test install the original FPGA configuration again
      * On *rsYocto* the startup FPGA configuration is located here `/usr/rsyocto/running_bootloader_fpgaconfig.rbf`
