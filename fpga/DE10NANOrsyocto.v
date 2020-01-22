@@ -19,7 +19,7 @@
 
 `define USE_HPS
 `define USE_ADUINO
-
+`define USE_ADC
 // `define USE_HDMI
 // `define USE_GPIO0
 // `define USE_GPIO1
@@ -87,10 +87,6 @@ module DE10NANOrsyocto(
 	input 		          		HPS_ENET_RX_DV,
 	output		     [3:0]		HPS_ENET_TX_DATA,
 	output		          		HPS_ENET_TX_EN,
-	
-	//inout 		          		HPS_GSENSOR_INT,
-	//inout 		          		HPS_I2C0_SCLK,
-	//inout 		          		HPS_I2C0_SDAT,
 	
 	inout 		          		HPS_I2C1_SCLK,
 	inout 		          		HPS_I2C1_SDAT,
@@ -163,29 +159,29 @@ wire can0_rx, can0_tx;
 base_hps u0 (
 
 /////////////////////////////////////////////// CLOCKS ////////////////////////////////////////////////
-		.clk_clk                            	 	(CLOCK_50),                          
+		 .clk_clk                          ( FPGA_CLK1_50 ),                          
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////	  
 ///////////////////////////////////////// 	HPS    ///////////////////////////////////////////////////  
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////  Onboard DDR3 1GB Memmory  //////////////////////////////////////
-      .hps_0_ddr_mem_a                          ( HPS_DDR3_ADDR),                     
-      .hps_0_ddr_mem_ba                         ( HPS_DDR3_BA),                        
-      .hps_0_ddr_mem_ck                         ( HPS_DDR3_CK_P),                       
-      .hps_0_ddr_mem_ck_n                       ( HPS_DDR3_CK_N),                       
-      .hps_0_ddr_mem_cke                        ( HPS_DDR3_CKE),                        
-      .hps_0_ddr_mem_cs_n                       ( HPS_DDR3_CS_N),                    
-      .hps_0_ddr_mem_ras_n                      ( HPS_DDR3_RAS_N),                      
-      .hps_0_ddr_mem_cas_n                      ( HPS_DDR3_CAS_N),                      
-      .hps_0_ddr_mem_we_n                       ( HPS_DDR3_WE_N),                      
-      .hps_0_ddr_mem_reset_n                    ( HPS_DDR3_RESET_N),                    
-      .hps_0_ddr_mem_dq                         ( HPS_DDR3_DQ),                        
-      .hps_0_ddr_mem_dqs                        ( HPS_DDR3_DQS_P),                      
-      .hps_0_ddr_mem_dqs_n                      ( HPS_DDR3_DQS_N),                      
-      .hps_0_ddr_mem_odt                        ( HPS_DDR3_ODT),                        
-      .hps_0_ddr_mem_dm                         ( HPS_DDR3_DM),                         
-      .hps_0_ddr_oct_rzqin                      ( HPS_DDR3_RZQ),                         
+      .hps_0_ddr_mem_a                   ( HPS_DDR3_ADDR),                     
+      .hps_0_ddr_mem_ba                  ( HPS_DDR3_BA),                        
+      .hps_0_ddr_mem_ck                  ( HPS_DDR3_CK_P),                       
+      .hps_0_ddr_mem_ck_n                ( HPS_DDR3_CK_N),                       
+      .hps_0_ddr_mem_cke                 ( HPS_DDR3_CKE),                        
+      .hps_0_ddr_mem_cs_n                ( HPS_DDR3_CS_N),                    
+      .hps_0_ddr_mem_ras_n               ( HPS_DDR3_RAS_N),                      
+      .hps_0_ddr_mem_cas_n               ( HPS_DDR3_CAS_N),                      
+      .hps_0_ddr_mem_we_n                ( HPS_DDR3_WE_N),                      
+      .hps_0_ddr_mem_reset_n             ( HPS_DDR3_RESET_N),                    
+      .hps_0_ddr_mem_dq                  ( HPS_DDR3_DQ),                        
+      .hps_0_ddr_mem_dqs                 ( HPS_DDR3_DQS_P),                      
+      .hps_0_ddr_mem_dqs_n               ( HPS_DDR3_DQS_N),                      
+      .hps_0_ddr_mem_odt                 ( HPS_DDR3_ODT),                        
+      .hps_0_ddr_mem_dm                  ( HPS_DDR3_DM),                         
+      .hps_0_ddr_oct_rzqin               ( HPS_DDR3_RZQ),                         
 
  ///////////////////////////////////////// HPS Ethernet 1  ////////////////////////////////////////////    
       .hps_0_io_hps_io_emac1_inst_TX_CLK ( HPS_ENET_GTX_CLK),     
@@ -275,10 +271,18 @@ base_hps u0 (
 		.hps_0_spim0_ss_3_n                 (),
 
 
-		
 ///////////////////////////////////////////////////////////////////////////////////////////////////////	  
 ////////////////////////////////// 	   On Board Compunents     ////////////////////////////////////////  
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+///////////////////////////////////////////  Analog Devices LTC2308    ////////////////////////////////
+
+		.adc_ltc2308_conduit_end_CONVST   (ADC_CONVST),  
+		.adc_ltc2308_conduit_end_SCK      (ADC_SCK),      
+		.adc_ltc2308_conduit_end_SDI      (ADC_SDI),      
+		.adc_ltc2308_conduit_end_SDO      (ADC_SDO),
+
 
 ///////////////////////////////////////////  HPS LED & KEY  ///////////////////////////////////////////
       .hps_0_io_hps_io_gpio_inst_GPIO53  ( HPS_LED),                
@@ -289,15 +293,16 @@ base_hps u0 (
 		.hps_0_io_hps_io_i2c0_inst_SCL      (HPS_I2C1_SCLK),      		
 		
 /////////////////////////////////// onboard LEDs, Switches and Keys ///////////////////////////////////
-		.led_pio_external_connection_export (LEDR),
+		.led_pio_external_connection_export (LED),
 		.pb_pio_external_connection_export  (KEY), 
 		.sw_pio_external_connection_export  (SW),
 		
 
 	  
 ////////////////////////////////// HPS -> FPGA GPIO ///////////////////////////////////
-	  .hps_0_h2f_gp_gp_in					  (32'hACDCACDC),
-	  .hps_0_h2f_gp_gp_out					  ()
+//    32-Bit direct access registry between HPS and FPGA
+	  .hps_0_h2f_gp_gp_in					  (32'hACDCACDC), // FPGA to HPS -->
+	  .hps_0_h2f_gp_gp_out					  ()					// HPS to FPGA <--
 );
 
 
@@ -329,7 +334,7 @@ base_hps u0 (
 		///////////////////////////////////////////
 
 
-//////////////////////////////////////// IO Buffer SPI 0 /////////////////////////////////////////////
+////////////////////////////////////////// IO Buffer SPI 0 /////////////////////////////////////////////
 	// SPI0 -> CS
 	ALT_IOBUF spi0_ss_iobuf    (.i(spi0_ss_0_n), .oe(1'b1), .o(), .io(ARDUINO_IO[10]));
 	// SPI0 -> MOSI
@@ -339,7 +344,7 @@ base_hps u0 (
 	// SPI0  -> CLK
 	ALT_IOBUF spi0_clk_iobuf   (.i(spi0_clk), .oe(1'b1), .o(), .io(ARDUINO_IO[13]));
 	
-////////////////////////////////////////// IO Buffer I2C 1 and 3 /////////////////////////////////////
+////////////////////////////////////////// IO Buffer I2C 1 and 3 //////////////////////////////////////
 	// I2C1 -> SCL 
 	ALT_IOBUF i2c1_scl_iobuf   (.i(1'b0),.oe(scl1_o_e),.o(scl1_o),.io(ARDUINO_IO[15]));
 	// I2C1 -> SDA 
@@ -362,7 +367,6 @@ base_hps u0 (
    // CAN-> TX
 	ALT_IOBUF can0_tx_iobuf (.i(can0_tx), .oe(1'b1), .o(), .io(ARDUINO_IO[8]));
 	
-
 
 endmodule
 
