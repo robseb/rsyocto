@@ -9,14 +9,14 @@
 	 <img src="https://img.shields.io/static/v1?label=Status&message=active&color=orange">
 	 <a href="https://github.com/robseb/rsyocto/releases">
 	 	<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/robseb/rsyocto">
+		<img alt="GitHub Releases" src="https://img.shields.io/github/downloads/robseb/rsyocto/latest/total"> 
+		<img alt="GitHub Releases" src="https://img.shields.io/github/downloads/robseb/rsyocto/total">
 	 </a>	 
-	 <img alt="GitHub Releases" src="https://img.shields.io/github/downloads/robseb/rsyocto/latest/total">
 	 <img src="https://img.shields.io/static/v1?label=Supported+SocFPGA&message=Intel+Arria10,+Cyclone+V&color=blue">
 	 <a href="https://github.com/robseb/rsyocto/issues">
 		<img alt="GitHub issues" src="https://img.shields.io/github/issues/robseb/rsyocto">
 	 </a>
 	 <img src="https://img.shields.io/badge/License-MIT%20-yellow.svg" alt="license">
-
 </p>
 
 ___
