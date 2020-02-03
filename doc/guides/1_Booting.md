@@ -66,11 +66,14 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
    | **15** | **User Commmand input after password authentication** |
    <br>
    
-  ### **During the boot must be an ON-OFF FPGA LED patern by shown on the board!**
-   * The secondary *u-bootloader* writes 0x55 via the *Lightweight HPS to FPGA bridge* to a Soft-IP PIO controller connected to the FPGA LEDs
+  ### **During the boot must be an ON and OFF FPGA LED pattern be shown on the board!**
+   * The secondary *u-bootloader* writes 0x55 via the *Lightweight HPS to FPGA bridge* to a Soft-IP PIO controller connected to the FPGA
+  LEDs
+    * **Note:** If this is not the case is the **MSEL switch** not in the proper position and the FPGA configuration could not be written properly!
   ### **The Linux requests an iPv4-Address by a DHCP-server**
   ### **After the system has booted properly and a network connection is established -> HPS LED and only FPGA LED 0 turns ON** 
-  * **Note:** If rs Yocto goes in a bootloop after requesting the current date the MSEL switch is not in the proper position and the FPGA configuration could not be written properly!
+  * **Note:** If rs Yocto goes in a bootloop after requesting the current date the **MSEL switch** is not in the proper position and the **FPGA configuration** could not be written properly! This problem could occur because the boot-up shell script([shown here at the end](https://github.com/robseb/rsyocto/blob/rsYocto-1.03/doc/guides/6_newFPGAconf.md)) tries to write the closed LW HPS2FPGA Bridge or to an unreachable address.
+  ### **For users with non supported boards:** Please go to [this guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.03/doc/guides/6_newFPGAconf.md) and use *rsYocto* with your custom FPGA configuration and boot scripts.
   
   <br>
   
