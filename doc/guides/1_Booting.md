@@ -65,9 +65,13 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
    | **14** | **BusyBox** | *BusyBox* Linux console interface | 
    | **15** | **User Commmand input after password authentication** |
    <br>
- 
+   
+  ### **During the boot must be an ON-OFF FPGA LED patern by shown on the board!**
+   * The secondary *u-bootloader* writes 0x55 via the *Lightweight HPS to FPGA bridge* to a Soft-IP PIO controller connected to the FPGA LEDs
   ### **The Linux requests an iPv4-Address by a DHCP-server**
-  ### **After the system has booted properly and a network connection is established -> HPS LED turns ON**
+  ### **After the system has booted properly and a network connection is established -> HPS LED and only FPGA LED 0 turns ON** 
+  * **Note:** If rs Yocto goes in a bootloop after requesting the current date the MSEL switch is not in the proper position and the FPGA configuration could not be written properly!
+  
   <br>
   
    ![Alt text](rsYoctoArria10BootLog.gif?raw=true "rufus")
