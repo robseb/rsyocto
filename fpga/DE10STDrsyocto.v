@@ -19,13 +19,14 @@
 
 `define USE_HPS
 `define USE_HEX
+`define USE_ADC
 
 //`define USE_SDRAM
 //`define USE_VIDEO_IN
 //`define USE_VGA
 //`define USE_AUDO
 //`define USE_PS2
-//`define USE_ADC
+
 //`define IR_LED
 //`define USE_PS2_VIDO_IF
 
@@ -346,7 +347,14 @@ base_hps u0 (
 
 //////////////////////////////////	G-Sensor: I2C0 (Terasic Docu I2C1) ////////////////////////////////
 		.hps_0_io_hps_io_i2c0_inst_SDA      (HPS_I2C1_SDAT),      		
-		.hps_0_io_hps_io_i2c0_inst_SCL      (HPS_I2C1_SCLK),      		
+		.hps_0_io_hps_io_i2c0_inst_SCL      (HPS_I2C1_SCLK),    
+
+		
+//////////////////////////////////	ADC: Analog Devices LTC2308 ////////////////////////////////
+		.adc_ltc2308_conduit_end_CONVST     (ADC_CONVST),    
+      .adc_ltc2308_conduit_end_SCK        (ADC_SCLK),        
+      .adc_ltc2308_conduit_end_SDI        (ADC_DIN),      
+      .adc_ltc2308_conduit_end_SDO        (ADC_DOUT),       
 		
 /////////////////////////////////// onboard LEDs, Switches and Keys ///////////////////////////////////
 		.led_pio_external_connection_export (LEDR), // LEDR
@@ -354,12 +362,12 @@ base_hps u0 (
 		.sw_pio_external_connection_export  (SW),
 		
 ////////////////////////////////// 24 Bit seven sigment HEX Display ///////////////////////////////////
-	  .de10std7sig_hex_io0_readdata       (HEX0), 
-	  .de10std7sig_hex_io1_readdata       (HEX1),
-	  .de10std7sig_hex_io2_readdata       (HEX2),
-	  .de10std7sig_hex_io3_readdata       (HEX3),
-	  .de10std7sig_hex_io5_readdata       (HEX4),
-	  .de10std7sig_hex_io4_readdata       (HEX5),
+	  .de10std7sig_hex0_export          	(HEX0), 
+	  .de10std7sig_hex1_readdata        	(HEX1),
+	  .de10std7sig_hex2_readdata        	(HEX2),
+	  .de10std7sig_hex3_readdata        	(HEX3),
+	  .de10std7sig_hex4_readdata        	(HEX4),
+	  .de10std7sig_hex5_readdata        	(HEX5),
 	  
 	  
 ////////////////////////////////// HPS -> FPGA GPIO ///////////////////////////////////
