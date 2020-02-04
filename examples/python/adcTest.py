@@ -59,7 +59,7 @@ if __name__ == '__main__':
         except ValueError:
             print("Warning: Failed to read rsYocto Version")
 
-    if not versionNo > 1.031:
+    if not versionNo >= 1.031:
         print("Error: The ADC is only supported with rsYocto Version 1.031 or later ")
         print(" This Version is: "+versionStr)
         sys.exit()
