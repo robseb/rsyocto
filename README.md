@@ -3,7 +3,7 @@
 	<img margin-right="100%" src="doc/symbols/rsYoctoLogo.jpg">
 </p>
 
-### *rsYocto* is an open embedded Linux System designed with the Yocto Project and optimized for Intel SoC-FPGAs (*Intel Cyclone V* and *Intel Arria 10* with a *ARM CORTEX-A9*) to achieve the best customization for the strong requirements of modern embedded applications.
+### *rsYocto* is an open source embedded Linux System designed with the Yocto Project and optimized for Intel SoC-FPGAs (*Intel Cyclone V* and *Intel Arria 10* with a *ARM CORTEX-A9*) to achieve the best customization for the strong requirements of modern embedded applications.
 
 <p align="center">
 	 <img src="https://img.shields.io/static/v1?label=Status&message=active&color=orange">
