@@ -215,6 +215,7 @@ I ‘m looking for an interesting job offer to share and deepen my shown skills 
 
 [![Gitter](https://badges.gitter.im/rsyocto/community.svg)](https://gitter.im/rsyocto/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Email me!](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](mailto:git@robseb.de)
-![GitHub stars](https://img.shields.io/github/stars/robseb/rsyocto?style=social)
-![GitHub watchers](https://img.shields.io/github/watchers/robseb/rsyocto?style=social)
-![GitHub followers](https://img.shields.io/github/followers/robseb?style=social)
+
+[![GitHub stars](https://img.shields.io/github/stars/robseb/rsyocto?style=social)](https://GitHub.com/robseb/rsyocto/stargazers/)
+[![GitHub watchers](https://img.shields.io/github/watchers/robseb/rsyocto?style=social)](https://github.com/robseb/rsyocto/watchers)
+[![GitHub followers](https://img.shields.io/github/followers/robseb?style=social)](https://github.com/robseb)
