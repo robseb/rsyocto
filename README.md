@@ -181,7 +181,7 @@ Also the `rsyoctoMakingSDscript` is recognizable, that on a running CentOS-Compu
 To show how to **map FPGA I/O Pins with HPS Hard IP components, like I²C- or CAN-Bus,** I wrote [**this step by step guide**](https://github.com/robseb/HPS2FPGAmapping). Here also a **description of the development of all necessary bootloaders and a bootloader script wih the Intel Embedded Development Suite (EDS)** is available.
 
 ### How to get started with the Yocto Project for Intel SoC-FPGAs?
-Inside my forked [`meta-altera` BSP layer](https://github.com/robseb/meta-altera) I described in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
+Inside my forked [`meta-intelfpga` BSP layer](https://github.com/robseb/meta-intelfpga) I described in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
 
 Also I published a Yocto project [*meta layer (`meta-rstools`)*](https://github.com/robseb/meta-rstools) to bring **tools to update the FPGA configuration with the running Linux and to interact with simple commands with the FPGA fabric.**
 
