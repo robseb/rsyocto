@@ -156,7 +156,7 @@ The final *rsYocto* Versions are available inside the **packages-Part of this re
 * [Intel Quartus Prime 18.1.0 Lite Edition](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/download.html) - Cyclone V
 * [Intel Quartus Prime 18.1.0 Standard Edition](https://www.intel.com/content/www/us/en/software/programmable/quartus-prime/download.html) - Arria 10
 * [The Yocto Project](https://www.yoctoproject.org/) 
-* [meta-intelfpga](https://github.com/robseb/meta-fpga) 
+* [meta-intelfpga](https://github.com/robseb/meta-intelfpga) 
 * [meta-openembedded](https://github.com/openembedded/meta-openembedded)
   * [meta-python](https://github.com/openembedded/meta-openembedded/tree/master/meta-python) 
   * [meta-webserver](https://github.com/openembedded/meta-openembedded/tree/master/meta-webserver)
