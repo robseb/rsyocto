@@ -27,14 +27,14 @@
       * For **configuration of the FPGA with *Linux*** use these export settings: 
         * Type: `Raw Binary File (.rbf)` 
         * Mode: `Passive Paralle x16`  
-        * Name:     `socfpga_nano_linux` or `socfpga_std_linux`
+        * Name:     `socfpga_nano_linux.rbf` or `socfpga_std_linux.rbf`
        
             ![Alt text](fpgaConfSettings1.png?raw=true "FPGA Configuration settings 1")
             
       * For **configuration of the FPGA  during the boot** use these export settings: 
         * Type: `Raw Binary File (.rbf)` 
         * Mode: `Passive Paralle x8`  
-        * Name: `socfpga_nano` or `socfpga_std`
+        * Name: `socfpga_nano.rbf` or `socfpga_std.rbf`
             ![Alt text](fpgaConfSettings2.png?raw=true "FPGA Configuration settings 2")
         
 ___
