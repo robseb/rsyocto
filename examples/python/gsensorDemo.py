@@ -5,10 +5,11 @@
 @disc:   Reading the ADXL345 Accelerometer 
          over the i2c-Bus
          
-@date:   14.09.2019
+@date:   22.06.2020
 @device: Intel Cyclone V 
 @author: Robin Sebastian
          (https://github.com/robseb)
+         (git@robseb.de)
 '''
 
 import sys 
@@ -42,9 +43,24 @@ ADXL345_DATAY1 = 0x35                   # y Axis high value register
 ADXL345_DATAZ0 = 0x36                   # z Axis low value register
 ADXL345_DATAZ1 = 0x37                   # z Axis high value register
 
+# Demo duration 
+TEST_DURATIONS = 100
+
 if __name__ == '__main__':
     print("I2C ADXL345 G-Sensor Demo")
     
+    # Read the name of the used development board 
+    #-> Only the Terasic DE10 Standard and Nano Boards are allowed!
+    # The Board name for the image is located here: "/usr/rsyocto/suppBoard.txt"
+    if os.path.isfile("/usr/rsyocto/suppBoard.txt"):
+        supportStr = ""
+        with open("/usr/rsyocto/suppBoard.txt", "r") as f:
+            supportStr = f.read()
+        if not supportStr.find('Terasic HAN Pilot') ==-1 :
+            print('The Terasic HAN Pilot Board has no ADXL345 and is not supported!')
+            sys.exit()
+
+
     ### Open the onboard I²C-Bus 0 
     dev = os.open("/dev/i2c-0", os.O_RDWR)
 
@@ -89,8 +105,8 @@ if __name__ == '__main__':
     row_val_y =[0,0]
     row_val_z =[0,0]
 
-    for var in range(50):
-
+    for var in range(TEST_DURATIONS):
+        print('Sample: '+str(var)+'/'+str(TEST_DURATIONS))
         ### Read the x-axis values
         rList =[ADXL345_DATAX0]
         arr = bytearray(rList)
@@ -146,6 +162,12 @@ if __name__ == '__main__':
 
         # Wait 300ms
         time.sleep(.300)
+
+        if(var != TEST_DURATIONS-1):
+            # Delate last two console line 
+            sys.stdout.write("\033[F")
+            sys.stdout.write("\033[F")
+        
 
     ## Disable the measurement mode 
     #       Register (address), 8bit data

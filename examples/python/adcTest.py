@@ -5,10 +5,11 @@
 @disc:  ADC readout Sensor Test (Analog Devices LTC2308)
         Fast way over the virtual memory
            
-@date:   21.01.2020
+@date:   22.06.2020
 @device: Intel Cyclone V 
 @author: Robin Sebastian
          (https://github.com/robseb)
+         (git@robseb.de)
 '''
 import os
 import time
@@ -21,9 +22,9 @@ import sys
 import devmem
 
 # Demo duration  
-TEST_DURATIONS  =30
+TEST_DURATIONS  =100
 
-# the Lightweight HPS-to-FPGA Bus base address offset
+# The Lightweight HPS-to-FPGA Bus base address offset
 HPS_LW_ADRS_OFFSET = 0xFF200000 
 
 # LTC2308 Address offset
@@ -41,10 +42,19 @@ ADC_CH = 1
 ### FIFO Convention Data Size for average calculation
 FIFO_SIZE = 255 # MAX=1024 
 
-VALUE_OR_VOLTAGE_OUTPUT = 0 # 1: Raw Value output | 0: Volage
-
 if __name__ == '__main__':
     print("ADC readout Demo for LTC2308 ADC with Channel "+str(ADC_CH))
+
+    # Read the name of the used development board 
+    #-> Only the Terasic DE10 Standard and Nano Boards are allowed!
+    # The Board name for the image is located here: "/usr/rsyocto/suppBoard.txt"
+    if os.path.isfile("/usr/rsyocto/suppBoard.txt"):
+        supportStr = ""
+        with open("/usr/rsyocto/suppBoard.txt", "r") as f:
+            supportStr = f.read()
+        if not supportStr.find('Terasic HAN Pilot') ==-1 :
+            print('The Terasic HAN Pilot Board has no LTC2308 and is not supported!')
+            sys.exit()
 
     # The ADC is only supported with rsYocto Version 1.031 or later
     versionNo = 0
@@ -68,8 +78,12 @@ if __name__ == '__main__':
     #                  (Base address, byte length to acceses, interface)
     de = devmem.DevMem(HPS_LW_ADRS_OFFSET, ADC_ADDRES_OFFSET+0x8, "/dev/mem")
     
+    print('Reading the current ADC value ...')
+
     # Enter test loop
     for var in range(TEST_DURATIONS):
+
+        print('Sample: '+str(var)+'/'+str(TEST_DURATIONS))
 
         # Set meassure number for ADC convert
         de.write(ADC_ADDRES_OFFSET+ADC_DATA_REG_OFFSET,[FIFO_SIZE])
@@ -95,14 +109,19 @@ if __name__ == '__main__':
         
         value = rawValue / FIFO_SIZE
 
-        if VALUE_OR_VOLTAGE_OUTPUT:
-            value = round(value,2)
-            print("ADC AVG: "+str(value))
-        else: 
-            # Convert ADC Value to Volage
-            volage = round(value/1000,2)
-            print("U AVG: "+str(volage)+"V")
+        value = round(value,2)
+        print("-> ADC AVG: "+str(value))
+
+        # Convert ADC Value to Volage
+        volage = round(value/1000,2)
+        print("-> U   AVG: "+str(volage)+"V")
 
         time.sleep(.2) # 200ms delay
+
+        if var != TEST_DURATIONS-1:
+            # Delate last 3 console line 
+            sys.stdout.write("\033[F")
+            sys.stdout.write("\033[F")
+            sys.stdout.write("\033[F")
 
 print('End of demo...')

@@ -19,21 +19,16 @@
 
 `define USE_HPS
 `define USE_HEX
-`define USE_ADC
 
 //`define USE_SDRAM
 //`define USE_VIDEO_IN
 //`define USE_VGA
 //`define USE_AUDO
 //`define USE_PS2
-
+`define USE_ADC
 //`define IR_LED
 //`define USE_PS2_VIDO_IF
 
-
-
-											
-										
 
 module DE10STDrsyocto(
 
@@ -45,7 +40,7 @@ module DE10STDrsyocto(
 
 ///////////////////////////////////////////////  KEY /////////////////////////////////////////////////
 	input 		     [3:0]		KEY,
-
+ 
 /////////////////////////////////////////////// SW ///////////////////////////////////////////////////
 	input 		     [9:0]		SW,
 
@@ -74,7 +69,7 @@ module DE10STDrsyocto(
 	output		          		DRAM_WE_N,
 `endif
 
-////////////////////////////////////////////////// Video-In ///////////////////////////////////////////
+///////////////////////l/////////////////////////// Video-In ///////////////////////////////////////////
 `ifdef USE_VIDEO_IN
 	input 		          		TD_CLK27,
 	input 		     [7:0]		TD_DATA,
@@ -335,6 +330,11 @@ base_hps u0 (
 //		.hps_0_spim0_ss_2_n                 (),                 
 //		.hps_0_spim0_ss_3_n                 (),
 
+////////////////////////////////////////////////// SPIO LCD ////////////////////////////////////////////
+		.hps_0_io_hps_io_spim0_inst_CLK    (HPS_LCM_SPIM_CLK),     
+	   .hps_0_io_hps_io_spim0_inst_MOSI   (HPS_LCM_SPIM_MOSI),    
+	   .hps_0_io_hps_io_spim0_inst_MISO   (HPS_LCM_SPIM_MISO),     
+	   .hps_0_io_hps_io_spim0_inst_SS0    (HPS_LCM_SPIM_SS),    
 
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////////	  
@@ -344,17 +344,20 @@ base_hps u0 (
 ///////////////////////////////////////////  HPS LED & KEY  ///////////////////////////////////////////
       .hps_0_io_hps_io_gpio_inst_GPIO53  ( HPS_LED),                
       .hps_0_io_hps_io_gpio_inst_GPIO54  ( HPS_KEY),   
-
+		
+//////////////////////////////////////////////  HPS GPIO  /////////////////////////////////////////////
+		.hps_0_io_hps_io_gpio_inst_GPIO09  (HPS_CONV_USB_N),        	
+		.hps_0_io_hps_io_gpio_inst_GPIO35  (HPS_ENET_INT_N),     
+		.hps_0_io_hps_io_gpio_inst_GPIO37  (HPS_LCM_BK),       
+		
+		.hps_0_io_hps_io_gpio_inst_GPIO41  (HPS_LCM_D_C),     
+		.hps_0_io_hps_io_gpio_inst_GPIO44  (HPS_LCM_RST_N),    
+		.hps_0_io_hps_io_gpio_inst_GPIO48  (HPS_I2C_CONTROL),            
+		.hps_0_io_hps_io_gpio_inst_GPIO61  (HPS_GSENSOR_INT), 
+		
 //////////////////////////////////	G-Sensor: I2C0 (Terasic Docu I2C1) ////////////////////////////////
 		.hps_0_io_hps_io_i2c0_inst_SDA      (HPS_I2C1_SDAT),      		
-		.hps_0_io_hps_io_i2c0_inst_SCL      (HPS_I2C1_SCLK),    
-
-		
-//////////////////////////////////	ADC: Analog Devices LTC2308 ////////////////////////////////
-		.adc_ltc2308_conduit_end_CONVST     (ADC_CONVST),    
-      .adc_ltc2308_conduit_end_SCK        (ADC_SCLK),        
-      .adc_ltc2308_conduit_end_SDI        (ADC_DIN),      
-      .adc_ltc2308_conduit_end_SDO        (ADC_DOUT),       
+		.hps_0_io_hps_io_i2c0_inst_SCL      (HPS_I2C1_SCLK),      		
 		
 /////////////////////////////////// onboard LEDs, Switches and Keys ///////////////////////////////////
 		.led_pio_external_connection_export (LEDR), // LEDR
@@ -362,17 +365,29 @@ base_hps u0 (
 		.sw_pio_external_connection_export  (SW),
 		
 ////////////////////////////////// 24 Bit seven sigment HEX Display ///////////////////////////////////
-	  .de10std7sig_hex0_export          	(HEX0), 
-	  .de10std7sig_hex1_readdata        	(HEX1),
-	  .de10std7sig_hex2_readdata        	(HEX2),
-	  .de10std7sig_hex3_readdata        	(HEX3),
-	  .de10std7sig_hex4_readdata        	(HEX4),
-	  .de10std7sig_hex5_readdata        	(HEX5),
+	  .de10std7sig_hex_io0_readdata       (HEX0), 
+	  .de10std7sig_hex_io1_readdata       (HEX1),
+	  .de10std7sig_hex_io2_readdata       (HEX2),
+	  .de10std7sig_hex_io3_readdata       (HEX3),
+	  .de10std7sig_hex_io4_readdata       (HEX4),	 
+	  .de10std7sig_hex_io5_readdata       (HEX5),
+	  
+	  
+//////////////////////////////////	ADC: Analog Devices LTC2308 ////////////////////////////////
+		.ltc2308_io_convst_writeresponsevalid_n     (ADC_CONVST),    
+      .ltc2308_io_sck_writeresponsevalid_n        (ADC_SCLK),        
+      .ltc2308_io_sdi_writeresponsevalid_n        (ADC_DIN),      
+      .ltc2308_io_sdo_beginbursttransfer          (ADC_DOUT),       
+		
 	  
 	  
 ////////////////////////////////// HPS -> FPGA GPIO ///////////////////////////////////
 	  .hps_0_h2f_gp_gp_in					  (32'hACDCACDC),
-	  .hps_0_h2f_gp_gp_out					  ()
+	  .hps_0_h2f_gp_gp_out					  (),
+	  
+	 /////////////////// USER CLOCK TEST ////////////////////////////
+	  .hps_0_h2f_user0_clock_clk			  (GPIO[34]),
+	  .hps_0_h2f_user2_clock_clk          (GPIO[35])
 );
 
 
