@@ -16,13 +16,13 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
     
     + Suffix decoding for the Image-Names:
     
-      | File Suffix | FPGA | suppored Board
+      | File Suffix | FPGA | supported Board name 
       |:--|:--|:--|
       | *_DE10STD* | Intel Cyclone V | [Terasic DE10-Standard](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=1081)
       | *_D10NANO* | Intel Cyclone V | [Terasic DE10-Nano](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=1046)
       | *_HAN* | Intel Arria 10 | [Terasic HAN Pilot Platform](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=228&No=1133)
       
-      **Note:** *rsyocto_SD ...* is the associated SD-Card folder for the relase (see Part 5) 
+      **Note:** *rsyocto_SD ...* is the associated SD-Card folder for the release (see Part 5) 
  2. Insert a **Micro SD Card** (1GB or greater) into your computer  
  3. Use a "**Bootable SD Card Creation Tool**" to create a bootable image on the SD card
     + For example use the tool [Rufus](https://rufus.ie/) 
@@ -47,23 +47,23 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
   1. Power up your FPGA Board
   2. Now **rsYocto** boots through following stages:
   
-   | No | Stage | Description | Taks 
+   | No | Stage | Description | Task 
    |:--|:--|:--|:--|
    | **1** | **Primary Bootloader** | Pre-configuration of the **FPGA configuration** (*Arria 10 SX only*) | Connecting HPS to FPGA SDRAM-Controller 
    | **2** | **Primary Bootloader** | Booting of primary bootloader | Hardware check and startup (SDRAM,...)
-   | **3** | **Secoundary Bootloader** | Booting of *u-boot* | Loading and execution of the bootloader script
-   | **4** | **Bootloader script** | Secoundary bootloader script execution | Writing the **FPGA configuration** and loading of the Linux Kernel
-   | **5** | **Secoundary Bootloader** | Booting of *u-boot* | Loading and execution of the bootloader script
-   | **6** | **Linux Kernel** | Booting of the Linux Kernel starts |  
+   | **3** | **Secondary Bootloader** | Booting of *u-boot* | Loading and execution of the bootloader script
+   | **4** | **Bootloader script** | Secondary bootloader script execution | Writing the **FPGA configuration** and loading of the Linux Kernel
+   | **5** | **Secondary Bootloader** | Booting of *u-boot* | Loading and execution of the bootloader script
+   | **6** | **Linux Kernel** | Start of booting the Linux Kernel |  
    | **7** | **Linux Kernel** | Reading the Device Tree | The Kernel reads the device tree and loads the drivers 
    | **8** | **Linux Kernel** | Execution of the startup scripts from the rootFs starts | 
-   | **9** | **startup-script** | **Excecution of by the user configurable startup script** |
+   | **9** | **startup-script** | **Execution of by the user configurable startup script** |
    | **10** | **Network Interface** | Activation of the Network interface | Waiting for an DHCP reception with an iPv4-Address
-   | **11** | **OpenSSH** | *OpenSSH* SSH Server  | Starting
-   | **12** | **Apache** | *Apache* Web Server  | Starting
-   | **13** | **run-script** | **Excecution of by the user configurable startup script** | Time Syncronisation via HTTP
+   | **11** | **OpenSSH** | *OpenSSH* SSH Server  | *Starting*
+   | **12** | **Apache** | *Apache* Web Server  | *Starting*
+   | **13** | **run-script** | **Execution of by the user configurable startup script** | Time synchronization via HTTP
    | **14** | **BusyBox** | *BusyBox* Linux console interface | 
-   | **15** | **User Commmand input after password authentication** |
+   | **15** | **User Command input after password authentication** |
    <br>
    
   ### **During the boot must be an ON and OFF FPGA LED pattern be shown on the board!**

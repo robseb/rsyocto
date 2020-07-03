@@ -2,7 +2,7 @@
 
 #  	Debugging Python applications remotely
 
-This Guide descripts how to install and configure *Visual Studio Code Insiders* to accsess the Linux system remotely over `ssh`. Later on is shown how to use *Visual Studio Code* to remote debug Phyton applications.
+This Guide describes how to install and configure *Visual Studio Code Insiders* to accsess the Linux system remotely over `ssh`. Later on is shown how to use *Visual Studio Code* to remote debug Phyton applications.
 
 *Visual Studio Code* is a code editor build by Microsoft. It is an universal binary application and runs on Windows, Linux and macOS. **Visual Studio Code Insider** is a special version and extended Visual Studio Code with advanced plugins. Only *Visual Studio Code Insider* allow a remote access via SSH to *ARMv7A* Linux-devices.
 
@@ -12,7 +12,7 @@ The following step by step guide shows how to setup *Visual Studio Code Insider*
 [Visual Studio Code Remote Development Troubleshooting Tips and Tricks](https://code.visualstudio.com/docs/remote/troubleshooting)
 (Chapter: Improving your security with a dedicated key)
 
-With the following guide *Microsoft* descripts the remote debugging function of *Visual Studio Code Insider*:
+With the following guide *Microsoft* describes the remote debugging function of *Visual Studio Code Insider*:
 [Developing on Remote Machines using SSH and Visual Studio Code](https://code.visualstudio.com/docs/remote/ssh)
 
 ### I. Generation of the SSH Key with Windows 10
@@ -72,7 +72,7 @@ Host rsYocto
     IdentityFile ~/.ssh/id_rsa
 `````` 
 * Save and close this configuration file
-* If a error occured close and restart *Visual Studio Code Insider* and try it again
+* If a error occurred close and restart *Visual Studio Code Insider* and try it again
 
 ### III. Connection of the *rsYocto* with *Visual Studio Code Insider*
 * Open *Visual Studio Code Insider*

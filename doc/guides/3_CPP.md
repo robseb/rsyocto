@@ -39,8 +39,8 @@ The following illustration shows how *Linux* and Microsoft Visual Studio work to
 
 # Known Issues with Visual Studio and Linux
  * Read the console output only and ingnore the error windows 
- * Ingore the "*rysnc could not start error*" (rsync is installed properly)
- * After iusses try to **clean and rebuild the solution**
+ * Ingore the "*rysnc could not start error*" (*rsync* is installed properly)
+ * After issues try to **clean and rebuild the solution**
 
 
  ## Continue with the next level: [Debugging Python applications remotely](4_Python.md)

@@ -2,7 +2,7 @@
 
 
 # Analyzation of applications with ARM DS-5 Streamline
-With *ARM DS-5 Streamline* is a trace debuging application on the Hardware Level inside *Intel EDS* available.
+With *ARM DS-5 Streamline* is a trace debugging application on the Hardware Level inside *Intel EDS* available.
 
 * ARM Streamline is a part of the *ARM DS-5 Studio* and [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html)
 * For ARM DS-5 a Software Licence is required!

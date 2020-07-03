@@ -2,12 +2,12 @@
 
 # Developing a Linux Startup script
 Linux Startup scripts are really important for embedded Linux systems. 
-Application services should start directly after a boot. This is particularly nesessary, because *rsYocto* has a watshdog timer activated and the system can therefore restart unexpectedly.
+Application services should start directly after a boot. This is particularly necessary, because *rsYocto* has a watchdog timer activated and the system can therefore restart unexpectedly.
 For this reason, three possible ways to activate startup scripts are shown.
 
 ## 1. Adding a startup script during runtime
 * For that the tool `udate-rc.d` ([see here](http://manpages.ubuntu.com/manpages/bionic/man8/update-rc.d.8.html)) is pre-installed
-* **Create a new Linux Shell script** remotly with Visual Studio Code Insider or with `nano`
+* **Create a new Linux Shell script** remotely with Visual Studio Code Insider or with `nano`
   ````bash
   nano /etc/init.d/myScript.h
   ````

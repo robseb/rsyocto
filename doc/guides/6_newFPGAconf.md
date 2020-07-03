@@ -13,7 +13,7 @@
            * Parts the configuration in a peripheral- and the core- configuration 
            * This allows to hold for example the memory configuration of the HPS during FPGA configuration changes 
            * For more information please visit the [Intel Arria 10 documentation](https://www.intel.com/content/www/us/en/programmable/documentation/mzh1527115949958.html) page
-              ![Alt text](Arria10Conf.jpg?raw=true "Quartus connfig for Arria 10")
+              ![Alt text](Arria10Conf.jpg?raw=true "Quartus config for Arria 10")
       * Execute following EDS-Shell command:
         ````bash
           quartus_cpf -c --hps -o bitstream_compression=on rsHAN.sof socfpga.rbf
@@ -26,14 +26,14 @@
   2. **for the Cyclone V:**
       * For **configuration of the FPGA with *Linux*** use these export settings: 
         * Type: `Raw Binary File (.rbf)` 
-        * Mode: `Passive Paralle x16`  
+        * Mode: `Passive Parallel x16`  
         * Name:     `socfpga_nano_linux.rbf` or `socfpga_std_linux.rbf`
        
             ![Alt text](fpgaConfSettings1.png?raw=true "FPGA Configuration settings 1")
             
       * For **configuration of the FPGA  during the boot** use these export settings: 
         * Type: `Raw Binary File (.rbf)` 
-        * Mode: `Passive Paralle x8`  
+        * Mode: `Passive Parallel x8`  
         * Name: `socfpga_nano.rbf` or `socfpga_std.rbf`
             ![Alt text](fpgaConfSettings2.png?raw=true "FPGA Configuration settings 2")
         
@@ -55,30 +55,30 @@ ___
 6. Dowload the "**rsyocto_SDxx-Folder**" from the "**releases Part**" of this Github repository to CentOS
       
     
-| File Name | Platform / Board | Origin | Description | Internal name (inside the script)
-|:--|:--|:--|:--|:--|
-|\"makersYoctoSDImage.py\"| *all*| by hand | the automatic *rsYocto* buliding script | *executed* | 
-|\"make_sdimage.py\"|*all*| wget | Altera SD image making script | *executed* | 
-|\"infoRSyocto.txt\"|*all*| by hand | rsYocto splech screen Infos | *integreted* | 
-|\"network_interfaces.txt\"|*all*| by hand | the Linux Network Interface configuration file (*/etc/network/interfaces*) | *interfaces* | 
-| \"rootfs_a10 .tar.gz\"|*all*| Yocto Project |compresed rootFs file for Arria 10 | *unziping* |
-| \"rootfs_cy5.tar.gz\"|*all*| Yocto Project |compresed rootFs file for Cyclone V | *unziping* |       
-|\"preloader_cy5.bin\"|*CY5*| EDS | prestage bootloader | *preloader-mkpimage.bin* | 
-|\"preloader_a10.bin\"|*A10*| EDS | prestage bootloader | *uboot_w_dtb-mkpimage.bin* | 
-|\"uboot_cy5.img\"|*CY5*| EDS | Uboot bootloader | *u-boot.img* | 
-|\"uboot_a10.img\"|*A10*| EDS | Uboot bootloader | *u-boot.img* | 
-|\"uboot_cy5.scr\"|*CY5*| by hand | Uboot bootloader script | *u-boot.scr* |   
-|\"uboot_a10.scr\"|*A10*| by hand | Uboot bootloader script | *u-boot.scr* |
-|\"zImage_cy5\"|*CY5*| Yocto Project | Linux Kernel | *zImage* |   
-|\"zImage_a10\"|*A10*| Yocto Project | Linux Kernel | *zImage* |
-|\"socfpga_cy5.dts\"|*CY5*| by hand | Linux Device Tree | *socfpga.dtb* |
-|\"socfpga_a10.dts\"|*A10*| by hand | Linux Device Tree | *socfpga_arria10_socdk_sdmmc.dtb* |
-|\"socfpga_nano.rbf\"|*DE10 Nano*| Quartus Prime | FPGA Config  | *socfpga.rbf* |
-|\"socfpga_std.rbf\"|*DE10 Standart*| Quartus Prime | FPGA Config  | *socfpga.rbf* |
-|\"socfpga_han_periph.rbf\"|*HAN Pilot*| EDS | FPGA Periph Config (Memory, ...)  | *socfpga.periph.rbf* |
-|\"socfpga_han_core.rbf\"|*HAN Pilot*| EDS | FPGA Core Config (user)  | *ghrd_10as066n2.core.rbf* |
-|\"socfpga_nano_linux.rbf\"|*DE10 Nano*| Quartus Prime | FPGA Config for written by Linux  | *running_bootloader_fpgaconfig.rbf* |          
-|\"socfpga_std_linux.rbf\"|*DE10 Standart*| Quartus Prime | FPGA Config for written by Linux |*running_bootloader_fpgaconfig.rbf* |
+| File Name | Platform / Board | Origin | Description | Disk Partition | Internal name (inside the script)
+|:--|:--|:--|:--|:--|:--|
+|\"makersYoctoSDImage.py\"| *all*| by hand | the automatic *rsYocto* build script | **-** | *executed* | 
+|\"make_sdimage.py\"|*all*| wget | Altera SD image making script |**-** | *executed* | 
+|\"infoRSyocto.txt\"|*all*| by hand | rsYocto spelch screen Infos |**-** | *integrated* | 
+|\"network_interfaces.txt\"|*all*| by hand | the Linux Network Interface configuration file  |*/etc/network/interfaces* | *interfaces* | 
+| \"rootfs_a10 .tar.gz\"|*all*| Yocto Project |compressed rootFs file for Arria 10 |**2.: ext3** | *unzipping* |
+| \"rootfs_cy5.tar.gz\"|*all*| Yocto Project |compressed rootFs file for Cyclone V |**2.: ext3** | *unzipping* |       
+|\"preloader_cy5.bin\"|*CY5*| EDS | Primary bootloader |**1.: RAW** | *preloader-mkpimage.bin* | 
+|\"preloader_a10.bin\"|*A10*| EDS | Primary bootloader |**1.: RAW** | *uboot_w_dtb-mkpimage.bin* | 
+|\"uboot_cy5.img\"|*CY5*| EDS | Secondary bootloader |**3.: vfat** | *u-boot.img* | 
+|\"uboot_a10.img\"|*A10*| EDS | Secondary bootloader |**3.: vfat** | *u-boot.img* | 
+|\"uboot_cy5.scr\"|*CY5*| by hand | Secondary bootloader script |**3.: vfat** | *u-boot.scr* |   
+|\"uboot_a10.scr\"|*A10*| by hand | Secondary bootloader script |**3.: vfat** | *u-boot.scr* |
+|\"zImage_cy5\"|*CY5*| Yocto Project | compressed Linux Kernel |**3.: vfat** | *zImage* |   
+|\"zImage_a10\"|*A10*| Yocto Project | compressed Linux Kernel |**3.: vfat** | *zImage* |
+|\"socfpga_cy5.dts\"|*CY5*| by hand | Linux Device Tree |**3.: vfat** | *socfpga.dtb* |
+|\"socfpga_a10.dts\"|*A10*| by hand | Linux Device Tree |**3.: vfat** | *socfpga_arria10_socdk_sdmmc.dtb* |
+|\"socfpga_nano.rbf\"|*DE10 Nano*| Quartus Prime | FPGA Config  |**3.: vfat** | *socfpga.rbf* |
+|\"socfpga_std.rbf\"|*DE10 Standard*| Quartus Prime | FPGA Config  |**3.: vfat** | *socfpga.rbf* |
+|\"socfpga_han_periph.rbf\"|*HAN Pilot*| EDS | FPGA Periph Config (Memory, ...)  |**3.: vfat** | *socfpga.periph.rbf* |
+|\"socfpga_han_core.rbf\"|*HAN Pilot*| EDS | FPGA Core Config (user)  |**3.: vfat** | *ghrd_10as066n2.core.rbf* |
+|\"socfpga_nano_linux.rbf\"|*DE10 Nano*| Quartus Prime | FPGA Config for written by Linux  | */usr/rsyocto/*  | *running_bootloader_fpgaconfig.rbf*|          
+|\"socfpga_std_linux.rbf\"|*DE10 Standard*| Quartus Prime | FPGA Config for written by Linux |*/usr/rsyocto/* | *running_bootloader_fpgaconfig.rbf* |
 
 **The Content  of the "rsyocto_SDxx-Folder"** 
 

@@ -25,7 +25,7 @@ ___
 
 To realize that **Python3** with the Python Package manager **pip (PyPI)** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsYocto* is for its best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface. For that is the python Web framework **Django 3.0** with the **AdminLTE** Dashboard pre-installed.
 
-During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsYocto* applications and parts can **build, deployed and even debugged over the network** (fully routable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* is a simple installment and quick jumpstart in the development process possible, because all required compilers run directly on *rsYocto*.
+During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsYocto* applications and parts can **build, deployed and even debugged over the network** (fully rootable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* is a simple installment and quick jump start in the development process possible, because all required compilers run directly on *rsYocto*.
 
 It is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C-, CAN-BUS,…**) and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for the development of industrial connected solutions. With a single command *rsYocto* is capable to **load a new FPGA configuration** or to **read and write the AXI-Bridge Interface to the FPGA fabric**.
 
@@ -56,7 +56,7 @@ ___
 
 **Build, debug and deploy your applications over the network**
 
-![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "poerfull remote development IDEs")
+![Alt text](doc/symbols/rsYoctoInterfaces.jpg?raw=true "powerfully remote development IDEs")
 **Ready for powerful remote development IDEs and fitted with a Web server to host modern web applications**
 <br>
 <br>
@@ -104,7 +104,7 @@ ___
 
 * **`Building system` to add the following to deployable and shareable images**
 	* Applications
-	* Software Librarys 
+	* Software Libraries 
 	* Web sites 
 	* Startup scripts 
 	* Info splash screen

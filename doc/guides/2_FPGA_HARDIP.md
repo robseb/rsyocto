@@ -25,7 +25,7 @@ Here are also commands given to change the FPGA fabric configuration.
    
 ## Opening *rsYocto* Info Paper 
   * For every *rsYocto*-Version  a Information Shied on the Apache Webserver is installed
-  * This Paper contains informations about the configuration of the FPGA IP and there Addresses and the used I/O Pins 
+  * This Paper contains information's about the configuration of the FPGA IP and there Addresses and the used I/O Pins 
   * **Open it by typing the iPv4-Address of your Board into a Web browser**
   * Of cause it is possible  to install any other homepage
      * Insert the homepage files to: `/usr/share/apache2/default-site/htdocs`
@@ -124,7 +124,7 @@ Here are also commands given to change the FPGA fabric configuration.
         ```
  ## Interacting with Hard IP
 1. **I²c-Devices** 
-    * The Terasic DE10 Boards containes an [*ADXL345*](https://www.analog.com/en/products/adxl345.html)-Accelerometer on i2c0
+    * The Terasic DE10 Boards contains an [*ADXL345*](https://www.analog.com/en/products/adxl345.html)-Accelerometer on i2c0
     * The `i2c-tools` allow to interact with this sensor
     * Scan the *i²c-Bus 0* to get the i²c-Address of this sensor 
         ```bash
