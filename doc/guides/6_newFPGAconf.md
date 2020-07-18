@@ -63,20 +63,20 @@ ___
 |\"network_interfaces.txt\"|*all*| by hand | the Linux Network Interface configuration file  |*/etc/network/interfaces* | *interfaces* | 
 | \"rootfs_a10 .tar.gz\"|*all*| Yocto Project |compressed rootFs file for Arria 10 |**2.: ext3** | *unzipping* |
 | \"rootfs_cy5.tar.gz\"|*all*| Yocto Project |compressed rootFs file for Cyclone V |**2.: ext3** | *unzipping* |       
-|\"preloader_cy5.bin\"|*CY5*| EDS | Primary bootloader |**1.: RAW** | *preloader-mkpimage.bin* | 
-|\"preloader_a10.bin\"|*A10*| EDS | Primary bootloader |**1.: RAW** | *uboot_w_dtb-mkpimage.bin* | 
-|\"uboot_cy5.img\"|*CY5*| EDS | Secondary bootloader |**3.: vfat** | *u-boot.img* | 
-|\"uboot_a10.img\"|*A10*| EDS | Secondary bootloader |**3.: vfat** | *u-boot.img* | 
-|\"uboot_cy5.scr\"|*CY5*| by hand | Secondary bootloader script |**3.: vfat** | *u-boot.scr* |   
-|\"uboot_a10.scr\"|*A10*| by hand | Secondary bootloader script |**3.: vfat** | *u-boot.scr* |
-|\"zImage_cy5\"|*CY5*| Yocto Project | compressed Linux Kernel |**3.: vfat** | *zImage* |   
-|\"zImage_a10\"|*A10*| Yocto Project | compressed Linux Kernel |**3.: vfat** | *zImage* |
-|\"socfpga_cy5.dts\"|*CY5*| by hand | Linux Device Tree |**3.: vfat** | *socfpga.dtb* |
-|\"socfpga_a10.dts\"|*A10*| by hand | Linux Device Tree |**3.: vfat** | *socfpga_arria10_socdk_sdmmc.dtb* |
-|\"socfpga_nano.rbf\"|*DE10 Nano*| Quartus Prime | FPGA Config  |**3.: vfat** | *socfpga.rbf* |
-|\"socfpga_std.rbf\"|*DE10 Standard*| Quartus Prime | FPGA Config  |**3.: vfat** | *socfpga.rbf* |
-|\"socfpga_han_periph.rbf\"|*HAN Pilot*| EDS | FPGA Periph Config (Memory, ...)  |**3.: vfat** | *socfpga.periph.rbf* |
-|\"socfpga_han_core.rbf\"|*HAN Pilot*| EDS | FPGA Core Config (user)  |**3.: vfat** | *ghrd_10as066n2.core.rbf* |
+|\"preloader_cy5.bin\"|*CY5*| EDS | Primary bootloader |**3.: RAW** | *preloader-mkpimage.bin* | 
+|\"preloader_a10.bin\"|*A10*| EDS | Primary bootloader |**3.: RAW** | *uboot_w_dtb-mkpimage.bin* | 
+|\"uboot_cy5.img\"|*CY5*| EDS | Secondary bootloader |**1.: vfat** | *u-boot.img* | 
+|\"uboot_a10.img\"|*A10*| EDS | Secondary bootloader |**1.: vfat** | *u-boot.img* | 
+|\"uboot_cy5.scr\"|*CY5*| by hand | Secondary bootloader script |**1.: vfat** | *u-boot.scr* |   
+|\"uboot_a10.scr\"|*A10*| by hand | Secondary bootloader script |**1.: vfat** | *u-boot.scr* |
+|\"zImage_cy5\"|*CY5*| Yocto Project | compressed Linux Kernel |**1.: vfat** | *zImage* |   
+|\"zImage_a10\"|*A10*| Yocto Project | compressed Linux Kernel |**1.: vfat** | *zImage* |
+|\"socfpga_cy5.dts\"|*CY5*| by hand | Linux Device Tree |**1.: vfat** | *socfpga.dtb* |
+|\"socfpga_a10.dts\"|*A10*| by hand | Linux Device Tree |**1.: vfat** | *socfpga_arria10_socdk_sdmmc.dtb* |
+|\"socfpga_nano.rbf\"|*DE10 Nano*| Quartus Prime | FPGA Config  |**1.: vfat** | *socfpga.rbf* |
+|\"socfpga_std.rbf\"|*DE10 Standard*| Quartus Prime | FPGA Config  |**1.: vfat** | *socfpga.rbf* |
+|\"socfpga_han_periph.rbf\"|*HAN Pilot*| EDS | FPGA Periph Config (Memory, ...)  |**1.: vfat** | *socfpga.periph.rbf* |
+|\"socfpga_han_core.rbf\"|*HAN Pilot*| EDS | FPGA Core Config (user)  |**1.: vfat** | *ghrd_10as066n2.core.rbf* |
 |\"socfpga_nano_linux.rbf\"|*DE10 Nano*| Quartus Prime | FPGA Config for written by Linux  | */usr/rsyocto/*  | *running_bootloader_fpgaconfig.rbf*|          
 |\"socfpga_std_linux.rbf\"|*DE10 Standard*| Quartus Prime | FPGA Config for written by Linux |*/usr/rsyocto/* | *running_bootloader_fpgaconfig.rbf* |
 
