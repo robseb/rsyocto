@@ -149,7 +149,7 @@ ___
 |  `examples/python` | *rsYocto* Python examples 
 |  `buildSystem` | *rsYocto* build system scripts |
 
-The final *rsYocto* Versions are available inside the **packages-Part of this repository**!
+The final *rsYocto* Versions are available inside the [**release-Part of this repository](https://github.com/robseb/rsyocto/releases)**!
 
 # Built With
 * [Intel SoC FPGA Embedded Development Suite (EDS) 18.1.0.625](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) - Linux
@@ -181,7 +181,7 @@ Also the `rsyoctoMakingSDscript` is recognizable, that on a running CentOS-Compu
 To show how to **map FPGA I/O Pins with HPS Hard IP components, like I²C- or CAN-Bus,** I wrote [**this step by step guide**](https://github.com/robseb/HPS2FPGAmapping). Here also a **description of the development of all necessary bootloaders and a bootloader script wih the Intel Embedded Development Suite (EDS)** is available.
 
 ### How to get started with the Yocto Project for Intel SoC-FPGAs?
-Inside my forked [`meta-intelfpga` BSP layer](https://github.com/robseb/meta-intelfpga) I described in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
+Inside my [`meta-intelfpga` BSP layer](https://github.com/robseb/meta-intelfpga) I described in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
 
 Also I published a Yocto project [*meta layer (`meta-rstools`)*](https://github.com/robseb/meta-rstools) to bring **tools to update the FPGA configuration with the running Linux and to interact with simple commands with the FPGA fabric.**
 
@@ -209,9 +209,11 @@ Currently I am working on a Windows 10 .net Desktop application to manage FPGA c
 # Author
 * **Robin Sebastian**
 
-*rsYocto* a project, that I have fully developed on my own. It is a academic project.
-Today I'm a Master Student of electronic engineering with the major embedded systems. 
-I ‘m looking for an interesting job offer to share and deepen my shown skills starting summer 2020.
+rsyocto and all my other project I have fully developed by my own. No companies are involved in this projects. I’m recently graduated as a master in electrical engineering with the major embedded systems (*M.Sc.*).
+
+I'm open for cooperations as a freelancer to realize your specific requirements. Otherwise, I‘m looking for an interesting full time job offer to share and deepen my shown skills.
+
+[**Github sponsoring is welcome.**](https://github.com/sponsors/robseb)
 
 [![Gitter](https://badges.gitter.im/rsyocto/community.svg)](https://gitter.im/rsyocto/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Email me!](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](mailto:git@robseb.de)
