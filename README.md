@@ -209,7 +209,7 @@ Currently I am working on a Windows 10 .net Desktop application to manage FPGA c
 # Author
 * **Robin Sebastian**
 
-rsyocto and all my other project I have fully developed by my own. No companies are involved in this projects. I’m recently graduated as a master in electrical engineering with the major embedded systems (*M.Sc.*).
+rsyocto and all my other projects I have fully developed by my own. No companies are involved in these projects. I’m recently graduated as a master in electrical engineering with the major embedded systems (*M.Sc.*).
 
 I'm open for cooperations as a freelancer to realize your specific requirements. Otherwise, I‘m looking for an interesting full time job offer to share and deepen my shown skills.
 
