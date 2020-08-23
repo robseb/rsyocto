@@ -329,7 +329,7 @@ if __name__ == '__main__':
     if nb =='q' or nb=='Q':
         sys.exit()
 
-    if nb =='d' or nb=='D':
+    if nb =='d' or nb=='D' or nb=='':
         # Add a datecode to the output file names
         now = datetime.now()
         nb = now.strftime("%Y%m%d_%H%M")
@@ -670,7 +670,7 @@ if __name__ == '__main__':
     print('     =Done')       
 
     ####################################### Script based ROOTFS Changes #######################################
-
+    
     ## Execute the python script "rootfsChange.py" to change the rootfs with root privileges
     if os.path.isfile(ext+'/rootfsChange.py'):
         print('--> Start the rootfs change script with sudo rights\n')
@@ -726,17 +726,17 @@ if __name__ == '__main__':
     print('    Copy these files to the rootfs')
     try:
         # Create the folder 
-        if not os.path.isdir(ext_dir+'/rsyocto'):
-            os.system('sudo mkdir '+ext_dir+'/rsyocto')
-        if not os.path.isdir(ext_dir+'/rsyocto'):
+        if not os.path.isdir(ext_dir+'/usr/rsyocto'):
+            os.system('sudo mkdir '+ext_dir+'/usr/rsyocto')
+        if not os.path.isdir(ext_dir+'/usr/rsyocto'):
             print('ERROR: Failed to create the "rsyocto" folder!')
             sys.exit()
         # Copy the files to it
-        os.system('sudo cp '+ext+'/device.txt'+' '+ext_dir+'/rsyocto')
-        os.system('sudo cp '+ext+'/suppBoard.txt'+' '+ext_dir+'/rsyocto')
-        os.system('sudo cp '+ext+'/version.txt'+' '+ext_dir+'/rsyocto')
+        os.system('sudo cp '+ext+'/device.txt'+' '+ext_dir+'/usr/rsyocto/device.txt')
+        os.system('sudo cp '+ext+'/suppBoard.txt'+' '+ext_dir+'/usr/rsyocto/suppBoard.txt')
+        os.system('sudo cp '+ext+'/version.txt'+' '+ext_dir+'/usr/rsyocto/version.txt')
 
-        # remove the files inside the execution folder
+        # Remove the files inside the execution folder
         os.system('sudo rm '+ext+'/device.txt')
         os.system('sudo rm '+ext+'/suppBoard.txt')
         os.system('sudo rm '+ext+'/version.txt')
@@ -745,8 +745,7 @@ if __name__ == '__main__':
         sys.exit()
 
     print('    = Done ')
-
-
+ 
     ################### Change the network configurations  ###################
 
     '''
@@ -806,7 +805,7 @@ if __name__ == '__main__':
 
     try:
         # Remove the files inside the execution folder
-        os.system('sudo cp '+ext+'/issue'+' '+ext_dir+'/rsyocto')
+        os.system('sudo cp '+ext+'/issue'+' '+ext_dir+'/etc/issue')
         os.system('sudo rm '+ext+'/issue')
     except Exception as ex:
         print('ERROR: Failed to copy files to the rootfs!')
@@ -826,10 +825,10 @@ if __name__ == '__main__':
     print('#                                                                              #')
     print('#                        GENERATION WAS SUCCESSFUL                             #')
     print('# -----------------------------------------------------------------------------#')
-    print('#                     Output file: "'+image_name+'"                     #')
+    print('#              Output file: "'+image_name+'" #')
     if compress_output:
-        print('#                    Compressed Output file: "'+image_name+'"                  #')
-    print('#                     Directory: "'+ext+'"                       #')                                                
+        print('#              Compressed Output file: "'+image_name+'" #')
+    print('#              Directory: "'+ext+'" #')                                                
     print('#                                                                              #')
     print('#                           SUPPORT THE AUTHOR                                 #')
     print('#                                                                              #')
