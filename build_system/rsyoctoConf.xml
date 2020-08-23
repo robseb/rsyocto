@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding = "UTF-8" ?>
+<!-- rsyocto Linux configuration file -->
+<!-- Used by the Python script "makersyoctoSDImage.py" -->
+
+<rsyocto>
+<board folder_name="Board_DE10NANO"   mac_addrs="d6:7d:ae:b3:0e:ba"/> 
+<board folder_name="Board_DE10STD"    mac_addrs="d6:7d:ae:b3:0e:bb"/> 
+<board folder_name="Board_HAN"        mac_addrs="d6:7d:ae:b3:0e:bc"/> 
+<board folder_name="Board_DE0NANOSOC" mac_addrs="d6:7d:ae:b3:0e:bd"/> 
+
+<distro yocto_build="21-06-20" kernel_name ="linux-socfpga 5.5" 
+description_txt="-- MAIN FEATURES:
+	  python3, pip3, django 3.01, adminLTE, sqlite, openSSH Server, apache2,
+	  php, gcc, gcc++, make, cmake, wget, curl, gdb server, gatord, time, nano, 
+	  minicom, i2c-tools, spi-tools, usbutils, ethtool, iputils, git, can-tools,
+	  rstools, opkg, update-rc.d, crontab, devmem, iproute2, devmem, iproute2, iw
+      -- FPGA:
+	  Sys_ID, LEDs, Switches, ADC, Seven Segment Display, Display ... 
+      -- INCLUDE:
+	 Intel hwlib
+      -- WEBITERFACE:
+	 Pinout- and Info-Page
+	 "/>
+</rsyocto>
+

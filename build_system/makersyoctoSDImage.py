@@ -57,7 +57,7 @@
 # Copying network interface settings to the rootfs
 #
 #16-01-2020 (Vers. 2.04)
-#  Allow rootfs changes after the "my_.."-folders were created
+#  Allows rootfs changes after the "my_.."-folders were created
 #
 #21-08-2020 (Vers. 3.00) 
 #  Milestone version
@@ -90,11 +90,13 @@ BOARD_ID =0
 FOLDER_NAME_SOCFPGA = ['','SoCFPGA_CY5','SoCFPGA_CY5','SoCFPGA_A10','SoCFPGA_CY5']
 FOLDER_NAME_BOARD   = ['','Board_DE10NANO','Board_DE10STD','Board_HAN','Board_DE0NANOSOC']                   
 
-BOARD_NAME      = ['Terasic DE10 Standard and Nano','Terasic DE10 Nano','Terasic DE10 Standard', \
+BOARD_NAME      = [' ','Terasic DE10 Nano','Terasic DE10 Standard', \
                     'Terasic HAN Pilot','Terasic DE0 Nano SoC']
 
 BOARD_FPGA_NAME = ['unknown','Intel Cyclone V','Intel Cyclone V','Intel Arria 10 SX', \
                    'Intel Cyclone V']
+
+DEVICE_ID_LIST = [0,0,0,2,0]
 
 DEVICETREE_OUTPUT_NAME = ['','socfpga_cyclone5_socdk.dts','socfpga_cyclone5_socdk.dts', \
                         '','socfpga_cyclone5_socdk.dts']
@@ -135,7 +137,7 @@ if sys.platform =='linux':
 
     except ImportError as ex:
         print('Msg: '+str(ex))
-        print('This Python Application requirers "git"')
+        print('This Python Application requires "git" and "wget"')
         print('Use following pip command to install it:')
         print('$ pip3 install GitPython wget')
         sys.exit()
@@ -266,7 +268,7 @@ if __name__ == '__main__':
         tree = ET.parse(CONF_XML_FILE_NAME) 
         root = tree.getroot()
     except Exception as ex:
-        print(' ERROR: Failed to prase "'+CONF_XML_FILE_NAME+'" file!')
+        print(' ERROR: Failed to parse "'+CONF_XML_FILE_NAME+'" file!')
         print(' Msg.: '+str(ex))
         sys.exit()
     
@@ -307,35 +309,8 @@ if __name__ == '__main__':
         print('ERROR: It is no device with "folder_name="'+FOLDER_NAME_BOARD[BOARD_ID]+'"')
         print('        was not found inside the XML configuration file!')
         sys.exit()
-    '''
-    # BOARD_ID = 1 -> DE10 Nano
-    # BOARD_ID = 2 -> DE10 Standard
-    # BOARD_ID = 3 -> HAN Pilot Arria 10 
-    # BOARD_ID = 4 -> DE0 Nano SoC
-    BOARD_ID =0
 
-    # SD-Folder Sub folder names
-    FOLDER_NAME_SOCFPGA = ['SoCFPGA_CY5','','SoCFPGA_A10']
-    FOLDER_NAME_BOARD   = ['','Board_DE10NANO','Board_DE10STD','Board_HAN','Board_DE0NANOSOC']                   
-
-    BOARD_NAME      = ['Terasic DE10 Standard and Nano','Terasic DE10 Nano','Terasic DE10 Standard', \
-                        'Terasic HAN Pilot','Terasic DE0 Nano SoC']
-
-    BOARD_FPGA_NAME = ['unknown','Intel Cyclone V','Intel Cyclone V','Intel Arria 10 SX', \
-                    'Intel Cyclone V']
-                    
-    BOARD_SUFIX_FPGA  = ['','_nano','_std','_han','_de0']
-    BOARD_SUFFIX_BOARD= ['','_cy5','_cy5','_a10','_cy5']
-    ROOTFS_FILE_NAME  = ['',ext_dir+'_cy5',ext_dir+'_cy5', ext_dir+'_a10',ext_dir+'_cy5']
-
-
-    # Read the execution envioment 
-    socfpgaGenerator = SocfpgaPlatformGenerator()
-
-    sys.exit()
-    '''
-
-    print ('This script will generate the image for following Board: ' + str(BOARD_NAME[BOARD_ID]))
+    print ('This script will generate the image for the following Board: ' + str(BOARD_NAME[BOARD_ID]))
 
     
     #############  Input the name of the final image ###################
@@ -369,18 +344,48 @@ if __name__ == '__main__':
     # Read the execution environment 
     socfpgaGenerator = SocfpgaPlatformGenerator()
 
+    # Check that the Quartus Prime project is compatible to the selected board
+    proj_compet = True
+    unlicensed_ip_found = False
+    gen_boot =0
+    if not DEVICE_ID_LIST[BOARD_ID] == socfpgaGenerator.Device_id:
+        print('Soc: '+str(socfpgaGenerator.Device_id))
+        print('********************************************************************************')
+        print('*                     The used Quartus Prime project                           *')
+        print('*                     is for a diffrent FPGA Device!                           *')
+        print('*    Generation of a new bootloader and FPGA configuration are not possible!   *')
+        print('********************************************************************************\n')
+        _wait2__ = input('   Please type something to continue (q= Abort)...  ')
+        if _wait2__ == 'q' or _wait2__ == 'Q':
+            sys.exit()
+        proj_compet = False
+        gen_boot = 3
+
+    if socfpgaGenerator.unlicensed_ip_found:
+        print('********************************************************************************')
+        print('*                     Unlicensed IP inside project found!                      *')
+        print('*                  Generation of ".rbf" file is not possible!                  *')
+        print('********************************************************************************\n')
+        _wait2__ = input('   Please type something to continue (q= Abort)...  ')
+        if _wait2__ == 'q' or _wait2__ == 'Q':
+            sys.exit()
+        unlicensed_ip_found = True
+
+
     # Create the partition table 
     if not socfpgaGenerator.GeneratePartitionTable():
         sys.exit()
 
     # Create the required bootloader
-    if not socfpgaGenerator.BuildBootloader(3):
+
+    if not socfpgaGenerator.BuildBootloader(gen_boot):
         sys.exit()
 
     ############################ Copy the depending Linux files to the partition folder #############################
     print('-> Copy the depending Linux files to the partition folder')
     ext = os.getcwd()+'/'
     ext_dir = socfpgaGenerator.Ext_folder_dir+'/'
+    fpga_conf_default_dir =''
 
     #### Copy the zImage  #######
     print('   Copy the compressed "zImage" file')
@@ -411,8 +416,32 @@ if __name__ == '__main__':
             print('ERROR: Failed to copy file! MSG: '+str(ex))
             sys.exit()
     else:
-        print('ERROR: It is no zImage compressed Linux files available for the board/device')
+        print('ERROR: It is no zImage compressed Linux file available for the board/device')
         sys.exit()
+
+    #### Find the FPGA configuration file   #######
+    if not proj_compet or unlicensed_ip_found:
+        print('   Looking for the default FPGA configuration file')
+        
+        # 1. Look for the file inside the Board specific folder
+        if os.path.isfile(ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
+                    "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]):
+            fpga_conf_default_dir= ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
+                    "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]
+            print('     Name: "'+fpga_conf_default_dir+'"')
+    
+        # 2. Look for the file inside the Device specific folder
+        elif os.path.isfile(ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+                    "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]):
+            fpga_conf_default_dir=ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+                    "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]
+            print('     Name: "'+fpga_conf_default_dir+'"')
+          
+        else:
+            print('ERROR: It is no default FPGA configuration file (.rbf)'+\
+                 'available for the board/device')
+            sys.exit()
+
 
     #### Copy the rootfs.tar.gz  #######
     print('   Copy the compressed rootfs archive file')
@@ -438,7 +467,7 @@ if __name__ == '__main__':
             print('ERROR: Failed to copy file! MSG: '+str(ex))
             sys.exit()
     else:
-        print('ERROR: It is no compressed rootfs files available for the board/device')
+        print('ERROR: It is no compressed rootfs file available for the board/device')
         sys.exit()
 
     #### Copy the devicetree file   #######
@@ -469,11 +498,10 @@ if __name__ == '__main__':
             print('ERROR: Failed to copy file! MSG: '+str(ex))
             sys.exit()
     else:
-        print('ERROR: It is no devicetree files available for the board/device')
+        print('ERROR: It is no devicetree file available for the board/device')
         sys.exit()
     print('     =Done\n')
         
-
     #################################  Add the MAC Address to the devicetree  #################################
     
     print("\n--> Open the Device Tree File to insert the new MAC-Address")
@@ -544,11 +572,19 @@ if __name__ == '__main__':
     #########################################  Register partition files  #########################################
     if not socfpgaGenerator.CopyLinuxFiles2Partition(2):
         sys.exit()
-    
+
+    # def GenerateBootFPGAconf(self,copy_file=False,dir2copy=''):
     # Generate the depending FPGA configuration file 
     #    specified inside the u-boot script
-    if not socfpgaGenerator.GenerateBootFPGAconf():
-        sys.exit()
+    if proj_compet or not unlicensed_ip_found:
+        # Generate a new FPGA configuration
+        if not socfpgaGenerator.GenerateBootFPGAconf():
+            sys.exit()
+    else: 
+        # Use the default FPGA configuration file
+        print('NOTE: Only the default FPGA configuration file will be used!')
+        if not socfpgaGenerator.GenerateBootFPGAconf(True,unlicensed_ip_found):
+            sys.exit()
 
     ############################## Unzip all available archive files such as the rootfs ##############################
     if not socfpgaGenerator.ScanUnpackagePartitions():
@@ -558,7 +594,7 @@ if __name__ == '__main__':
     ##########################################     Allow user changes      ##########################################
     
     print('\n#############################################################################')
-    print('#               Copy files to the "my_folders" the contant                   #')
+    print('#               Copy files to the "my_folders" the content                   #')
     print('#            will then be copied to the depending rootfs location            #')
     print('#                                                                            #')
     print('#                                 ==========                                 #')
@@ -656,7 +692,7 @@ if __name__ == '__main__':
         try:
             os.remove(ext+'/version.txt')
         except Exception:
-            print('ERROR: Failed to delate "version.txt"')
+            print('ERROR: Failed to delete "version.txt"')
 
     # Write the Version No. to the file
     with open(ext+'/version.txt', "a") as f:
@@ -668,7 +704,7 @@ if __name__ == '__main__':
         try:
             os.remove(ext+'/suppBoard.txt')
         except Exception:
-            print('ERROR: Failed to delate "suppBoard.txt"')
+            print('ERROR: Failed to delete "suppBoard.txt"')
 
     # Write the Board name to the file
     with open(ext+'/suppBoard.txt', "a") as f:
@@ -680,7 +716,7 @@ if __name__ == '__main__':
         try:
             os.remove(ext+'/device.txt')
         except Exception:
-            print('ERROR: Failed to delate "device.txt"')
+            print('ERROR: Failed to delete "device.txt"')
 
     # Write the SoC-FPGA name to the file
     with open(ext+'/device.txt', "a") as f:
@@ -724,19 +760,19 @@ if __name__ == '__main__':
     ################### add the Bootloader FPGA Configuration to the rootfs ###################
 
 
-    ################### generate splash boot screen for each Board ###################
+    ################### Generate splash boot screen for the Board ###################
     ## Board Selection 
     print("--> Decoding the Board selection")
     now = datetime.now()
     path = os.getcwd()
 
 
-    print("\n--> Generaing the boot splash screen\n")
+    print("\n--> Generating the boot splash screen\n")
     if os.path.isfile(ext+'/issue'):
         try:
             os.remove(ext+'/issue')
         except Exception:
-            print('ERROR: Failed to delate "issue"')
+            print('ERROR: Failed to delete "issue"')
 
     with open(ext+'/issue', "a") as f:   
         f.write("\n")
@@ -768,31 +804,32 @@ if __name__ == '__main__':
             f.write(x)
         f.write("***********************************************************************************************************\n\n")   
 
-    '''     
-    #############  allow manual rootFs changes ###################
+    try:
+        # Remove the files inside the execution folder
+        os.system('sudo cp '+ext+'/issue'+' '+ext_dir+'/rsyocto')
+        os.system('sudo rm '+ext+'/issue')
+    except Exception as ex:
+        print('ERROR: Failed to copy files to the rootfs!')
+        sys.exit()
 
-    print("\n --> Now manual rootFs changes for the Board: "+BOARD_NAME[BOARD_ID]+" are possible!\n")
-    raw_input("PRESS ENTER to continue...\n")
-    print("------------------------------------------------------\n\n") 
-    '''
 
     ################################ Generate the bootable image file  ###################################
       
     # Generate with the files inside the partition folder a Image file
-    # Use a date code as a output file
+    # Use a date code as an output file
     if not socfpgaGenerator.GenerateImageFile(image_name,zip_name,compress_output,True):
         sys.exit()
 
         
 ############################################################ Goodby screen  ###################################################
-      print('\n################################################################################')
+    print('\n################################################################################')
     print('#                                                                              #')
     print('#                        GENERATION WAS SUCCESSFUL                             #')
     print('# -----------------------------------------------------------------------------#')
     print('#                     Output file: "'+image_name+'"                     #')
     if compress_output:
         print('#                    Compressed Output file: "'+image_name+'"                  #')
-    print('#                     Direcotry: "'+ext+'"                       #')                                                                          #')
+    print('#                     Directory: "'+ext+'"                       #')                                                
     print('#                                                                              #')
     print('#                           SUPPORT THE AUTHOR                                 #')
     print('#                                                                              #')
