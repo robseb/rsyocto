@@ -55,7 +55,7 @@ To automate these two build steps I designed two Python scripts. To accomplish t
 
 # Installment of the required development tools
 
-Follow [following instructions](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md) to install the required development tools:
+Follow the [following instructions](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md) to install the required development tools:
 * *Intel Quartus Prime* Lite for Windows and Linux 
     * with *Eclipse for NIOS II* support
 * *Intel Embedded Development Suite* (*SoC EDS*) 20.1 for Linux
@@ -208,20 +208,20 @@ status = "disabled";
 
 # Booting the new designed Linux Distribution and configuring the FPGA fabric with the NIOS II Core
 
-**Use the build script as usual to generate a bootable image file with the change bootflow.** 
+**Use the build script as usual to generate a bootable image file with the changed bootflow.** 
 **The Intel NIOS II Soft-Core processor is typically only in a demo mode (*un-license*) available.** *Intel* Quartus Prime will reject to generate a binary FPGA configuration file with a NIOS II core. However, the build system will use for FPGA configuration a default file. That can be later overwritten.
 <br>
 
-Flash the outputted image file (*.img*) to an SD-Card and boot your development baord with it as shown in the [first guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/1_Booting.md).
+Flash the output image file (*.img*) to a SD-Card and boot your development board with it as shown in the [first guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/1_Booting.md).
 <br>
 
-After complete boot of the embedded Linux is done connect the onboard *ALTERA JTAG Blaster* via a USB Cable to your development computer. 
-Write the FPGA configuration of your Quartus Prime project with the integrated programmer to the FPGA fabric of your development baord. 
+After the complete boot of the embedded Linux is done connect the onboard *ALTERA JTAG Blaster* via an USB Cable to your development computer. 
+Write the FPGA configuration of your Quartus Prime project with the integrated debugger to the FPGA fabric of your development board. 
 
 
 # Generating a *NIOS II for Eclipse* demo project with FreeRTOS and the HPS HAL lib
 
-A other time consuming part of this project is usually to implement a real-time operating system (*e.g. FreeRTOS*) into a *Eclipse* project. I designed a Python script (*"NIOSII_EclipseCompProject*") to automate this step, as well. It can clone the latest FreeRTOS version from Github and install a optimized port of it for the NIOS II processor. A wrote a small HAL library for accessing HPS IP with the NIOS II core. It can be pre-installed with custom user libraries as well. The will generate a **Eclipse example project**. That can be used as a reference for a further development. 
+Another time consuming part of this project is usually to implement a real-time operating system (*e.g. FreeRTOS*) into an *Eclipse* project. I designed a Python script (*"NIOSII_EclipseCompProject*") to automate these steps, as well. It can clone the latest FreeRTOS version from Github and install an optimized port of it for the NIOS II processor. I wrote a small HAL library for accessing HPS IP with the NIOS II core. It can be pre-installed with custom user libraries, as well. The Python script will generate an **Eclipse example project**. That can be used as a reference for a further development. 
 
 **Concept of the *"NIOSII_EclipseCompProject"* Python script:**
 
@@ -242,12 +242,12 @@ Finish the generation of the **Eclipse example project** and then start *Eclipse
 The starting of a new debug session is also shown inside the documentation of "*NIOSII_EclipseCompProject*" [Github repository](https://github.com/robseb/NIOSII_EclipseCompProject). Create a new *Eclipse* project that based on the NIOS II Software example **"FreeRTOS+socfpgaHAL-robseb"**.
 <br>
 
-The project contains FreeRTOS implementation that access with multiple Hard-IP components. 
+The project contains FreeRTOS implementation that accesses with multiple Hard-IP components. 
 <br>
 
 # Understanding the *socfpgaHAL* Library 
 
-The "*socfpgaHAL*" is a small library that can be used as an HAL for interaction with HPS Hard-IP with an NIOS II processor. 
+The "*socfpgaHAL*" is a small library that can be used as an HAL for interaction with HPS Hard-IP with a NIOS II processor. 
 
 **The Structure of the "*socfpgaHAL*"**: 
 
@@ -257,13 +257,13 @@ The "*socfpgaHAL*" is a small library that can be used as an HAL for interaction
  | *"socfpgaHAL_config.h"* | The configuration file of the HAL | 
 <br>
 
-Use the configuration file to enable access of components. For instance the GPIO support can be enabled by adding to the configuration file (*socfpgaHAL/socfpgaHAL_config.h*):
+Use the configuration file to enable the access of components. For instance the GPIO support can be enabled by adding to the configuration file (*socfpgaHAL/socfpgaHAL_config.h*):
 ````c
 #define SOCFPGAHAL_ENABLE_GPIO 			(1)
 ```` 
 <br>
 
-**Currently the support for following Hard-IP components is available:**
+**Currently the support for the following Hard-IP components is available:**
 
 
 | **Peripheral Name** | **Module Name** | **Description**

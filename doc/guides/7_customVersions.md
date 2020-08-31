@@ -322,6 +322,8 @@ The Python script will go through the following major steps that specific user i
 8. **Change the *rootfs* or add files to the Board- or SoC-FPGA specfic folders manually**
     * At this point the script will show the following message box:
         ![Alt text](CopyFilesMes.png?raw=true "Bootloader Generation Question")
+        <br>
+    
     * Now it is enabled to copy or change files inside the partition folders (*"socfpgaPlatformGenerator/Image_partitions"*) by hand 
 
     The script will generate for each selected partition a depending folder. At this point it is enabled to drag&drop files and folders 
