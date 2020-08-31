@@ -83,8 +83,10 @@ The NIOS II Soft-Core processor can be designed as usually and will for that rea
         * By using a sub-window offset of *0xfc000000* it is for the NIOS II Core enable to access the entire memory part of the HPS components
         * That means a NIOS II Core can for example access the base address of CAN0 (*HPS base Address: 0xFFC00000*) by using the address *0x3C00000* (*=0xFFC00000-0xFFC00000*)
         * **Use the following settings for the Address Span Expander**
-        ![Alt text](addressExpander.png?raw=true "Address Span Expander")
-<br>
+            <br>
+
+            ![Alt text](addressExpander.png?raw=true "Address Span Expander")
+            <br>
 
     * **Connect the NIOS II AVALON Bus to the Window Slave Port of the Address Span Expander**
     * **Connect the FPGA-to-HPS Bridge of the HPS module to the expander master port of the Address Span Expander**
@@ -95,7 +97,8 @@ The NIOS II Soft-Core processor can be designed as usually and will for that rea
 <br>
 The following table illustrates the by the NIOS II accessible memory space with this configuration:
 <br>
-![Alt text](MemorySpace.png?raw=true "Accessible memory space")
+
+    ![Alt text](MemorySpace.png?raw=true "Accessible memory space")
 <br>
 
 
@@ -231,12 +234,12 @@ Be sure, that you select inside the Python script the implementation of the [soc
 ![Alt text](AddSoCHalMes.png?raw=true "Generation with socfpgaHAL") 
 <br>
 
-Finish the generation of the **Eclipse example project** and then start *Eclipse* as described inside the documentation of the *"NIOSII_EclipseCompProject"*. 
+Finish the generation of the **Eclipse example project** and then start *Eclipse* as described inside the documentation of the *"[NIOSII_EclipseCompProject](https://github.com/robseb/NIOSII_EclipseCompProject)"*. 
 
 
 # Starting a new *NIOS II for Eclipse* debug session and running the example code
 
-The starting of a new debug session is also shown inside the documentation of "*NIOSII_EclipseCompProject*" Github repository. Create a new *Eclipse* project that based on the NIOS II Software example **"FreeRTOS+socfpgaHAL-robseb"**.
+The starting of a new debug session is also shown inside the documentation of "*NIOSII_EclipseCompProject*" [Github repository](https://github.com/robseb/NIOSII_EclipseCompProject). Create a new *Eclipse* project that based on the NIOS II Software example **"FreeRTOS+socfpgaHAL-robseb"**.
 <br>
 
 The project contains FreeRTOS implementation that access with multiple Hard-IP components. 
