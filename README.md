@@ -158,7 +158,7 @@ ___
 
 | No. | Objective | Guide
 |:--|:--|:--|
-| 1 | **Designing of custom *rsyoto* versions** | | [Guide](doc/appSpecificGuides/7_customVersions.md)  |
+| 1 | **Designing of custom *rsyoto* versions** | [Guide](doc/appSpecificGuides/7_customVersions.md)  |
 <br>
 
 ### Application-specific Guides
@@ -201,9 +201,11 @@ The final *rsyocto* Versions are available inside the **packages-Part of this re
 <br>
 
 # Development Process
+**My first approach to design this Linux Distribution** 
 
 ![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsyocto required building steps")
 **Build Flow to create the first rsyocto version**
+<br>
 
 # Build system for generation of custom flavors
 
