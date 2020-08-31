@@ -51,12 +51,12 @@ Within this repository I have also integrated a step by step guide to show my so
 
 # System Overview of rsyocto
 
-![Alt text](doc/symbols/rsyoctoLayers.jpg?raw=true "System Overview")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/rsYoctoLayers.jpg?raw=true "System Overview")
 ___
 
 **Build, debug and deploy your applications over the network**
 
-![Alt text](doc/symbols/rsyoctoInterfaces.jpg?raw=true "powerfully remote development IDEs")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/rsYoctoInterfaces.jpg?raw=true "powerfully remote development IDEs")
 **Ready for powerful remote development IDEs and fitted with a Web server to host modern web applications**
 <br>
 <br>
@@ -202,13 +202,14 @@ The final *rsyocto* Versions are available inside the **packages-Part of this re
 
 # Development Process
 
-![Alt text](doc/symbols/rsyoctoRequieredBuildingSteps.jpg?raw=true "rsyocto required building steps")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsyocto required building steps")
 **Build Flow to create the first rsyocto version**
 
 # Build system for generation of custom flavors
 
-![Alt text](doc/symbols/BuildSystem.jpg?raw=true "automatic rsyocto Build system")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/BuildSystem.jpg?raw=true "automatic rsyocto Build system")
 **Block diagram of the fully automated build system to design new releases**
+<br>
 <br>
 
 This illustration shows my development procedure and the required complexity to create *rsyocto*. **I entirely automated the required complex bootflow** to generate with a *Intel Quartus Prime* FPGA project and Linux Distribution files (*e.g. zImage,rootfs,...*) a bootable image file (*.img*). 
@@ -253,7 +254,7 @@ I wrote [Python Script](https://github.com/robseb/NIOSII_EclipseCompProject) to 
 
 Currently I am working on a Windows 10 .net Desktop application to manage FPGA configurations and to allow to record data via the network. To release that I will design a server task, running on *rsyocto*, that can send python- or C++-values with TCP to the desktop. The following screenshot shows the development state of this project.
 
-![Alt text](doc/symbols/destopSoftwareAlphaState.jpg?raw=true "rsyocto required building steps")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/destopSoftwareAlphaState.jpg?raw=true "rsyocto required building steps")
 
 
 <br>
