@@ -4,9 +4,13 @@ ___
 ![GitHub](https://img.shields.io/static/v1?label=Ubuntu&message=18.04+LTS,+20.04+LTS&color=yellowgreen)
 ![GitHub](https://img.shields.io/static/v1?label=CentOS&message=7.0,+8.0&color=yellowgreen)
 ![GitHub](https://img.shields.io/static/v1?label=Intel+EDS&message=20.1&color=blue)
+___
+
+<br>
+<br>
 
 
-![Alt text](https://github.com/robseb/rsyocto/doc/symbols/BuildSystem.jpg?raw=true "automatic rsyocto Build system")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/BuildSystem.jpg?raw=true "automatic rsyocto Build system")
 <br>
 
 **The Python script *"makersyoctoSDImage.py"* allows to build with the *Intel Embedded Development Suite* (*SoC EDS*) the entire bootflow and generates a bootable image (*.img*) file with a flavor of *rsyocto***
