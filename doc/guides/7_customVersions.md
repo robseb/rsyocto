@@ -97,11 +97,11 @@ For generating a bootable *rsyocto* image for *Intel* SoC-FPGAs by executing a s
     * The project configurations will then be used to build the bootable image 
     * You can also use the default Quartus Prime project as shown in the previous [guide](6_newFPGAconf.md)
     * Note: The project compilation must be successfully done
-    <br>
+<br>
 
     **The Quartus Project folder should now look like this:**
     ![Alt text](project_folder.png?raw=true "Screenshot of the Quartus Prime Project")
-    <br>
+<br>
 
 * Navigate with the Linux terminal into this folder inside your Quartus Project 
     ````shell 
@@ -187,17 +187,17 @@ Inside **board specific folders** replace "*XXX*" with following:
 
 |  **Suffix** | **Description**  | **Example** |
 |:--|:--|:--|
-|*\"nano\"* | identified the *Terasic DE10-Nano*  (*Cyclone V*) development board | "*socfpga_nano.dts*"|
-|*\"std\"* | identified the *Terasic DE10-Nano*  (*Cyclone V*) development board | "*socfpga_std.dts*"|
-|*\"de0\"* | identified the *Terasic DE0-Nano SoC*  (*Cyclone V*) development board | "*socfpga_de0.dts*"|
-|*\"han\"* | identified the *Terasic HAN Pilot*  (*Arria 10*) development board | "*socfpga_han.dts*"|
+|*\"nano\"* | Identified the *Terasic DE10-Nano*  (*Cyclone V*) development board | "*socfpga_nano.dts*"|
+|*\"std\"* | Identified the *Terasic DE10-Nano*  (*Cyclone V*) development board | "*socfpga_std.dts*"|
+|*\"de0\"* | Identified the *Terasic DE0-Nano SoC*  (*Cyclone V*) development board | "*socfpga_de0.dts*"|
+|*\"han\"* | Identified the *Terasic HAN Pilot*  (*Arria 10*) development board | "*socfpga_han.dts*"|
 
 Inside **SoC-FPGA specific folders** replace "*XXX*" with following:
 
 |  **Suffix** | **Description**  | **Example** |
 |:--|:--|:--|
-|*\"cy5\"* | identified the *Intel* *Cyclone V* SoC-FPGA | "*socfpga_cy5.dts*"|
-|*\"a10\"* | identified the *Intel* *Arria 10 SX* SoC-FPGA | "*socfpga_a10.dts*"|
+|*\"cy5\"* | Identified the *Intel* *Cyclone V* SoC-FPGA | "*socfpga_cy5.dts*"|
+|*\"a10\"* | Identified the *Intel* *Arria 10 SX* SoC-FPGA | "*socfpga_a10.dts*"|
 <br>
 
 During further execution the Python build system will create new folders inside the *socfpgaPlatformGenerator* directory:

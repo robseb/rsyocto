@@ -202,8 +202,13 @@ The final *rsyocto* Versions are available inside the **packages-Part of this re
 
 # Development Process
 
-The first version of *rsyocto* (release december of 2019) was developed with the *Intel Embedded Development Suite* (*SoC EDS*) version 18.1 and a custom Yocto Project meta-layer. By default the specifications of these two development tools are not compatible to each other. To handle this issue I designed a custom build flow to progress the output Linux files of the Yocto project and to create all necessary boot stages. This build system consists of an Ubuntu Linux and a CentOS Linux part. On CentOS was an Altera script used to generate the boot images. 
-With re-design of the bootflow of Intel SoC-FPGAs with the SoC EDS Version 19.1 it was essential for me to design an new build system that can run on a single development computer (Ubuntu Linux or CentOS) and generate all required bootloaders fully automatically. 
+The first version of *rsyocto* (*release december of 2019*) was developed with the *Intel Embedded Development Suite* (*SoC EDS*) version 18.1 and a custom Yocto Project meta-layer. 
+
+By default the specifications of these two development tools are not compatible to each other. To handle this issue **I designed a custom build flow to progress the output Linux files of the Yocto project and to create all necessary boot stages**. 
+
+This build system consists of an Ubuntu Linux and a *CentOS* Linux part. On *CentOS* was an *Altera* script used to generate the boot images. 
+With re-design of the bootflow of *Intel* SoC-FPGAs with the SoC EDS Version 19.1 it was essential for me to design an new build system that can run on a single development computer (Ubuntu Linux or *CentOS*) and generate all required bootloaders fully automatically. 
+<br>
 
 **My first approach to design this Linux Distribution** 
 ![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsyocto required building steps")
@@ -218,7 +223,7 @@ With re-design of the bootflow of Intel SoC-FPGAs with the SoC EDS Version 19.1 
 <br>
 
 This illustration shows my new development procedure and the required complexity to create *rsyocto*. **I entirely automated the required complex bootflow** to generate with a *Intel Quartus Prime* FPGA project and Linux Distribution files (*e.g. zImage,rootfs,...*) a bootable image file (*.img*). 
-The script uses the **Intel Embedded Development Suite (SoC EDS)** in version **20.1** to design the necessary bootloader based on the project settings.
+The script uses the **Intel Embedded Development Suite (SoC EDS)** in version **20.1** (*2020*) to design the necessary bootloader based on the project settings.
 **It was designed to allow a high optimization of all components**, such as the *u-boot* boot script or the Linux device tree. With this project I want to give other developers a full-functional system to reduce their development effort.
 
 For designing custom *rsyocto* Versions it is only necessary to copy the `"socfpgaPlatformGenerator"`- Folder (available inside Repository's Releases part) into a Quartus Prime FPGA project folder. The included Python script can then generate the entire platform and can output a shareable and a bootable image file ("*.img").
