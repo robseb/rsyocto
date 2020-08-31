@@ -98,7 +98,7 @@ The NIOS II Soft-Core processor can be designed as usually and will for that rea
 The following table illustrates the by the NIOS II accessible memory space with this configuration:
 <br>
 
-    ![Alt text](MemorySpace.png?raw=true "Accessible memory space")
+![Alt text](MemorySpace.png?raw=true "Accessible memory space")
 <br>
 
 
