@@ -55,7 +55,7 @@ To automate these two build steps I designed two Python scripts. To accomplish t
 
 # Installment of the required development tools
 
-Follow [following instructions](https://github.com/robseb/rsyocto/tree/rsYocto-1.04/doc/appSpecificGuides/7_customVersions.md) to install the required development tools:
+Follow [following instructions](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md) to install the required development tools:
 * *Intel Quartus Prime* Lite for Windows and Linux 
     * with *Eclipse for NIOS II* support
 * *Intel Embedded Development Suite* (*SoC EDS*) 20.1 for Linux
@@ -117,7 +117,7 @@ To achieve that two suitable solutions are possible
   
 The first solutions is has the advantage to give the privilege instantly after the board is powered on. A major disadvantage is that complex boatload design is for adding an single *u-boot* command necessary. It will burn the most time for this project. However, with the build system of *rsyocto* based on the [*socfpgaPlatformGenerator*](https://github.com/robseb/socfpgaPlatformGenerator) can this be done in few seconds. 
 
-For *rsyocto*-based Linux Distributions follow the [customization guide](https://github.com/robseb/rsyocto/tree/rsYocto-1.04/doc/appSpecificGuides/7_customVersions.md) and for general *Intel* SoC-FPGA can [this guide](https://github.com/robseb/socfpgaPlatformGenerator) be considered. 
+For *rsyocto*-based Linux Distributions follow the [customization guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md) and for general *Intel* SoC-FPGA can [this guide](https://github.com/robseb/socfpgaPlatformGenerator) be considered. 
 
 For example to give the NIOS II core the privilege to access the entire peripheral components add following to the *u-boot* script (*socfpgaPlatformGenerator/ubootScript/uboot_cyclone5.script*): 
 
