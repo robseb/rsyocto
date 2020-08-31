@@ -158,7 +158,7 @@ ___
 
 | No. | Objective | Guide
 |:--|:--|:--|
-| 1 | **Designing of custom *rsyoto* versions** | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/appSpecificGuides/4_NIOS2HPS.md)  |
+| 1 | **Designing of custom *rsyoto* versions** | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md)  |
 <br>
 
 ### Application-specific Guides
