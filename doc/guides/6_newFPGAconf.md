@@ -1,20 +1,38 @@
 [back](5_Streamline.md)
 
-#  	Developing a new FPGA configuration
+#  	Developing a new FPGA configuration with Intel Quartus Prime 
+
+This guide describes how to design a new FPGA configuration with a custom *Intel Quartus Prime* project. That configuration can be written during boot or on runtime by Linux. For each board the used default configuration and a version with a *Intel NIOS II Soft-Core processor* inside this repository are available. The Quartus Prime Project with the *Intel NIOS II Soft-Core processor* is connected via the *FPGA2HPS*-Bridge to the Hard-IP of the HPS. This allows to use Hard-IP components, such as CAN with the *NIOS II*. 
+
+## Getting started with Intel Quartus Prime
+
+  * Instal *Intel Quartus Prime* (18.1 or newer)
+  * A step-by-step guide how to install Intel Quartus Prime on Linux is [available here](https://github.com/robseb/NIOSII_EclipseCompProject#i-installment-of-intel-quartus-prime-191-and-201-with-nios-ii-support) (Of cause NIOS II support is only for a NIOS II Project required)
+  
+  * **Use a demo project** 
+      * Clone the *Intel Quartus Prime* archive file (*.qar*) from this repository for your project
+      * Start *Intel Quartus Prime* and choose `Project/Archive Project` to select the archive file
+      * Start the Compilation of the *Quartus Prime* project 
+  * **Design your own FPGA configuration file**
+      * I wrote a [guide](https://github.com/robseb/HPS2FPGAmapping) to show in steps how to design a custom *Quartus Prime* project and how to use FPGA I/O with the HPS and Linux
+ 
+
 
 *rsYocto* allows with the layer `meta-rstools` to change the FPGA configuration with a single Linux command. That was shown in chapter 2 with:
   ````bash
       FPGA-writeConfig  -f gpiConf.rbf
   ````   
   
-   **The required steps to generate right configuration files with a Quartus Prime Project are:**
+ ## Steps to generate the FPGA configuration files with a Quartus Prime Project
+  **Note: The new build system can do these steps automatically!**
+
    1. **for the Arria 10:**
-      * Be sure that "**Enables the HPS early release of HPS IO**"  in the Quartus Prime- and HPS- Settings is enabled
-           * Parts the configuration in a peripheral- and the core- configuration 
+      * Be sure that "**Enables the HPS early release of HPS IO**" is enabled in the Quartus Prime- and HPS- Settings 
+           * To split the configuration in a peripheral- and core- configuration 
            * This allows to hold for example the memory configuration of the HPS during FPGA configuration changes 
            * For more information please visit the [Intel Arria 10 documentation](https://www.intel.com/content/www/us/en/programmable/documentation/mzh1527115949958.html) page
               ![Alt text](Arria10Conf.jpg?raw=true "Quartus config for Arria 10")
-      * Execute following EDS-Shell command:
+      * Execute the following EDS-Shell command:
         ````bash
           quartus_cpf -c --hps -o bitstream_compression=on rsHAN.sof socfpga.rbf
         ````
@@ -31,147 +49,14 @@
        
             ![Alt text](fpgaConfSettings1.png?raw=true "FPGA Configuration settings 1")
             
-      * For **configuration of the FPGA  during the boot** use these export settings: 
+      * For **configuration of the FPGA during the boot** use these export settings: 
         * Type: `Raw Binary File (.rbf)` 
         * Mode: `Passive Parallel x8`  
         * Name: `socfpga_nano.rbf` or `socfpga_std.rbf`
             ![Alt text](fpgaConfSettings2.png?raw=true "FPGA Configuration settings 2")
         
 ___
-## Including the FPGA-Configuration files and other files to the SD-Image or changing the Device Tree
-   With the *rsYocto*-"`makersYoctoSDImage.py`" script a simple way of changing the Image automatically is available. 
-   This script uses internally the ALTERA Script `"make_sdimage.py"`, that only works with CentOS.
-   
-   The following step-by-step guide shows how to setup a **CentOS VM**:
-   
-1. Download the [CentOS 6.5 64-Bit ISO Image](http://vault.centos.org/6.5/isos/x86_64/)
-2.  Install a Virtual Machine Hypervisor, like *VMware Workstation Player* or *Virtual Box* 
-3. Create a new CentOS VM 
-4.	After CentOS is installed as a Live-DVD burn it to the HDD
-    *	Start the Application “Install to Hard Drive” from the Desktop
-    *	Follow the Installer wizard of this Application with default Settings 
-    *  At the end choose: “*write changes to the Disk*” and later on restart the VM manually  
-5. On CentOS install the device Tree compiler Tool `dtc`
-6. Dowload the "**rsyocto_SDxx-Folder**" from the "**releases Part**" of this Github repository to CentOS
-      
-    
-| File Name | Platform / Board | Origin | Description | Disk Partition | Internal name (inside the script)
-|:--|:--|:--|:--|:--|:--|
-|\"makersYoctoSDImage.py\"| *all*| by hand | the automatic *rsYocto* build script | **-** | *executed* | 
-|\"make_sdimage.py\"|*all*| wget | Altera SD image making script |**-** | *executed* | 
-|\"infoRSyocto.txt\"|*all*| by hand | rsYocto spelch screen Infos |**-** | *integrated* | 
-|\"network_interfaces.txt\"|*all*| by hand | the Linux Network Interface configuration file  |*/etc/network/interfaces* | *interfaces* | 
-| \"rootfs_a10 .tar.gz\"|*all*| Yocto Project |compressed rootFs file for Arria 10 |**2.: ext3** | *unzipping* |
-| \"rootfs_cy5.tar.gz\"|*all*| Yocto Project |compressed rootFs file for Cyclone V |**2.: ext3** | *unzipping* |       
-|\"preloader_cy5.bin\"|*CY5*| EDS | Primary bootloader |**1.: RAW** | *preloader-mkpimage.bin* | 
-|\"preloader_a10.bin\"|*A10*| EDS | Primary bootloader |**1.: RAW** | *uboot_w_dtb-mkpimage.bin* | 
-|\"uboot_cy5.img\"|*CY5*| EDS | Secondary bootloader |**3.: vfat** | *u-boot.img* | 
-|\"uboot_a10.img\"|*A10*| EDS | Secondary bootloader |**3.: vfat** | *u-boot.img* | 
-|\"uboot_cy5.scr\"|*CY5*| by hand | Secondary bootloader script |**3.: vfat** | *u-boot.scr* |   
-|\"uboot_a10.scr\"|*A10*| by hand | Secondary bootloader script |**3.: vfat** | *u-boot.scr* |
-|\"zImage_cy5\"|*CY5*| Yocto Project | compressed Linux Kernel |**3.: vfat** | *zImage* |   
-|\"zImage_a10\"|*A10*| Yocto Project | compressed Linux Kernel |**3.: vfat** | *zImage* |
-|\"socfpga_cy5.dts\"|*CY5*| by hand | Linux Device Tree |**3.: vfat** | *socfpga.dtb* |
-|\"socfpga_a10.dts\"|*A10*| by hand | Linux Device Tree |**3.: vfat** | *socfpga_arria10_socdk_sdmmc.dtb* |
-|\"socfpga_nano.rbf\"|*DE10 Nano*| Quartus Prime | FPGA Config  |**3.: vfat** | *socfpga.rbf* |
-|\"socfpga_std.rbf\"|*DE10 Standard*| Quartus Prime | FPGA Config  |**3.: vfat** | *socfpga.rbf* |
-|\"socfpga_han_periph.rbf\"|*HAN Pilot*| EDS | FPGA Periph Config (Memory, ...)  |**3.: vfat** | *socfpga.periph.rbf* |
-|\"socfpga_han_core.rbf\"|*HAN Pilot*| EDS | FPGA Core Config (user)  |**3.: vfat** | *ghrd_10as066n2.core.rbf* |
-|\"socfpga_nano_linux.rbf\"|*DE10 Nano*| Quartus Prime | FPGA Config for written by Linux  | */usr/rsyocto/*  | *running_bootloader_fpgaconfig.rbf*|          
-|\"socfpga_std_linux.rbf\"|*DE10 Standard*| Quartus Prime | FPGA Config for written by Linux |*/usr/rsyocto/* | *running_bootloader_fpgaconfig.rbf* |
 
-**The Content  of the "rsyocto_SDxx-Folder"** 
-
-![Alt text](BuildingScriptActivityDia.jpg?raw=true "Build Script activity diagram")
-
- 7. With the Text-File \"infoRSyocto.txt\" it is possible to add some notes to the final image
-  * The **MAC address** can also be changed here:
-     ````
-     -- MAC: d6:7d:ae:b3:0e:ba
-     ````
-8. Change if necessary the network configurations by adding the *network_interfaces.text*. This file will be used as Linux */etc/network/interfaces* file
-  * For using a **static iPv4-Address** instead of a dynamic one:
-    * Remove following line from the *network_interfaces.txt*-file:
-      ````txt 
-      iface eth0 inet dhcp
-      ````
-    * Insert instead of (here with the iPv4-Address *192.168.0.150* and the gateway *192.168.0.100*):
-      ````txt
-      iface eth0 inet static
-        address 192.168.0.150
-        netmask 255.255.255.0
-        network 192.168.0.0
-        gateway 192.168.0.100
-        dns-nameservers 192.168.0.100
-        broadcast 192.168.0.255
-      ````
-9. **Replacing the pre-installed *rsYocto* files with your files**
-  * It is also allowed to **delete files for unused platforms and devices** or to **replace other self developed files**
-    * For example for changing the `Device Tree`
-      * Open the `dts-File` with an editor 
-  * An example is available [here](https://github.com/robseb/HPS2FPGAmapping)  
-10. **Open the Linux console and navigate into the SD-folder**
-11. For allocating more **user memory space** edit the following line inside the *makersYoctoSDImage.py* script
-    ````python
-    #
-    # #################### CHANGE HERE THE ADDITIONAL ROOTFS SPACE FOR USER SPACE ####################
-    #
-    # Size of the available User Space in Mega Byte (MB) 
-    #
-    USER_SPACE_SIZE_MB =600 # 600MB 
-    #
-    ###################################################################################################
-    #
-    #
-  
-    ````
-12. **Start the building script with:**
-    ````bash  
-    sudo python makersYoctoSDImage.py   
-    ````
-13. The script will ask for a **version Number** and will wait for user changes
-14. Now it is possible to **pre-install files to the image** by adding the files to:
-  
-  |  **Folder name** | **Kind** | **Location on the rootfs**
-  |:--|:--|:--|
-  | "my_homepage" | **Homepages and web interfaces** | `/usr/share/apache2/default-site/htdocs`|
-  | "my_includes" | **C++ libraries**  | `/usr/include`|
-  | "my_rootdir" | **Home directory** | `/home/root`|
-  
-15. At this point it is also possible to **change Linux startup scripts** 
-  * If necessary edit following script files
-  
-    | **Script name** | **Execution position** |
-    |:--|:--|
-    | *"my_startUpScripts/start_script.sh"* | *Before the NIC has started* | 
-    | *"my_startUpScripts/run_script.sh"* | *After the network connection with SSH is established* (run level 5) | 
-    
-  * **Note:** For more information about the execution position look at the table on chapter 1
-  
-  * For example the content of the pre-installed *run_script.sh* is attached here, that shows how it is possible to **interact in a easy way with the FPGA fabric**
-
-  ```console
-    #!/bin/sh
-    # Run script
-    # This script will be called when the system has booted
-    echo "*********************************"
-    echo "rsYocto run script: started!"
-
-    echo " Synchronization of the system time with a HTTP Server"
-    htpdate -d -t -b -s www.linux.org
-    echo "Time sync. done"
-
-    # NW Up? => Turn HPS LED ON
-    if grep -qF "up" /sys/class/net/eth0/operstate; then
-       echo 100 > /sys/class/leds/hps_led0/brightness
-       FPGA-writeBridge -lw 20 -h 01 -b
-    fi
-  ````
-
-13. Press ENTER to generate the new *rsYocto"-Image 
-14. The final image can be deployed to any SD-Card as shown in chapter 1
-
-
-
+ ## Continue with the next level: [Designing of a custom rsyocto Version](7_customVersions.md)
  [Back to the startpage](https://github.com/robseb/rsyocto)
  

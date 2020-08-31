@@ -114,6 +114,7 @@ CONF_XML_FILE_NAME = "rsyoctoConf.xml"
 
 import os
 import sys
+import re
 from zipfile import ZipFile as zip
 import math
 import shutil
@@ -290,6 +291,8 @@ if __name__ == '__main__':
             print(' ERROR: XML File decoding failed!')
             print(' Msg.: '+str(ex))
             sys.exit()
+    # Convert new line feets 
+    description_txt = description_txt.replace('\\n','\r\n',1000)
 
     # Read the board items with the MAC-Address 
     for part in root.iter('board'):
@@ -334,6 +337,10 @@ if __name__ == '__main__':
         now = datetime.now()
         nb = now.strftime("%Y%m%d_%H%M")
 
+    if not re.match("^[a-z0-9_]+$", nb, re.I):
+        print('ERROR: The selected output file with the name:"rsYocto_'+nb+'"')
+        print('        has caracters witch are not allowed!')
+        sys.exit()
     image_name = 'rsYocto_'+str(nb)+BOARD_SUFFIX_NAME[BOARD_ID]+'.img'
     zip_name = 'rsYocto_'+str(nb)+BOARD_SUFFIX_NAME[BOARD_ID]+'.zip'
 
@@ -424,22 +431,24 @@ if __name__ == '__main__':
         print('   Looking for the default FPGA configuration file')
         
         # 1. Look for the file inside the Board specific folder
+        print(ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
+                    "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf')
         if os.path.isfile(ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
-                    "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]):
+                    "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'):
             fpga_conf_default_dir= ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
-                    "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]
-            print('     Name: "'+fpga_conf_default_dir+'"')
+                    "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'
+            print('     Name: "'+fpga_conf_default_dir+'.rbf"')
     
         # 2. Look for the file inside the Device specific folder
         elif os.path.isfile(ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
-                    "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]):
+                    "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'):
             fpga_conf_default_dir=ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
-                    "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]
-            print('     Name: "'+fpga_conf_default_dir+'"')
+                    "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'
+            print('     Name: "'+fpga_conf_default_dir+'.rbf"')
           
         else:
             print('ERROR: It is no default FPGA configuration file (.rbf)'+\
-                 'available for the board/device')
+                 ' available for the board/device')
             sys.exit()
 
 
@@ -576,14 +585,15 @@ if __name__ == '__main__':
     # def GenerateBootFPGAconf(self,copy_file=False,dir2copy=''):
     # Generate the depending FPGA configuration file 
     #    specified inside the u-boot script
-    if proj_compet or not unlicensed_ip_found:
+    if proj_compet and not unlicensed_ip_found:
         # Generate a new FPGA configuration
         if not socfpgaGenerator.GenerateBootFPGAconf():
             sys.exit()
     else: 
         # Use the default FPGA configuration file
         print('NOTE: Only the default FPGA configuration file will be used!')
-        if not socfpgaGenerator.GenerateBootFPGAconf(True,unlicensed_ip_found):
+        print(fpga_conf_default_dir)
+        if not socfpgaGenerator.GenerateBootFPGAconf(True,fpga_conf_default_dir):
             sys.exit()
 
     ############################## Unzip all available archive files such as the rootfs ##############################
@@ -791,18 +801,17 @@ if __name__ == '__main__':
         f.write("**********************************************************************************************************\n")   
         f.write("\n")
         f.write("-- Git Repository: https://github.com/robseb/rsyocto\n")
-        f.write("-- VERSION:       "+str(nb)+"\n")
+        f.write("-- VERSION:        "+str(nb)+"\n")
         f.write('-- KERNEL:        "'+kernel_name+'"\n')
         f.write('-- BUILD:         '+yocto_build+'\n')
         f.write("-- FPGA:          "+BOARD_FPGA_NAME[BOARD_ID]+"\n")
         f.write("-- BOARD:         "+BOARD_NAME[BOARD_ID]+"\n")
-        f.write('-- IMAGE:         "'+image_name+'"') 
+        f.write('-- IMAGE:         "'+image_name+'"\n') 
         f.write('--PACKING DATE:   '+str(now.strftime("%d.%m.%Y"))+"\n")
         f.write('--FOLDER NAME:    '+str(os.path.basename(path))+"\n")
-        for x in description_txt:
-            f.write(x)
+        f.write(description_txt)
         f.write("***********************************************************************************************************\n\n")   
-
+       
     try:
         # Remove the files inside the execution folder
         os.system('sudo cp '+ext+'/issue'+' '+ext_dir+'/etc/issue')
@@ -819,16 +828,24 @@ if __name__ == '__main__':
     if not socfpgaGenerator.GenerateImageFile(image_name,zip_name,compress_output,True):
         sys.exit()
 
+    # Remove the Image_Partition
+    print('--> Remove the "'+IMAGE_FOLDER_NAME+'" folder')
+    if os.path.isdir(ext+'/'+IMAGE_FOLDER_NAME):
+        try:
+            os.system('sudo rm -r '+ext+'/'+IMAGE_FOLDER_NAME)
+        except Exception as ex:
+            print('ERROR: Failed to remove the "'+IMAGE_FOLDER_NAME+'" folder')
+            sys.exit()
         
 ############################################################ Goodby screen  ###################################################
     print('\n################################################################################')
     print('#                                                                              #')
     print('#                        GENERATION WAS SUCCESSFUL                             #')
     print('# -----------------------------------------------------------------------------#')
-    print('#              Output file: "'+image_name+'" #')
+    print('#  Output file: "'+image_name+'" #')
     if compress_output:
-        print('#              Compressed Output file: "'+image_name+'" #')
-    print('#              Directory: "'+ext+'" #')                                                
+        print('# Compressed Output file: "'+image_name+'" #')
+    print('# Directory: "'+ext+'" #')                                                
     print('#                                                                              #')
     print('#                           SUPPORT THE AUTHOR                                 #')
     print('#                                                                              #')

@@ -42,5 +42,10 @@ The following illustration shows how *Linux* and Microsoft Visual Studio work to
  * Ingore the "*rysnc could not start error*" (*rsync* is installed properly)
  * After issues try to **clean and rebuild the solution**
 
+# Getting Started- and in-depth Demos
+  * Interact with the HPS Hard-IP 
+  * Interact with FPGA Soft-IP
+  * **[Available here](https://github.com/robseb/LinuxVSCppFPGA)**
+
 
  ## Continue with the next level: [Debugging Python applications remotely](4_Python.md)

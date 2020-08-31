@@ -278,11 +278,10 @@ base_hps u0 (
 
 ///////////////////////////////////////////  Analog Devices LTC2308    ////////////////////////////////
 
-		.adc_ltc2308_conduit_end_CONVST   (ADC_CONVST),  
-		.adc_ltc2308_conduit_end_SCK      (ADC_SCK),      
-		.adc_ltc2308_conduit_end_SDI      (ADC_SDI),      
-		.adc_ltc2308_conduit_end_SDO      (ADC_SDO),
-
+		.adc_ltc2308_external_interface_cs_n     (ADC_CONVST),  
+		.adc_ltc2308_external_interface_sclk     (ADC_SCK),       
+		.adc_ltc2308_external_interface_din      (ADC_SDI),      
+		.adc_ltc2308_external_interface_dout     (ADC_SDO),
 
 ///////////////////////////////////////////  HPS LED & KEY  ///////////////////////////////////////////
       .hps_0_io_hps_io_gpio_inst_GPIO53  ( HPS_LED),                
