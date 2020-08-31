@@ -1,12 +1,8 @@
 [back](6_newFPGAconf.md)
 ___
-
 ![GitHub](https://img.shields.io/static/v1?label=Ubuntu&message=18.04+LTS,+20.04+LTS&color=yellowgreen)
 ![GitHub](https://img.shields.io/static/v1?label=CentOS&message=7.0,+8.0&color=yellowgreen)
 ![GitHub](https://img.shields.io/static/v1?label=Intel+EDS&message=20.1&color=blue)
-___
-
-<br>
 <br>
 
 
