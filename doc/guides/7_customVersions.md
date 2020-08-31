@@ -97,10 +97,11 @@ For generating a bootable *rsyocto* image for *Intel* SoC-FPGAs by executing a s
     * The project configurations will then be used to build the bootable image 
     * You can also use the default Quartus Prime project as shown in the previous [guide](6_newFPGAconf.md)
     * Note: The project compilation must be successfully done
+    <br>
 
-**The Quartus Project folder should now look like this:**
-![Alt text](project_folder.png?raw=true "Screenshot of the Quartus Prime Project")
-<br>
+    **The Quartus Project folder should now look like this:**
+    ![Alt text](project_folder.png?raw=true "Screenshot of the Quartus Prime Project")
+    <br>
 
 * Navigate with the Linux terminal into this folder inside your Quartus Project 
     ````shell 
