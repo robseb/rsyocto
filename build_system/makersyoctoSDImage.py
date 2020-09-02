@@ -64,7 +64,12 @@
 #  Using the socfpgaGenerator and LinuxBootImageGenerator for generating 
 #  all required components 
 #
-version = "3.00"
+#02-09-2020 (Vers. 3.01)
+#  Generation of a FPGA configuration file that can be written by Linux
+#  Configuration of Linux with network interface file 
+#
+#
+version = "3.01"
 
 
 #
@@ -112,9 +117,13 @@ BOARD_SUFFIX_NAME = ['_unknown','_D10NANO','_DE10STD','_HAN','_DE0']
 
 CONF_XML_FILE_NAME = "rsyoctoConf.xml"
 
+ROOLBACK_FPGACONF_DIR = '/usr/rsyocto/'
+ROOLBACK_FPGACONF_NAME = 'running_bootloader_fpgaconfig.rbf'
+
+NETWORKCONF_TMP_NAME = 'network_interface_temp_file.txt'
+
 import os
 import sys
-import re
 from zipfile import ZipFile as zip
 import math
 import shutil
@@ -291,8 +300,6 @@ if __name__ == '__main__':
             print(' ERROR: XML File decoding failed!')
             print(' Msg.: '+str(ex))
             sys.exit()
-    # Convert new line feets 
-    description_txt = description_txt.replace('\\n','\r\n',1000)
 
     # Read the board items with the MAC-Address 
     for part in root.iter('board'):
@@ -337,10 +344,6 @@ if __name__ == '__main__':
         now = datetime.now()
         nb = now.strftime("%Y%m%d_%H%M")
 
-    if not re.match("^[a-z0-9_]+$", nb, re.I):
-        print('ERROR: The selected output file with the name:"rsYocto_'+nb+'"')
-        print('        has caracters witch are not allowed!')
-        sys.exit()
     image_name = 'rsYocto_'+str(nb)+BOARD_SUFFIX_NAME[BOARD_ID]+'.img'
     zip_name = 'rsYocto_'+str(nb)+BOARD_SUFFIX_NAME[BOARD_ID]+'.zip'
 
@@ -392,7 +395,8 @@ if __name__ == '__main__':
     print('-> Copy the depending Linux files to the partition folder')
     ext = os.getcwd()+'/'
     ext_dir = socfpgaGenerator.Ext_folder_dir+'/'
-    fpga_conf_default_dir =''
+    fpgaboot_conf_default_dir  =''
+    fpgalinux_conf_default_dir =''
 
     #### Copy the zImage  #######
     print('   Copy the compressed "zImage" file')
@@ -426,31 +430,49 @@ if __name__ == '__main__':
         print('ERROR: It is no zImage compressed Linux file available for the board/device')
         sys.exit()
 
-    #### Find the FPGA configuration file   #######
+    #### Find the FPGA configuration for u-boot configuration file   #######
     if not proj_compet or unlicensed_ip_found:
-        print('   Looking for the default FPGA configuration file')
+        print('   Looking for the default u-boot FPGA configuration file')
         
         # 1. Look for the file inside the Board specific folder
-        print(ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
-                    "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf')
         if os.path.isfile(ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
                     "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'):
-            fpga_conf_default_dir= ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
+            fpgaboot_conf_default_dir= ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
                     "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'
-            print('     Name: "'+fpga_conf_default_dir+'.rbf"')
+            print('     Name: "'+fpgaboot_conf_default_dir+'.rbf"')
     
         # 2. Look for the file inside the Device specific folder
         elif os.path.isfile(ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'):
-            fpga_conf_default_dir=ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+            fpgaboot_conf_default_dir=ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'
-            print('     Name: "'+fpga_conf_default_dir+'.rbf"')
+            print('     Name: "'+fpgaboot_conf_default_dir+'.rbf"')
           
         else:
-            print('ERROR: It is no default FPGA configuration file (.rbf)'+\
-                 ' available for the board/device')
+            print('ERROR: It is no default u-boot FPGA configuration file (.rbf)'+\
+                 'available for the board/device')
             sys.exit()
-
+        
+        #### Find the FPGA configuration for Linux configuration file   #######
+        print('   Looking for the default Linux FPGA configuration file')
+        
+        # 1. Look for the file inside the Board specific folder
+        if os.path.isfile(ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
+                    "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'):
+            fpgalinux_conf_default_dir= ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
+                    "socfpga_rollback"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'
+            print('     Name: "'+fpgalinux_conf_default_dir+'.rbf"')
+    
+        # 2. Look for the file inside the Device specific folder
+        elif os.path.isfile(ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+                    "socfpga_rollback"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'):
+            fpgalinux_conf_default_dir=ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+                    "socfpga_rollback"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'
+            print('     Name: "'+fpgalinux_conf_default_dir+'.rbf"')
+          
+        else:
+            print('NOTE: It is no default Linux rollback FPGA configuration file (.rbf)'+\
+                 'available for the board/device')
 
     #### Copy the rootfs.tar.gz  #######
     print('   Copy the compressed rootfs archive file')
@@ -509,6 +531,38 @@ if __name__ == '__main__':
     else:
         print('ERROR: It is no devicetree file available for the board/device')
         sys.exit()
+
+    ### Copy the network interface file   #######
+    print('   Copy the network interface file to the exc folder')
+
+    # 1. Look for the file inside the Board specific folder
+    network_if_name = ''
+    if os.path.isfile(ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
+                "network_interfaces"+BOARD_SUFIX_BOARD[BOARD_ID]+'.txt'):
+        network_if_name= "network_interfaces"+BOARD_SUFIX_BOARD[BOARD_ID]+'.txt'
+        print('     Name: "'+network_if_name+'"')
+        try:
+            shutil.copyfile(ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
+                "network_interfaces"+BOARD_SUFIX_BOARD[BOARD_ID]+'.txt', \
+                    ext+NETWORKCONF_TMP_NAME)
+                    
+        except Exception as ex:
+            print('ERROR: Failed to copy file! MSG: '+str(ex))
+            sys.exit()
+    # 2. Look for the file inside the Device specific folder
+    elif os.path.isfile(ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+                "network_interfaces"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.txt'):
+        network_if_name= "network_interfaces"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.txt'
+        print('     Name: "'+network_if_name+'"')
+        try:
+            shutil.copyfile(ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+                "network_interfaces"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.txt', \
+                 ext+NETWORKCONF_TMP_NAME)
+        except Exception as ex:
+            print('ERROR: Failed to copy file! MSG: '+str(ex))
+            sys.exit()
+    else:
+        print('NOTE: It is no network configuration file available for the board/device')
     print('     =Done\n')
         
     #################################  Add the MAC Address to the devicetree  #################################
@@ -582,19 +636,38 @@ if __name__ == '__main__':
     if not socfpgaGenerator.CopyLinuxFiles2Partition(2):
         sys.exit()
 
-    # def GenerateBootFPGAconf(self,copy_file=False,dir2copy=''):
+    ###################################  Generate a FPGA boot configuration  #####################################
     # Generate the depending FPGA configuration file 
     #    specified inside the u-boot script
-    if proj_compet and not unlicensed_ip_found:
-        # Generate a new FPGA configuration
-        if not socfpgaGenerator.GenerateBootFPGAconf():
+    if proj_compet or not unlicensed_ip_found:
+        # Generate a new FPGA configuration for configuration during boot
+        if not socfpgaGenerator.GenerateFPGAconf():
             sys.exit()
     else: 
         # Use the default FPGA configuration file
         print('NOTE: Only the default FPGA configuration file will be used!')
-        print(fpga_conf_default_dir)
-        if not socfpgaGenerator.GenerateBootFPGAconf(True,fpga_conf_default_dir):
+        if not socfpgaGenerator.GenerateFPGAconf(True,fpgaboot_conf_default_dir):
             sys.exit()
+
+    ###################################  Generate a rollback FPGA configuration  #####################################
+    # Generate the depending FPGA configuration file 
+
+    if proj_compet or not unlicensed_ip_found:
+        # Generate a new rollback FPGA configuration for configuration with Linux
+        if not socfpgaGenerator.GenerateFPGAconf(boot_linux=True,\
+                linux_filename=ROOLBACK_FPGACONF_NAME,\
+                linux_copydir=ext):
+            sys.exit()
+    elif fpgalinux_conf_default_dir!='':
+        # Is a default rollback FPGA configuration for configuration with Linux
+        if not socfpgaGenerator.GenerateFPGAconf(True,fpgalinux_conf_default_dir,True,
+                linux_filename=ROOLBACK_FPGACONF_NAME,\
+                linux_copydir=ext):
+                # socfpgaGenerator.Ext_folder_dir+'/'+ROOLBACK_FPGACONF_DIR):
+            sys.exit()
+    else:
+        print('NOTE: No rollback FPGA configuration is used!')
+        sys.exit()
 
     ############################## Unzip all available archive files such as the rootfs ##############################
     if not socfpgaGenerator.ScanUnpackagePartitions():
@@ -679,20 +752,6 @@ if __name__ == '__main__':
                     MY_FOLDER_NAME[i]+'" does not exist on the rootfs')
     print('     =Done')       
 
-    ####################################### Script based ROOTFS Changes #######################################
-    
-    ## Execute the python script "rootfsChange.py" to change the rootfs with root privileges
-    if os.path.isfile(ext+'/rootfsChange.py'):
-        print('--> Start the rootfs change script with sudo rights\n')
-        try:
-            os.system('sudo python3 '+ext+'/rootfsChange.py'+' -r '+ext_dir)
-        except Exception as ex:
-            print('ERROR: Failed execute the "rootfsChange.py" script! Msg.:'+str(ex))
-            sys.exit()      
-    else:
-        print('ERROR:The "rootfsChange.py" file is not available! Msg.:'+str(ex))
-        sys.exit()  
-
     ################################### Generate the rsyocto files        ###################################
     print('--> Generate the rsyocto info files and add them to the rootfs')
     
@@ -741,6 +800,7 @@ if __name__ == '__main__':
         if not os.path.isdir(ext_dir+'/usr/rsyocto'):
             print('ERROR: Failed to create the "rsyocto" folder!')
             sys.exit()
+
         # Copy the files to it
         os.system('sudo cp '+ext+'/device.txt'+' '+ext_dir+'/usr/rsyocto/device.txt')
         os.system('sudo cp '+ext+'/suppBoard.txt'+' '+ext_dir+'/usr/rsyocto/suppBoard.txt')
@@ -755,15 +815,20 @@ if __name__ == '__main__':
         sys.exit()
 
     print('    = Done ')
- 
-    ################### Change the network configurations  ###################
-
-    '''
-    # Copy a new network interface file to the rootfs only when the file is there
-    if nwifcopy: 
-        shutil.copyfile('network_interfaces.txt', ext_dir+'/etc/network/interfaces') 
-        print ("--> the network interface settings are written\n")    
-    '''
+    
+   ####################################### Script based ROOTFS Changes #######################################
+    
+    ## Execute the python script "rootfsChange.py" to change the rootfs with root privileges
+    if os.path.isfile(ext+'/rootfsChange.py'):
+        print('--> Start the rootfs change script with sudo rights\n')
+        try:
+            os.system('sudo python3 '+ext+'/rootfsChange.py'+' -r '+ext_dir)
+        except Exception as ex:
+            print('ERROR: Failed execute the "rootfsChange.py" script! Msg.:'+str(ex))
+            sys.exit()      
+    else:
+        print('ERROR:The "rootfsChange.py" file is not available! Msg.:'+str(ex))
+        sys.exit()  
 
   
     ################### add the Bootloader FPGA Configuration to the rootfs ###################
@@ -801,17 +866,18 @@ if __name__ == '__main__':
         f.write("**********************************************************************************************************\n")   
         f.write("\n")
         f.write("-- Git Repository: https://github.com/robseb/rsyocto\n")
-        f.write("-- VERSION:        "+str(nb)+"\n")
+        f.write("-- VERSION:       "+str(nb)+"\n")
         f.write('-- KERNEL:        "'+kernel_name+'"\n')
         f.write('-- BUILD:         '+yocto_build+'\n')
         f.write("-- FPGA:          "+BOARD_FPGA_NAME[BOARD_ID]+"\n")
         f.write("-- BOARD:         "+BOARD_NAME[BOARD_ID]+"\n")
-        f.write('-- IMAGE:         "'+image_name+'"\n') 
+        f.write('-- IMAGE:         "'+image_name+'"') 
         f.write('--PACKING DATE:   '+str(now.strftime("%d.%m.%Y"))+"\n")
         f.write('--FOLDER NAME:    '+str(os.path.basename(path))+"\n")
-        f.write(description_txt)
+        for x in description_txt:
+            f.write(x)
         f.write("***********************************************************************************************************\n\n")   
-       
+
     try:
         # Remove the files inside the execution folder
         os.system('sudo cp '+ext+'/issue'+' '+ext_dir+'/etc/issue')
@@ -828,24 +894,16 @@ if __name__ == '__main__':
     if not socfpgaGenerator.GenerateImageFile(image_name,zip_name,compress_output,True):
         sys.exit()
 
-    # Remove the Image_Partition
-    print('--> Remove the "'+IMAGE_FOLDER_NAME+'" folder')
-    if os.path.isdir(ext+'/'+IMAGE_FOLDER_NAME):
-        try:
-            os.system('sudo rm -r '+ext+'/'+IMAGE_FOLDER_NAME)
-        except Exception as ex:
-            print('ERROR: Failed to remove the "'+IMAGE_FOLDER_NAME+'" folder')
-            sys.exit()
         
 ############################################################ Goodby screen  ###################################################
     print('\n################################################################################')
     print('#                                                                              #')
     print('#                        GENERATION WAS SUCCESSFUL                             #')
     print('# -----------------------------------------------------------------------------#')
-    print('#  Output file: "'+image_name+'" #')
+    print('#              Output file: "'+image_name+'" #')
     if compress_output:
-        print('# Compressed Output file: "'+image_name+'" #')
-    print('# Directory: "'+ext+'" #')                                                
+        print('#              Compressed Output file: "'+image_name+'" #')
+    print('#              Directory: "'+ext+'" #')                                                
     print('#                                                                              #')
     print('#                           SUPPORT THE AUTHOR                                 #')
     print('#                                                                              #')

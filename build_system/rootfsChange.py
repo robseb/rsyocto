@@ -28,6 +28,12 @@
 import os
 import sys
 import getopt
+import shutil
+
+ROOLBACK_FPGACONF_DIR = '/usr/rsyocto'
+ROOLBACK_FPGACONF_NAME = 'running_bootloader_fpgaconfig.rbf'
+
+NETWORKCONF_TMP_NAME = 'network_interface_temp_file.txt'
 
 
 ############################################                                ############################################
@@ -90,6 +96,8 @@ if __name__ == '__main__':
 
 #######################################    ROOTFS Changes   #######################################
 
+    ext = os.getcwd()+'/'
+
     ################### Changing the SSH authentication to "Linux User Password" ###################
 
     print("--> Changing the SSH authentication to \"Linux User Password\"")
@@ -104,7 +112,7 @@ if __name__ == '__main__':
 
     # Enable NETBIOS with the machine name
     if  os.path.isfile(rootfs_dir+"/etc/nsswitch.conf"):
-        print('--> Enable the NETBIOS\n')
+        print('--> Enable the NETBIOS')
 
         fd=open(rootfs_dir+"/etc/nsswitch.conf",'r+') 
         dnsraw=''
@@ -135,8 +143,36 @@ if __name__ == '__main__':
         try:
             os.remove(rootfs_dir+"/etc/init.d/hwclock.sh")
         except IOError:
-            print ("WARNING: Removing \"hwclock.sh\" failed!")
+            print ("\nWARNING: Removing \"hwclock.sh\" failed!")
 
-   
+    # Move the rollback FPGA configuration to the rootfs
+    if not os.path.isdir(rootfs_dir+ROOLBACK_FPGACONF_DIR):
+        print('\nWARNING: The rootfs FPGA configuration rollback dir does not exist!')
+    else:   
+        if os.path.isfile(ext+ROOLBACK_FPGACONF_NAME):
+            print('--> Move the rollback FPGA configuration file to the rootfs')
+            try:
+                shutil.move(ext+ROOLBACK_FPGACONF_NAME, \
+                    rootfs_dir+ROOLBACK_FPGACONF_DIR+'/')
+            except IOError:
+                print('\nWARNING: Moving the rollback FPGA configuration file failed!')
+        else:
+            print ("\nWARNING: Moving the rollback FPGA configuration file does not exist!")
+
+    # Change the Linux network interface configurations
+
+    ################### Change the network configurations  ###################
+
+    # Copy a new network interface file to the rootfs only when the file is there
+    if os.path.isfile(ext+NETWORKCONF_TMP_NAME): 
+        print('--> Change the Linux network settings')
+        try:
+            shutil.move(ext+NETWORKCONF_TMP_NAME, rootfs_dir+'/etc/network/interfaces')
+        except IOError:
+            print('\nWARNING: Failed to move the network interface file to the rootfs!')
+    else:
+        print('\nWARNING: There is no Linux network interface file available!')
+
+
     print('********************************************************************************\n')
 #EOF
