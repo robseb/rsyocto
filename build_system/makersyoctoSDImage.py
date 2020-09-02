@@ -127,6 +127,7 @@ import sys
 from zipfile import ZipFile as zip
 import math
 import shutil
+import re
 from datetime import datetime
 from datetime import timedelta
 import xml.etree.ElementTree as ET
@@ -301,6 +302,9 @@ if __name__ == '__main__':
             print(' Msg.: '+str(ex))
             sys.exit()
 
+     # Convert new line feets 
+    description_txt = description_txt.replace('\\n','\r\n',1000)
+    
     # Read the board items with the MAC-Address 
     for part in root.iter('board'):
         try:
@@ -343,6 +347,11 @@ if __name__ == '__main__':
         # Add a datecode to the output file names
         now = datetime.now()
         nb = now.strftime("%Y%m%d_%H%M")
+
+    if not re.match("^[a-z0-9_]+$", nb, re.I):
+        print('ERROR: The selected output file with the name:"rsYocto_'+nb+'"')
+        print('        has caracters witch are not allowed!')
+        sys.exit()
 
     image_name = 'rsYocto_'+str(nb)+BOARD_SUFFIX_NAME[BOARD_ID]+'.img'
     zip_name = 'rsYocto_'+str(nb)+BOARD_SUFFIX_NAME[BOARD_ID]+'.zip'
@@ -871,8 +880,8 @@ if __name__ == '__main__':
         f.write('-- BUILD:         '+yocto_build+'\n')
         f.write("-- FPGA:          "+BOARD_FPGA_NAME[BOARD_ID]+"\n")
         f.write("-- BOARD:         "+BOARD_NAME[BOARD_ID]+"\n")
-        f.write('-- IMAGE:         "'+image_name+'"') 
-        f.write('--PACKING DATE:   '+str(now.strftime("%d.%m.%Y"))+"\n")
+        f.write('-- IMAGE:         "'+image_name+'"\n') 
+        f.write('-- PACKING DATE:  '+str(now.strftime("%d.%m.%Y"))+"\n")
         f.write('--FOLDER NAME:    '+str(os.path.basename(path))+"\n")
         for x in description_txt:
             f.write(x)
@@ -900,10 +909,10 @@ if __name__ == '__main__':
     print('#                                                                              #')
     print('#                        GENERATION WAS SUCCESSFUL                             #')
     print('# -----------------------------------------------------------------------------#')
-    print('#              Output file: "'+image_name+'" #')
+    print('#  Output file: "'+image_name+'" #')
     if compress_output:
-        print('#              Compressed Output file: "'+image_name+'" #')
-    print('#              Directory: "'+ext+'" #')                                                
+        print('#  Compressed Output file: "'+image_name+'" #')
+    print('#  Directory: "'+ext+'" #')                                                
     print('#                                                                              #')
     print('#                           SUPPORT THE AUTHOR                                 #')
     print('#                                                                              #')

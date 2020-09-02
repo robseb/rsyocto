@@ -94,7 +94,7 @@ ___
     * *ARM DS-5 Studio* for **remote- and JTAG- C++ debugging**  
 • `gcc-compiler` and `gdb-server`
 * **ARM DS-5 Streamline** is pre-installed and immediately is after start ready for **trace analysis**
-* ** The "[NIOSII_EclipseCompProject](https://github.com/robseb/NIOSII_EclipseCompProject)" can generate custom **Eclipse for NIOS II** projects with for instance a real-time operating system **FreeRTOS**
+* The ["NIOSII_EclipseCompProject](https://github.com/robseb/NIOSII_EclipseCompProject)" can generate custom **Eclipse for NIOS II** projects with for instance a real-time operating system **FreeRTOS**
 <br>
 
 * **`Python3`**,**`Python3-dev`**
@@ -108,7 +108,7 @@ ___
 * `opkg` **package manager** 
 <br>
 
-*    **Custom designed `Build System` to generate the entire bootflow for Intel SoC-FPGAs automatically**
+* **Custom designed `Build System` to generate the entire bootflow for Intel SoC-FPGAs automatically**
     * **Allows to design highly optimized *rsyocto* flavors for your specific requirements**
     * Overview of the main feature of the "*[socfpgaPlatformGenerator](https://github.com/robseb/socfpgaPlatformGenerator)*" Build System
         * Automatically generate a bootable image file with configuration provided by a Quartus Prime project
@@ -117,19 +117,18 @@ ___
         * In case of the u-boot script is configured to load a FPGA configuration the depending FPGA configuration will be generated
         * Allows to pre-install any files or operating systems to a SD-Card image
         * **Boot image (.img) file generation** for distributing embedded Linux Distributions
-        * Dynamic mode: Partition size = Size of the files to add to the partition
+        * Dynamic mode: *Partition size = Size of the files to add to the partition*
         * Linux device tree (dts) -files inside a partition can be automatically compiled and replaced with the un-compiled file
         * Compressed files (e.g. "tar.gz") containing for instance the Linux *rootfs* can be unzipped and automatically added to the partition
-
-        * **To add the following to a deployable and shareable image file**
-        	* Custom bootloader configuration
-            * FPGA configuration files 
-            * *u-boot* boot script
-            * Files/Applications
-        	* Software Libraries 
-        	* Web sites 
-        	* Linux Shell Startup scripts 
-        	* Network Interface settings 
+	* **To add the following to a deployable and shareable image file**
+		* Custom bootloader configuration
+		* FPGA configuration files 
+		* *u-boot* boot script
+		* Files/Applications
+		* Software Libraries 
+		* Web sites 
+		* Linux Shell Startup scripts 
+		* Network Interface settings 
 <br>
 
 * **Full supported boards**
@@ -237,7 +236,7 @@ In the following table these three stages are visible. The stage one is on the l
 |:--|:--|:--|:--|
 | 1 | [LinuxBootImageFileGenerator](https://github.com/robseb/LinuxBootImageFileGenerator) |  Class to automatically generate a bootable Image file with a specifiable partition table | Image file for enabling booting for almost all embedded Linux distributions |
 | 2 | [socfpgaPlatformGenerator](https://github.com/robseb/socfpgaPlatformGenerator) |  Class to generate all necessary components for booting an embedded Linux on Intel (ALTERA) SoC-FPGAs to build the bootloader (u-boot) and bring all components to a bootable image | Image for booting any *Intel* SoC-FPGA |
-| 3 |makersyoctoSDImage.py | Python script to generate a custom *rsyocto* version with for instance *rootfs* changes (*SSH configuration*) | Image with a custom *rsyocto* flavor |
+| 3 |[makersyoctoSDImage.py](https://github.com/robseb/rsyocto/tree/rsYocto-1.04/build_system) | Python script to generate a custom *rsyocto* version with for instance *rootfs* changes (*SSH configuration*) | Image with a custom *rsyocto* flavor |
 
 <br>
 
