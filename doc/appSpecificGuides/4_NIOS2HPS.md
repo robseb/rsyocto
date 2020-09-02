@@ -10,14 +10,14 @@ The following step-by-step guide demonstrate how to access Hard-IP, such as UART
 
 *Intel SoC-FPGAs*, such as the Cyclone V, have a *ARM AXI Interface* between the HPS- and FPGA-part of the SoC to allow the FPGA to access almost the entire memory space of the *ARM Cortex-A9* application processor system. This interface is called **FPGA-to-HPS Bridge**. 
 
-This includes for instance all Hard-IP modules, such as *UART*-,*I²C*- or *CAN*-Bus and the on-chip memory used by the bootloader during boot. It enabled to export the interrupt lines of the Hard-IP module to the FPGA fabric as well.  This skill can bring the capability to the *NIOS II* processor to react for example *CAN*-Packages via a *CAN RX* interrupt.
+This includes for instance all Hard-IP modules, such as *UART*-,*I²C*- or *CAN*-Bus and the on-chip memory used by the bootloader during boot. It is enabled to export the interrupt lines of the Hard-IP module to the FPGA fabric as well.  This skill can bring the capability to the *NIOS II* processor to react for example to *CAN*-Packages via a *CAN RX* interrupt.
 
-An additional microcontroller inside the SoC, running a real-time operating system, such as FreeRTOS, can rapidly extend the real-time related performance of an embedded Linux Distribution.Such a two processor solution can combine the benefits of a Linux- and real-time OS and it can be assumed that the real-time performance is significantly higher as a single processor solution with a real-time optimized Linux Kernel.
+An additional microcontroller inside the SoC, running a real-time operating system, such as FreeRTOS, can rapidly extend the real-time related performance of an embedded Linux Distribution. Such a two processor solution can combine the benefits of a Linux- and real-time OS and it can be assumed that the real-time performance is significantly higher as a single processor solution with a real-time optimized Linux Kernel.
 
-For my embedded Linux *rsyocto* I already wrote examples and guides that demonstrate the interaction between FPGA Soft-IP devices and embedded Linux. That can be assumed for the NIOS II to Linux communication.
+For my embedded Linux *rsyocto* I already wrote examples and guides that demonstrate the interaction between FPGA Soft-IP devices and embedded Linux. That can be assumed for the NIOS II to Linux communication as well.
 <br>
 
-This guide shows the second path of this two Processor solution: The design of a NIOS II Soft-Core processor that can use the HPS Hard-IP. The configuration of NIOS II and the Bridge interface to the HPS is with *Intel's Quartus Prime Platform Designer* really straight forwards.
+This guide shows the second path of this two Processor solution: The design of a NIOS II Soft-Core processor that can use the HPS Hard-IP. The configuration of the *NIOS II* and the Bridge interface to the HPS is with *Intel's Quartus Prime Platform Designer* really straight forwards.
 
 The most complicated part is the designing of all components beside. For example it is necessary to give after each boot the FPGA the privilege to access the address space of the HPS. Only the HPS can give these rights. That means a special optimized embedded Linux with an entire boot flow is necessary to achieve that.  
 
@@ -50,7 +50,7 @@ The most complicated part is the designing of all components beside. For example
 The most complicated and time consuming part of this project is not the FPGA design, that is completely automated by *Intel's Quartus Prime Platform Designer*. 
 Instead it is to design a bootflow for an embedded Linux to give the FPGA the privileges to access the HPS-Memory space and to instal the latest FreeRTOS version on the NIOS II processor.
 
-To automate these two build steps I designed two Python scripts. To accomplish that I wrote a small library, called [socfpgaHAL](https://github.com/robseb/socfpgaHAL) as a Hardware Abstraction layer (HPS) as NIOS II driver for the Hard IP modules. 
+To automate these two build steps I designed two Python scripts. To accomplish that I wrote a small library, called [socfpgaHAL](https://github.com/robseb/socfpgaHAL) as a Hardware Abstraction layer (HPS) as a NIOS II driver for the Hard IP modules. 
 <br>
 
 # Installment of the required development tools
@@ -80,8 +80,8 @@ The NIOS II Soft-Core processor can be designed as usually and will for that rea
     * **Enable the HPS-to-FPGA Interrupt line for the modules**
     * **Use an Address Span Expander to allow the NIOS II with its memory to interact with the 32-bit address size of the HPS**
         * Due to the fact that the NIOS II requires some system memory the available address bus is too small  
-        * By using a sub-window offset of *0xfc000000* it is for the NIOS II Core enable to access the entire memory part of the HPS components
-        * That means a NIOS II Core can for example access the base address of CAN0 (*HPS base Address: 0xFFC00000*) by using the address *0x3C00000* (*=0xFFC00000-0xFFC00000*)
+        * By using a sub-window offset of *0xfc000000* it is for the NIOS II Core enabled to access the entire memory space of the HPS components
+        * That means a NIOS II Core can for example access the base address of *CAN0* (*HPS base Address: 0xFFC00000*) by using the address *0x3C00000* (*=0xFFC00000-0xFFC00000*)
         * **Use the following settings for the Address Span Expander**
             <br>
 
@@ -110,12 +110,12 @@ The documentation of these registers are available inside the **Intel Cyclone V 
 For instance to enable the **UART1** component it is necessary to set the bit number 7 of the register `l4sp` (*HPS Address 0xFF80000C*).
 ![Alt text](exampleBitFiled.png?raw=true "Example documentation of l4sp")
 
-As mentioned it is only for the HPS possible to change these registers and it must be done after every power up of the SoC-FPGA.
+As mentioned it is only for the HPS is it possible to change these registers and it must be done after every power up of the SoC-FPGA.
 To achieve that two suitable solutions are possible
-    1. Setting the registers inside an *u-boot* script during boot
-    2. Using a Linux Shell boot script
+1. **Setting the registers inside an *u-boot* script during boot**
+2. **Using a Linux Shell boot script**
   
-The first solutions is has the advantage to give the privilege instantly after the board is powered on. A major disadvantage is that complex boatload design is for adding an single *u-boot* command necessary. It will burn the most time for this project. However, with the build system of *rsyocto* based on the [*socfpgaPlatformGenerator*](https://github.com/robseb/socfpgaPlatformGenerator) can this be done in few seconds. 
+The first solutions is has the advantage to give the privilege instantly after the board is powered on. A major disadvantage is that complex boatload design is for adding an single *u-boot* command necessary. It will burn the most time for this project. However, with the build system of *rsyocto* based on the [*socfpgaPlatformGenerator*](https://github.com/robseb/socfpgaPlatformGenerator) can this be done in a few minutes. 
 
 For *rsyocto*-based Linux Distributions follow the [customization guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md) and for general *Intel* SoC-FPGA can [this guide](https://github.com/robseb/socfpgaPlatformGenerator) be considered. 
 
@@ -147,12 +147,12 @@ mw.b 0xFFD0501C 0x0
 ````
 <br>
 
-Be sure that these commands are added after the FPGA configuration is written and the FPGA fabric was released from Reset.
-The `mw.w` *u-boot* command allows to write a word (32-bit) and the `mw.b` can write a byte (8-bit) to address. After any change of the privilege set is nessary to released the Bridges from Reset. This must be done via the `brgmodrst` register (*Address: 0xFFD0501C*) by writing an "*0*".
+**Be sure that these commands are added after the FPGA configuration is written and the FPGA fabric was released from Reset.**
+The `mw.w` *u-boot* command allows to write a word (*32-bit*) and the `mw.b` can write a byte (*8-bit*) to an address. **After any change of the privilege set is nessary to released the Bridges from Reset.** This must be done via the `brgmodrst` register (*Address: 0xFFD0501C*) by writing an "*0*".
 <br>
 
 Alternately it is also possible to change the registers with a Linux Shell script or just a single console command.
-For giving the NIOS II core the privilege to access the memory space of the I²C-,CAN-,UART- and Timer run following command on the running embedded Linux:
+For giving the NIOS II core the privilege to access the memory space of the *I²C-,CAN-,UART-* and *Timer* run following command on the running embedded Linux:
 
 ````shell  
 devmem2 0xFF80000C w 0x7FF
@@ -160,7 +160,7 @@ devmem2 0xFFD0501C w 0
 ````
 <br>
 
-These two commands can also be inserted to a Linux Shell start up script as shown in the next example (*e.g. for the DE10-Nano:   socfpgaPlatformGenerator/Board_DE0NANOSOC/my_startUpScripts/startup_script.sh):
+These two commands can also be inserted to a Linux Shell start up script as shown in the next example (*e.g. for the DE10-Nano:   socfpgaPlatformGenerator/Board_DE0NANOSOC/my_startUpScripts/startup_script.sh*):
 
 `````shell
 #!/bin/sh
@@ -180,7 +180,7 @@ echo "Startup script: end!"
 `````
 <br>
 
-# Change the Linux Device Tree to disable to loading of a with the NIOS II used component
+# Change the Linux Device Tree to disable the loading of a with the NIOS II used component
 
 To prevent the Linux Distribution to interact at same time as the NIOS II to a identical Hard-IP component disable it from the Linux device tree. Then this address space will not be used by the Linux Kernel and Kernel Mode drivers. For instance incase **UART1** is used by the NIOS II Soft-Core processor disable the device for the embedded Linux.
 The following code shows the Linux device tree description for loading the driver for **UART1** (**serial1**):
@@ -200,7 +200,7 @@ The following code shows the Linux device tree description for loading the drive
 `````
 <br>
 
-A change of the `status` from *"okay"* to *"disabled"* will disable to loading of the driver for this device. 
+A change of the `status` from *"okay"* to *"disabled"* will disable the loading of the driver for this device. 
 Change for with NIOS II used peripheral component the `status` attributes to  *"disabled"*.
 ````shell
 status = "disabled";
@@ -215,7 +215,7 @@ status = "disabled";
 Flash the output image file (*.img*) to a SD-Card and boot your development board with it as shown in the [first guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/1_Booting.md).
 <br>
 
-After the complete boot of the embedded Linux is done connect the onboard *ALTERA JTAG Blaster* via an USB Cable to your development computer. 
+After the complete boot of the embedded Linux is done connect the onboard *ALTERA JTAG Blaster* via an USB cable to your development computer. 
 Write the FPGA configuration of your Quartus Prime project with the integrated debugger to the FPGA fabric of your development board. 
 
 
@@ -242,7 +242,7 @@ Finish the generation of the **Eclipse example project** and then start *Eclipse
 The starting of a new debug session is also shown inside the documentation of "*NIOSII_EclipseCompProject*" [Github repository](https://github.com/robseb/NIOSII_EclipseCompProject). Create a new *Eclipse* project that based on the NIOS II Software example **"FreeRTOS+socfpgaHAL-robseb"**.
 <br>
 
-The project contains FreeRTOS implementation that accesses with multiple Hard-IP components. 
+The project contains FreeRTOS implementation that accesses multiple Hard-IP components. 
 <br>
 
 # Understanding the *socfpgaHAL* Library 
