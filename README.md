@@ -134,7 +134,7 @@ ___
 * **Full supported boards**
 	* **Terasic DE10-Standard** (Intel Cyclone V)
 	* **Terasic DE10-Nano** (Intel Cyclone V)
-    * **Terasic DE0-Nano SoC** (Intel Cyclone V)
+    * **Terasic DE0-Nano SoC Kit *(Atlas-SoC Kit)*** (Intel Cyclone V)
 	* **Terasic HAN-Pilot** (Intel Arria 10 SX)
 
 <br>
@@ -196,7 +196,6 @@ The final *rsyocto* Versions are available inside the **packages-Part of this re
   * [meta-python](https://github.com/openembedded/meta-openembedded/tree/master/meta-python) 
   * [meta-webserver](https://github.com/openembedded/meta-openembedded/tree/master/meta-webserver)
   * [meta-networking](https://github.com/openembedded/meta-openembedded/tree/master/meta-networking) 
-* [meta-rstools](https://github.com/robseb/meta-rstools)
 <br>
 
 # Development Process
@@ -212,6 +211,7 @@ With re-design of the bootflow of *Intel* SoC-FPGAs with the SoC EDS Version 19.
 **My first approach to design this Linux Distribution** 
 ![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsyocto required building steps")
 **Build Flow to create the first rsyocto version**
+<br>
 <br>
 
 # Build system for generation of custom rsyocto flavors
@@ -243,8 +243,7 @@ In the following table these three stages are visible. The stage one is on the l
 
 ### How to get started with the Yocto Project for Intel SoC-FPGAs?
 Inside my [`meta-intelfpga` BSP layer](https://github.com/robseb/meta-intelfpga) I described in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
-
-Also I published a Yocto project [*meta layer (`meta-rstools`)*](https://github.com/robseb/meta-rstools) to bring **tools to update the FPGA configuration with the running Linux and to interact with simple commands with the FPGA fabric.**
+Also I published inside this layer the source code and documentation to bring **tools to update the FPGA configuration with the running Linux and to interact with simple commands with the FPGA fabric** to the Yocto Project.
 
 ### How to import Python pip (*python-pip*) packages or setup scripts with the Yocto Project
 I designed a simple python script to pre-install Python pip (PyPI)- Packages within a final Yocto Project Linux Image (see [here](https://github.com/robseb/PiP2Bitbake).

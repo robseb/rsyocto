@@ -21,6 +21,7 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
       | *_DE10STD* | Intel Cyclone V | [Terasic DE10-Standard](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=1081)
       | *_D10NANO* | Intel Cyclone V | [Terasic DE10-Nano](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=1046)
       | *_HAN* | Intel Arria 10 | [Terasic HAN Pilot Platform](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=228&No=1133)
+      | *_DE0NANOSOC* | Intel Cyclone V | [Terasic DE0-Nano SoC Kit/Atlas-SoC Kit](https://www.terasic.com.tw/cgi-bin/page/archive.pl?Language=English&CategoryNo=167&No=941&PartNo=1)
       
       **Note:** *rsyocto_SD ...* is the associated SD-Card folder for the release (see Part 5) 
  2. Insert a **Micro SD Card** (1GB or greater) into your computer  

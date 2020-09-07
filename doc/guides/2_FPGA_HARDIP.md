@@ -35,9 +35,9 @@ Here are also commands given to change the FPGA fabric configuration.
             /etc/init.d/apache2 start
         ````
      *  Info Papers
-        * [DE10 Standard](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.03/doc/symbols/DE10Std_pinout.png)
-        * [DE10 Nano](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.03/doc/symbols/DE10Nano_pinout.png)
-        * [HAN Pilot (Arria 10)](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.03/doc/symbols/HANPilot_pinout.png)
+        * [DE10 Standard](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/DE10Std_pinout.png)
+        * [DE10 Nano & DE0 Nano SoC](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/DE10Nano_pinout.png)
+        * [HAN Pilot (Arria 10)](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04 /doc/symbols/HANPilot_pinout.png)
  
 ## Interacting with FPGA IP
   * The *rstools*-layer implifies interaction the interaction with any FPGA IP easy
