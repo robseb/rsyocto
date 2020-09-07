@@ -131,7 +131,7 @@ Here are also commands given to change the FPGA fabric configuration.
         ```
     * On the other direction the FPGA writes the value *0xacdcacdc* to the HPS
         ```bash
-        FPGA-gpiRead -h acdc
+        FPGA-gpiRead
         ```
      * After this test install the original FPGA configuration again
      * On *rsYocto* the startup FPGA configuration is located here `/usr/rsyocto/running_bootloader_fpgaconfig.rbf`
