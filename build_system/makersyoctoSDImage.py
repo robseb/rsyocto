@@ -351,7 +351,7 @@ if __name__ == '__main__':
         now = datetime.now()
         nb = now.strftime("%Y%m%d_%H%M")
 
-    if not re.match("^[a-z0-9_]+$", nb, re.I):
+    if not re.match("^[a-z0-9_.]+$", nb, re.I):
         print('ERROR: The selected output file with the name:"rsYocto_'+nb+'"')
         print('        has caracters witch are not allowed!')
         sys.exit()
@@ -886,7 +886,7 @@ if __name__ == '__main__':
         f.write("-- BOARD:         "+BOARD_NAME[BOARD_ID]+"\n")
         f.write('-- IMAGE:         "'+image_name+'"\n') 
         f.write('-- PACKING DATE:  '+str(now.strftime("%d.%m.%Y"))+"\n")
-        f.write('--FOLDER NAME:    '+str(os.path.basename(path))+"\n")
+        f.write('-- PROJECT NAME:  '+str(socfpgaGenerator.Qpf_file_name)+"\n")
         for x in description_txt:
             f.write(x)
         f.write("***********************************************************************************************************\n\n")   
