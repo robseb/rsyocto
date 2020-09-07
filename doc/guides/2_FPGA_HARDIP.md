@@ -23,7 +23,7 @@ Here are also commands given to change the FPGA fabric configuration.
    ```
    * Later a more pleasant way will be shown (Level 4) 
    
-## Opening *rsYocto* Info Paper 
+## Opening *rsyocto* Info Paper (*Platform block design*)
   * For every *rsYocto*-Version  a Information Shied on the Apache Webserver is installed
   * This Paper contains information's about the configuration of the FPGA IP and there Addresses and the used I/O Pins 
   * **Open it by typing the iPv4-Address of your Board into a Web browser**
@@ -48,12 +48,14 @@ Here are also commands given to change the FPGA fabric configuration.
   
   1. **Reading a AVALON-Bus FPGA Module**
       * During the Boot process the FPGA-Configuration is written with a "*System ID Peripheral*"-component (*ID: 0xcafeacdc*)
-      * The Module is connected via the Lightweight-HPS-to-FPGA interface to the HPS
+      * The Module is connected via the Lightweight HPS-to-FPGA (*LWHPS2FPGA*) bridge to the HPS with a address offset of *0x30*
       * Use following command to read the System ID:
         ```bash
         FPGA-readBridge -lw 30
         ```
-      * The Suffix `"-lw"` selects the Lightweight-HPS-to-FPGA interface
+        ![Alt text](readBridgeExample.png?raw=true "FPGA-readBridge example output")
+
+      * The Suffix `"-lw"` selects the Lightweight HPS-to-FPGA (*LWHPS2FPGA*) bridge
       * "*30*" is the (hex) address offset to read given by the Intel Quartus Prime Platform Designer
       * The Suffix `"-b"` disables an detailed output
         * Often used inside a *Python-*, *C++-* or *PHP-* application
@@ -92,10 +94,25 @@ Here are also commands given to change the FPGA fabric configuration.
         ````
       * This Status Codes are transmitted by the FPGA Manager
       * The FPGA should be in the User Mode
-7. **Using the GPI/GPO- Registers to the FPGA** 
+ 7. **Reading the FPGA switches for 15sec**
+     * On the *LWHPS2FPGA* Bridge is with the address offset *0x00* a **PIO** (*Parallel I/O*) module connected
+     * This is assigned to the FPGA switches 
+     * Use following command to read it 
+        ```bash
+        FPGA-readBridge -lw 0
+        ````
+      * **The Suffix `"-r"` allows to update the value of the register for 15sec**
+        ```bash
+        FPGA-readBridge -lw 0 -r
+        ````
+    * Reading the 4-bit switches of the *Terasic* DE10 Nano
+        ![Alt text](SwitchReadingAninmation.gif?raw=true "Reading switches")
+    
+ 
+8. **Using the GPI/GPO- Registers to the FPGA** 
     * Intel SoC-FPGAs have two 32-Bit registers to interact directly with the FPGA 
     * To test this feature by connecting the FPGA LEDs with the GPO-Register
-    * But now the FPGA LEDs are connected to Lightweight-HPS-to-FPGA Bridge
+    * But now the FPGA LEDs are connected to Lightweight-HPS-to-FPGA (*LWHPS2FPGA*) Bridge
     * The FPGA configuration must be changed
     * The required `.rbf` configuration file ("*gpiConf.rbf*") is pre-installed on the home directory
     * Execute following command to **configure the FPGA fabric** with this file:
@@ -122,7 +139,34 @@ Here are also commands given to change the FPGA fabric configuration.
         ```bash
        FPGA-writeConfig -r 
         ```
- ## Interacting with Hard IP
+9. **Reading a AVALON-Bus FPGA Module connect to the HPS-to-FPGA Bridge**
+      * During the Boot process the FPGA-Configuration is written with a "*System ID Peripheral*"-component (*ID: 0x23456789*)
+      * The Module is connected via the HPS-to-FPGA (*HPS2FPGA*) bridge to the HPS with a address offset of *0x00*
+      * Use following command to read the System ID:
+        ```bash
+        FPGA-readBridge -hf 0
+        ```
+      * The Suffix `"-hf"` selects the HPS-to-FPGA (*HPS2FPGA*) bridge
+10. **Reading to a HPS (MPU) Address to get the status of the HPS_KEY**
+      * The `FPGA-readBridge`- and `FPGA-writeBridge`- command allows beside to interact with both HPS-to-FPGA Bridges to read the entire memory space of the HPS 
+        (*ARM Cortex-A9*) (**MPU** =*Microprocessor system*) 
+      * This feature is enabled with the attribute `-mpu` 
+      * On the *Terasic* DE10- and DE0- Cyclone V boards is the *HPS_KEY* connected to *GPIO1[24]* (*GPIOB*)
+      * The *gpio_ext_porta* of *GPIO1* as the address *0xFF709050* and holds the status of the *HPS_KEY* push button (*.p3139 of the Cyclone V HPS handbook*)
+      * Use following command to read this Register:
+        ```bash
+        FPGA-readBridge -mpu 0xFF709050 
+        ```
+      * The Suffix `"-mpu"` selects the MPU (HPS) memory space (*no offset will be used*)
+      * Bit number 25 is the *HPS_KEY* value
+      * **The Suffix `"-r"` allows to update the value of the register for 15sec**
+      * Alternately is [`devmem2](https://github.com/radii/devmem2) pre-installed as well
+      * In this example use
+      ````bash
+      devmem2 0xFF709050
+      ````
+
+ ## Interacting with Hard-IP
 1. **I²c-Devices** 
     * The Terasic DE10 Boards contains an [*ADXL345*](https://www.analog.com/en/products/adxl345.html)-Accelerometer on i2c0
     * The `i2c-tools` allow to interact with this sensor

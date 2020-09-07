@@ -1,6 +1,6 @@
  [Back to the startpage](https://github.com/robseb/rsyocto)
  
-# Booting *rsYocto* on your Board
+# Booting *rsyocto* on your Board
 This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Terasic FPGA development Board. 
 
 ## Create a bootable SD-Card 
@@ -37,6 +37,8 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
   1. Eject the SD Card from your Computer and insert it into the SD -Reader of your FPGA Board
   2. Change the MSEL-Bit switch to following setting: 
    ![Alt text](requiredMSEL.jpg?raw=true "Required MSEL-Bit Switch Selection")
+   
+  * The *Terasic DE0-Nano SoC Kit/Atlas-SoC Kit* required the same MSEL configuration as the *Terasic DE10-Nano or Standard* 
   3. Connect your FPGA-Board with a **Ethernet cable to your network**
      + Be sure that a **iPv4-DHCP** is active on this network 
   4. Connect a USB Cable between the FTDI Virtual **COM-Port** (USB CDC) and your Computer
@@ -66,15 +68,18 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
    | **14** | **BusyBox** | *BusyBox* Linux console interface | 
    | **15** | **User Command input after password authentication** |
    <br>
+    
+
+  In Intel's latest approach from 2020 are the primary bootloader and the secondary bootloader combined to a single bootloader. This bootloader based on *u-boot* and must be written to a raw partition of the SD-Card.
    
   ### **During the boot must be an ON and OFF FPGA LED pattern be shown on the board!**
    * The secondary *u-bootloader* writes 0x55 via the *Lightweight HPS to FPGA bridge* to a Soft-IP PIO controller connected to the FPGA LEDs
    * **Note:** If this is not the case is the **MSEL switch** not in the proper position and the FPGA configuration could not be written properly!
   ### **The Linux requests an iPv4-Address by a DHCP-server**
   ### **After the system has booted properly and a network connection is established -> HPS LED and only FPGA LED 0 turns ON** 
-   * **Note:** If rs Yocto goes in a bootloop after requesting the current date the **MSEL switch** is not in the proper position and the **FPGA configuration** could not be written properly! This problem could occur because the boot-up shell script ([shown here at the end](https://github.com/robseb/rsyocto/blob/rsYocto-1.03/doc/guides/6_newFPGAconf.md)) tries to write to the closed LW HPS2FPGA Bridge or to an unreachable address.
+   * **Note:** If rs Yocto goes in a bootloop after requesting the current date the **MSEL switch** is not in the proper position and the **FPGA configuration** could not be written properly! This problem could occur because the boot-up shell script ([shown here at the end](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/6_newFPGAconf.md)) tries to write to the closed LW HPS2FPGA Bridge or to an unreachable address.
 
-**For users with non supported boards:** Please go to [this guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.03/doc/guides/6_newFPGAconf.md) and use *rsYocto* with your custom FPGA configuration and boot scripts.
+**For users with non supported boards:** Please go to [this guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/6_newFPGAconf.md) and use *rsyocto* with your custom FPGA configuration and boot scripts.
   
   <br>
   
@@ -86,7 +91,6 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
 * Default device name: `cyclone5` or `arria10` 
 * Login: `root`
 * Passwort:  `eit`
-* Default MAC: `d6:7d:ae:b3:0e:ba`
  <br>
  
  ## Find the iPv4 Address of your Board
@@ -97,14 +101,14 @@ This guide shows how to install *rsYocto* on a **SD Card** and boot it on a Tera
  * the IP Address is also shown during the boot
  <br> 
  
-## Connect to *rsYocto* with SSH
+## Connect to *rsyocto* with SSH
 1. Open Linux or *Windows Command Prompt* (Windows 10) and insert this command to connect to your Board: 
     ```
     ssh root@<Boards iPv4-address>
     ```
-2. Use following the Passwort: `eit`
+2. **Use following the Passwort:** `eit`
   * No other authentications are required
   * The default SSH-Port (22) is used 
-3. Now *rsYocto* Splash screen appears
+3. Now *rsyocto* Splash screen appears
 
  ## Continue with the next level: [Use of Hard IP, FPGA-IP and configuration of the FPGA fabric](2_FPGA_HARDIP.md)
