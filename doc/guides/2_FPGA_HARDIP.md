@@ -88,12 +88,13 @@ Here are also commands given to change the FPGA fabric configuration.
           for count in range(1024):
             os.system('FPGA-writeBridge -lw 38 -h '+ str(count) +' -b')
         ````
-  6. **Reading the Status of the FPGA-fabric:**
+  6. **Reading the MSEL switch**
         ```bash
-        FPGA-status
+        FPGA-readMSEL
         ````
-      * This Status Codes are transmitted by the FPGA Manager
-      * The FPGA should be in the User Mode
+      * The MSEL(*mode select*) switch is used to give the HPS the right to access the HPS-to-FPGA Bridges and to change the FPGA configuration
+      * Also is with the MSEL the type of the FPGA configuration file and the source of it specified 
+      * The MSEL bit-switch is reachable over the FPGA configuration manager
  7. **Reading the FPGA switches for 15sec**
      * On the *LWHPS2FPGA* Bridge is with the address offset *0x00* a **PIO** (*Parallel I/O*) module connected
      * This is assigned to the FPGA switches 
@@ -116,13 +117,17 @@ Here are also commands given to change the FPGA fabric configuration.
     * The FPGA configuration must be changed
     * The required `.rbf` configuration file ("*gpiConf.rbf*") is pre-installed on the home directory
     * Execute following command to **configure the FPGA fabric** with this file:
-        * For the Terasic DE10 Standard Board 
+        * For the *Terasic* DE10 Standard Board 
           ```bash
           FPGA-writeConfig  -f gpiConfStd.rbf
           ```
-         * For the Terasic DE10 Nano Board 
+         * For the *Terasic* DE10 Nano Board 
            ```bash
-           FPGA-writeConfig  -f gpiConfNano.rbf
+           FPGA-writeConfig -f gpiConfNano.rbf
+           ```
+        * For the *Terasic* DE0 Nano SoC Kit 
+           ```bash
+           FPGA-writeConfig -f gpiConfDe0.rbf
            ```
     * Now should be the LEDs connected with the direct 32-Bit register
     * Enable the LEDs over this way:
