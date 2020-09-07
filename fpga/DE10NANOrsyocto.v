@@ -7,9 +7,9 @@
 //            ##    ##  ##    ##       ##    ##     ## ##    ##    ##    ##     ##        
 //            ##     ##  ######        ##     #######   ######     ##     #######         
 //
-//						rsYocto reference FPGA project of the Terasic DE10 Nano Board
+//						rsyocto reference FPGA project for the Terasic DE10 Nano Board
 //    				 created by Robin Sebastian (https://github.com/robseb) 
-//
+//												(git@robseb.de)
 //
 
 
@@ -227,8 +227,8 @@ base_hps u0 (
 		
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////	  
-/////////////////////////////// 	HPS Hard IP to FPGA Mapping     /////////////////////////////////////  
-
+//////////////////////////// 	HPS Hard-IP to FPGA I/O Mapping     ////////////////////////////////////  
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		
 ///////////////////////////////////////////// HPS UART 1  /////////////////////////////////////////////
@@ -277,7 +277,6 @@ base_hps u0 (
 
 
 ///////////////////////////////////////////  Analog Devices LTC2308    ////////////////////////////////
-
 		.adc_ltc2308_external_interface_cs_n     (ADC_CONVST),  
 		.adc_ltc2308_external_interface_sclk     (ADC_SCK),       
 		.adc_ltc2308_external_interface_din      (ADC_SDI),      
@@ -303,7 +302,6 @@ base_hps u0 (
 	  .hps_0_h2f_gp_gp_in					  (32'hACDCACDC), // FPGA to HPS -->
 	  .hps_0_h2f_gp_gp_out					  ()					// HPS to FPGA <--
 );
-
 
 
 //////////////////////////// DE10 NANO //////////////////////////////
@@ -365,7 +363,6 @@ base_hps u0 (
 	ALT_IOBUF can0_rx_iobuf (.i(1'b0), .oe(1'b0), .o(can0_rx), .io(ARDUINO_IO[9]));
    // CAN-> TX
 	ALT_IOBUF can0_tx_iobuf (.i(can0_tx), .oe(1'b1), .o(), .io(ARDUINO_IO[8]));
-	
 
 endmodule
 

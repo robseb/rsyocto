@@ -5,7 +5,7 @@
 @disc:  ADC readout Sensor Test (Analog Devices LTC2308)
         Fast way over the virtual memory
            
-@date:   22.06.2020
+@date:   04.09.2020
 @device: Intel Cyclone V 
 @author: Robin Sebastian
          (https://github.com/robseb)
@@ -21,6 +21,10 @@ import sys
 #
 import devmem
 
+#### Used ADC Channel 
+# Select here the ADC Channel for this Demo 
+ADC_CH = 0
+
 # Demo duration  
 TEST_DURATIONS  =100
 
@@ -30,17 +34,19 @@ HPS_LW_ADRS_OFFSET = 0xFF200000
 # LTC2308 Address offset
 ADC_ADDRES_OFFSET = 0x40
 
-# Register set of the LTC2308
-ADC_CMD_REG_OFFSET  = 0x0
-ADC_DATA_REG_OFFSET = 0x4
+#
+##### Register Set of the Intel University program Analog Devices LTC2308 Soft-IP
+#
 
-#### Used ADC Channel 
-# Select here the ADC Channel for this Demo 
-ADC_CH = 1
-##
+# ADC data register no for channel (read only)
+ADC_REG_OFF_DATACH  = ADC_CH*4
 
-### FIFO Convention Data Size for average calculation
-FIFO_SIZE = 255 # MAX=1024 
+# ADC Control register no (write only)
+ADC_REG_OFF_UPDATE      =  0 # Update the converted values
+ADC_REG_OFF_AUTO_UPDATE =  4 # Enables or disables auto-updating
+
+# The number of available number 
+ADC_REG_RANGE=           28
 
 if __name__ == '__main__':
     print("ADC readout Demo for LTC2308 ADC with Channel "+str(ADC_CH))
@@ -56,7 +62,7 @@ if __name__ == '__main__':
             print('The Terasic HAN Pilot Board has no LTC2308 and is not supported!')
             sys.exit()
 
-    # The ADC is only supported with rsYocto Version 1.031 or later
+    # The ADC is only supported with rsyocto Version 1.04 or later
     versionNo = 0
     # The rsYocto Version Number is located here: "/usr/rsyocto/version.txt"
     if os.path.isfile("/usr/rsyocto/version.txt"):
@@ -67,17 +73,20 @@ if __name__ == '__main__':
         try: 
             versionNo = float(versionStr)
         except ValueError:
-            print("Warning: Failed to read rsYocto Version")
+            print("Warning: Failed to read rsyocto Version")
 
-    if not versionNo >= 1.031:
-        print("Error: The ADC is only supported with rsYocto Version 1.031 or later ")
+    if not versionNo >= 1.04:
+        print("Error: The ADC is only supported with rsyocto Version 1.04 or later ")
         print(" This Version is: "+versionStr)
         sys.exit()
 
     # open the memory Access to the Lightweight HPS-to-FPGA bridge
     #                  (Base address, byte length to acceses, interface)
-    de = devmem.DevMem(HPS_LW_ADRS_OFFSET, ADC_ADDRES_OFFSET+0x8, "/dev/mem")
+    de = devmem.DevMem(HPS_LW_ADRS_OFFSET, ADC_ADDRES_OFFSET+ADC_REG_RANGE, "/dev/mem")
     
+    # Enable the auto conversion update mode 
+    de.write(ADC_ADDRES_OFFSET+ADC_REG_OFF_UPDATE,[1])
+
     print('Reading the current ADC value ...')
 
     # Enter test loop
@@ -85,36 +94,15 @@ if __name__ == '__main__':
 
         print('Sample: '+str(var)+'/'+str(TEST_DURATIONS))
 
-        # Set meassure number for ADC convert
-        de.write(ADC_ADDRES_OFFSET+ADC_DATA_REG_OFFSET,[FIFO_SIZE])
-        # Enable the convention with CH0 
-        de.write(ADC_ADDRES_OFFSET+ADC_CMD_REG_OFFSET, [(ADC_CH <<1) | 0x00])
-        de.write(ADC_ADDRES_OFFSET+ADC_CMD_REG_OFFSET, [(ADC_CH <<1) | 0x01])
-        de.write(ADC_ADDRES_OFFSET+ADC_CMD_REG_OFFSET, [(ADC_CH <<1) | 0x00])
-        
-        timeout = 300 #ms
-        # Wait untis convention is done or timeout
-        while (not(timeout == 0)):
-            
-            if(de.read(ADC_ADDRES_OFFSET+ADC_CMD_REG_OFFSET,1)[0] & (1<<0)): 
-                break
-
-            timeout = timeout -1
-            time.sleep(.001) # delay 1ms 
-
-        # Avarage FIFO values
-        rawValue = 0
-        for i in range(FIFO_SIZE): 
-            rawValue = rawValue+ (de.read(ADC_ADDRES_OFFSET+ADC_DATA_REG_OFFSET,1))[0]
-        
-        value = rawValue / FIFO_SIZE
-
-        value = round(value,2)
-        print("-> ADC AVG: "+str(value))
+        # Read the ADC Value from the selected Channel
+        raw_value = (de.read(ADC_ADDRES_OFFSET+ADC_REG_OFF_DATACH,1))[0]
+        # Remove Bit 12-31 (Bit 15 is always high)
+        raw_value = (raw_value & 0x00000FFF)
+        print("-> ADC CH"+str(ADC_CH)+': ' +str(raw_value))
 
         # Convert ADC Value to Volage
-        volage = round(value/1000,2)
-        print("-> U   AVG: "+str(volage)+"V")
+        u_value = round((raw_value*5)/4095,4)
+        print("-> U   AVG: "+str(u_value)+"V")
 
         time.sleep(.2) # 200ms delay
 
@@ -123,5 +111,8 @@ if __name__ == '__main__':
             sys.stdout.write("\033[F")
             sys.stdout.write("\033[F")
             sys.stdout.write("\033[F")
+
+    # Disable the ADC again
+    de.write(ADC_ADDRES_OFFSET+ADC_REG_OFF_UPDATE,[0])
 
 print('End of demo...')

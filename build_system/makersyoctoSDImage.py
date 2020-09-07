@@ -68,8 +68,11 @@
 #  Generation of a FPGA configuration file that can be written by Linux
 #  Configuration of Linux with network interface file 
 #
+#03-09-2020 (Vers. 3.02)
+#  Fixed a bug with copying of the the "my folders"
 #
-version = "3.01"
+
+version = "3.02"
 
 
 #
@@ -726,12 +729,12 @@ if __name__ == '__main__':
     for i in range(len(MY_FOLDER_NAME)):
         print('     Copy the content of the folder "'+MY_FOLDER_NAME[i]+'"')
 
-        # 1. Look for the files inside the Device specific folder
-        dir = ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + MY_FOLDER_NAME[i]
+        # 1. Look for the file inside the Board specific folder
+        dir = ext + FOLDER_NAME_BOARD[BOARD_ID]
         if os.path.isdir(dir):
             if os.path.isdir(ext_dir+'/'+ MY_FOLDER_ROOTFS_DIR[i]):
                 try:
-                    os.system('sudo cp -r '+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+                    os.system('sudo cp -rv '+dir+ '/' + \
                         MY_FOLDER_NAME[i]+'/. '+ext_dir+'/'+ MY_FOLDER_ROOTFS_DIR[i])
                 except Exception as ex:
                     print('ERROR: Failed to copy files! Error Msg.:'+str(ex))
@@ -743,12 +746,12 @@ if __name__ == '__main__':
             print('NOTE: The folder "'+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     MY_FOLDER_NAME[i]+'" does not exist on the rootfs')
 
-        # 2. Look for the file inside the Board specific folder
-        dir = ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + MY_FOLDER_NAME[i]
+        # 2. Look for the files inside the Device specific folder
+        dir = ext + FOLDER_NAME_SOCFPGA[BOARD_ID]
         if os.path.isdir(dir):
             if os.path.isdir(ext_dir+'/'+ MY_FOLDER_ROOTFS_DIR[i]):
                 try:
-                    os.system('sudo cp -r '+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+                    os.system('sudo cp -rv '+dir+ '/' + \
                         MY_FOLDER_NAME[i]+'/. '+ext_dir+'/'+ MY_FOLDER_ROOTFS_DIR[i])
                 except Exception as ex:
                     print('ERROR: Failed to copy files! Error Msg.:'+str(ex))
@@ -759,6 +762,7 @@ if __name__ == '__main__':
         else: 
             print('NOTE: The folder "'+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     MY_FOLDER_NAME[i]+'" does not exist on the rootfs')
+
     print('     =Done')       
 
     ################################### Generate the rsyocto files        ###################################

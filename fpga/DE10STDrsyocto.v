@@ -7,9 +7,9 @@
 //            ##    ##  ##    ##       ##    ##     ## ##    ##    ##    ##     ##        
 //            ##     ##  ######        ##     #######   ######     ##     #######         
 //
-//						rsYocto reference FPGA project of the Terasic DE10 Standard Board
+//						rsyocto reference FPGA project for the Terasic DE10 Standard Board
 //    				 created by Robin Sebastian (https://github.com/robseb) 
-//
+//													  git@robseb.de
 //
 
 
@@ -219,29 +219,29 @@ wire can0_rx, can0_tx;
 base_hps u0 (
 
 /////////////////////////////////////////////// CLOCKS ////////////////////////////////////////////////
-		.clk_clk                            	 	(CLOCK_50),                          
+		.clk_clk                           (CLOCK_50),                          
 
 ///////////////////////////////////////////////////////////////////////////////////////////////////////	  
 ///////////////////////////////////////// 	HPS    ///////////////////////////////////////////////////  
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 /////////////////////////////////////  Onboard DDR3 1GB Memmory  //////////////////////////////////////
-      .hps_0_ddr_mem_a                          ( HPS_DDR3_ADDR),                     
-      .hps_0_ddr_mem_ba                         ( HPS_DDR3_BA),                        
-      .hps_0_ddr_mem_ck                         ( HPS_DDR3_CK_P),                       
-      .hps_0_ddr_mem_ck_n                       ( HPS_DDR3_CK_N),                       
-      .hps_0_ddr_mem_cke                        ( HPS_DDR3_CKE),                        
-      .hps_0_ddr_mem_cs_n                       ( HPS_DDR3_CS_N),                    
-      .hps_0_ddr_mem_ras_n                      ( HPS_DDR3_RAS_N),                      
-      .hps_0_ddr_mem_cas_n                      ( HPS_DDR3_CAS_N),                      
-      .hps_0_ddr_mem_we_n                       ( HPS_DDR3_WE_N),                      
-      .hps_0_ddr_mem_reset_n                    ( HPS_DDR3_RESET_N),                    
-      .hps_0_ddr_mem_dq                         ( HPS_DDR3_DQ),                        
-      .hps_0_ddr_mem_dqs                        ( HPS_DDR3_DQS_P),                      
-      .hps_0_ddr_mem_dqs_n                      ( HPS_DDR3_DQS_N),                      
-      .hps_0_ddr_mem_odt                        ( HPS_DDR3_ODT),                        
-      .hps_0_ddr_mem_dm                         ( HPS_DDR3_DM),                         
-      .hps_0_ddr_oct_rzqin                      ( HPS_DDR3_RZQ),                         
+      .hps_0_ddr_mem_a                   ( HPS_DDR3_ADDR),                     
+      .hps_0_ddr_mem_ba                  ( HPS_DDR3_BA),                        
+      .hps_0_ddr_mem_ck                  ( HPS_DDR3_CK_P),                       
+      .hps_0_ddr_mem_ck_n                ( HPS_DDR3_CK_N),                       
+      .hps_0_ddr_mem_cke                 ( HPS_DDR3_CKE),                        
+      .hps_0_ddr_mem_cs_n                ( HPS_DDR3_CS_N),                    
+      .hps_0_ddr_mem_ras_n               ( HPS_DDR3_RAS_N),                      
+      .hps_0_ddr_mem_cas_n               ( HPS_DDR3_CAS_N),                      
+      .hps_0_ddr_mem_we_n                ( HPS_DDR3_WE_N),                      
+      .hps_0_ddr_mem_reset_n             ( HPS_DDR3_RESET_N),                    
+      .hps_0_ddr_mem_dq                  ( HPS_DDR3_DQ),                        
+      .hps_0_ddr_mem_dqs                 ( HPS_DDR3_DQS_P),                      
+      .hps_0_ddr_mem_dqs_n               ( HPS_DDR3_DQS_N),                      
+      .hps_0_ddr_mem_odt                 ( HPS_DDR3_ODT),                        
+      .hps_0_ddr_mem_dm                  ( HPS_DDR3_DM),                         
+      .hps_0_ddr_oct_rzqin               ( HPS_DDR3_RZQ),                         
 
  ///////////////////////////////////////// HPS Ethernet 1  ////////////////////////////////////////////    
       .hps_0_io_hps_io_emac1_inst_TX_CLK ( HPS_ENET_GTX_CLK),     
@@ -287,8 +287,8 @@ base_hps u0 (
 		
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////	  
-/////////////////////////////// 	HPS Hard IP to FPGA Mapping     /////////////////////////////////////  
-
+///////////////////////////// 	HPS Hard-IP to FPGA I/O Mapping     /////////////////////////////////  
+//////////////////////////////////////////////////////////////////////////////////////////////////////
 
 		
 ///////////////////////////////////////////// HPS UART 1  /////////////////////////////////////////////
@@ -338,7 +338,7 @@ base_hps u0 (
 
 		
 ///////////////////////////////////////////////////////////////////////////////////////////////////////	  
-////////////////////////////////// 	   On Board Compunents     ////////////////////////////////////////  
+////////////////////////////////// 	   On Board Compunents     /////////////////////////////0x12345678///////////  
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 ///////////////////////////////////////////  HPS LED & KEY  ///////////////////////////////////////////
@@ -365,29 +365,22 @@ base_hps u0 (
 		.sw_pio_external_connection_export  (SW),
 		
 ////////////////////////////////// 24 Bit seven sigment HEX Display ///////////////////////////////////
-	  .de10std7sig_hex_io0_readdata       (HEX0), 
-	  .de10std7sig_hex_io1_readdata       (HEX1),
-	  .de10std7sig_hex_io2_readdata       (HEX2),
-	  .de10std7sig_hex_io3_readdata       (HEX3),
-	  .de10std7sig_hex_io4_readdata       (HEX4),	 
-	  .de10std7sig_hex_io5_readdata       (HEX5),
-	  
+	   .de10std7sig_hex_io0_readdata       (HEX0), 
+	   .de10std7sig_hex_io1_readdata       (HEX1),
+	   .de10std7sig_hex_io2_readdata       (HEX2),
+	   .de10std7sig_hex_io3_readdata       (HEX3),
+	   .de10std7sig_hex_io4_readdata       (HEX4),	 
+	   .de10std7sig_hex_io5_readdata       (HEX5),
 	  
 //////////////////////////////////	ADC: Analog Devices LTC2308 ////////////////////////////////
-		.ltc2308_io_convst_writeresponsevalid_n     (ADC_CONVST),    
-      .ltc2308_io_sck_writeresponsevalid_n        (ADC_SCLK),        
-      .ltc2308_io_sdi_writeresponsevalid_n        (ADC_DIN),      
-      .ltc2308_io_sdo_beginbursttransfer          (ADC_DOUT),       
-		
-	  
+		.adc_ltc2308_external_interface_cs_n     (ADC_CONVST),    
+      .adc_ltc2308_external_interface_sclk     (ADC_SCLK),        
+      .adc_ltc2308_external_interface_din      (ADC_DIN),      
+      .adc_ltc2308_external_interface_dout     (ADC_DOUT),       
 	  
 ////////////////////////////////// HPS -> FPGA GPIO ///////////////////////////////////
 	  .hps_0_h2f_gp_gp_in					  (32'hACDCACDC),
-	  .hps_0_h2f_gp_gp_out					  (),
-	  
-	 /////////////////// USER CLOCK TEST ////////////////////////////
-	  .hps_0_h2f_user0_clock_clk			  (GPIO[34]),
-	  .hps_0_h2f_user2_clock_clk          (GPIO[35])
+	  .hps_0_h2f_gp_gp_out					  ()
 );
 
 
@@ -401,49 +394,49 @@ base_hps u0 (
 ////////////////////////////////////////////  USER GPIO PORT /////////////////////////////////////////
 //////////////////////////////////// (40 Pin Wannenstecker 2,54mm)  //////////////////////////////////
 		
-										///////////////////////////////////////////////////
-										//  PIN   | ---	 mapped func ---	|  GPIO      //
-										//    1   | 			  UART1 TX 		|	  0		 //
-										//    2   | 			  UART1 RX 	   |	  1		 //
-										//    3   | 			  I2C1 SCL     |	  2		 //
-										//    4   | 			  I2C1 SDA     |	  3		 //
-										//    5   | 			  CAN0 TX		|	  4		 //
-										//    6   |				  CAN0 RX		|	  5		 //
-										//    7   |                         |	  6		 //
-										//    8   |                         |	  7		 //
-										//    9   |                         |	  8		 //
-										//   10   |                         |	  9		 //
-										//   11   ---  VDD 5V  ------       |	   		 //
-										//   12   ---  GND     ------       |	  	   	 //
-										//   13	 |	 			 I2C2 SCL      |	 10   	 //
-										//   14	 |	 			 I2C2 SDA      |	 11		 //
-										//   15   |				         	   |	 12		 //
-										//   16   |									|	 13		 //
-										//   17   |	                  		|	 14   	 //
-										//   18   |				         		|	 15		 //
-										//   19   |									|	 16		 //
-										//   20   |									|	 17		 //
-										//   21   |			                  |	 18		 //
-										//   22   |									|	 19		 //
-										//   23   |			             		|	 20		 //
-										//   24   |									|	 21		 //
-										//   25   |									|	 22		 //
-										//   26   |			                  |	 23		 //
-										//   27   |									|	 24		 //
-										//   28   |									|	 25		 //
-										//   29   ---  VCC 3V3  ------		|	   		 //
-										//   30   ---  GND      ------		|	  		    //
-										//   31   |									|	 26		 //
-										//   32   |			         			|	 27		 //	                 
-										//   33   |									|	 28		 //
-										//   34   |									|	 29		 //
-										//   35   |									|	 30		 //
-										//   36   |									|	 31		 //
-										//   37   |									|	 32		 //
-										//   38   |									|	 33		 //
-										//   39   |									|	 34		 //
-										//   40   |									|	 35		 //										
-										///////////////////////////////////////////////////
+									///////////////////////////////////////////////////
+									//  PIN   | ---	 mapped func ---	|  GPIO      //
+									//    1   | 			  UART1 TX 		|	  0		 //
+									//    2   | 			  UART1 RX 	   |	  1		 //
+									//    3   | 			  I2C1 SCL     |	  2		 //
+									//    4   | 			  I2C1 SDA     |	  3		 //
+									//    5   | 			  CAN0 TX		|	  4		 //
+									//    6   |				  CAN0 RX		|	  5		 //
+									//    7   |                         |	  6		 //
+									//    8   |                         |	  7		 //
+									//    9   |                         |	  8		 //
+									//   10   |                         |	  9		 //
+									//   11   ---  VDD 5V  ------       |	   		 //
+									//   12   ---  GND     ------       |	  	   	 //
+									//   13	 |	 			 I2C2 SCL      |	 10   	 //
+									//   14	 |	 			 I2C2 SDA      |	 11		 //
+									//   15   |				         	   |	 12		 //
+									//   16   |									|	 13		 //
+									//   17   |	                  		|	 14   	 //
+									//   18   |				         		|	 15		 //
+									//   19   |									|	 16		 //
+									//   20   |									|	 17		 //
+									//   21   |			                  |	 18		 //
+									//   22   |									|	 19		 //
+									//   23   |			             		|	 20		 //
+									//   24   |									|	 21		 //
+									//   25   |									|	 22		 //
+									//   26   |			                  |	 23		 //
+									//   27   |									|	 24		 //
+									//   28   |									|	 25		 //
+									//   29   ---  VCC 3V3  ------		|	   		 //
+									//   30   ---  GND      ------		|	  		    //
+									//   31   |									|	 26		 //
+									//   32   |			         			|	 27		 //	                 
+									//   33   |									|	 28		 //
+									//   34   |									|	 29		 //
+									//   35   |									|	 30		 //
+									//   36   |									|	 31		 //
+									//   37   |									|	 32		 //
+									//   38   |									|	 33		 //
+									//   39   |									|	 34		 //
+									//   40   |									|	 35		 //										
+									///////////////////////////////////////////////////
 										
 
 
