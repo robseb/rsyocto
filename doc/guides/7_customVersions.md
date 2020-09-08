@@ -177,8 +177,10 @@ These folders can also contain the *rootfs*-, Linux Device Tree, or *zImage*-fil
 |:--|:--|:--|:--| 
 | \"socfpga_XXX.dts\" | Linux Device Tree | Pat.1 (*vfat*)| *Complied by the build script to:* **CY5:** "*socfpga_cyclone5_socdk.dtb*" **A10:** "*socfpga_arria10_socdk_sdmmc.dtb*" |
 | \"socfpga_XXX.rbf\" | Default FPGA configuration file | Pat.1 (*vfat*)| "*Name of selected inside the u-boot script*" |
+| \"socfpga_rollback_XXX.rbf\" | Rollback FPGA configuration (*Can be written by Linux*) | Pat.2 (*ext3*): `/usr/rsyocto/running_bootloader_fpgaconfig.rbf` | *"running_bootloader_fpgaconfig.rbf"* |
 | \"rootfs_XXX.tar.gz\" | Linux compressed *rootfs* | Pat.2 (*ext3*)| "*unzipped by the build system*" |
 | \"zImage_XXX\" | Compressed Linux Kernel | Pat.1 (*vfat*)| "*zImage*" |
+| \"network_interfaces_XXX.txt\" | Linux Network interface configuration file  | Pat.2 (*ext3*): `/etc/network/interfaces`| "*interfaces*" |
 <br>
 
 **Note: XXX represents the board specific- or SoC-FPGA specific- suffix**
