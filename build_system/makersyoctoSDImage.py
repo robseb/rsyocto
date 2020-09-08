@@ -71,8 +71,12 @@
 #03-09-2020 (Vers. 3.02)
 #  Fixed a bug with copying of the the "my folders"
 #
+# (2020-09-08) Vers. 3.03)
+#  Fixing a issue with non licence IP inside Quartus Prime projects   
+#
+#
 
-version = "3.02"
+version = "3.03"
 
 
 #
@@ -451,39 +455,39 @@ if __name__ == '__main__':
                     "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'):
             fpgaboot_conf_default_dir= ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
                     "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'
-            print('     Name: "'+fpgaboot_conf_default_dir+'.rbf"')
+            print('     Name: socfpga'+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf')
     
         # 2. Look for the file inside the Device specific folder
         elif os.path.isfile(ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'):
             fpgaboot_conf_default_dir=ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'
-            print('     Name: "'+fpgaboot_conf_default_dir+'.rbf"')
+            print('     Name: socfpga'+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf')
           
         else:
             print('ERROR: It is no default u-boot FPGA configuration file (.rbf)'+\
                  'available for the board/device')
             sys.exit()
         
-        #### Find the FPGA configuration for Linux configuration file   #######
+        #### Find the FPGA configuration for Linux configuration file (rollback)  #######
         print('   Looking for the default Linux FPGA configuration file')
         
         # 1. Look for the file inside the Board specific folder
         if os.path.isfile(ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
-                    "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'):
+                    "socfpga_rollback"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'):
             fpgalinux_conf_default_dir= ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
                     "socfpga_rollback"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'
-            print('     Name: "'+fpgalinux_conf_default_dir+'.rbf"')
+            print('     Name: socfpga_rollback'+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf')
     
         # 2. Look for the file inside the Device specific folder
         elif os.path.isfile(ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     "socfpga_rollback"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'):
             fpgalinux_conf_default_dir=ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     "socfpga_rollback"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'
-            print('     Name: "'+fpgalinux_conf_default_dir+'.rbf"')
+            print('     Name: socfpga_rollback'+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf')
           
         else:
-            print('NOTE: It is no default Linux rollback FPGA configuration file (.rbf)'+\
+            print('\nNOTE: It is no default Linux rollback FPGA configuration file (.rbf)'+\
                  'available for the board/device')
 
     #### Copy the rootfs.tar.gz  #######
@@ -574,7 +578,7 @@ if __name__ == '__main__':
             print('ERROR: Failed to copy file! MSG: '+str(ex))
             sys.exit()
     else:
-        print('NOTE: It is no network configuration file available for the board/device')
+        print('\nNOTE: It is no network configuration file available for the board/device')
     print('     =Done\n')
         
     #################################  Add the MAC Address to the devicetree  #################################
@@ -651,35 +655,39 @@ if __name__ == '__main__':
     ###################################  Generate a FPGA boot configuration  #####################################
     # Generate the depending FPGA configuration file 
     #    specified inside the u-boot script
-    if proj_compet or not unlicensed_ip_found:
+
+    if  proj_compet and not unlicensed_ip_found:
         # Generate a new FPGA configuration for configuration during boot
         if not socfpgaGenerator.GenerateFPGAconf():
             sys.exit()
     else: 
         # Use the default FPGA configuration file
-        print('NOTE: Only the default FPGA configuration file will be used!')
-        if not socfpgaGenerator.GenerateFPGAconf(True,fpgaboot_conf_default_dir):
+        print('\nNOTE: Only the default FPGA configuration file will be used!')
+        if not socfpgaGenerator.GenerateFPGAconf(copy_file=True, \
+            dir2copy=fpgaboot_conf_default_dir,boot_linux=False, linux_filename='', linux_copydir=''):
             sys.exit()
 
     ###################################  Generate a rollback FPGA configuration  #####################################
     # Generate the depending FPGA configuration file 
-
-    if proj_compet or not unlicensed_ip_found:
+    
+    if proj_compet and not unlicensed_ip_found:
         # Generate a new rollback FPGA configuration for configuration with Linux
+        print('--> Generate a new FPGA rollback configuration file')
         if not socfpgaGenerator.GenerateFPGAconf(boot_linux=True,\
                 linux_filename=ROOLBACK_FPGACONF_NAME,\
                 linux_copydir=ext):
             sys.exit()
     elif fpgalinux_conf_default_dir!='':
         # Is a default rollback FPGA configuration for configuration with Linux
+        print('\nNOTE: Only the default rollback FPGA configuration file will be used!')
         if not socfpgaGenerator.GenerateFPGAconf(True,fpgalinux_conf_default_dir,True,
                 linux_filename=ROOLBACK_FPGACONF_NAME,\
                 linux_copydir=ext):
                 # socfpgaGenerator.Ext_folder_dir+'/'+ROOLBACK_FPGACONF_DIR):
             sys.exit()
     else:
-        print('NOTE: No rollback FPGA configuration is used!')
-        sys.exit()
+        print('\nNOTE: No rollback FPGA configuration is used!')
+    
 
     ############################## Unzip all available archive files such as the rootfs ##############################
     if not socfpgaGenerator.ScanUnpackagePartitions():
@@ -743,7 +751,7 @@ if __name__ == '__main__':
                 print('WARNING: The folder "'+ext_dir+'/'+ MY_FOLDER_ROOTFS_DIR[i]+\
                     '" does not exist on the rootfs')
         else: 
-            print('NOTE: The folder "'+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+            print('\nNOTE: The folder "'+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     MY_FOLDER_NAME[i]+'" does not exist on the rootfs')
 
         # 2. Look for the files inside the Device specific folder
@@ -760,7 +768,7 @@ if __name__ == '__main__':
                 print('WARNING: The folder "'+ext_dir+'/'+ MY_FOLDER_ROOTFS_DIR[i]+\
                     '" does not exist on the rootfs')
         else: 
-            print('NOTE: The folder "'+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+            print('\nNOTE: The folder "'+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     MY_FOLDER_NAME[i]+'" does not exist on the rootfs')
 
     print('     =Done')       
@@ -889,6 +897,7 @@ if __name__ == '__main__':
         f.write('-- PROJECT NAME:  '+str(socfpgaGenerator.Qpf_file_name)+"\n")
         for x in description_txt:
             f.write(x)
+        f.write("\n")
         f.write("***********************************************************************************************************\n\n")   
 
     try:
