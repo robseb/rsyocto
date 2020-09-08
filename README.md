@@ -21,7 +21,7 @@
 
 ___
 
-*rsyocto* implements a **modern Linux Kernel (linux-socfpga 5.5)** and brings a set of today fundamentally needed components to **Intel SoC-FPGAs** and helps to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
+*rsyocto* implements a **modern Linux Kernel (linux-socfpga 5.7)** and brings a set of today fundamentally needed components to **Intel SoC-FPGAs** and helps to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
 
 To realize that **Python3** with the Python Package manager **pip (PyPI)** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsyocto* is for its best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface. For that the Python Web framework **Django 3.0** with the **AdminLTE** Dashboard is pre-installed.
 
