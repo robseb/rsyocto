@@ -74,9 +74,11 @@
 # (2020-09-08) Vers. 3.03)
 #  Fixing a issue with non licence IP inside Quartus Prime projects   
 #
+# (2021-01-08) Vers. 3.04)
+#  Small bug fix
 #
 
-version = "3.03"
+version = "3.04"
 
 
 #
@@ -848,7 +850,8 @@ if __name__ == '__main__':
             print('ERROR: Failed execute the "rootfsChange.py" script! Msg.:'+str(ex))
             sys.exit()      
     else:
-        print('ERROR:The "rootfsChange.py" file is not available! Msg.:'+str(ex))
+        print('ERROR:The "rootfsChange.py" file is not available!')
+        print('      Please clone it from "https://github.com/robseb/rsyocto"! and insert it to this script!')
         sys.exit()  
 
   
