@@ -71,15 +71,15 @@
 #03-09-2020 (Vers. 3.02)
 #  Fixed a bug with copying of the the "my folders"
 #
-# (2020-09-08) Vers. 3.03)
-#  Fixing a issue with non licence IP inside Quartus Prime projects   
-#
-# (2021-01-08) Vers. 3.04)
-#  Small bug fix
-#
+# (2021-02-09) Vers. 3.10
+#  Bug Fix with FPGA configuration generation with unlicensed IP
+#    projects
+#  New selection interface
+#  Console input arguments to allow to use a Yocto Project Linux
+#    Distribution or to auto generate the Linux Device Tree with  
+#  First full supported version for Intel Arria 10 SX SoC-FPGA
 
-version = "3.04"
-
+version = "3.10"
 
 #
 #
@@ -113,7 +113,7 @@ BOARD_FPGA_NAME = ['unknown','Intel Cyclone V','Intel Cyclone V','Intel Arria 10
 DEVICE_ID_LIST = [0,0,0,2,0]
 
 DEVICETREE_OUTPUT_NAME = ['','socfpga_cyclone5_socdk.dts','socfpga_cyclone5_socdk.dts', \
-                        '','socfpga_cyclone5_socdk.dts']
+                          'socfpga_arria10_socdk_sdmmc.dts','socfpga_cyclone5_socdk.dts']
 
 BOARD_SUFIX_BOARD  = ['','_nano','_std','_han','_de0']
 BOARD_SUFFIX_FPGA  = ['','_cy5','_cy5','_a10','_cy5']
@@ -140,6 +140,7 @@ import re
 from datetime import datetime
 from datetime import timedelta
 import xml.etree.ElementTree as ET
+import argparse
 
 #
 #
@@ -211,6 +212,196 @@ except ModuleNotFoundError as ex:
     from socfpgaPlatformGenerator  import SocfpgaPlatformGenerator
 
 
+#
+# @brief Print a selection table that allows user to choose a item
+# @param headline:        Main headline that will be displayed in the top of the box 
+# @param headline_table:  Headline of the table (column names)
+# @param raw1:            List of raw items of the column 1
+# @param raw1:            List of raw items of the column 2 (optional)
+# @param selectionMode:   Allow the user to select a item
+# @param line_offset:     Offset of a raw line
+# @return                 Selected item by the user (0 = Error)
+#
+def printSelectionTable(headline=[], headline_table=[], raw1=[], raw2=[],
+        selectionMode=False,line_offset=10):
+
+    singleRaw = True
+    if len(raw1)==0 or len(headline_table)==0:
+        return 0
+    if raw2=='': 
+        singleRaw = True
+    elif not len(raw2)==0:
+        singleRaw = False
+    if not singleRaw and len(headline_table)<1:
+        return 0
+
+    # Find longest sting in raws
+    max_raw_len =0
+    for raw1_it in raw1:
+        loc = len(raw1_it)
+        if loc > max_raw_len:
+            max_raw_len=loc
+
+    for head_it in headline_table:
+        loc = len(head_it)
+        if loc > max_raw_len:
+            max_raw_len=loc
+    
+    if not singleRaw:
+        for raw2_it in raw2:
+            loc = len(raw2_it)
+            if loc > max_raw_len:
+                max_raw_len=loc
+
+    max_raw_len+=line_offset
+
+    ### Print the top of the box
+    total_raw_len = max_raw_len
+    if not singleRaw:
+        total_raw_len *=2
+    total_raw_len+=10
+    filling='#'
+    print(' ')
+    for i in range(total_raw_len):
+        sys.stdout.write('#')
+    for i in range(total_raw_len-2):
+        filling+=' '
+    filling+='#'
+    line_sep = filling.replace(' ','-')
+    print('')
+
+    ### Print the headline 
+    if len(headline)>0:
+        for lin in headline:
+            lin2 =''
+            lin1 =''
+            if(len(lin)>total_raw_len-5):
+                lin1=lin[:total_raw_len-5]
+                lin2 = lin[total_raw_len-5:]
+            else:
+                lin1 = lin
+            print('# '+lin1.center(total_raw_len-3)+'#')
+            if lin2!='':
+                print('# '+lin2.center(total_raw_len-3)+'#')
+    print(filling)
+    print(line_sep)
+    ### Print the table headline 
+    sys.stdout.write('#  '+' No. '+' '.center(3)+'|')
+
+    sys.stdout.write(headline_table[0].center(max_raw_len-(3 if singleRaw else 2)))
+    if not singleRaw:
+        sys.stdout.write('|'+headline_table[1].center(max_raw_len-2)+'#')
+    else:
+        sys.stdout.write('#')
+    print('')
+
+    # Print a line seperator
+    line_sep = filling.replace(' ','-')
+    print(line_sep)
+
+    ### Print the content to the raws 
+    # Find the number of iteams
+    no_it = len(raw1)
+    if not singleRaw and len(raw2) > no_it:
+        no_it = len(raw2)
+    
+    # for loop for every raw
+    for i in range(no_it):
+        sys.stdout.write('# '+str(i+1).center(9)+'|')
+        if len(raw1)>=i:
+            item_len = len(raw1[i])+(3 if not singleRaw else 4)
+            sys.stdout.write(' '+raw1[i]+''.center(max_raw_len-item_len))
+            sys.stdout.write('|' if not singleRaw else '#')
+        else:
+            sys.stdout.write(''.center(max_raw_len-2)+'|')
+        if not singleRaw:
+            if   len(raw2)>=i:
+                item_len = len(raw2[i])+3
+                sys.stdout.write(' '+raw2[i]+' '.center(max_raw_len-item_len)+'#')
+            else:
+                sys.stdout.write(''.center(max_raw_len-2)+'#')
+        print('')
+    print(line_sep)
+    
+    # Print the selection interface
+    inp_val =0
+    if selectionMode:
+        st = '#   Select a item by typing a number (1-'+str(no_it)+') [q=Abort]'
+        sys.stdout.write(st+' '.center(total_raw_len-len(st)-1)+'#')
+        print('')
+        while True:
+            inp = input('#  Please input a number: $')
+
+            try:
+                inp_val = int(inp)
+            except Exception:
+                pass
+
+            if inp=='Q' or inp=='q':
+                print(' Aborting...')
+                sys.exit()
+            elif inp_val>0 and inp_val <(no_it+1):
+                st='# Your Selection: '+str(inp_val)
+                if len(raw1)>=inp_val-1:
+                    st='# Your Selection: '+str(inp_val)+'" : "'+raw1[inp_val-1]+'"'
+                elif len(raw2)>=inp_val-1:
+                    st='# Your Selection: '+str(inp_val)+'" : "'+raw2[inp_val-1]+'"'
+                sys.stdout.write(st+' '.center(total_raw_len-len(st)-1)+'#')
+                print('')
+                break
+            else:
+                st='# Wrong Input! Please try it agin!'
+                sys.stdout.write(st+' '.center(total_raw_len-len(st)-1)+'#')
+                print('')
+    ### Print the bottom of the box
+    print(filling)
+    for i in range(total_raw_len):
+        sys.stdout.write('#')
+    print('\n')
+
+    if selectionMode:
+        return inp_val
+    
+    return 1        
+
+#
+# @brief prase input arguments to enable to special modes 
+#
+def praseInputArgs():
+    ### Progress the user arguments 
+    arg_use_yocto_project           = False 
+    arg_use_devicetree_gen          = 0
+
+    # Was the script started with a additional argument specified?
+    if len(sys.argv)>1:
+        # Select the posibile input arguments 
+        parser = argparse.ArgumentParser()
+        parser.add_argument('-y','--yocto_linux', required=False, help='Use the Yocto Project zImage,rootfs files ["-y 1"]')
+        parser.add_argument('-g','--devicetree_gen', required=False, help='Use SoC EDS DeviceTree Generator '+\
+                            '["-g 1 --> no GUI | 2 --> GUI"]')
+
+        args = parser.parse_args()
+
+        # Was use Project Linux Distribution selected 
+        if args.yocto_linux != None:
+            try: tmp = int(args.yocto_linux)
+            except Exception:
+                print('ERROR: Failed to convert the [--yocto_linux/-y] input argument!')
+                print('       Only integer numbers allowed!')
+                sys.exit()
+            if tmp>0: arg_use_yocto_project=True
+        # Was use SoC EDS DeviceTree Generator selected 
+        if args.devicetree_gen != None:
+            try: tmp = int(args.devicetree_gen)
+            except Exception:
+                print('ERROR: Failed to convert the [--devicetree_gen/-g] input argument!')
+                print('       Only integer numbers allowed!')
+                sys.exit()
+            if tmp>0 and tmp<3: arg_use_devicetree_gen=tmp
+      
+    return arg_use_yocto_project, arg_use_devicetree_gen
+
+
 ############################################                                ############################################
 ############################################             MAIN               ############################################
 ############################################                                ############################################
@@ -254,33 +445,18 @@ if __name__ == '__main__':
         print('ERROR: This script can not run with root privileges!')
         sys.exit()
     
-    print('\n################################################################################')
-    print('#                                                                              #')
-    print('#                     SELECT YOUR DEVELOPMENT BOARD                            #')
-    print('#                                                                              #')
-    print('--------------------------------------------------------------------------------')
-    print('#                    1 -> DE10 Nano                                            #')
-    print('#                    2 -> DE10 Standard                                        #')
-    print('#                    3 -> HAN Pilot Arria 10                                   #')
-    print('#                    4 -> DE0 Nano SoC                                         #') 
-    print('#                    Q: Abort                                                  #')
-    print('------------------------------------------------------------------------------')
+     # Enable and read input arguments 
+    arg_use_yocto_project,arg_use_devicetree_gen = praseInputArgs()
 
-    while True:
-        __wait__ = input('Type anything to continue ... ')
+    headline = ['SELECT YOUR DEVELOPMENT BOARD']
+    headline_table=['Board Name']
+    headline_content= BOARD_NAME.copy()
+    headline_content.remove(' ')
+    BOARD_ID = printSelectionTable(headline,headline_table,headline_content,[],True,47)
 
-        if __wait__ =='q' or __wait__=='Q':
-            sys.exit()
-
-        try:
-            BOARD_ID = int(__wait__)
-        except Exception:
-            pass
-        
-        if BOARD_ID > 0 and BOARD_ID < 5:
-            break
-        print('#                      Unknown input please try again!                       #')
-        print('------------------------------------------------------------------------------')
+    if BOARD_ID > len(FOLDER_NAME_BOARD):
+        print('ERROR: The selected board number is outsite of the "FOLDER_NAME_BOARD" list!')
+        sys.exit()
 
     ######################################## Read the XML config file ##########################################
     print('\n---> Read the XML blueprint file ')
@@ -311,7 +487,7 @@ if __name__ == '__main__':
             print(' Msg.: '+str(ex))
             sys.exit()
 
-     # Convert new line feets 
+     # Convert new lines commands 
     description_txt = description_txt.replace('\\n','\r\n',1000)
     
     # Read the board items with the MAC-Address 
@@ -357,7 +533,7 @@ if __name__ == '__main__':
         now = datetime.now()
         nb = now.strftime("%Y%m%d_%H%M")
 
-    if not re.match("^[a-z0-9_.]+$", nb, re.I):
+    if not re.match("^[a-z0-9_]+$", nb, re.I):
         print('ERROR: The selected output file with the name:"rsYocto_'+nb+'"')
         print('        has caracters witch are not allowed!')
         sys.exit()
@@ -383,9 +559,7 @@ if __name__ == '__main__':
         print('*                     is for a diffrent FPGA Device!                           *')
         print('*    Generation of a new bootloader and FPGA configuration are not possible!   *')
         print('********************************************************************************\n')
-        _wait2__ = input('   Please type something to continue (q= Abort)...  ')
-        if _wait2__ == 'q' or _wait2__ == 'Q':
-            sys.exit()
+        sys.exit()
         proj_compet = False
         gen_boot = 3
 
@@ -393,12 +567,26 @@ if __name__ == '__main__':
         print('********************************************************************************')
         print('*                     Unlicensed IP inside project found!                      *')
         print('*                  Generation of ".rbf" file is not possible!                  *')
+        print('* You can still generate a bootable image by using a exiting FPGA conf. file.  *')
         print('********************************************************************************\n')
         _wait2__ = input('   Please type something to continue (q= Abort)...  ')
         if _wait2__ == 'q' or _wait2__ == 'Q':
             sys.exit()
         unlicensed_ip_found = True
 
+    ############################ Run the SoC-FPGA Platform Generator  ######################################
+    ext = os.getcwd()+'/'
+    if arg_use_devicetree_gen >0:
+        # if selected:
+        if not (socfpgaGenerator.RunDeviceTreeGenerator(ext + FOLDER_NAME_BOARD[BOARD_ID], \
+            'socfpga'+BOARD_SUFIX_BOARD[BOARD_ID]+'_reference.dts',arg_use_devicetree_gen==2)):
+            print('ERROR: Failed to run the SoC-EDS DeviceTree Generator!')
+        else: 
+            print('--> A new DeviceTree for reference was generated!')
+            print(' Dir: "'+ext + FOLDER_NAME_BOARD[BOARD_ID]+'/'+\
+                'socfpga'+BOARD_SUFIX_BOARD[BOARD_ID]+'_reference.dts"')
+        print(' End of script...')
+        sys.exit()
 
     # Create the partition table 
     if not socfpgaGenerator.GeneratePartitionTable():
@@ -457,39 +645,39 @@ if __name__ == '__main__':
                     "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'):
             fpgaboot_conf_default_dir= ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
                     "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'
-            print('     Name: socfpga'+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf')
+            print('     Name: "'+fpgaboot_conf_default_dir+'.rbf"')
     
         # 2. Look for the file inside the Device specific folder
         elif os.path.isfile(ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'):
             fpgaboot_conf_default_dir=ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     "socfpga"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'
-            print('     Name: socfpga'+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf')
+            print('     Name: "'+fpgaboot_conf_default_dir+'.rbf"')
           
         else:
             print('ERROR: It is no default u-boot FPGA configuration file (.rbf)'+\
                  'available for the board/device')
             sys.exit()
         
-        #### Find the FPGA configuration for Linux configuration file (rollback)  #######
+        #### Find the FPGA configuration for Linux configuration file   #######
         print('   Looking for the default Linux FPGA configuration file')
         
         # 1. Look for the file inside the Board specific folder
         if os.path.isfile(ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
-                    "socfpga_rollback"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'):
+                    "socfpga"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'):
             fpgalinux_conf_default_dir= ext + FOLDER_NAME_BOARD[BOARD_ID]+ '/' + \
                     "socfpga_rollback"+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf'
-            print('     Name: socfpga_rollback'+BOARD_SUFIX_BOARD[BOARD_ID]+'.rbf')
+            print('     Name: "'+fpgalinux_conf_default_dir+'.rbf"')
     
         # 2. Look for the file inside the Device specific folder
         elif os.path.isfile(ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     "socfpga_rollback"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'):
             fpgalinux_conf_default_dir=ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     "socfpga_rollback"+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf'
-            print('     Name: socfpga_rollback'+BOARD_SUFFIX_FPGA[BOARD_ID]+'.rbf')
+            print('     Name: "'+fpgalinux_conf_default_dir+'.rbf"')
           
         else:
-            print('\nNOTE: It is no default Linux rollback FPGA configuration file (.rbf)'+\
+            print('NOTE: It is no default Linux rollback FPGA configuration file (.rbf)'+\
                  'available for the board/device')
 
     #### Copy the rootfs.tar.gz  #######
@@ -580,12 +768,12 @@ if __name__ == '__main__':
             print('ERROR: Failed to copy file! MSG: '+str(ex))
             sys.exit()
     else:
-        print('\nNOTE: It is no network configuration file available for the board/device')
-    print('     =Done\n')
+        print('NOTE: It is no network configuration file available for the board/device')
+    print('     =Done')
         
     #################################  Add the MAC Address to the devicetree  #################################
     
-    print("\n--> Open the Device Tree File to insert the new MAC-Address")
+    print("--> Open the Device Tree File to insert the new MAC-Address")
     f3=open( socfpgaGenerator.Vfat_folder_dir+'/'+ \
          DEVICETREE_OUTPUT_NAME[BOARD_ID],'r+') 
     dtsraw=''
@@ -649,47 +837,42 @@ if __name__ == '__main__':
 
         print('     = MAC-Address is included in the Device Tree \n')
 
-     
     #########################################  Register partition files  #########################################
-    if not socfpgaGenerator.CopyLinuxFiles2Partition(2):
+    if not socfpgaGenerator.CopyLinuxFiles2Partition(0 if arg_use_yocto_project else 2 ):
         sys.exit()
 
     ###################################  Generate a FPGA boot configuration  #####################################
     # Generate the depending FPGA configuration file 
     #    specified inside the u-boot script
-
-    if  proj_compet and not unlicensed_ip_found:
+    if proj_compet and not unlicensed_ip_found:
         # Generate a new FPGA configuration for configuration during boot
         if not socfpgaGenerator.GenerateFPGAconf():
             sys.exit()
     else: 
         # Use the default FPGA configuration file
-        print('\nNOTE: Only the default FPGA configuration file will be used!')
-        if not socfpgaGenerator.GenerateFPGAconf(copy_file=True, \
-            dir2copy=fpgaboot_conf_default_dir,boot_linux=False, linux_filename='', linux_copydir=''):
+        print('NOTE: Only the default FPGA configuration file will be used!')
+        if not socfpgaGenerator.GenerateFPGAconf(True,fpgaboot_conf_default_dir):
             sys.exit()
 
     ###################################  Generate a rollback FPGA configuration  #####################################
     # Generate the depending FPGA configuration file 
-    
+
     if proj_compet and not unlicensed_ip_found:
         # Generate a new rollback FPGA configuration for configuration with Linux
-        print('--> Generate a new FPGA rollback configuration file')
         if not socfpgaGenerator.GenerateFPGAconf(boot_linux=True,\
                 linux_filename=ROOLBACK_FPGACONF_NAME,\
                 linux_copydir=ext):
             sys.exit()
     elif fpgalinux_conf_default_dir!='':
         # Is a default rollback FPGA configuration for configuration with Linux
-        print('\nNOTE: Only the default rollback FPGA configuration file will be used!')
         if not socfpgaGenerator.GenerateFPGAconf(True,fpgalinux_conf_default_dir,True,
                 linux_filename=ROOLBACK_FPGACONF_NAME,\
                 linux_copydir=ext):
                 # socfpgaGenerator.Ext_folder_dir+'/'+ROOLBACK_FPGACONF_DIR):
             sys.exit()
     else:
-        print('\nNOTE: No rollback FPGA configuration is used!')
-    
+        print('NOTE: No rollback FPGA configuration is used!')
+        sys.exit()
 
     ############################## Unzip all available archive files such as the rootfs ##############################
     if not socfpgaGenerator.ScanUnpackagePartitions():
@@ -698,38 +881,33 @@ if __name__ == '__main__':
 
     ##########################################     Allow user changes      ##########################################
     
-    print('\n#############################################################################')
-    print('#               Copy files to the "my_folders" the content                   #')
-    print('#            will then be copied to the depending rootfs location            #')
-    print('#                                                                            #')
-    print('#                                 ==========                                 #')
-    print('#                                                                            #')
-    print('#      Copy files to the partition folders to allow the pre-installment      #')
-    print('#                    to the depending image partition                        #')
-    print('#                                                                            #')
-    print('#                     === Folders for every partition ===                    #')
+    headline = [' Copy files to the "my_folders" the content',\
+        'These files will then be copied to the depending rootfs location','==========', \
+        'Copy files to the partition folders to allow the pre-installment',\
+        'to the depending image partition','Folders for every partition:']
+    headline_table=['(ID) Folder Name','Filesystem | Size ']
+    content1=[]
+    content2=[]
     for part in socfpgaGenerator.PartitionList:
-        print('# Folder: "'+IMAGE_FOLDER_NAME+'/'+part.giveWorkingFolderName(False)+'"| No.: '+ \
-                                str(part.id)+' Filesystem: '+part.type+' Size: '+str(part.size_str))
-    print('#                                                                            #')
-    print('#        C: Compress the output image as .zip                                #')
-    print('#        Q: Quit the script                                                  #')
-    print('#        Any other input: Continue with the script                           #')
-    print('#                                                                            #')
-    print('##############################################################################')
-    _wait_ = input('#              Please type ...                                               #\n')
-    
+        content1.append('('+str(part.id)+') '+IMAGE_FOLDER_NAME+'/'+part.giveWorkingFolderName(False))
+        content2.append(part.type+' | '+str(part.size_str))
+
+    printSelectionTable(headline,headline_table,content1,content2,False,10)
+
+    headline = [' Compress the output image file as ".zip"',\
+            'A zip files reduces the image file size by removing the offsets.',\
+            'Commen boot disk generation tools can directly work with these files.']
+    headline_table=['Task']
+    content1=['Compress the output image as ".zip"','Use only a regular ".img" file']
+
+    comprsSel= printSelectionTable(headline,headline_table,content1,[],True,32)
     compress_output = False
-    
-    if _wait_ == 'q' or _wait_ == 'Q':
-        sys.exit()
-    elif _wait_ =='C' or _wait_ =='c':
-        compress_output = True
+    if comprsSel==1:compress_output = True
     
     ################################################ ROOTFS Changes ################################################
 
     #############  Copy the content of the "my_folder"s to the rootfs  ###################
-    print('\n--> Copy the content of the "my_folders" to the rootfs ')
+    print('--> Copy the content of the "my_folders" to the rootfs ')
     
     ext_dir = socfpgaGenerator.Ext_folder_dir
     if not os.path.isdir(ext_dir):
@@ -753,7 +931,7 @@ if __name__ == '__main__':
                 print('WARNING: The folder "'+ext_dir+'/'+ MY_FOLDER_ROOTFS_DIR[i]+\
                     '" does not exist on the rootfs')
         else: 
-            print('\nNOTE: The folder "'+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+            print('NOTE: The folder "'+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     MY_FOLDER_NAME[i]+'" does not exist on the rootfs')
 
         # 2. Look for the files inside the Device specific folder
@@ -770,7 +948,7 @@ if __name__ == '__main__':
                 print('WARNING: The folder "'+ext_dir+'/'+ MY_FOLDER_ROOTFS_DIR[i]+\
                     '" does not exist on the rootfs')
         else: 
-            print('\nNOTE: The folder "'+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
+            print('NOTE: The folder "'+ext + FOLDER_NAME_SOCFPGA[BOARD_ID]+ '/' + \
                     MY_FOLDER_NAME[i]+'" does not exist on the rootfs')
 
     print('     =Done')       
@@ -843,15 +1021,14 @@ if __name__ == '__main__':
     
     ## Execute the python script "rootfsChange.py" to change the rootfs with root privileges
     if os.path.isfile(ext+'/rootfsChange.py'):
-        print('--> Start the rootfs change script with sudo rights\n')
+        print('--> Start the rootfs change script with sudo rights')
         try:
             os.system('sudo python3 '+ext+'/rootfsChange.py'+' -r '+ext_dir)
         except Exception as ex:
             print('ERROR: Failed execute the "rootfsChange.py" script! Msg.:'+str(ex))
             sys.exit()      
     else:
-        print('ERROR:The "rootfsChange.py" file is not available!')
-        print('      Please clone it from "https://github.com/robseb/rsyocto"! and insert it to this script!')
+        print('ERROR:The "rootfsChange.py" file is not available! Msg.:'+str(ex))
         sys.exit()  
 
   
@@ -865,7 +1042,7 @@ if __name__ == '__main__':
     path = os.getcwd()
 
 
-    print("\n--> Generating the boot splash screen\n")
+    print("--> Generating the boot splash screen")
     if os.path.isfile(ext+'/issue'):
         try:
             os.remove(ext+'/issue')
@@ -884,7 +1061,7 @@ if __name__ == '__main__':
         f.write("*                     ##    ##  ##    ##       ##    ##     ## ##    ##    ##    ##     ##               *\n")  
         f.write("*                     ##     ##  ######        ##     #######   ######     ##     #######                *\n") 
         f.write("*                                                                                                        *\n")
-        f.write("*                    --    Embedded Yocto based Linux System for Intel SoC-FPGAs          --             *\n")
+        f.write("*                    --    Embedded Yocto based Linux Distro for Intel SoC-FPGAs          --             *\n")
         f.write("*                    ---        created by Robin Sebastian (github.com/robseb)           ---             *\n")
         f.write("*                    ---                   Contact: git@robseb.de                        ---             *\n")
         f.write("**********************************************************************************************************\n")   
@@ -897,10 +1074,10 @@ if __name__ == '__main__':
         f.write("-- BOARD:         "+BOARD_NAME[BOARD_ID]+"\n")
         f.write('-- IMAGE:         "'+image_name+'"\n') 
         f.write('-- PACKING DATE:  '+str(now.strftime("%d.%m.%Y"))+"\n")
-        f.write('-- PROJECT NAME:  '+str(socfpgaGenerator.Qpf_file_name)+"\n")
+        f.write('-- FPGA PROJECT:  "'+socfpgaGenerator.Qpf_file_name+'"\n') 
+        f.write('--FOLDER NAME:    '+str(os.path.basename(path))+"\n")
         for x in description_txt:
             f.write(x)
-        f.write("\n")
         f.write("***********************************************************************************************************\n\n")   
 
     try:
@@ -915,31 +1092,25 @@ if __name__ == '__main__':
     ################################ Generate the bootable image file  ###################################
       
     # Generate with the files inside the partition folder a Image file
-    # Use a date code as an output file
+    # Use a date code as an output file or the user chosen file name 
     if not socfpgaGenerator.GenerateImageFile(image_name,zip_name,compress_output,True):
+        print('  Try to remove the "Image_partitions" folder and try it again!')
         sys.exit()
 
         
 ############################################################ Goodby screen  ###################################################
-    print('\n################################################################################')
-    print('#                                                                              #')
-    print('#                        GENERATION WAS SUCCESSFUL                             #')
-    print('# -----------------------------------------------------------------------------#')
-    print('#  Output file: "'+image_name+'" #')
+
+    headline = [' GENERATION WAS SUCCESSFUL','------------------------------------------------',\
+                'SUPPORT THE AUTHOR','------------------------------------------------',
+                'ROBIN SEBASTIAN','(https://github.com/robseb/)','git@robseb.de',' ',\
+                'rsyocto and socfpgaGenerator are projects, that I have fully on my own.',
+                'No companies are involved in these projects.','I am recently graduated as Master of Since of electronic engineering',\
+                'Please support me for further development']
+    headline_table=['Output']
+    content1=['           Output file: "'+image_name+'"']
     if compress_output:
-        print('#  Compressed Output file: "'+image_name+'" #')
-    print('#  Directory: "'+ext+'" #')                                                
-    print('#                                                                              #')
-    print('#                           SUPPORT THE AUTHOR                                 #')
-    print('#                                                                              #')
-    print('#                            ROBIN SEBASTIAN                                   #')
-    print('#                     (https://github.com/robseb/)                             #')
-    print('#                            git@robseb.de                                     #')
-    print('#                                                                              #')
-    print('#         rsyocto and socfpgaGenerator are projects, that I have fully         #')
-    print('#        developed on my own. No companies are involved in these projects.     #')
-    print('#        I am recently graduated as Master of Since of electronic engineering  #')
-    print('#                Please support me for further development                     #')
-    print('#                                                                              #')
-    print('################################################################################')
+        content1.append('Compressed Output file: "'+image_name+'"')
+    content1.append('             Directory: "'+ext+'"')
+
+    printSelectionTable(headline,headline_table,content1,[],False,32)
 # EOF
