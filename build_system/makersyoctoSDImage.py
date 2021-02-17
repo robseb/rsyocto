@@ -78,8 +78,12 @@
 #  Console input arguments to allow to use a Yocto Project Linux
 #    Distribution or to auto generate the Linux Device Tree with  
 #  First full supported version for Intel Arria 10 SX SoC-FPGA
+#
+# (2021-02-17) Vers. 3.11
+#  Small bug with the ".zip" archive file output name
+#
 
-version = "3.10"
+version = "3.11"
 
 #
 #
@@ -1109,7 +1113,7 @@ if __name__ == '__main__':
     headline_table=['Output']
     content1=['           Output file: "'+image_name+'"']
     if compress_output:
-        content1.append('Compressed Output file: "'+image_name+'"')
+        content1.append('Compressed Output file: "'+zip_name+'"')
     content1.append('             Directory: "'+ext+'"')
 
     printSelectionTable(headline,headline_table,content1,[],False,32)
