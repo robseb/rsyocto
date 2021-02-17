@@ -88,10 +88,16 @@ For generating a bootable *rsyocto* image for *Intel* SoC-FPGAs by executing a s
         chmod +x SoCEDSSetup-20.1.0.711-linux.run && ./SoCEDSSetup-20.1.0.711-linux.run
         ````
 * Install the required packages
-    ````shell
-    sudo apt-get update -y && sudo apt-get install -y bison flex libncurses-dev \
-         git device-tree-compiler  u-boot-tools
-    ````
+	* **For Ubuntu Linux** 	
+	````shell
+	sudo apt-get update -y && sudo apt-get install -y bison flex libncurses-dev \
+	git device-tree-compiler  u-boot-tools
+	````
+	* **For CentOS Linux** 	
+	````shell
+	sudo yum -y install git dtc uboot-tools
+	git device-tree-compiler  u-boot-tools
+	````
 * Download the "**rsyocto_SDxx-Folder**" from the "**releases Part**" of this Github repository
 * Unzip the folder and copy the internal folder **"socfpgaPlatformGenerator"** and copy it into your *Intel Quartus Prime* project
     * The project configurations will then be used to build the bootable image 
