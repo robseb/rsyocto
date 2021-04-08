@@ -33,7 +33,7 @@ During development, a major concern was placed on the integration of **powerful 
 
 *rsyocto* was designed with an automatically Python based `build system`. That generates an highly optimized **customize *rsyocto*-image** with the installment of users **private** **applications**,**boot configurations**,**scripts**,**FPGA configuration files, that will be configured on the FPGA Fabric before the Linux boots** and a lot more with a only Intel Quartus Prime FPGA project. This feature enables users, without the requirement of deep Linux knowledge, to design own *rsyocto* flavors with its own FPGA projects for complex Intel SoC-FPGAs. The `build system` generates the 3-stage bootloader, finds the right embedded Linux Distribution files, configures the partitions of the final image in the right way, configures the`OpenSSH Server` and automates a lot more with a one shell single command.    
 
-*rsyocto* is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C-, CAN-BUS,…**), **all Interfaces between hard processor system (HPS) and the FPGA Fabric**  and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for the development of industrial connected solutions. For instance, with a single command *rsyocto* is capable to **load a new FPGA configuration** (`FPGA Manager`) or to **read and write the AXI-Bridge Interface to the FPGA Fabric**. The Linux test commands allow in a simple fashion to communicate with the FPGA Fabric via all available interfaces, such as **Lightweight HPS-to-FPGA-** (`lwhps2fpga`) , **HPS-to-FPGA-Bridge**  (`hps2fpga`) , **shared-memory** (`hps2sdram`) or **general purpose signals** (`gpi` and `gpo`). Python- and C++- demo applications show a powerful way with a high throughput to interact with FPGA Soft-IP. 
+*rsyocto* is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C-, CAN-BUS,…**), **all Interfaces between hard processor system (HPS) and the FPGA Fabric**  and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for the development of industrial connected solutions. For instance, with a single command *rsyocto* is capable to **load a new FPGA configuration** (`FPGA Manager`) or to **read and write the ARM AXI-Bridge Interface to the FPGA Fabric**. The Linux test commands allow in a simple fashion to communicate with the FPGA Fabric via all available interfaces, such as **Lightweight HPS-to-FPGA-** (`lwhps2fpga`) , **HPS-to-FPGA-Bridge**  (`hps2fpga`) , **shared-memory** (`hps2sdram`) or **general purpose signals** (`gpi` and `gpo`). Python- and C++- demo applications show a powerful way with a high throughput to interact with FPGA Soft-IP. 
 
 
 The final *rsyocto*-Image can be **installed** on a **SD-Card** with any commonly **used Boot-Image creating tools**. Versions are available for the **Terasic DE10 Standard-** (Cyclone V SoC-FPGA), **Terasic DE10 Nano-** (Cyclone V SoC-FPGA), **Terasic Han Pilot** (Arria 10 SX SoC-FPGA) and **Terasic DE0-Nano SoC** (Cyclone V SoC-FPGA).
@@ -52,7 +52,7 @@ Within this repository I have also integrated a step by step guide to show my so
 
 **With my first versions I got only positive feedback from the community. However,...**
 
-**This project is by far not finished and issue free. I will continue my work and upload newer versions. I invite everybody to submit issues, comments and ideas.**
+**This project is by far not finished and issue free. I will continue my work and upload newer versions. I invite everybody to submit issues, comments and ideas and to support me in other ways...**
 
 <br>
 
@@ -73,16 +73,21 @@ ___
 * **Embedded Linux specially developed for Intel SoC-FPGAs**
     * **Linux Kernel 5.11** ([*Source*](https://github.com/altera-opensource/linux-socfpga/tree/socfpga-5.11))
 * Full **usage of the Dual-Core ARM (ARMv7-A) Cortex-A9** with
-	* The (*SIMD*) **NEON-Engine**
+	* The **ARM** (*SIMD*) **NEON-Engine**
 	* The **Vector Floating Point Unit (VFP)** 
 	* The **ARM Thumb-2 Instruction Set**
+    * The **ARM *PL390* Generic Interrupt Controller (GIC)** 
+    * The of the **ARM TrustZone** for ARMv7-A and **Arteris  FlexNoC** Network-on-Chip Interconnect for the *Intel Arria 10 SX*
     * The **ARM CoreSight Debug and Trace Engine** with *ARM Development Studio (DS-5)* support
+    * The **external memory interface controller** (EMIF) (SDRAM DDR3/DDR4 controller) of the *Intel Arria 10 SX* with **Early I/O Enabled** 
+    
 * For the best performance completely custom optimized 
 * **Console based** (**GUI less**) with `Busybox`
 * **Watchdog** timer is enabled    
 <br>
 
 * **FPGA Fabric configuration during the boot (*u-boot script*) and with a single Linux command**
+* **All Bridge Interfaces between the HPS and FPGA are tested, enabled and ready for use!**
 * **Tools to interact with the FPGA Fabric via the ARM AXI HPS-to-FPGA bridges**
 * **Access the FPGA Fabric with Shell scripts, C++-, Python-Applications or PHP or Django web applications**
 * **HPS Hard IP components (I²C-,SPI-, CAN-BUS or UART) are routed to FPGA I/O**
@@ -94,8 +99,10 @@ ___
 * Console memory dump tools (e.g. `devmem2`) 
 <br>
 
-* Ethernet with **dynamic and static iPv4** is supported
-* **SSH-Server** starts automatically
+* Full `Linux Network stack` with **dynamic and static iPv4** is supported
+* `OpenSSH-Server` starts automatically during boot and is configured for user authentications 
+*  UTC Time is synced during bootup with `htpdate` and a HTTP Time server
+*  A virtual software random number generator (**RNG**) is used (*This SoC-FPGAs have no build in TRNG.*)
 * `resolvconf` the  Linux DNS network tool is pre-installed 
 * **Pre-installed development tools and DevOps**
     * `gcc`compiler *9.3.0*
