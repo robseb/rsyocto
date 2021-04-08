@@ -50,7 +50,7 @@ After a hard time, I'm able to present this first working project. To get there,
 I think nearly everybody will have the same problems that I had during the development. For that reason, **I try to give everybody a solution for their rapid prototyping**.
 Within this repository I have also integrated a step by step guide to show my solution with the openEmbedded Yocto project and the *Intel SoC EDS*.
 
-**With my first versions I got only positive feedback from the community.However,...**
+**With my first versions I got only positive feedback from the community. However,...**
 
 **This project is by far not finished and issue free. I will continue my work and upload newer versions. I invite everybody to submit issues, comments and ideas.**
 
