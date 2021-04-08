@@ -57,12 +57,12 @@ Within this repository I have also integrated a step by step guide to show my so
 
 # System Overview of rsyocto
 
-![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/rsYoctoLayers.jpg?raw=true "System Overview")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.042/doc/symbols/rsYoctoLayers.jpg?raw=true "System Overview")
 ___
 
 **Build, debug and deploy your applications over the network**
 
-![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/rsYoctoInterfaces.jpg?raw=true "powerfully remote development IDEs")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.042/doc/symbols/rsYoctoInterfaces.jpg?raw=true "powerfully remote development IDEs")
 **Ready for powerful remote development IDEs and fitted with a Web server to host modern web applications**
 <br>
 <br>
@@ -167,16 +167,16 @@ ___
 | 3b | **Debugging C++ applications remotely** with **CMAKE** and *Microsoft Visual Studio Code* | [Step by step guide 2b](doc/guides/3_CPP_CMAKE.md) |
 | 4 | **Debugging Python applications remotely** | [Step by step guide 3](doc/guides/4_Python.md) |
 | 5 | **Analyzation of applications with ARM DS-5 Streamline** | [Step by step guide 4](doc/guides/5_Streamline.md) |
-| 6 | **Developing a custom FPGA configuration with Intel Quartus Prime**| [Step by step guide 5](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/6_newFPGAconf.md) |
+| 6 | **Developing a custom FPGA configuration with Intel Quartus Prime**| [Step by step guide 5](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/6_newFPGAconf.md) |
 <br>
 
 ### Customization Guides 
 
 | No. | Objective | Guide
 |:--|:--|:--|
-| 1 | **Designing of custom *rsyoto* versions** with your content and FPGA project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md)  |
-| 2 | **Install addional Packages** with `opkg`- and `pip3` package manager  | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md)  |
-| 2 | **Build your own custom Linux Distro for Intel SoC-FPGAs** with the Yocto Project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md)  |
+| 1 | **Designing of custom *rsyoto* versions** with your content and FPGA project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)  |
+| 2 | **Install addional Packages** with `opkg`- and `pip3` package manager  | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)  |
+| 2 | **Build your own custom Linux Distro for Intel SoC-FPGAs** with the Yocto Project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)  |
 <br>
 
 ### Application-specific Guides
@@ -187,7 +187,7 @@ ___
 | 2 | **Developing a Django web application for interacting with the FPGA Fabric** | [Guide](doc/appSpecificGuides/2_DjangoWebApps.md) |
 | 3 | **Writing a Linux Startup script** | [Guide](doc/appSpecificGuides/3_LinuxStartUpScript.md) |
 | 4 | **Examples of using *Microsoft Visual Studio*  for C++ development** | [Guide](https://github.com/robseb/LinuxVSCppFPGA) |
-| 5 | **Using the *Intel NIOS II* Processor, running FreeRTOS, to interact with HPS Hard-IP** | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/appSpecificGuides/4_NIOS2HPS.md) |
+| 5 | **Using the *Intel NIOS II* Processor, running FreeRTOS, to interact with HPS Hard-IP** | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/appSpecificGuides/4_NIOS2HPS.md) |
 <br>
 
 
@@ -232,14 +232,14 @@ With re-design of the bootflow of *Intel* SoC-FPGAs with the SoC EDS Version 19.
 <br>
 
 **My first approach to design this Linux Distribution** 
-![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsyocto required building steps")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.042/doc/symbols/rsYoctoRequieredBuildingSteps.jpg?raw=true "rsyocto required building steps")
 **Build Flow to create the first rsyocto version**
 <br>
 <br>
 
 # Build system for generation of custom rsyocto flavors
 
-![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/BuildSystem.jpg?raw=true "automatic rsyocto Build system")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.042/doc/symbols/BuildSystem.jpg?raw=true "automatic rsyocto Build system")
 **Block diagram of the fully automated build system to design new releases**
 <br>
 <br>
@@ -259,7 +259,7 @@ In the following table these three stages are visible. The stage one is on the l
 |:--|:--|:--|:--|
 | 1 | [LinuxBootImageFileGenerator](https://github.com/robseb/LinuxBootImageFileGenerator) |  Class to automatically generate a bootable Image file with a specifiable partition table | Image file for enabling booting for almost all embedded Linux distributions |
 | 2 | [socfpgaPlatformGenerator](https://github.com/robseb/socfpgaPlatformGenerator) |  Class to generate all necessary components for booting an embedded Linux on Intel (ALTERA) SoC-FPGAs to build the bootloader (u-boot) and bring all components to a bootable image | Image for booting any *Intel* SoC-FPGA |
-| 3 |[makersyoctoSDImage.py](https://github.com/robseb/rsyocto/tree/rsYocto-1.04/build_system) | Python script to generate a custom *rsyocto* version with for instance *rootfs* changes (*SSH configuration*) | Image with a custom *rsyocto* flavor |
+| 3 |[makersyoctoSDImage.py](https://github.com/robseb/rsyocto/tree/rsYocto-1.042/build_system) | Python script to generate a custom *rsyocto* version with for instance *rootfs* changes (*SSH configuration*) | Image with a custom *rsyocto* flavor |
 
 <br>
 
@@ -270,8 +270,7 @@ As described, I attach great importance to easy-to-use and powerful Integrated d
 For the Linux Desktop application development, I used following approach for my project:
 
 
-
-![Alt text](\doc\symbols\EmbeddedNativDevApproch.jpg)
+![Alt text](https://github.com/robseb/rsyocto/blob/rsYocto-1.0422/doc/symbols/EmbeddedNativDevApproch.jpg)
 **My pre-configured and preferred Linux application development approach for C++,Python and Web**
 
 
@@ -304,7 +303,7 @@ I wrote [Python Script](https://github.com/robseb/NIOSII_EclipseCompProject) to 
 
 Currently I am working on a Windows 10 .net Desktop application to manage FPGA configurations and to allow to record data via the network. To release that I will design a server task, running on *rsyocto*, that can send python- or C++-values with TCP to the desktop. The following screenshot shows the development state of this project.
 
-![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/destopSoftwareAlphaState.jpg?raw=true "rsyocto required building steps")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.042/doc/symbols/destopSoftwareAlphaState.jpg?raw=true "rsyocto required building steps")
 
 <br>
 
