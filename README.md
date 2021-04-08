@@ -270,7 +270,7 @@ As described, I attach great importance to easy-to-use and powerful Integrated d
 For the Linux Desktop application development, I used following approach for my project:
 
 
-![Alt text](https://github.com/robseb/rsyocto/blob/rsYocto-1.0422/doc/symbols/EmbeddedNativDevApproch.jpg)
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.042/doc/symbols/EmbeddedNativDevApproch.jpg)
 **My pre-configured and preferred Linux application development approach for C++,Python and Web**
 
 
