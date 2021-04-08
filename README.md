@@ -21,29 +21,35 @@
 
 ___
 
-*rsyocto* implements a **modern Linux Kernel (linux-socfpga 5.7)** and brings a set of today fundamentally needed components to **Intel SoC-FPGAs** and helps to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- or deep learning applications.
 
-To realize that **Python3** with the Python Package manager **pip (PyPI)** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsyocto* is for its best optimization complete console based, but the Apache Webserver can bring any GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface. For that the Python Web framework **Django 3.0** with the **AdminLTE** Dashboard is pre-installed.
+`I'm working on the new rsyocto release! This branch bis work under process! Please use the MASTER branch!`
 
-During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsyocto* applications and parts can be **build, deployed and even debugged over the network** (fully rootable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* a simple installment and quick jump start in the development process is possible, because all required compilers run directly on *rsyocto*.
 
-It is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C-, CAN-BUS,…**) and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for the development of industrial connected solutions. With a single command *rsyocto* is capable to **load a new FPGA configuration** or to **read and write the AXI-Bridge Interface to the FPGA fabric**. The Linux test commands allow in a simple fashion to communicate with the FPGA fabric via all available interfaces, such as **Lightweight HPS-to-FPGA-**, **HPS-to-FPGA-Bridge**, **shared-memory** or **general purpose signals** (*gpi* and *gpo*). Python- and C++- demo applications show a powerful way with a high throughput. 
+*rsyocto* implements a **modern Linux Kernel (linux-socfpga 5.10)** and brings a set of today fundamentally needed components to **Intel SoC-FPGAs** to helps to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- (IoT), automotive- and deep learning (AI) accelerator- applications.
 
-*rsyocto* was designed with an automatically Python based build system. That generates an entirely requirement optimized **customize *rsyocto*-image** with the installment of users own **applications**,**boot configurations**,**scripts**,**FPGA configuration files, that will be configured on the FPGA fabric before the Linux boots** and a lot more. 
+To realize that **Python3** with the Python Package manager **pip (PyPI)** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsyocto* is for its best optimization complete console based, but the Apache Webserver can bring any modern GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface. For that the Python Web framework **Django 3.0** is pre-installed.
 
-The final *rsyocto*-Image can be **installed** on a **SD-Card** with any commonly **used Boot-Image creating tools**. Versions are available for the **Terasic DE10 Standard-** (Cyclone V), **Terasic DE10 Nano-** (Cyclone V), **Terasic Han Pilot** (Arria 10) and **Terasic DE0-Nano SoC** (Cyclone V).
+During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsyocto* applications and parts can be **build, deployed and even debugged over the network** (fully rootable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* a simple installment and quick jump start in the development process is possible, because all required compilers run directly on *rsyocto*. The custom developed build system goes even a step further. 
+
+*rsyocto* was designed with an automatically Python based `build system`. That generates an entirely requirement optimized **customize *rsyocto*-image** with the installment of users own **applications**,**boot configurations**,**scripts**,**FPGA configuration files, that will be configured on the FPGA Fabric before the Linux boots** and a lot more with a Intel Quartus Prime FPGA project. This feature enables users, without the requirement of deep Linux knowledge, to design own *rsyocto* flavors with its own FPGA projects for complex Intel SoC-FPGAs.
+
+It is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C-, CAN-BUS,…**), all Interfaces between hard processor system (HPS) and the FPGA Fabric  and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for the development of industrial connected solutions. With a single command *rsyocto* is capable to **load a new FPGA configuration** (`FPGA Manager`) or to **read and write the AXI-Bridge Interface to the FPGA Fabric**. The Linux test commands allow in a simple fashion to communicate with the FPGA Fabric via all available interfaces, such as **Lightweight HPS-to-FPGA-** (`lwhps2fpga`) , **HPS-to-FPGA-Bridge**  (`hps2fpga`) , **shared-memory** (`hps2sdram`) or **general purpose signals** (`gpi` and `gpo`). Python- and C++- demo applications show a powerful way with a high throughput to interact with FPGA Soft-IP. 
+
+
+The final *rsyocto*-Image can be **installed** on a **SD-Card** with any commonly **used Boot-Image creating tools**. Versions are available for the **Terasic DE10 Standard-** (Cyclone V SoC-FPGA), **Terasic DE10 Nano-** (Cyclone V SoC-FPGA), **Terasic Han Pilot** (Arria 10 SX SoC-FPGA) and **Terasic DE0-Nano SoC** (Cyclone V SoC-FPGA).
 
 On the Terasic DE10 Nano board the **Arduino Uno header** can be used to connect external devices to a Hard-IP Bus, because the HPS interfaces with the pre-installed configuration are routed to FPGA I/O-Pins. An example shows how to use *rsyocto*, the **FPGA-to-HPS-Bridge** to access Hard-IP of the HPS with a **NIOS II Soft-Core Processor** running **FreeRTOS**. **NIOS II Eclipse platforms** can also be generated automatically.
 
 <br>
-I noticed that right now only desktop Linux systems, like Ubuntu, are available for free. In my opinion they are not designed for embedded SoC-FPGAs and therefore, they cannot be considered for long-term embedded systems.
+I noticed that right now only desktop Linux systems, like *Ubuntu*, are available for *free*. In my opinion they are not designed for embedded SoC-FPGAs and therefore, they cannot be considered for long-term embedded systems.
 
 That was for me the starting point to try to develop my own fully optimized Linux distribution. Shortly after, I announced that the *Intel* development tools and documentations for HPS development are not nearly as good as those for the FPGA part. At the beginning it was really complicated to get anything running. 
-After a hard time, I'm able to present this first working project. To get there, **I designed my own built flow with my own scripts**.
+After a hard time, I'm able to present this first working project. To get there, **I had to develop my own approach that I think is the best for embedded use-case by designing my own build flow with my own Python scripts**.
 
 I think nearly everybody will have the same problems that I had during the development. For that reason, **I try to give everybody a solution for their rapid prototyping**.
-Within this repository I have also integrated a step by step guide to show my solution with the Yocto project and the *Intel SoC EDS*.
+Within this repository I have also integrated a step by step guide to show my solution with the openEmbedded Yocto project and the *Intel SoC EDS*.
 
+**With my first versions I got only positive feedback from the community.However,...**
 **This project is by far not finished and issue free. I will continue my work and upload newer versions. I invite everybody to submit issues, comments and ideas.**
 
 <br>
@@ -62,50 +68,60 @@ ___
 <br>
 
 # Key Advantages
-
 * **Embedded Linux specially developed for Intel SoC-FPGAs**
-* Full **usage of the Dual-Core ARM Cortex A9** with
-	* the **NEON-Engine**
-	* the **Vector Floating Point Unit (VFP)** 
-	* the **Thumb-2 Instruction Set**
-    * the **ARM CoreSight Debugging engine** 
+    * **Linux Kernel 5.11** ([*Source*](https://github.com/altera-opensource/linux-socfpga/tree/socfpga-5.11))
+* Full **usage of the Dual-Core ARM (ARMv7-A) Cortex-A9** with
+	* The (*SIMD *) **NEON-Engine**
+	* The **Vector Floating Point Unit (VFP)** 
+	* The **ARM Thumb-2 Instruction Set**
+    * The **ARM CoreSight Debug and Trace Engine** with *ARM Development Studio (DS-5)* support
 * For the best performance completely custom optimized 
 * **Console based** (**GUI less**) with `Busybox`
 * **Watchdog** timer is enabled    
 <br>
 
-* **FPGA fabric configuration during the boot and with a single Linux command**
-* **Tools to interact with the FPGA fabric via the HPS to FPGA bridges**
-* **Access the FPGA fabric with Shell scripts, C++-, Python-Applications or PHP or Django web applications**
+* **FPGA Fabric configuration during the boot (*u-boot script*) and with a single Linux command**
+* **Tools to interact with the FPGA Fabric via the ARM AXI HPS-to-FPGA bridges**
+* **Access the FPGA Fabric with Shell scripts, C++-, Python-Applications or PHP or Django web applications**
 * **HPS Hard IP components (I²C-,SPI-, CAN-BUS or UART) are routed to FPGA I/O**
 	* Ready for connecting different devices 
 		* e.g. **Arduino Uno shields**
-* **Accelerometer** and **ADC** can be accessed via Python or C++ (*Demos available*)
+* **Accelerometer** and **ADC** can be accessed via Python or C++ (*Demos available*) (*only for the Cyclone V boards*)
+* `socketCAN` pre-installed and pre-configured (*examples available!*) (*Only for Cyclone V SoC-FPGAs*)
 * Console based Bus test tools (e.g. `can-utils`)
-* Console memory dump tools (e.g. `devmem2`)
+* Console memory dump tools (e.g. `devmem2`) 
 <br>
 
 * Ethernet with **dynamic and static iPv4** is supported
 * **SSH-Server** starts automatically
 * `resolvconf` the  Linux DNS network tool is pre-installed 
+* **Pre-installed development tools and DevOps**
+    * `gcc`compiler *9.3.0*
+    * `glibc` and `glib-2.0`(*The GNU C Library*)
+    * `cmake` *3.16.5* 
+    * `python 3.8`
+    *  `python3-dev` and `python-dev`
+    * `git` *2.31*, `wget` *1.20.3*, `curl` *7.69.1* 
+    
 * **Support for remote based development IDEs pre-installed**
 	* *Visual Studio Code* for **remote python debugging**
-	* *Visual Studio* for **remote C++ debugging*** 
-    * *ARM DS-5 Studio* for **remote- and JTAG- C++ debugging**  
+	* *Visual Studio* for **remote C++ debugging**
+    * *Visual Studio Code* for **remote C++ debugging** with `cmake` 
+    * *ARM Development Studio (DS-5)* for **remote- (Ethernet) and JTAG- C++ debugging**  
 • `gcc-compiler` and `gdb-server`
-* **ARM DS-5 Streamline** is pre-installed and immediately is after start ready for **trace analysis**
-* The ["NIOSII_EclipseCompProject](https://github.com/robseb/NIOSII_EclipseCompProject)" can generate custom **Eclipse for NIOS II** projects with for instance a real-time operating system **FreeRTOS**
+* **ARM Development Studio (DS-5) Streamline** is pre-installed and immediately is after start ready for **trace analysis**
+* The ["NIOSII_EclipseCompProject](https://github.com/robseb/NIOSII_EclipseCompProject)" can generate custom **Eclipse for NIOS II** projects with for instance the real-time operating system (*RTOS*) **FreeRTOS**
 <br>
 
-* **`Python3`**,**`Python3-dev`**
+* **`Python`**,**`Python3`**
 * `Apache` webserver with `PHP` and `SQLite`
+* `git`,`curl` and `wget` **download manager**
 * **Latest `Django` version is pre-installed for Python-based web framework development**
-* **The `adminLTE` web dashboard can bring modern complex web applications to SoC-FPGAs** ([example](https://adminlte.io/themes/dev/AdminLTE/index.html))
 <br>
 
-* `git`,`curl` and `wget` **download manager**
 * **Full integrated python `pip3` (*python-pip*) package manager**
-* `opkg` **package manager** 
+* `opkg` **package manager** *0.4.2* 
+
 <br>
 
 * **Custom designed `Build System` to generate the entire bootflow for Intel SoC-FPGAs automatically**
@@ -132,10 +148,10 @@ ___
 <br>
 
 * **Full supported boards**
-	* **Terasic DE10-Standard** (Intel Cyclone V)
-	* **Terasic DE10-Nano** (Intel Cyclone V)
-    * **Terasic DE0-Nano SoC Kit *(Atlas-SoC Kit)*** (Intel Cyclone V)
-	* **Terasic HAN-Pilot** (Intel Arria 10 SX)
+	* **Terasic DE10-Standard** (Intel Cyclone V SoC-FPGA)
+	* **Terasic DE10-Nano** (Intel Cyclone V SoC-FPGA)
+    * **Terasic DE0-Nano SoC Kit *(Atlas-SoC Kit)*** (Intel Cyclone V SoC-FPGA)
+	* **Terasic HAN-Pilot** (Intel Arria 10 SX SoC-FPGA)
 
 <br>
 
@@ -146,8 +162,9 @@ ___
 | Level | Objective | Guide
 |:--|:--|:--|
 | 1 | **Booting *rsyocto* on your Board** | [**Getting started Guide**](doc/guides/1_Booting.md) |
-| 2 | **Use of Hard IP, FPGA-IP and configuration of the FPGA fabric** |[Step by step guide 1](doc/guides/2_FPGA_HARDIP.md) |
-| 3 | **Debugging C++ applications remotely** | [Step by step guide 2](doc/guides/3_CPP.md) |
+| 2 | **Use of Hard IP, FPGA-IP and configuration of the FPGA Fabric** |[Step by step guide 1](doc/guides/2_FPGA_HARDIP.md) |
+| 3a | **Debugging C++ applications remotely** with *Microsoft Visual Studio* | [Step by step guide 2a](doc/guides/3_CPP.md) |
+| 3b | **Debugging C++ applications remotely** with **CMAKE** and *Microsoft Visual Studio Code* | [Step by step guide 2b](doc/guides/3_CPP_CMAKE.md) |
 | 4 | **Debugging Python applications remotely** | [Step by step guide 3](doc/guides/4_Python.md) |
 | 5 | **Analyzation of applications with ARM DS-5 Streamline** | [Step by step guide 4](doc/guides/5_Streamline.md) |
 | 6 | **Developing a custom FPGA configuration with Intel Quartus Prime**| [Step by step guide 5](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/6_newFPGAconf.md) |
@@ -157,7 +174,9 @@ ___
 
 | No. | Objective | Guide
 |:--|:--|:--|
-| 1 | **Designing of custom *rsyoto* versions** | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md)  |
+| 1 | **Designing of custom *rsyoto* versions** with your content and FPGA project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md)  |
+| 2 | **Install addional Packages** with `opkg`- and `pip3` package manager  | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md)  |
+| 2 | **Build your own custom Linux Distro for Intel SoC-FPGAs** with the Yocto Project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/guides/7_customVersions.md)  |
 <br>
 
 ### Application-specific Guides
@@ -165,7 +184,7 @@ ___
 | No. | Objective | Guide
 |:--|:--|:--|
 | 1 | **Transmitting CAN-Bus packages with Python** | [Guide](doc/appSpecificGuides/1_TransmittingCAN.md) |
-| 2 | **Developing a Django web application for interacting with the FPGA fabric** | [Guide](doc/appSpecificGuides/2_DjangoWebApps.md) |
+| 2 | **Developing a Django web application for interacting with the FPGA Fabric** | [Guide](doc/appSpecificGuides/2_DjangoWebApps.md) |
 | 3 | **Writing a Linux Startup script** | [Guide](doc/appSpecificGuides/3_LinuxStartUpScript.md) |
 | 4 | **Examples of using *Microsoft Visual Studio*  for C++ development** | [Guide](https://github.com/robseb/LinuxVSCppFPGA) |
 | 5 | **Using the *Intel NIOS II* Processor, running FreeRTOS, to interact with HPS Hard-IP** | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.04/doc/appSpecificGuides/4_NIOS2HPS.md) |
@@ -180,7 +199,11 @@ ___
 |  `examples/python` | *rsyocto* Python examples |
 |  `build_system` | *rsyocto* build scripts |
 
-The final *rsyocto* Versions are available inside the **packages-Part of this repository**!
+The **C++-Demo Project** for *Microsoft Visual Studio* are available [here](https://github.com/robseb/LinuxVSCppFPGA).
+
+The final *rsyocto* boot images (*img*) are available inside the **packages-Part of this repository**!
+
+
 
 # Built With / Credits & Contribution
 * [Intel SoC FPGA Embedded Development Suite (EDS) 20.1](https://www.intel.com/content/www/us/en/software/programmable/soc-eds/overview.html) - Linux
@@ -205,7 +228,7 @@ The first version of *rsyocto* (*release december of 2019*) was developed with t
 By default the specifications of these two development tools are not compatible to each other. To handle this issue **I designed a custom build flow to progress the output Linux files of the Yocto project and to create all necessary boot stages**. 
 
 This build system consists of an Ubuntu Linux and a *CentOS* Linux part. On *CentOS* was an *Altera* script used to generate the boot images. 
-With re-design of the bootflow of *Intel* SoC-FPGAs with the SoC EDS Version 19.1 it was essential for me to design an new build system that can run on a single development computer (Ubuntu Linux or *CentOS*) and generate all required bootloaders fully automatically. 
+With re-design of the bootflow of *Intel* SoC-FPGAs with the SoC EDS Version 19.1 it was essential for me to design an new build system that can run on a single development computer (Ubuntu Linux or *CentOS*) and generate all required bootloaders fully automatically. **My implementation has the big benefit, that it enables the generation of complete custom Linux versions with own FPGA Projects by just running a Python script. A deep Linux knowledge is for this process not required.**  
 <br>
 
 **My first approach to design this Linux Distribution** 
@@ -222,12 +245,12 @@ With re-design of the bootflow of *Intel* SoC-FPGAs with the SoC EDS Version 19.
 <br>
 
 This illustration shows my new development procedure and the required complexity to create *rsyocto*. **I entirely automated the required complex bootflow** to generate with a *Intel Quartus Prime* FPGA project and Linux Distribution files (*e.g. zImage,rootfs,...*) a bootable image file (*.img*). 
-The script uses the **Intel Embedded Development Suite (SoC EDS)** in version **20.1** (*2020*) to design the necessary bootloader based on the project settings.
-**It was designed to allow a high optimization of all components**, such as the *u-boot* boot script or the Linux device tree. With this project I want to give other developers a full-functional system to reduce their development effort.
+The script uses the **Intel Embedded Development Suite (SoC EDS)** in version **20.1** (*2020*) to design the necessary bootloaders based on the project settings for an Intel Cyclone V- and Intel Arria 10 SX SoC-FPGA.
+**It was designed to allow a high optimization of all components**, such as the *u-boot* boot script or the Linux device tree. With this project I want to give other developers a full-functional system to reduce their development effort. 
 
-For designing custom *rsyocto* Versions it is only necessary to copy the `"socfpgaPlatformGenerator"`- Folder (available inside Repository's Releases part) into a Quartus Prime FPGA project folder. The included Python script can then generate the entire platform and can output a shareable and a bootable image file ("*.img").
+For designing custom *rsyocto* Versions it is only necessary to copy the `"socfpgaPlatformGenerator"`- Folder (available inside Repository's Releases part) into a Quartus Prime FPGA project folder. The included Python script can then generate the entire platform and can output a shareable and a bootable image file ("*.img").Be the way, it is also possible to use this script with your own Linux Distribution files as I show later.
 
-My build flow consists of three stages to allow the usage for other embedded Linux platforms or with different embedded Linux Distributions.
+My build flow consists of three stages to enable the support for other embedded Linux platforms or with different embedded Linux Distributions.
 In the following table these three stages are visible. The stage one is on the lowest level and its classes will be used by the next stage.
 <br>
 
@@ -241,9 +264,27 @@ In the following table these three stages are visible. The stage one is on the l
 <br>
 
 
+# Embedded native remote development environment
+
+As described, I attach great importance to easy-to-use and powerful Integrated development environments (**IDE**) for the Linux application development, due to the fact that the requirement and complexity of embedded applications grows exponentially year after year and the only way to counter act this trend are simple to install and use IDEs. On the Linux generation site, I could simplify the complex multi-stage bootloader and Linux generation process with my Python scripts and pre-installed Bus-tools and the ARM Development (DS-5) Studio integration can help with hardware-level development and trace debugging. 
+For the Linux Desktop application development, I used following approach for my project:
+
+
+
+![Alt text](\doc\symbols\EmbeddedNativDevApproch.jpg)
+**My pre-configured and preferred Linux application development approach for C++,Python and Web**
+
+
+This replaces the complex *Eclipse*- and *Visual Studio* IDEs and annoys all essential components on the embedded Linux itself.
+In this concept the development projects are located for the best code tracking inside a *git*- (*GitHub* or *GitLab*) repository. This repo can be directly cloned to the *rootfs* of the embedded Linux via a secure shell (**SSH**) interface over the network. A developer can use other SSH connection to its development machine. The development machine can be any computer that runs the compact code editor *Microsoft Visual Studio Code Insider*.  The *Microsoft Visual Studio Code Insider* version allows the remote connection to an embedded ARMv7-A and ARMv8-A Linux distributions, such as *rsyocto*. Via SSH established *VS Code* a connection to the `Linux Shell` of embedded Linux and via **SFTP** it is enabled to access the `root file system` (*rootfs*). The code editor uses the exiting development tools on the target platform, such as the `native gcc-complier` or `Python` for the application engineering and debugging (e.g. `gdb-server`). A difficult to install and configure cross-complier or python framework is on the development machine not required, because everything runs directly natively on the development board. This makes the complex design and usage of a `Linux Framework` for this Linux Distribution unnecessary, due to the fact that the source code runs directly on the right location and can access all interfaces, files and libraries natively. This brings a high optimization in terms of feature usage of *rsyocto* and it can help to reduce the code size. *VS Code* and *rsyocto* enables in this way to develop *Python*, *PHP*, *HTML*,*CSS*,*C++* with `cmake` and a lot more. I wrote for these use cases examples. The ARMv7-A CPU of the *Intel Cyclone V-* and *Intel Arria 10 SX-* SoC-FPGA-devices are more than powerful enough to notice no major difference between cross-compilation- and native compilation-time. For cloning a *git* repo is only some user space on the *rootfs* required.
+
+
+<br>
+
+
 ### How to get started with the Yocto Project for Intel SoC-FPGAs?
 Inside my [`meta-intelfpga` BSP layer](https://github.com/robseb/meta-intelfpga) I described in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
-Also I published inside this layer the source code and documentation to bring **tools to update the FPGA configuration with the running Linux and to interact with simple commands with the FPGA fabric** to the Yocto Project.
+Also I published inside this layer the source code and documentation to bring **tools to update the FPGA configuration with the running Linux and to interact with simple commands with the FPGA Fabric** to the Yocto Project.
 
 ### How to import Python pip (*python-pip*) packages or setup scripts with the Yocto Project
 I designed a simple python script to pre-install Python pip (PyPI)- Packages within a final Yocto Project Linux Image (see [here](https://github.com/robseb/PiP2Bitbake).
@@ -256,6 +297,7 @@ I wrote [Python Script](https://github.com/robseb/NIOSII_EclipseCompProject) to 
 
 <br>
 
+
 # Continuation
 
 **I will continue my work and upload newer versions. I invite everybody to submit issues, comments and ideas.**
@@ -263,7 +305,6 @@ I wrote [Python Script](https://github.com/robseb/NIOSII_EclipseCompProject) to 
 Currently I am working on a Windows 10 .net Desktop application to manage FPGA configurations and to allow to record data via the network. To release that I will design a server task, running on *rsyocto*, that can send python- or C++-values with TCP to the desktop. The following screenshot shows the development state of this project.
 
 ![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/destopSoftwareAlphaState.jpg?raw=true "rsyocto required building steps")
-
 
 <br>
 
