@@ -41,6 +41,7 @@ The final *rsyocto*-Image can be **installed** on a **SD-Card** with any commonl
 On the Terasic DE10 Nano board the **Arduino Uno header** can be used to connect external devices to a Hard-IP Bus, because the HPS interfaces with the pre-installed configuration are routed to FPGA I/O-Pins. An example shows how to use *rsyocto*, the **FPGA-to-HPS-Bridge** to access Hard-IP of the HPS with a **NIOS II Soft-Core Processor** running **FreeRTOS**. **NIOS II Eclipse platforms** can also be generated automatically.
 
 <br>
+
 I noticed that right now only desktop Linux systems, like *Ubuntu*, are available for *free*. In my opinion they are not designed for embedded SoC-FPGAs and therefore, they cannot be considered for long-term embedded systems.
 
 That was for me the starting point to try to develop my own fully optimized Linux distribution. Shortly after, I announced that the *Intel* development tools and documentations for HPS development are not nearly as good as those for the FPGA part. At the beginning it was really complicated to get anything running. 
@@ -50,6 +51,7 @@ I think nearly everybody will have the same problems that I had during the devel
 Within this repository I have also integrated a step by step guide to show my solution with the openEmbedded Yocto project and the *Intel SoC EDS*.
 
 **With my first versions I got only positive feedback from the community.However,...**
+
 **This project is by far not finished and issue free. I will continue my work and upload newer versions. I invite everybody to submit issues, comments and ideas.**
 
 <br>
@@ -71,7 +73,7 @@ ___
 * **Embedded Linux specially developed for Intel SoC-FPGAs**
     * **Linux Kernel 5.11** ([*Source*](https://github.com/altera-opensource/linux-socfpga/tree/socfpga-5.11))
 * Full **usage of the Dual-Core ARM (ARMv7-A) Cortex-A9** with
-	* The (*SIMD *) **NEON-Engine**
+	* The (*SIMD*) **NEON-Engine**
 	* The **Vector Floating Point Unit (VFP)** 
 	* The **ARM Thumb-2 Instruction Set**
     * The **ARM CoreSight Debug and Trace Engine** with *ARM Development Studio (DS-5)* support
