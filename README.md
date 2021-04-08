@@ -31,7 +31,7 @@ To realize that **Python3** with the Python Package manager **pip (PyPI)** and t
 
 During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsyocto* applications and parts can be **build, deployed and even debugged over the network** (fully rootable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* a simple installment and quick jump start in the development process is possible, because all required compilers run directly on *rsyocto*. The custom developed build system goes even a step further. 
 
-*rsyocto* was designed with an automatically Python based `build system`. That generates an entirely requirement optimized **customize *rsyocto*-image** with the installment of users own **applications**,**boot configurations**,**scripts**,**FPGA configuration files, that will be configured on the FPGA Fabric before the Linux boots** and a lot more with a Intel Quartus Prime FPGA project. This feature enables users, without the requirement of deep Linux knowledge, to design own *rsyocto* flavors with its own FPGA projects for complex Intel SoC-FPGAs.
+*rsyocto* was designed with an automatically Python based `build system`. That generates an highly optimized **customize *rsyocto*-image** with the installment of users **private** **applications**,**boot configurations**,**scripts**,**FPGA configuration files, that will be configured on the FPGA Fabric before the Linux boots** and a lot more with a single Intel Quartus Prime FPGA project. This feature enables users, without the requirement of deep Linux knowledge, to design own *rsyocto* flavors with its own FPGA projects for complex Intel SoC-FPGAs. The `build system` generates the 3-stage bootloader, finds the right embedded Linux Distribution files, configures the partitions of the final image in the right way, configures the`OpenSSH Server` and lot more with a single command.    
 
 It is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C-, CAN-BUS,…**), all Interfaces between hard processor system (HPS) and the FPGA Fabric  and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for the development of industrial connected solutions. With a single command *rsyocto* is capable to **load a new FPGA configuration** (`FPGA Manager`) or to **read and write the AXI-Bridge Interface to the FPGA Fabric**. The Linux test commands allow in a simple fashion to communicate with the FPGA Fabric via all available interfaces, such as **Lightweight HPS-to-FPGA-** (`lwhps2fpga`) , **HPS-to-FPGA-Bridge**  (`hps2fpga`) , **shared-memory** (`hps2sdram`) or **general purpose signals** (`gpi` and `gpo`). Python- and C++- demo applications show a powerful way with a high throughput to interact with FPGA Soft-IP. 
 
@@ -290,22 +290,21 @@ A difficult to install and configure cross-complier or python framework is on th
 
 <br>
 
+# Q&A
+
 
 ### How to get started with the Yocto Project for Intel SoC-FPGAs?
 Inside my [`meta-intelfpga` BSP layer](https://github.com/robseb/meta-intelfpga) I described in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
 Also I published inside this layer the source code and documentation to bring **tools to update the FPGA configuration with the running Linux and to interact with simple commands with the FPGA Fabric** to the Yocto Project.
 
-### How to import Python pip (*python-pip*) packages or setup scripts with the Yocto Project
+### How to import Python pip (*python-pip*) packages to Yocto Project 
 I designed a simple python script to pre-install Python pip (PyPI)- Packages within a final Yocto Project Linux Image (see [here](https://github.com/robseb/PiP2Bitbake).
-
-For the implementation of custom startup scripts to the boot process of an embedded Linux with Yocto project I also added a simple way to my [`meta-rstools`layer](https://github.com/robseb/meta-rstools).
 
 ### How to automatically generate an Intel NIOS II Eclipse project with for instance FreeRTOS
 
 I wrote [Python Script](https://github.com/robseb/NIOSII_EclipseCompProject) to automatically generate an Intel NIOS II Eclipse Project with custom software components (e.g. FreeRTOS). 
 
 <br>
-
 
 # Continuation
 
