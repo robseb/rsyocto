@@ -31,7 +31,7 @@ To realize that **Python3** with the Python Package manager **pip (PyPI)** and t
 
 During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsyocto* applications and parts can be **build, deployed and even debugged over the network** (fully rootable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* a simple installment and quick jump start in the development process is possible, because all required compilers run directly on *rsyocto*. The custom developed build system goes even a step further. 
 
-*rsyocto* was designed with an automatically Python based `build system`. That generates an highly optimized **customize *rsyocto*-image** with the installment of users **private** **applications**,**boot configurations**,**scripts**,**FPGA configuration files, that will be configured on the FPGA Fabric before the Linux boots** and a lot more with a only Intel Quartus Prime FPGA project. This feature enables users, without the requirement of deep Linux knowledge, to design own *rsyocto* flavors with its own FPGA projects for complex Intel SoC-FPGAs. The `build system` generates the 3-stage bootloader, finds the right embedded Linux Distribution files, configures the partitions of the final image in the right way, configures the`OpenSSH Server` and automates a lot more with a one shell single command.    
+*rsyocto* was designed with an automatically Python based `build system`. That generates an highly optimized **customize *rsyocto*-image** with the installment of users **private** **applications**, **boot configurations**, **scripts**, **FPGA configuration files, that will be configured on the FPGA Fabric before the Linux boots** and a lot more with a only Intel Quartus Prime FPGA project. This feature enables users, without the requirement of deep Linux knowledge, to design own *rsyocto* flavors with its own FPGA projects for complex Intel SoC-FPGAs. The `build system` generates the 3-stage bootloader, finds the right embedded Linux Distribution files, configures the partitions of the final image in the right way, configures the`OpenSSH Server` and automates a lot more with a one shell single command.    
 
 *rsyocto* is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C-, CAN-BUS,…**), **all Interfaces between hard processor system (HPS) and the FPGA Fabric**  and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for the development of industrial connected solutions. For instance, with a single command *rsyocto* is capable to **load a new FPGA configuration** (`FPGA Manager`) or to **read and write the ARM AXI-Bridge Interface to the FPGA Fabric**. The Linux test commands allow in a simple fashion to communicate with the FPGA Fabric via all available interfaces, such as **Lightweight HPS-to-FPGA-** (`lwhps2fpga`) , **HPS-to-FPGA-Bridge**  (`hps2fpga`) , **shared-memory** (`hps2sdram`) or **general purpose signals** (`gpi` and `gpo`). Python- and C++- demo applications show a powerful way with a high throughput to interact with FPGA Soft-IP. 
 
@@ -114,6 +114,7 @@ ___
     
 * **Support for remote based development IDEs pre-installed**
 	* *Visual Studio Code* for **remote Python debugging**
+    * *Visual Studio Code* for **remote Interface development**
 	* *Visual Studio* for **remote C++ debugging**
     * *Visual Studio Code* for **remote C++ debugging** with `cmake` 
     * *ARM Development Studio (DS-5)* for **remote- (Ethernet) and JTAG- C++ debugging**  
@@ -127,10 +128,8 @@ ___
 * `git`,`curl` and `wget` **download manager**
 * **Latest `Django` version is pre-installed for Python-based web framework development**
 * `udate-rc.d` and `crontab` for startup- and time-triggered shell script scheduling
-<br>
-
 * **Full integrated Python `pip3` (*Python-pip*) package manager**
-* `opkg` **package manager** *0.4.2* 
+* `opkg` **package manager** *0.4.2* enables to add some packages from different Linux Distributions.
 
 <br>
 
@@ -287,11 +286,11 @@ For the Linux Desktop application development, I used following approach for my 
 
 
 This replaces the complex *Eclipse*- and *Visual Studio* IDEs and annoys all essential components on the embedded Linux itself.
-In this concept the development projects are located for the best code tracking inside a *git*- (*GitHub* or *GitLab*) repository. This repo can be directly cloned to the *rootfs* of the embedded Linux via a secure shell (**SSH**) interface over the network. A developer can use other SSH connection to its development machine.
+In this concept the development projects are located for the best code tracking inside a *git*- (*GitHub* or *GitLab*) repository. This repo can be directly cloned to the *rootfs* of the embedded Linux via a secure shell (**SSH**) interface over the network. A developer can use a other SSH connection to its development machine.
 
-The development machine can be any computer that runs the compact code editor *Microsoft Visual Studio Code Insider*. The *Microsoft Visual Studio Code Insider* version allows the remote connection to an embedded ARMv7-A and ARMv8-A Linux distributions, such as *rsyocto*. Via SSH established *VS Code* a connection to the `Linux Shell` of embedded Linux and via **SFTP** it is enabled to access the `root file system` (*rootfs*). The code editor uses the exiting development tools on the target platform, such as the `native gcc-complier` or `Python` for the application engineering and debugging (e.g. `gdb-server`). 
+The development machine can be any computer that runs the compact code editor *Microsoft Visual Studio Code Insider*. The *Microsoft Visual Studio Code Insider* version allows the remote connection to an embedded ARMv7-A and ARMv8-A Linux distributions, such as *rsyocto*. Via SSH established *VS Code* a connection to the `Linux Shell` of embedded Linux and via **SFTP** it is enabled to access the `root file system` (*rootfs*). The code editor uses the existing development tools on the target platform, such as the `native gcc-compiler` or `Python` for the application engineering and debugging (e.g. `gdb-server`). 
 
-A difficult to install and configure cross-complier or Python framework is on the development machine not required, because everything runs directly natively on the development board. This makes the complex design and usage of a `Linux Framework` for this Linux Distribution unnecessary, due to the fact that the source code runs directly on the right location and can access all interfaces, files and libraries natively. This brings a high optimization in terms of feature usage of *rsyocto* and it can help to reduce the code size. 
+A difficult to install and configure cross-compiler or Python framework is on the development machine not required, because everything runs directly natively on the development board. This makes the complex design and usage of a `Linux Framework` for this Linux Distribution unnecessary, due to the fact that the source code runs directly on the right location and can access all interfaces, files and libraries natively. This brings a high optimization in terms of feature usage of *rsyocto* and it can help to reduce the code size. 
 
 *VS Code* and *rsyocto* enables in this way to develop *Python*, *PHP*, *HTML*,*CSS*,*C++* with `cmake` and a lot more. I wrote for these use cases examples. The ARMv7-A CPU of the *Intel Cyclone V-* and *Intel Arria 10 SX-* SoC-FPGA-devices are more than powerful enough to notice no major difference between cross-compilation- and native compilation-time. For cloning a *git* repo is only some user space on the *rootfs* required.
 
@@ -325,7 +324,7 @@ Currently I am working on a Windows 10 .net Desktop application to manage FPGA c
 <br>
 
 # Author
-* **Robin Sebastian**
+* **[Robin Sebastian](https://www.linkedin.com/in/robin-sebastian-a5080220a)**
 
 rsyocto are projects, that I have fully developed on my own. No companies are involved in my projects. 
 I’m recently graduated as a master in electrical engineering with the major embedded systems (M. Sc.).
