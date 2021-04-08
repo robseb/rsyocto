@@ -6,7 +6,7 @@ ___
 <br>
 
 
-![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.04/doc/symbols/BuildSystem.jpg?raw=true "automatic rsyocto Build system")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsyocto-1.042/doc/symbols/BuildSystem.jpg?raw=true "automatic rsyocto Build system")
 <br>
 
 **The Python script *"makersyoctoSDImage.py"* allows to build with the *Intel Embedded Development Suite* (*SoC EDS*) the entire bootflow and generates a bootable image (*.img*) file with a flavor of *rsyocto***

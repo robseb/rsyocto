@@ -143,7 +143,7 @@ ___
         * Allows to pre-install any files or operating systems to a SD-Card image
         * **Boot image (.img) file generation** for distributing embedded Linux Distributions
         * Dynamic mode: *Partition size = Size of the files to add to the partition*
-        * Linux device tree (*.dts*) -files inside a partition can be automatically compiled and replaced with the un-compiled file
+        * Linux Device Tree (*.dts*) -files inside a partition can be automatically compiled and replaced with the un-compiled file
         * Compressed files (*e.g. "tar.gz"*) containing for instance the Linux *rootfs* can be unzipped and automatically added to the partition
 	* **To add the following to a deployable and shareable image file**
 		* Custom bootloader configuration
@@ -255,7 +255,7 @@ With re-design of the bootflow of *Intel* SoC-FPGAs with the SoC EDS Version 19.
 
 This illustration shows my new development procedure and the required complexity to create *rsyocto*. **I entirely automated the required complex bootflow** to generate with a *Intel Quartus Prime* FPGA project and Linux Distribution files (*e.g. zImage,rootfs,...*) a bootable image file (*.img*). 
 The script uses the **Intel Embedded Development Suite (SoC EDS)** in version **20.1** (*2020*) to design the necessary bootloaders based on the project settings for an Intel Cyclone V- and Intel Arria 10 SX SoC-FPGA.
-**It was designed to allow a high optimization of all components**, such as the *u-boot* boot script or the Linux device tree. With this project I want to give other developers a full-functional system to reduce their development effort. 
+**It was designed to allow a high optimization of all components**, such as the *u-boot* boot script or the Linux Device Tree. With this project I want to give other developers a full-functional system to reduce their development effort. 
 
 For designing custom *rsyocto* Versions it is only necessary to copy the `"socfpgaPlatformGenerator"`- Folder (available inside Repository's Releases part) into a Quartus Prime FPGA project folder. The included Python script can then generate the entire platform and can output a shareable and a bootable image file ("*.img").Be the way, it is also possible to use this script with your own Linux Distribution files as I show later.
 
@@ -323,8 +323,9 @@ Currently I am working on a Windows 10 .net Desktop application to manage FPGA c
 
 <br>
 
+
 # Author
-* **[Robin Sebastian](https://www.linkedin.com/in/robin-sebastian-a5080220a)**
+* **Robin Sebastian [(LinkedIn)](https://www.linkedin.com/in/robin-sebastian-a5080220a)**
 
 rsyocto are projects, that I have fully developed on my own. No companies are involved in my projects. 
 I’m recently graduated as a master in electrical engineering with the major embedded systems (M. Sc.).
