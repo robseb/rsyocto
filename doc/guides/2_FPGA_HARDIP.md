@@ -16,7 +16,7 @@ Here are also commands given to change the **FPGA Fabric configuration** by usin
     ```bash
     echo 0 > /sys/class/leds/hps_led0/brightness
     ```
-1. *To Toggle the HPS_LED is a *blinkLed.py* Python script pre-installed**
+1. **To toggle the HPS_LED is a *blinkLed.py* Python script pre-installed**
     * Run run a exiting Python script that is located on the home-dir (*~*) by using
     ```bash 
     python3 blinkLed.py
@@ -40,18 +40,19 @@ Here are also commands given to change the **FPGA Fabric configuration** by usin
             /etc/init.d/apache2 start
         ````
      *  Info Papers
-        * [DE10 Standard](https://raw.githubusercontent.com/robseb/rsyocto/rsyocto-1.042/doc/symbols/DE10Std_pinout.png)
-        * [DE10 Nano & DE0 Nano SoC](https://raw.githubusercontent.com/robseb/rsyocto/rsyocto-1.042/doc/symbols/DE10Nano_pinout.png)
-        * [HAN Pilot (Arria 10)](https://raw.githubusercontent.com/robseb/rsyocto/rsyocto-1.042/doc/symbols/HANPilot_pinout.png)
+        * [DE10 Standard](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.042/doc/symbols/DE10Std_pinout.png)
+        * [DE10 Nano & DE0 Nano SoC](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.042/doc/symbols/DE10Nano_pinout.png)
+        * [HAN Pilot (Arria 10)](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.042/doc/symbols/HANPilot_pinout.png)
  
 ## Interacting with FPGA IP
-  **In *rsyocto* all interfaces for interaction with the FPGA fabric are activated and are opened during the start-up process. The following paragraph shows how easy it is to use them.**
+  **In *rsyocto* all interfaces for interaction with the FPGA fabric are activated and open during the start-up process. The following paragraph shows how easy it is to use them.**
   
 
   * The `rstools` contains a set of useful simple commands to interact and access all interfaces between the HPS (*Hard processor system*) and the FPGA Fabric and the `FPGA-Manager`of the SoC-FPGAs 
   * Type "*FPGA* and press *TAB* inside your SSH-console to see all FPGA commands:
-  `FPGA-gpiRead` `FPGA-gpoWrite` `FPGA-readBridge` `FPGA-readMSEL` `FPGA-resetFabric`
-  `FPGA-status` `FPGA-writeBridge` `FPGA-writeConfig`
+
+      `FPGA-gpiRead` `FPGA-gpoWrite` `FPGA-readBridge` `FPGA-readMSEL` `FPGA-resetFabric`
+      `FPGA-status` `FPGA-writeBridge` `FPGA-writeConfig`
   * The Suffix `"-h"` after any command gives detailed information
   * The `rstools` are part of my [`meta-intelfpga`](https://github.com/robseb/meta-intelfpga) BSP-layer for the Yocto Project  
   
@@ -175,10 +176,10 @@ Here are also commands given to change the **FPGA Fabric configuration** by usin
         ```bash
         FPGA-readBridge -mpu 0xFF709050 
         ```
-      * The Suffix `"-mpu"` selects the **MPU (*HPS*) memory space** (*no offset will be used*)
-      * Bit number 25 is the *HPS_KEY* value
+      * **The Suffix `"-mpu"` selects the MPU (*HPS*) memory space** (*no offset will be used*)
+      * *Bit number 25* is the *HPS_KEY* value
       * **The Suffix `"-r"` allows to update the value of the register for 15sec**
-      * Alternately is [`devmem2](https://github.com/radii/devmem2) pre-installed as well
+      * Alternately is [`devmem2`](https://github.com/radii/devmem2) pre-installed as well
       * For this example use
       ````bash
       devmem2 0xFF709050
@@ -186,7 +187,11 @@ Here are also commands given to change the **FPGA Fabric configuration** by usin
 <br>
 
  ## Interacting with HPS Hard-IP (I²C, SPI, CAN, ...)
-**In *rsyocto* are Linux drivers for all Hard-IP components are pre-installed.** This was done within the *Linux Device Tree*. **Inside the pre-configured FPGA configuration are the HPS I/O Hard-IP I/O pins routed over the `FPGA Interconnect` to FPGA I/O pins to enable the usage of `Arduino Uno shields`**. Typically, dedicated HPS I/O pin headers are not available on SoC-FPGA development boards. It is for this reason that I chose this route to gain access. This can be seen inside the info papers and [**here**](https://github.com/robseb/HPS2FPGAmapping). For every Hard-IP components common Linux shell tools are available.
+**In *rsyocto* are Linux drivers for all Hard-IP components are pre-installed.** This was done within the *Linux Device Tree*. 
+
+**Inside the pre-configured FPGA configuration are the HPS I/O Hard-IP I/O pins routed over the `FPGA Interconnect` to FPGA I/O pins to enable the usage of `Arduino Uno shields`**. 
+
+Typically, dedicated HPS I/O pin headers are not available on SoC-FPGA development boards. It is for this reason that I chose this route to gain access. This can be seen inside the info papers and [**here**](https://github.com/robseb/HPS2FPGAmapping). For every Hard-IP components common Linux shell tools are available.
     
 1. **I²c-Devices** 
     * The *Terasic DE10 Boards* have an [*ADXL345*](https://www.analog.com/en/products/adxl345.html)-Accelerometer on `i2c0`
@@ -240,7 +245,7 @@ Here are also commands given to change the **FPGA Fabric configuration** by usin
         cangen can0
         ```
     * For more information please read the [can-tools](https://github.com/linux-can/can-utils) documentation
-    * **A Python example show how to send a CAN-package with python is also given in details** [here](https://github.com/robseb/rsyocto/blob/rsyocto-1.041/doc/appSpecificGuides/1_TransmittingCAN.md)
+    * **A Python example show how to send a CAN-package with python is also given in details** [here](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/appSpecificGuides/1_TransmittingCAN.md)
     
  
  ## Continue with the next level: [Debugging C++ applications remotely with Visual Studio](3_CPP.md)

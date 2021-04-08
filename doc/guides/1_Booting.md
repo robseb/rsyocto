@@ -84,7 +84,7 @@ This guide shows how to install *rsyocto* on a **SD-Card** and boot it on a Tera
   ### **After the system has booted properly and a network connection is established -> HPS_LED and only FPGA LED 0 turns ON** 
    * **Note:** If rsyocto goes in a bootloop after requesting the current date the **MSEL switch** is not in the proper position and the **FPGA configuration** could not be written properly! This problem could occur because the boot-up shell script ([shown here at the end](https://github.com/robseb/rsyocto/blob/rsyocto-1.042/doc/guides/6_newFPGAconf.md)) tries to write to the closed LW HPS2FPGA Bridge or to an unreachable address.
 
-**For users with non supported boards:** Please go to [this guide](https://github.com/robseb/rsyocto/blob/rsyocto-1.042/doc/guides/6_newFPGAconf.md) and use *rsyocto* with your custom FPGA configuration in the same way as shown here.
+**For users with non supported boards:** Please go to [this guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md) and use *rsyocto* with your custom FPGA configuration in the same way as shown here.
 <br>
   
    ![Alt text](rsyoctoArria10BootLog.gif?raw=true "rufus")
