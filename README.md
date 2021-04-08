@@ -22,7 +22,7 @@
 ___
 
 
-`I'm working on the new rsyocto release! This branch bis work under process! Please use the MASTER branch!`
+`I'm working on the new rsyocto release! This branch is work under process! Please use the MASTER branch!`
 
 
 *rsyocto* implements a **modern Linux Kernel (linux-socfpga 5.10)** and brings a set of today fundamentally needed components to **Intel SoC-FPGAs** to helps to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- (IoT), automotive- and deep learning (AI) accelerator- applications.
@@ -268,7 +268,9 @@ In the following table these three stages are visible. The stage one is on the l
 
 # Embedded native remote development environment
 
-As described, I attach great importance to easy-to-use and powerful Integrated development environments (**IDE**) for the Linux application development, due to the fact that the requirement and complexity of embedded applications grows exponentially year after year and the only way to counter act this trend are simple to install and use IDEs. On the Linux generation site, I could simplify the complex multi-stage bootloader and Linux generation process with my Python scripts and pre-installed Bus-tools and the ARM Development (DS-5) Studio integration can help with hardware-level development and trace debugging. 
+As described, I attach great importance to easy-to-use and powerful Integrated development environments (**IDE**) for the Linux application development, due to the fact that the requirement and complexity of embedded applications grows exponentially year after year and the only way to counter act this trend are simple to install and use IDEs. 
+
+On the Linux generation site, I could simplify the complex multi-stage bootloader and Linux generation process with my Python scripts and pre-installed Bus-tools and the ARM Development (DS-5) Studio integration can help with hardware-level development and trace debugging. 
 For the Linux Desktop application development, I used following approach for my project:
 
 
@@ -277,7 +279,13 @@ For the Linux Desktop application development, I used following approach for my 
 
 
 This replaces the complex *Eclipse*- and *Visual Studio* IDEs and annoys all essential components on the embedded Linux itself.
-In this concept the development projects are located for the best code tracking inside a *git*- (*GitHub* or *GitLab*) repository. This repo can be directly cloned to the *rootfs* of the embedded Linux via a secure shell (**SSH**) interface over the network. A developer can use other SSH connection to its development machine. The development machine can be any computer that runs the compact code editor *Microsoft Visual Studio Code Insider*.  The *Microsoft Visual Studio Code Insider* version allows the remote connection to an embedded ARMv7-A and ARMv8-A Linux distributions, such as *rsyocto*. Via SSH established *VS Code* a connection to the `Linux Shell` of embedded Linux and via **SFTP** it is enabled to access the `root file system` (*rootfs*). The code editor uses the exiting development tools on the target platform, such as the `native gcc-complier` or `Python` for the application engineering and debugging (e.g. `gdb-server`). A difficult to install and configure cross-complier or python framework is on the development machine not required, because everything runs directly natively on the development board. This makes the complex design and usage of a `Linux Framework` for this Linux Distribution unnecessary, due to the fact that the source code runs directly on the right location and can access all interfaces, files and libraries natively. This brings a high optimization in terms of feature usage of *rsyocto* and it can help to reduce the code size. *VS Code* and *rsyocto* enables in this way to develop *Python*, *PHP*, *HTML*,*CSS*,*C++* with `cmake` and a lot more. I wrote for these use cases examples. The ARMv7-A CPU of the *Intel Cyclone V-* and *Intel Arria 10 SX-* SoC-FPGA-devices are more than powerful enough to notice no major difference between cross-compilation- and native compilation-time. For cloning a *git* repo is only some user space on the *rootfs* required.
+In this concept the development projects are located for the best code tracking inside a *git*- (*GitHub* or *GitLab*) repository. This repo can be directly cloned to the *rootfs* of the embedded Linux via a secure shell (**SSH**) interface over the network. A developer can use other SSH connection to its development machine.
+
+The development machine can be any computer that runs the compact code editor *Microsoft Visual Studio Code Insider*. The *Microsoft Visual Studio Code Insider* version allows the remote connection to an embedded ARMv7-A and ARMv8-A Linux distributions, such as *rsyocto*. Via SSH established *VS Code* a connection to the `Linux Shell` of embedded Linux and via **SFTP** it is enabled to access the `root file system` (*rootfs*). The code editor uses the exiting development tools on the target platform, such as the `native gcc-complier` or `Python` for the application engineering and debugging (e.g. `gdb-server`). 
+
+A difficult to install and configure cross-complier or python framework is on the development machine not required, because everything runs directly natively on the development board. This makes the complex design and usage of a `Linux Framework` for this Linux Distribution unnecessary, due to the fact that the source code runs directly on the right location and can access all interfaces, files and libraries natively. This brings a high optimization in terms of feature usage of *rsyocto* and it can help to reduce the code size. 
+
+*VS Code* and *rsyocto* enables in this way to develop *Python*, *PHP*, *HTML*,*CSS*,*C++* with `cmake` and a lot more. I wrote for these use cases examples. The ARMv7-A CPU of the *Intel Cyclone V-* and *Intel Arria 10 SX-* SoC-FPGA-devices are more than powerful enough to notice no major difference between cross-compilation- and native compilation-time. For cloning a *git* repo is only some user space on the *rootfs* required.
 
 
 <br>
