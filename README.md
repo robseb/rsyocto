@@ -72,14 +72,14 @@ ___
 # Key Advantages
 * **Embedded Linux specially developed for Intel SoC-FPGAs**
     * **Linux Kernel 5.11** ([*Source*](https://github.com/altera-opensource/linux-socfpga/tree/socfpga-5.11))
-* Full **usage of the Dual-Core ARM (ARMv7-A) Cortex-A9** with
+* Full **usage of the Dual-Core ARM (*ARMv7-A*) Cortex-A9** with
 	* The **ARM** (*SIMD*) **NEON-Engine**
-	* The **Vector Floating Point Unit (VFP)** 
-	* The **ARM Thumb-2 Instruction Set**
+	* The **Vector Floating Point Unit (*VFP*)** 
+	* The **ARM *Thumb-2* Instruction Set**
     * The **ARM *PL390* Generic Interrupt Controller (GIC)** 
-    * The of the **ARM TrustZone** for ARMv7-A and **Arteris  FlexNoC** Network-on-Chip Interconnect for the *Intel Arria 10 SX*
+    * The of the **ARM TrustZone** for ARMv7-A and **Arteris  *FlexNoC*** Network-on-Chip Interconnect for the *Intel Arria 10 SX*
     * The **ARM CoreSight Debug and Trace Engine** with *ARM Development Studio (DS-5)* support
-    * The **external memory interface controller** (EMIF) (SDRAM DDR3/DDR4 controller) of the *Intel Arria 10 SX* with **Early I/O Enabled** 
+    * The **external memory interface controller** (*EMIF*) (*SDRAM DDR3/DDR4 controller*) of the *Intel Arria 10 SX* with **Early I/O enabled** 
     
 * For the best performance completely custom optimized 
 * **Console based** (**GUI less**) with `Busybox`
@@ -108,12 +108,12 @@ ___
     * `gcc`compiler *9.3.0*
     * `glibc` and `glib-2.0`(*The GNU C Library*)
     * `cmake` *3.16.5* 
-    * `python 3.8`
-    *  `python3-dev` and `python-dev`
+    * `Python 3.8`
+    *  `Python3-dev` and `Python-dev`
     * `git` *2.31*, `wget` *1.20.3*, `curl` *7.69.1* 
     
 * **Support for remote based development IDEs pre-installed**
-	* *Visual Studio Code* for **remote python debugging**
+	* *Visual Studio Code* for **remote Python debugging**
 	* *Visual Studio* for **remote C++ debugging**
     * *Visual Studio Code* for **remote C++ debugging** with `cmake` 
     * *ARM Development Studio (DS-5)* for **remote- (Ethernet) and JTAG- C++ debugging**  
@@ -126,25 +126,26 @@ ___
 * `Apache` webserver with `PHP` and `SQLite`
 * `git`,`curl` and `wget` **download manager**
 * **Latest `Django` version is pre-installed for Python-based web framework development**
+* `udate-rc.d` and `crontab` for startup- and time-triggered shell script scheduling
 <br>
 
-* **Full integrated python `pip3` (*python-pip*) package manager**
+* **Full integrated Python `pip3` (*Python-pip*) package manager**
 * `opkg` **package manager** *0.4.2* 
 
 <br>
 
 * **Custom designed `Build System` to generate the entire bootflow for Intel SoC-FPGAs automatically**
     * **Allows to design highly optimized *rsyocto* flavors for your specific requirements**
-    * Overview of the main feature of the "*[socfpgaPlatformGenerator](https://github.com/robseb/socfpgaPlatformGenerator)*" Build System
-        * Automatically generate a bootable image file with configuration provided by a Quartus Prime project
-        * Cloning and compiling of the u-boot bootloader for Intel SoC-FPGAs
-        * **Allows a highly optimization of the u-boot (e.g. via *menuconfig*)**
+    * Overview of the main feature of the "*[socfpgaPlatformGenerator](https://github.com/robseb/socfpgaPlatformGenerator)*" Build System: 
+        * Automatically generate a bootable image file with configuration provided by a *Quartus Prime* FPGA project
+        * Cloning and compiling of the *u-boot* bootloader for *Intel SoC-FPGAs*
+        * **Allows a highly optimization of the u-boot (*e.g. via Linux `menuconfig`*)**
         * In case of the u-boot script is configured to load a FPGA configuration the depending FPGA configuration will be generated
         * Allows to pre-install any files or operating systems to a SD-Card image
         * **Boot image (.img) file generation** for distributing embedded Linux Distributions
         * Dynamic mode: *Partition size = Size of the files to add to the partition*
-        * Linux device tree (dts) -files inside a partition can be automatically compiled and replaced with the un-compiled file
-        * Compressed files (e.g. "tar.gz") containing for instance the Linux *rootfs* can be unzipped and automatically added to the partition
+        * Linux device tree (*.dts*) -files inside a partition can be automatically compiled and replaced with the un-compiled file
+        * Compressed files (*e.g. "tar.gz"*) containing for instance the Linux *rootfs* can be unzipped and automatically added to the partition
 	* **To add the following to a deployable and shareable image file**
 		* Custom bootloader configuration
 		* FPGA configuration files 
@@ -225,7 +226,7 @@ The final *rsyocto* boot images (*img*) are available inside the **packages-Part
 * [The Yocto Project](https://www.yoctoproject.org/) 
 * [meta-intelfpga](https://github.com/robseb/meta-intelfpga) 
 * [meta-openembedded](https://github.com/openembedded/meta-openembedded)
-  * [meta-python](https://github.com/openembedded/meta-openembedded/tree/master/meta-python) 
+  * [meta-Python](https://github.com/openembedded/meta-openembedded/tree/master/meta-Python) 
   * [meta-webserver](https://github.com/openembedded/meta-openembedded/tree/master/meta-webserver)
   * [meta-networking](https://github.com/openembedded/meta-openembedded/tree/master/meta-networking) 
 <br>
@@ -290,7 +291,7 @@ In this concept the development projects are located for the best code tracking 
 
 The development machine can be any computer that runs the compact code editor *Microsoft Visual Studio Code Insider*. The *Microsoft Visual Studio Code Insider* version allows the remote connection to an embedded ARMv7-A and ARMv8-A Linux distributions, such as *rsyocto*. Via SSH established *VS Code* a connection to the `Linux Shell` of embedded Linux and via **SFTP** it is enabled to access the `root file system` (*rootfs*). The code editor uses the exiting development tools on the target platform, such as the `native gcc-complier` or `Python` for the application engineering and debugging (e.g. `gdb-server`). 
 
-A difficult to install and configure cross-complier or python framework is on the development machine not required, because everything runs directly natively on the development board. This makes the complex design and usage of a `Linux Framework` for this Linux Distribution unnecessary, due to the fact that the source code runs directly on the right location and can access all interfaces, files and libraries natively. This brings a high optimization in terms of feature usage of *rsyocto* and it can help to reduce the code size. 
+A difficult to install and configure cross-complier or Python framework is on the development machine not required, because everything runs directly natively on the development board. This makes the complex design and usage of a `Linux Framework` for this Linux Distribution unnecessary, due to the fact that the source code runs directly on the right location and can access all interfaces, files and libraries natively. This brings a high optimization in terms of feature usage of *rsyocto* and it can help to reduce the code size. 
 
 *VS Code* and *rsyocto* enables in this way to develop *Python*, *PHP*, *HTML*,*CSS*,*C++* with `cmake` and a lot more. I wrote for these use cases examples. The ARMv7-A CPU of the *Intel Cyclone V-* and *Intel Arria 10 SX-* SoC-FPGA-devices are more than powerful enough to notice no major difference between cross-compilation- and native compilation-time. For cloning a *git* repo is only some user space on the *rootfs* required.
 
@@ -304,8 +305,8 @@ A difficult to install and configure cross-complier or python framework is on th
 Inside my [`meta-intelfpga` BSP layer](https://github.com/robseb/meta-intelfpga) I described in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
 Also I published inside this layer the source code and documentation to bring **tools to update the FPGA configuration with the running Linux and to interact with simple commands with the FPGA Fabric** to the Yocto Project.
 
-### How to import Python pip (*python-pip*) packages to Yocto Project 
-I designed a simple python script to pre-install Python pip (PyPI)- Packages within a final Yocto Project Linux Image (see [here](https://github.com/robseb/PiP2Bitbake).
+### How to import Python pip (*Python-pip*) packages to Yocto Project 
+I designed a simple Python script to pre-install Python pip (PyPI)- Packages within a final Yocto Project Linux Image (see [here](https://github.com/robseb/PiP2Bitbake).
 
 ### How to automatically generate an Intel NIOS II Eclipse project with for instance FreeRTOS
 
@@ -317,7 +318,7 @@ I wrote [Python Script](https://github.com/robseb/NIOSII_EclipseCompProject) to 
 
 **I will continue my work and upload newer versions. I invite everybody to submit issues, comments and ideas.**
 
-Currently I am working on a Windows 10 .net Desktop application to manage FPGA configurations and to allow to record data via the network. To release that I will design a server task, running on *rsyocto*, that can send python- or C++-values with TCP to the desktop. The following screenshot shows the development state of this project.
+Currently I am working on a Windows 10 .net Desktop application to manage FPGA configurations and to allow to record data via the network. To release that I will design a server task, running on *rsyocto*, that can send Python- or C++-values with TCP to the desktop. The following screenshot shows the development state of this project.
 
 ![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.042/doc/symbols/destopSoftwareAlphaState.jpg?raw=true "rsyocto required building steps")
 
