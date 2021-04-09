@@ -394,15 +394,18 @@ The Python script will go through the following major steps that specific user i
     <br>
 
 11. **Generation of the bootable image file with custom configuration**
-    
+
+    **Please, use my [**Build your own custom Linux Distro for Intel SoC-FPGAs** with the Yocto Project](9_customYoctoVersions.md) guide to show you can use my Python build system with custom Yocto Project designs and how you can generate a *Linux Device Tree*.**
+
     In connection the Python script will use the [*LinuxBootImageFileGenerator*](https://github.com/robseb/LinuxBootImageFileGenerator) to build the finale bootable image file. 
     The file will be located inside the "*socfpgaPlatformGenerator*" folder. 
-    This image file can be distributed and flashed to a bootable SD-Card as shown in the first Guide
+    This image file can be distributed and flashed to a bootable SD-Card as shown in the first Guide.
 
 <br>
 <br>
 
 ___
 [back](6_newFPGAconf.md)
+
 [Back to the startpage](https://github.com/robseb/rsyocto)
 
