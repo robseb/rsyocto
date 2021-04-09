@@ -8,7 +8,7 @@ On *rsyocto* all required components for Visual Studio are pre-installed.
 
 The following illustration shows how *Linux* and Microsoft Visual Studio work together:
 
-![Alt text](IneractionrsyoctoVisalStudio.jpg?raw=true "Linux and Visual Studio")
+![Alt text](IneractionrsYoctoVisalStudio.jpg?raw=true "Linux and Visual Studio")
 
 Note: Instate of using the complex *Microsoft Visual Studio* for C++ development and debugging is a more pleasant way with the code editor *Microsoft Visual Studio Code* and `cmake` available. To demonstrate is approach I wrote following **GUIDE XXXXXXXXXXXXX**.
 <br>
