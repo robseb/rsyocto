@@ -299,15 +299,32 @@ A difficult to install and configure cross-compiler or Python framework is on th
 
 # Q&A
 
+### Are all drivers for the HPS for the Intel Cyclone V- and Intel Arria 10 SX SoC-FPGA installed?
+
+Yes, of course all HPS drivers are properly installed and tested. Demo applications and step-by-step guide are available, as well.
+
+### Are all AXI bridge interfaces between the FPGA and FPGA Fabric enabled?
+
+Yes, of course all bridge interfaces between the ARMv7-A- and FPGA- world are for both *Intel SoC-FPGAs* enabled and tested. Demo applications and step-by-step guide are available, as well.
 
 ### How to get started with the Yocto Project for Intel SoC-FPGAs?
+
 Inside my [`meta-intelfpga` BSP layer](https://github.com/robseb/meta-intelfpga) I described in details how to get started with the Yocto project for *Intel SoC-FPGAs*.
 Also I published inside this layer the source code and documentation to bring **tools to update the FPGA configuration with the running Linux and to interact with simple commands with the FPGA Fabric** to the Yocto Project.
 
-### How to import Python pip (*Python-pip*) packages to Yocto Project 
+### Can I use *rsyocto* with my own FPGA Configuration?
+
+Yes, the build system enables to bring a custom *Intel Quartus Prime* *Intel Cyclone V-* or *Intel Arria 10 SX-* FPGA project to a bootable image with *rsyocto* installed. The *u-boot* will the write FPGA Configuration of the *Intel Quartus Prime* FPGA project to the FPGA Fabric. Please follow the instructions of this guide: "[**Designing of custom *rsyoto* versions** with your content and FPGA project](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)
+
+### Can I use *rsyocto* with a non-supported board?
+
+Yes, you can run *rsyocto* on almost every Intel *Cyclone V*- and *Intel Arria 10 SX* SoC-FPGA board with a SD-Card as boot source. My build system enables this feature. Please consider the guide: "[**Build your own custom Linux Distro for Intel SoC-FPGAs** with the Yocto Project](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/9_customYoctoVersions.md)"
+
+### How to import Python pip (*Python-pip*) packages to Yocto Project?
+
 I designed a simple Python script to pre-install Python pip (PyPI)- Packages within a final Yocto Project Linux Image (see [here](https://github.com/robseb/PiP2Bitbake).
 
-### How to automatically generate an Intel NIOS II Eclipse project with for instance FreeRTOS
+### How to automatically generate an Intel NIOS II Eclipse project with for instance FreeRTOS?
 
 I wrote [Python Script](https://github.com/robseb/NIOSII_EclipseCompProject) to automatically generate an Intel NIOS II Eclipse Project with custom software components (*e.g. FreeRTOS*). 
 
