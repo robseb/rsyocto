@@ -25,11 +25,11 @@ ___
 `I'm working on the new rsyocto release! This branch is work under process! Please use the MASTER branch!`
 
 
-*rsyocto* implements a **modern Linux Kernel (linux-socfpga 5.10)** and brings a set of today fundamentally needed components to **Intel SoC-FPGAs** to helps to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- (IoT), automotive- and deep learning (AI) accelerator- applications.
+*rsyocto* implements a **modern Linux Kernel (linux-socfpga 5.11)** and brings a set of today fundamentally needed components to **Intel SoC-FPGAs** to helps to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- (IoT), automotive- and deep learning (AI) accelerator- applications.
 
 To realize that **Python3** with the Python Package manager **pip (PyPI)** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsyocto* is for its best optimization complete console based, but the Apache Webserver can bring any modern GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface. For that the Python Web framework **Django 3.0** is pre-installed.
 
-During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsyocto* applications and parts can be **build, deployed and even debugged over the network** (fully rootable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* a simple installment and quick jump start in the development process is possible, because all required compilers run directly on *rsyocto*. The custom developed build system goes even a step further. 
+During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsyocto* applications and parts can be **build, deployed and even debugged over the network** (fully routable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* a simple installment and quick jump start in the development process is possible, because all required compilers run directly on *rsyocto*. The custom developed build system goes even a step further. 
 
 *rsyocto* was designed with an automatically Python based `build system`. That generates an highly optimized **customize *rsyocto*-image** with the installment of users **private** **applications**, **boot configurations**, **scripts**, **FPGA configuration files, that will be configured on the FPGA Fabric before the Linux boots** and a lot more with a only Intel Quartus Prime FPGA project. This feature enables users, without the requirement of deep Linux knowledge, to design own *rsyocto* flavors with its own FPGA projects for complex Intel SoC-FPGAs. The `build system` generates the 3-stage bootloader, finds the right embedded Linux Distribution files, configures the partitions of the final image in the right way, configures the`OpenSSH Server` and automates a lot more with a one shell single command.    
 
@@ -257,7 +257,7 @@ This illustration shows my new development procedure and the required complexity
 The script uses the **Intel Embedded Development Suite (SoC EDS)** in version **20.1** (*2020*) to design the necessary bootloaders based on the project settings for an Intel Cyclone V- and Intel Arria 10 SX SoC-FPGA.
 **It was designed to allow a high optimization of all components**, such as the *u-boot* boot script or the Linux Device Tree. With this project I want to give other developers a full-functional system to reduce their development effort. 
 
-For designing custom *rsyocto* Versions it is only necessary to copy the `"socfpgaPlatformGenerator"`- Folder (available inside Repository's Releases part) into a Quartus Prime FPGA project folder. The included Python script can then generate the entire platform and can output a shareable and a bootable image file ("*.img").Be the way, it is also possible to use this script with your own Linux Distribution files as I show later.
+For designing custom *rsyocto* Versions it is only necessary to copy the `"socfpgaPlatformGenerator"`- Folder (available inside Repository's Releases part) into a Quartus Prime FPGA project folder. The included Python script can then generate the entire platform and can output a shareable and a bootable image file ("*.img*").Be the way, it is also possible to use this script with your own Linux Distribution files as I show later.
 
 My build flow consists of three stages to enable the support for other embedded Linux platforms or with different embedded Linux Distributions.
 In the following table these three stages are visible. The stage one is on the lowest level and its classes will be used by the next stage.
@@ -309,7 +309,7 @@ I designed a simple Python script to pre-install Python pip (PyPI)- Packages wit
 
 ### How to automatically generate an Intel NIOS II Eclipse project with for instance FreeRTOS
 
-I wrote [Python Script](https://github.com/robseb/NIOSII_EclipseCompProject) to automatically generate an Intel NIOS II Eclipse Project with custom software components (e.g. FreeRTOS). 
+I wrote [Python Script](https://github.com/robseb/NIOSII_EclipseCompProject) to automatically generate an Intel NIOS II Eclipse Project with custom software components (*e.g. FreeRTOS*). 
 
 <br>
 
@@ -327,8 +327,8 @@ Currently I am working on a Windows 10 .net Desktop application to manage FPGA c
 # Author
 * **Robin Sebastian [(LinkedIn)](https://www.linkedin.com/in/robin-sebastian-a5080220a)**
 
-rsyocto are projects, that I have fully developed on my own. No companies are involved in my projects. 
-I’m recently graduated as a master in electrical engineering with the major embedded systems (M. Sc.).
+*rsyocto* is a project, that I have fully developed on my own. No companies are involved in my projects. 
+I’m recently graduated as a master in electrical engineering with the major embedded systems (*M. Sc.*).
 
 **[Github sponsoring is welcome.](https://github.com/sponsors/robseb)**
 
