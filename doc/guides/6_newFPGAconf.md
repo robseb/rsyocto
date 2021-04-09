@@ -31,10 +31,10 @@ For each board the used default FPGA Configuration and a version with a *Intel N
    1. **For the Arria 10 SX SoC-FPGA:**
       * Be sure that "**`Enables the HPS early release of HPS IO`**" is enabled in the **Intel Quartus Prime**- and HPS- Settings 
            * To **split the FPGA Configuration in a peripheral- and core- FPGA Configuration** 
-           * This allows to hold for example the **memory configuration of the HPS** (*EMIF= external memory interface controller is part of the FPGA Fabric and need a connection over the FPGA Interconnect before the secondary bootloader (u-boot) can use the SDRAM*) during FPGA Configuration changes 
+           * This allows to hold for example the **memory configuration of the HPS** during FPGA Configuration changes  (*EMIF= external memory interface controller of the Intel Arria 10 SX is part of the FPGA Fabric and need a connection over the FPGA Interconnect before the secondary bootloader (u-boot) can use the SDRAM*) 
            * For more information please visit the [Intel Arria 10 documentation](https://www.intel.com/content/www/us/en/programmable/documentation/mzh1527115949958.html) page
               ![Alt text](Arria10Conf.jpg?raw=true "Quartus config for Arria 10")
-      * Execute the following EDS-Shell command:
+      * Execute the following *Intel SoC-EDS-Shell* command:
         ````bash
           quartus_cpf -c --hps -o bitstream_compression=on rsHAN.sof socfpga.rbf
         ````
