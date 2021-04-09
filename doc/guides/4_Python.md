@@ -122,7 +122,7 @@ Host rsyocto
 ### VI. Debugging Python Code remotely
 * Open any pre-installed Python sample located on the home directory (*~*) of *rsyocto* (*also available inside `examples/python` of this repo*)
 * Navigate to the sidebar icon **"`Debug and Run`"** and click on the "**`Debug with Python`**" Button
-* Choose in the Drop Down Menu "**Python File**" 
+* Choose in the Drop Down Menu "**`Python File`**" 
 
  ![Alt text](VisualCodeConfig8.jpg?raw=true "Visual Studio Configuration 8")
  
@@ -152,7 +152,7 @@ ___
 ### VII. Use of the Python Package Manager pip (PyPI)
 * The pre-installed example "*serialEchoDemo.py*" requires the [pySerial](https://pyserial.readthedocs.io/en/latest/shortintro.html)-module
 * "*rsyocto*" has a full support for all *Python pip* package index versions
-* Use the *PiP* [Homepage](https://pypi.org/) to find a module
+* Use the *PiP* [Homepage](https://pypi.org/) to find a module to download and install
 * Run following command to download and install this module with *rsyocto*:
      ````bash
      pip3 install "module_name"
