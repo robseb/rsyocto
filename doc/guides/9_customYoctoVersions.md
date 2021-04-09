@@ -121,7 +121,7 @@ ___
     * Type `1` to let the script use this files for the build
 
 8. **Select the Linux *Device Tree* for the build**
-    * My [**meta-intelfpga](https://github.com/robseb/meta-intelfpga) BSP layer for the OpenEmbedded Yocto Project did not build the Linux *Device Tree*
+    * My [**meta-intelfpga**](https://github.com/robseb/meta-intelfpga) BSP layer for the OpenEmbedded Yocto Project did not build the Linux *Device Tree*
     * Instate, the build script will ask the user to **copy a Linux *Device Tree file* with a specific name to the Image Partition folder** as shown:
     ````shell
     #################################################################################################################
