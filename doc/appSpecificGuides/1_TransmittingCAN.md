@@ -89,7 +89,7 @@ ifconfig can0
 
 <br>
 
-**In the same way it is also possible to communicate via UART, SPI or I²C. On *rsyocto* python scripts for these use cases are pre-installed.**
+**In the same way it is also possible to communicate via UART, SPI or I²C. On *rsyocto* Python scripts for these use cases are pre-installed.**
 
 <br>
 
