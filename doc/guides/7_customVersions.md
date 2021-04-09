@@ -3,22 +3,29 @@ ___
 ![GitHub](https://img.shields.io/static/v1?label=Ubuntu&message=18.04+LTS,+20.04+LTS&color=yellowgreen)
 ![GitHub](https://img.shields.io/static/v1?label=CentOS&message=7.0,+8.0&color=yellowgreen)
 ![GitHub](https://img.shields.io/static/v1?label=Intel+EDS&message=20.1&color=blue)
+![GitHub](https://img.shields.io/static/v1?label=Supported+SocFPGA&message=Intel+Arria10,+Cyclone+V&color=red")
+<br>
+
+**The Python script *"makersyoctoSDImage.py"* allows to build with the *Intel Embedded Development Suite* (*SoC EDS*) the entire bootflow and generates a bootable image (*.img*) file with a flavor of *rsyocto*** with your *Intel Quartus Prime FPGA project*.
+
+![Alt text](BuildSystemHead.png?raw=true "Symbol of the build system")
+**Use your *Intel Quartus Prime* FPGA project to create your own *rsyocto* with your FPGA Configuration**
+___
 <br>
 
 
-![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsyocto-1.042/doc/symbols/BuildSystem.jpg?raw=true "automatic rsyocto Build system")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/master/doc/symbols/BuildSystem.jpg?raw=true "automatic rsyocto Build system")
+**Block diagram of the fully automated build system to design new releases**
 <br>
 
-**The Python script *"makersyoctoSDImage.py"* allows to build with the *Intel Embedded Development Suite* (*SoC EDS*) the entire bootflow and generates a bootable image (*.img*) file with a flavor of *rsyocto***
 
+This Python build system was designed to automate the always identical, but complicated and time consuming, build flow for *Intel SoC-FPGAs* to reduce the possible sources of error during design.
 
-This Python build system was designed to automate the always identical build flow for *Intel* SoC-FPGAs to reduce the possible sources of error during design.
+It can use the information provided by the *Intel Quartus Prime* FPGA project to compile and configure the bootloader (*u-boot*) to boot up an embedded Linux and to configure the FPGA fabric with the *Intel Quartus Prime FPGA project*. 
 
-It can use the information provided by the *Intel Quartus Prime* project to compile and configure the bootloader (u-boot) to boot up an embedded Linux and to configure the FPGA fabric with the *Quartus Prime project*. 
+The Image folder contains a sub-folder for any partition of the final *SD-Card* image. **Files copied into these folders will automatically be pre-installed to the depending partition on the bootable *SD-Card* image**. To achieve this internally my  [*LinuxBootImageFileGenerator*](https://github.com/robseb/LinuxBootImageFileGenerator) is used to generate an image file. 
 
-The Image folder contains a sub-folder for any partition of the final *SD-Card* image. Files copied into these folders will automatically be pre-installed to the depending partition on the bootable *SD-Card* image. To achieve this internally my  [*LinuxBootImageFileGenerator*](https://github.com/robseb/LinuxBootImageFileGenerator) is used to generate an image file. 
-
-It can run on any modern Linux operating system, such as *CentOS* or *Ubuntu* Linux with the pre-installed SoC EDS. 
+It can run on any modern Linux operating system, such as *CentOS* or *Ubuntu* Linux with the pre-installed **Intel SoC-EDS**. 
 <br>
 ___
 
@@ -69,7 +76,8 @@ ___
 * **Supported Intel Embedded Development Suite (SoC EDS) Versions**
     * **EDS 20.1 (Linux)**
 * **Supported Intel SoC-FPGAs**
-    * **Intel Cyclone V**
+    * **Intel Cyclone V SoC-FPGA**
+    * **Intel Arria 10 SX SoC-FPGA**
 ___
 <br>
 
@@ -81,13 +89,13 @@ For generating a bootable *rsyocto* image for *Intel* SoC-FPGAs by executing a s
 
 * **Instal Intel Quartus Prime (18.1 or newer) for Linux**
     *    A step-by-step guide how to install *Intel Quartus Prime* on **Linux** is available [here](https://github.com/robseb/NIOSII_EclipseCompProject#i-installment-of-intel-quartus-prime-191-and-201-with-nios-ii-support) (*NIOS II support is for this project not required*)
-* Install the Intel Embedded Development Suite (SoC EDS)
-    * [Download](https://fpgasoftware.intel.com/soceds/20.1/?edition=standard&platform=windows&download_manager=direct) Intel SoC EDS 20.1 Standard for Linux
-    * Install SoC EDS by executing the following Linux console commands
+* Install the **Intel Embedded Development Suite** (*SoC-EDS*)
+    * [Download](https://fpgasoftware.intel.com/soceds/20.1/?edition=standard&platform=windows&download_manager=direct) *Intel SoC EDS 20.1 Standard for Linux*
+    * **Install** SoC EDS by executing the following Linux console commands
         ````shell
         chmod +x SoCEDSSetup-20.1.0.711-linux.run && ./SoCEDSSetup-20.1.0.711-linux.run
         ````
-* Install the required packages
+* **Install the required packages**
 	* **For Ubuntu Linux** 	
 	````shell
 	sudo apt-get update -y && sudo apt-get install -y bison flex libncurses-dev \
@@ -99,8 +107,15 @@ For generating a bootable *rsyocto* image for *Intel* SoC-FPGAs by executing a s
 	git device-tree-compiler  u-boot-tools
 	````
 * Download the "**rsyocto_SDxx-Folder**" from the "**releases Part**" of this Github repository
-* Unzip the folder and copy the internal folder **"socfpgaPlatformGenerator"** and copy it into your *Intel Quartus Prime* project
-    * The project configurations will then be used to build the bootable image 
+
+  <p align="center">
+    <a href="https://github.com/robseb/rsyocto/releases">
+        <img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/robseb/rsyocto">
+    </a>	 
+  </p>
+       
+* **Unzip the folder and copy** the internal folder **"socfpgaPlatformGenerator"** and copy it into your *Intel Quartus Prime* FPGA project
+    * The project configuration will then be automatically used to build the bootable image 
     * You can also use the default Quartus Prime project as shown in the previous [guide](6_newFPGAconf.md)
     * Note: The project compilation must be successfully done
 * **The Quartus Project folder should now look like this:**

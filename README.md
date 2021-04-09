@@ -171,12 +171,12 @@ ___
 | Level | Objective | Guide
 |:--|:--|:--|
 | 1 | **Booting *rsyocto* on your Board** | [**Getting started Guide**](doc/guides/1_Booting.md) |
-| 2 | **Use of Hard IP, FPGA-IP and configuration of the FPGA Fabric** |[Step by step guide 1](doc/guides/2_FPGA_HARDIP.md) |
+| 2 | **Use of Hard-IP, FPGA-IP and FPGA Configuration of the FPGA Fabric** |[Step by step guide 1](doc/guides/2_FPGA_HARDIP.md) |
 | 3a | **Debugging C++ applications remotely** with *Microsoft Visual Studio* | [Step by step guide 2a](doc/guides/3_CPP.md) |
 | 3b | **Debugging C++ applications remotely** with **CMAKE** and *Microsoft Visual Studio Code* | [Step by step guide 2b](doc/guides/3_CPP_CMAKE.md) |
 | 4 | **Debugging Python applications remotely** | [Step by step guide 3](doc/guides/4_Python.md) |
 | 5 | **Analyzation of applications with ARM DS-5 Streamline** | [Step by step guide 4](doc/guides/5_Streamline.md) |
-| 6 | **Developing a custom FPGA configuration with Intel Quartus Prime**| [Step by step guide 5](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/6_newFPGAconf.md) |
+| 6 | **Developing a custom FPGA Configuration with Intel Quartus Prime**| [Step by step guide 5](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/6_newFPGAconf.md) |
 <br>
 
 ### Customization Guides 
@@ -196,7 +196,7 @@ ___
 | 2 | **Developing a Django web application for interacting with the FPGA Fabric** | [Guide](doc/appSpecificGuides/2_DjangoWebApps.md) |
 | 3 | **Writing a Linux Startup script** | [Guide](doc/appSpecificGuides/3_LinuxStartUpScript.md) |
 | 4 | **Examples of using *Microsoft Visual Studio*  for C++ development** | [Guide](https://github.com/robseb/LinuxVSCppFPGA) |
-| 5 | **Using the *Intel NIOS II* Processor, running FreeRTOS, to interact with HPS Hard-IP** | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/appSpecificGuides/4_NIOS2HPS.md) |
+| 5 | **Using the *Intel NIOS II* Soft-Core Processor, running *FreeRTOS*, to interact with HPS Hard-IP** | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/appSpecificGuides/4_NIOS2HPS.md) |
 <br>
 
 
