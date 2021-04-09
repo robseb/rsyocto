@@ -87,7 +87,7 @@ This guide shows how to install *rsyocto* on a **SD-Card** and boot it on a Tera
 **For users with non supported boards:** Please go to [this guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md) and use *rsyocto* with your custom FPGA configuration in the same way as shown here.
 <br>
   
-   ![Alt text](rsyoctoArria10BootLog.gif?raw=true "rufus")
+   ![Alt text](rsYoctoArria10BootLog.gif?raw=true "rufus")
    ***rsyocto* is booting on an Intel Arria 10 SX SoC-FPGA**
   
   
