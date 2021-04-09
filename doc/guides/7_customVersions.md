@@ -21,7 +21,7 @@ ___
 
 This Python build system was designed to automate the always identical, but complicated and time consuming, build flow for *Intel SoC-FPGAs* to reduce the possible sources of error during design.
 
-It can use the information provided by the *Intel Quartus Prime* FPGA project to compile and configure the bootloader (*u-boot*) to boot up an embedded Linux and to configure the FPGA fabric with the *Intel Quartus Prime FPGA project*. 
+It can use the information provided by the *Intel Quartus Prime* FPGA project to compile and configure the bootloader (*u-boot*) to boot up an embedded Linux and to configure the FPGA fabric with the *Intel Quartus Prime FPGA project*. The build system changes the rootfs of the embedded Linux und uses XML-files for configuration to automate every essential step to archive a good experience of a modern Linux Distribution. 
 
 The Image folder contains a sub-folder for any partition of the final *SD-Card* image. **Files copied into these folders will automatically be pre-installed to the depending partition on the bootable *SD-Card* image**. To achieve this internally my  [*LinuxBootImageFileGenerator*](https://github.com/robseb/LinuxBootImageFileGenerator) is used to generate an image file. 
 
