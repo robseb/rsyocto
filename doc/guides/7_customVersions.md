@@ -21,7 +21,7 @@ ___
 
 This Python build system was designed to automate the always identical, but complicated and time consuming, build flow for *Intel SoC-FPGAs* to reduce the possible sources of error during design.
 
-It can use the information provided by the *Intel Quartus Prime* FPGA project to compile and configure the bootloader (*u-boot*) to boot up an embedded Linux and to configure the FPGA fabric with the *Intel Quartus Prime FPGA project*. The build system changes the rootfs of the embedded Linux und uses XML-files for configuration to automate every essential step to archive a good experience of a modern Linux Distribution. 
+It can use the information provided by the *Intel Quartus Prime* FPGA project to compile and configure the bootloader (*u-boot*) to boot up an embedded Linux and to configure the FPGA Fabric with the *Intel Quartus Prime FPGA project*. The build system changes the rootfs of the embedded Linux und uses XML-files for configuration to automate every essential step to archive a good experience of a modern Linux Distribution. 
 
 The Image folder contains a sub-folder for any partition of the final *SD-Card* image. **Files copied into these folders will automatically be pre-installed to the depending partition on the bootable *SD-Card* image**. To achieve this internally my  [*LinuxBootImageFileGenerator*](https://github.com/robseb/LinuxBootImageFileGenerator) is used to generate an image file. 
 
@@ -30,11 +30,11 @@ It can run on any modern Linux operating system, such as *CentOS* or *Ubuntu* Li
 ___
 
 # Features
-* **Automatically generate a bootable image file with configuration provided by a Quartus Prime project**
+* **Automatically generate a bootable image file with configuration provided by a *Intel Quartus Prime* FPGA project**
 * **Cloning and compiling of the *u-boot* bootloader for Intel SoC-FPGAs**
-* **Allows *menuconfig* of *u-boot***
+* **Allows *menuconfig* of *denx* *u-boot***
 * **Installs and uses the *Linaro* cross-platform toolchain**
-* **HPS Memory- and HPS I/O- configuration based on the Quartus Prime project settings**
+* **HPS Memory- and HPS I/O- configuration based on the Intel Quartus Prime FPGA project settings**
 * **Allows to use a pre-build bootloader execuatable and default u-boot script**
 * **In case of the u-boot script is configured to load a FPGA configuration the depending FPGA configuration will be generated**
 * **Uses the default *rsyocto* Linux files for the boot image**
@@ -44,16 +44,16 @@ ___
 * **Configures e.g. the SSH-Server and the Apache web server**s 
 * **Boot image *(.img)* file generation for distributing embedded Linux Distributions**
 * **Up to 4 freely configurable partitions**
-* **Configurable partition size in *Byte*,*Kilobyte*,*Megabyte* or *Gigabyte***
+* **Configurable partition size in *Byte*, *Kilobyte*, *Megabyte* or *Gigabyte***
 * **File structure for each partition will be generated and user files can be added**
 * **Partition file size check** 
 * **Dynamic mode: Partition size = Size of the files to add to the partition**
 * **An offset can be added to a dynamic size (*e.g. for user space on the running Linux*)**
-* **Linux device tree (*dts*) -files inside a partition can be automatically compiled and replaced with the un-compiled file**  
+* **Linux *device tree *(*dts*) -files inside a partition can be automatically compiled and replaced with the un-compiled file**  
 * **An u-boot script with the name "*boot.script*" inside a partition can be automatically compiled and replaced with the un-compiled file**
 * **Compressed files *(e.g. "tar.gz")* containing for instance the Linux *rootfs* can be unzipped and automatically added to the partition**
 * **Image Sizes, Block Sizes, Start Sectors for every partition will be automatically generated for the depending configuration**
-* **The final image file can be compressed to a "*zip*-archive file to reduce the image size**
+* **The final image file can be compressed to a "*zip*"-archive file to reduce the image size**
 
 * **Supported File Systems**
     * **ext2**
@@ -87,7 +87,7 @@ For generating a bootable *rsyocto* image for *Intel* SoC-FPGAs by executing a s
 
 ## Install the required development- and the build tools
 
-* **Instal Intel Quartus Prime (18.1 or newer) for Linux**
+* **Instal Intel Quartus Prime (18.1 or later) for Linux**
     *    A step-by-step guide how to install *Intel Quartus Prime* on **Linux** is available [here](https://github.com/robseb/NIOSII_EclipseCompProject#i-installment-of-intel-quartus-prime-191-and-201-with-nios-ii-support) (*NIOS II support is for this project not required*)
 * Install the **Intel Embedded Development Suite** (*SoC-EDS*)
     * [Download](https://fpgasoftware.intel.com/soceds/20.1/?edition=standard&platform=windows&download_manager=direct) *Intel SoC EDS 20.1 Standard for Linux*
@@ -117,7 +117,7 @@ For generating a bootable *rsyocto* image for *Intel* SoC-FPGAs by executing a s
 * **Unzip the folder and copy** the internal folder **"socfpgaPlatformGenerator"** and copy it into your *Intel Quartus Prime* FPGA project
     * The project configuration will then be automatically used to build the bootable image 
     * You can also use the default Quartus Prime project as shown in the previous [guide](6_newFPGAconf.md)
-    * Note: The project compilation must be successfully done
+    * **Note:** The project compilation must be successfully done
 * **The Quartus Project folder should now look like this:**
     <br>
     
@@ -131,7 +131,7 @@ For generating a bootable *rsyocto* image for *Intel* SoC-FPGAs by executing a s
     ````shell
     python3 makersyoctoSDImage.py
     ````
-    * Note: The execution with root (*"sudo"*) privileges is not allowed
+    * **Note:** The execution with root (*"sudo"*) privileges is not allowed
 
 
 ## Understand the internal folder structure
@@ -170,7 +170,7 @@ Every **Board- or SoC-FPGA specific folder** contains the following file structu
  | *"my_startUpScripts/run_script.sh"* | *After the network connection with SSH is established* (run level 5) | 
 <br>    
 
-  * For example the content of the pre-installed *run_script.sh* is attached here, that shows how it is possible to **interact in an easy way with the FPGA fabric**
+  * For example the content of the pre-installed "*run_script.sh"* is attached here, that shows how it is possible to **interact in an easy way with the FPGA Fabric**
 
   ```shell
     #!/bin/sh
@@ -191,7 +191,7 @@ Every **Board- or SoC-FPGA specific folder** contains the following file structu
   ````
 <br>
 
-Files copied into these folders will automatically be written on the depending *rootfs* locations. Files with the same name will always overwritten by the file of the board specific folder.
+**Files copied into these folders will automatically be written on the depending *rootfs* locations**. Files with the same name will always overwritten by the file of the board specific folder.
 These folders can also contain the *rootfs*-, Linux Device Tree, or *zImage*-file for the Linux distribution. These files must have the following syntax:
 
 |  **File name** | **Description**  | **Final partition location** | **Final Name inside the partition** |
@@ -274,7 +274,7 @@ The following table summarizes the required file locations for *Intel* SoC-FPGAs
 
 The other XML file is called "*SocFPGABlueprint.xml*". It is used by the `LinuxBootImageFileGenerator` to **define the partition table of the final bootable image**. 
 
-Here it is enabled to change or to add new partitions to the image. However, the default configuration already allows to boot an embedded Linux on an *Intel* SoC-FPGA. The "\*"* is used to select the **dynamic size mode**. That means the script will calculate the required file size for inserting the selected files for all partitions.
+Here it is enabled to change or to add new partitions to the image. However, the default configuration already allows to boot an embedded Linux on an *Intel* SoC-FPGA. The **"\*"** is used to select the **dynamic size mode**. That means the script will calculate the required file size for inserting the selected files for the partition.
 
 The offset value defines additional space. **Change the offset value of the partition with the type "*ext3*" (Id. 2) to increase the free available disk space on the *rootfs*.**  
      
@@ -318,7 +318,7 @@ The Python script will go through the following major steps that specific user i
 1. **Development Board selection**
     * Choose the development board for the final image
 2. **Image Version selection**
-    * Give the ouput image file a name with a version number (Syntax: "*rsyocto_X_XX.img*")
+    * Give the ouput image file a name with a version number (*Syntax: "*rsyocto_X_XX.img*"*)
     * The Version number will be written for instace to the *rootfs* location ("*/usr/rsyocto/version.txt*")
     * By pressing ENTER a date code will be used instead (e.g. "*rsYocto_20200830_1825_D10NANO.img*")
 3. **Check that the Quartus Prime Project is compatible to the selection**
@@ -326,7 +326,7 @@ The Python script will go through the following major steps that specific user i
     * Then a generation of a new FPGA configuration and the bootloader are not possible, the default files will be used
 4. **Check that the Quartus Prime Project contains no non-licend IP**
     * In case a non-licend IP, for instace for an *Intel NIOS II* Soft-Core processor, a warning message will appear
-    * Then a generation of a new FPGA configuration is not possible, the default ".rbf"-file  will be used instead
+    * Then a generation of a new FPGA configuration is not possible, the default *".rbf"*-file  will be used instead
 5. **Selection how the bootloader should be generated**
     * The following question box will appear
         ![Alt text](bootloaderGenQuestion.png?raw=true "Bootloader Generation Question")
@@ -334,7 +334,7 @@ The Python script will go through the following major steps that specific user i
     <br>
 
 6. **In case the entire bootloader should be generated the script will do the following tasks**
-	* Download the Limaro cross-platform toolchain 
+	* Download the *Limaro* cross-platform toolchain 
 	* Generate the *Board Support Package* (*BSP*) with the *Intel Embedded Development Suite* (*SoC EDS*)
 	* Clone the [*u-boot-socfpga*](https://github.com/altera-opensource/u-boot-socfpga) from Github
 	* Run the *Intel SoC EDS filter script*
@@ -355,17 +355,17 @@ The Python script will go through the following major steps that specific user i
     **The script will generate for each selected partition a depending folder**. At this point it is enabled to *drag&drop* files and folders 
     to the partition folder. This content will then be included in the final image file. 
 
-    Linux device tree- and archive-files, copied to the partition folder, will **be automatically processed by the script** in case these features were enabled for the partition inside the XML file. Of cause, archive files or un-compiled device tree files will not be added to the final image. 
+    Linux *device tree*- and archive-files, copied to the partition folder, will **be automatically processed by the script** in case these features were enabled for the partition inside the *XML*-file. Of cause, archive files or un-compiled device tree files will not be added to the final image. 
 
     **It is also possible to add the content of the Board- or SoC-FPGA specfic folders as previously shown**.
 
-    The following illustration shows the generated folder structure with the previous XML configuration file.
+    The following illustration shows the generated folder structure with the previous *XML*-configuration file.
 
     ![Alt text](FolderStrucre.png?raw=true "Example of the folder structure")
 
     Files copied to a partition folder will then be pre-installed onto the depending partition.
-    *Note: On RAW partitions are only files allowed!*
-    *Note: The *u-boot* script and the Linux device tree will be compiled in the next step!* 
+    ***Note:** On RAW partitions are only files allowed!*
+    ***Note:** The *u-boot* script and the Linux device tree will be compiled in the next step!* 
     <br>
 
     * The following manual steps are for instance now allowed:
