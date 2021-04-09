@@ -277,7 +277,7 @@ In the following table these three stages are visible. The stage one is on the l
 
 As described, I attach great importance to easy-to-use and powerful Integrated development environments (**IDE**) for the Linux application development, due to the fact that the requirement and complexity of embedded applications grows exponentially year after year and the only way to counter act this trend are simple to install and use IDEs. 
 
-On the Linux generation site, I could simplify the complex multi-stage bootloader and Linux generation process with my Python scripts and pre-installed Bus-tools and the ARM Development (DS-5) Studio integration can help with hardware-level development and trace debugging. 
+**On the Linux generation site, I could simplify the complex multi-stage bootloader and Linux generation process with my Python scripts and pre-installed Bus-tools and the ARM Development (DS-5) Studio integration can help with hardware-level development and trace debugging**. 
 For the Linux Desktop application development, I used following approach for my project:
 
 
@@ -292,7 +292,7 @@ The development machine can be any computer that runs the compact code editor *M
 
 A difficult to install and configure cross-compiler or Python framework is on the development machine not required, because everything runs directly natively on the development board. This makes the complex design and usage of a `Linux Framework` for this Linux Distribution unnecessary, due to the fact that the source code runs directly on the right location and can access all interfaces, files and libraries natively. This brings a high optimization in terms of feature usage of *rsyocto* and it can help to reduce the code size. 
 
-*VS Code* and *rsyocto* enables in this way to develop *Python*, *PHP*, *HTML*,*CSS*,*C++* with `cmake` and a lot more. I wrote for these use cases examples. The ARMv7-A CPU of the *Intel Cyclone V-* and *Intel Arria 10 SX-* SoC-FPGA-devices are more than powerful enough to notice no major difference between cross-compilation- and native compilation-time. For cloning a *git* repo is only some user space on the *rootfs* required.
+***VS Code* and *rsyocto* enables in this way to develop *Python*, *PHP*, *HTML*,*CSS*,*C++* with `cmake` and a lot more**. **I wrote for these use cases examples**. The ARMv7-A CPU of the *Intel Cyclone V-* and *Intel Arria 10 SX-* SoC-FPGA-devices are more than powerful enough to notice no major difference between cross-compilation- and native compilation-time. For cloning a *git* repo is only some user space on the *rootfs* required.
 
 
 <br>
