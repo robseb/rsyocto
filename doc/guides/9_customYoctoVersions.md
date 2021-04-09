@@ -137,9 +137,9 @@ ___
     #################################################################################################################
     ````
     * For reference the Intel Device tree generator can also be used. To doe this run this script
-    ````shell
-    python3 makersyoctoSDImage.py -g 1
-    ````
+        ````shell
+        python3 makersyoctoSDImage.py -g 1
+        ````
         * The Python script will place this Linux device tree file with the name "*_reference.dts*" to the *Board folder*
     * Copy the file with shown name to the shown location and continue the script 
     * The script will generate a bootable Linux Distribution image for the *Intel Quartus Prime FPGA* project 
