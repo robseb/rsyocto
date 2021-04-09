@@ -26,10 +26,10 @@ ___
 
 ## Designing of custom Yocto-Project based Linux Distributions with the *rsyocto* build system 
 
-1. Install all required tools, like Intel SoC-EDS on a Linux Computer
+1. **Install all required tools, like Intel SoC-EDS on a Linux Computer**
     * For installing and setting up of your build computer please follow the instructions of the [Designing of custom rsyoto versions](7_customVersions.md) guide
 
-2. Download and unzip the SD-Card folder 
+2. **Download and unzip the SD-Card folder** 
     * Download the "**rsyocto_SDxx-Folder**" from the "**releases Part**" of this Github repository 
     
     <p align="center">
@@ -40,9 +40,9 @@ ___
 
     * Unzip the folder
 4. **Copy this folder into your *Intel Quartus Prime* FPGA project folder**
-5. Change the files of the SD-Card folder for your requirements
+5. **Change the files of the SD-Card folder for your requirements**
     * To allow to generate special Linux Distributions chnage the SD-Card folder as described in the [Designing of custom rsyoto versions](7_customVersions.md) guide
-6. Run the *rsyocto* build script with your Yocto-Project Linux files 
+6. **Run the *rsyocto* build script with your Yocto-Project Linux files** 
     * The "*makersyoctoSDImage.py*" Python script allow some specific attributes:
     ````shell
     vm@yoctoBuntoX:~/Desktop/DE10NANOrsyocto/socfpgaPlatformGenerator$ python3 makersyoctoSDImage.py -h
@@ -84,7 +84,7 @@ ___
     ````shell
     python3 makersyoctoSDImage.py -y 1
     ````
-7. Follow the instruction of the Python build script 
+7. **Follow the instruction of the Python build script**
     * The procdure will be identical as shown in the [Designing of custom rsyoto versions](7_customVersions.md) guide
     * Only following message box will appear to show the available Yocto Project output Linux Distribution files
     ````shell
@@ -120,9 +120,9 @@ ___
     ````
     * Type `1` to let the script use this files for the build
 
-8. Select the Linux Device Tree for the build
-    * My [**meta-intelfpga](https://github.com/robseb/meta-intelfpga) BSP layer for the OpenEmbedded Yocto Project did not build the Linux *device tree*
-    * Instate, the build script will ask the user to **copy a Linux *device tree file* with a specific name to the Image Partition folder** as shown:
+8. **Select the Linux *Device Tree* for the build**
+    * My [**meta-intelfpga](https://github.com/robseb/meta-intelfpga) BSP layer for the OpenEmbedded Yocto Project did not build the Linux *Device Tree*
+    * Instate, the build script will ask the user to **copy a Linux *Device Tree file* with a specific name to the Image Partition folder** as shown:
     ````shell
     #################################################################################################################
     #                  Inside the Yocto Project Repo. folder no Linux Devicetree (.dts) was found!                  #
@@ -138,16 +138,16 @@ ___
     #                                                                                                               #
     #################################################################################################################
     ````
-    * For reference the Intel Device tree generator can also be used. To doe this run this script
+    * For reference the Intel Device Tree generator can also be used. To doe this run this script
         ````shell
         python3 makersyoctoSDImage.py -g 1
         ````
-        * The Python script will place this Linux device tree file with the name "*_reference.dts*" to the *Board folder*
+        * The Python script will place this Linux Device Tree file with the name "*_reference.dts*" to the *Board folder*
     * Copy the file with shown name to the shown location and continue the script 
     * The script will generate a bootable Linux Distribution image for the *Intel Quartus Prime FPGA* project 
       
-9. Flash the image to a SD-Card and boot your *Intel SoC-FPGA* board up
-    * done 
+9. **Flash the image to a SD-Card and boot your *Intel SoC-FPGA* board up**
+    * *Done ...*
     
 <br>
 <br>
