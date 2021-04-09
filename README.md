@@ -184,8 +184,8 @@ ___
 | No. | Objective | Guide
 |:--|:--|:--|
 | 1 | **Designing of custom *rsyoto* versions** with your content and FPGA project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)  |
-| 2 | **Install addional Packages** with `opkg`- and `pip3` package manager  | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)  |
-| 2 | **Build your own custom Linux Distro for Intel SoC-FPGAs** with the Yocto Project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)  |
+| 2 | **Install additional Packages** with `opkg`- and `pip3` package manager  | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)  |
+| 2 | **Build your own custom Linux Distro for Intel SoC-FPGAs** with the Yocto Project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/9_customYoctoVersions.md)  |
 <br>
 
 ### Application-specific Guides
