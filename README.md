@@ -303,7 +303,7 @@ A difficult to install and configure cross-compiler or Python framework is on th
 
 Yes, of course all HPS drivers are properly installed and tested. Demo applications and step-by-step guide are available, as well.
 
-### Are all AXI bridge interfaces between the FPGA and FPGA Fabric enabled?
+### Are all AXI bridge interfaces between the HPS and FPGA Fabric enabled?
 
 Yes, of course all bridge interfaces between the ARMv7-A- and FPGA- world are for both *Intel SoC-FPGAs* enabled and tested. Demo applications and step-by-step guide are available, as well.
 
