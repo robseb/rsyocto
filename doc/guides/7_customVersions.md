@@ -9,6 +9,7 @@ ___
 **The Python script *"makersyoctoSDImage.py"* allows to build with the *Intel Embedded Development Suite* (*SoC EDS*) the entire bootflow and generates a bootable image (*.img*) file with a flavor of *rsyocto*** with your *Intel Quartus Prime FPGA project*.
 
 ![Alt text](BuildSystemHead.png?raw=true "Symbol of the build system")
+
 **Use your *Intel Quartus Prime* FPGA project to create your own *rsyocto* with your FPGA Configuration**
 ___
 <br>
