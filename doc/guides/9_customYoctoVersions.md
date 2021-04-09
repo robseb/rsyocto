@@ -9,12 +9,14 @@ ___
 **This is a more advanced guide of my  [ 	Designing of custom rsyoto versions](7_customVersions.md) to show to use the build system with custom Yocto Project Linux distributions to automate the entire bootflow for Intel Cyclone V- and Intel Arria 10 SX SoC-FPGA.** The Python scripts work with any Intel Cyclone V and Intel Arria 10 SoC-FPGA board with booting via SD-Card.  
 
 ![Alt text](BuildSystemHead.png?raw=true "Symbol of the build system")
+
 **Use your *Intel Quartus Prime* FPGA project to create your own *rsyocto* with your FPGA Configuration**
 ___
 <br>
 
 
 ![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/master/doc/symbols/BuildSystem.jpg?raw=true "automatic rsyocto Build system")
+
 **Block diagram of the fully automated build system to design new releases**
 <br>
 
@@ -151,6 +153,5 @@ ___
 <br>
 
 ___
-[back](6_newFPGAconf.md)
 [Back to the startpage](https://github.com/robseb/rsyocto)
 
