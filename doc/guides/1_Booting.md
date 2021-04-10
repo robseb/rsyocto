@@ -39,11 +39,11 @@ This guide shows how to install *rsyocto* on a **SD-Card** and boot it on a Tera
 
   ## Prepare your Board and open the console COM-Port
   1. **Eject** the SD-Card from your Computer and insert it into the SD-Card-Reader of your SoC-FPGA Board
-  2. **Change the MSEL (*Mode Select*)-Bit** switch to following setting: 
+  2. **Change the MSEL (*Mode Select*)-Bit** switch to the following setting: 
    ![Alt text](requiredMSEL.jpg?raw=true "Required MSEL-Bit Switch Selection")
    
-  * The *Terasic DE0-Nano SoC Kit/Atlas-SoC Kit* require the **same** MSEL configuration as the *Terasic DE10-Nano or Standard* Development Board
-  3. Connect your FPGA-Board with a **Ethernet cable to your local network**
+  * The *Terasic DE0-Nano SoC Kit/Atlas-SoC Kit* requires the **same** MSEL configuration as the *Terasic DE10-Nano or Standard* Development Board
+  3. Connect your FPGA-Board with an **Ethernet cable to your local network**
      * Be sure that a **iPv4-DHCP** is active on this network 
   4. Connect a USB Cable between the FTDI Virtual **COM-Port** (USB CDC) and your Computer
   5. **Open the COM-Port**
@@ -53,7 +53,7 @@ This guide shows how to install *rsyocto* on a **SD-Card** and boot it on a Tera
     
 ## Boot *rsyocto* on your FPGA-Board
   1. **Power up** your FPGA Board
-  2. Now **rsyocto** boots through following stages:
+  2. Now **rsyocto** boots through the following stages:
   
    | No | Stage | Description | Task 
    |:--|:--|:--|:--|
@@ -79,7 +79,7 @@ This guide shows how to install *rsyocto* on a **SD-Card** and boot it on a Tera
    
   ### **During the boot must be an ON and OFF FPGA LED pattern be shown on the board!**
    * The secondary *u-bootloader* writes the value **0x55** via the *Lightweight HPS-to-FPGA bridge* to a Soft-IP PIO controller connected to the FPGA LEDs
-   * **Note:** If this is not the case is the **MSEL switch** is not in the proper position and the FPGA configuration could not be written properly!
+   * **Note:** If this is not the case the **MSEL switch** is not in the proper position and the FPGA configuration could not be written properly!
   ### **The Linux requests an iPv4-Address by a DHCP-server**
   ### **After the system has booted properly and a network connection is established -> HPS_LED and only FPGA LED 0 turns ON** 
    * **Note:** If rsyocto goes in a bootloop after requesting the current date the **MSEL switch** is not in the proper position and the **FPGA configuration** could not be written properly! This problem could occur because the boot-up shell script ([shown here at the end](https://github.com/robseb/rsyocto/blob/rsyocto-1.042/doc/guides/6_newFPGAconf.md)) tries to write to the closed LW HPS2FPGA Bridge or to an unreachable address.
@@ -98,7 +98,7 @@ This guide shows how to install *rsyocto* on a **SD-Card** and boot it on a Tera
  <br>
  
  ## Find the iPv4 Address of your Board
- * Use following Linux Command to get the iPv4 Address of your Board
+ * Use the following Linux Command to get the iPv4 Address of your Board
      ````shell
       ifconfig
      ```` 
@@ -110,7 +110,7 @@ This guide shows how to install *rsyocto* on a **SD-Card** and boot it on a Tera
     ```
     ssh root@<Boards iPv4-address>
     ```
-2. **Use following the Passwort:** `eit`
+2. **Use the following the Passwort:** `eit`
   * No other authentication is required
   * The default *SSH-Port* (*22*) is used 
 3. Now *rsyocto* Splash screen appears
