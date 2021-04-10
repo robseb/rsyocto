@@ -21,10 +21,6 @@
 
 ___
 
-
-`I'm working on the new rsyocto release! This branch is work under process! Please use the MASTER branch!`
-
-
 *rsyocto* implements a **modern Linux Kernel (linux-socfpga 5.11)** and brings a set of today fundamentally needed components to **Intel SoC-FPGAs** to help to **simplify the complex process of development** for FPGA-, Industrial 4.0-, Internet of things- (IoT), automotive- and deep learning (AI) accelerator- applications.
 
 To realize that **Python3** with the Python Package manager **pip (PyPI)** and the **Apache Webserver** with **PHP** are already included. Thereby it is really easy to install Python applications from the *Raspberry Pi* on a powerful Intel SoC-FPGA. *rsyocto* is for its best optimization complete console based, but the Apache Webserver can bring any modern GUI to Computers, Smartphones or Tablets, by hosting for example a monitor web interface. For that the Python Web framework **Django 3.0** is pre-installed.
@@ -172,7 +168,7 @@ ___
 |:--|:--|:--|
 | 1 | **Booting *rsyocto* on your Board** | [**Getting started Guide**](doc/guides/1_Booting.md) |
 | 2 | **Use of Hard-IP, FPGA-IP and FPGA Configuration of the FPGA Fabric** |[Step by step guide 1](doc/guides/2_FPGA_HARDIP.md) |
-| 3 | **Debugging C++ applications remotely** with *Microsoft Visual Studio* | [Step by step guide 2a](doc/guides/3_CPP.md) |
+| 3 | **Debugging C++ applications remotely** with *Microsoft Visual Studio* | [Step by step guide 2](doc/guides/3_CPP.md) |
 | 4 | **Debugging Python applications remotely** | [Step by step guide 3](doc/guides/4_Python.md) |
 | 5 | **Analyzation of applications with ARM DS-5 Streamline** | [Step by step guide 4](doc/guides/5_Streamline.md) |
 | 6 | **Developing a custom FPGA Configuration with Intel Quartus Prime**| [Step by step guide 5](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/6_newFPGAconf.md) |
