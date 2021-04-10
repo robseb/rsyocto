@@ -17,7 +17,7 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
     echo 0 > /sys/class/leds/hps_led0/brightness
     ```
 1. **To toggle the HPS_LED is a *blinkLed.py* Python script pre-installed**
-    * Run run a exiting Python script that is located on the home-dir (*~*) by using
+    * Run a exiting Python script that is located on the home-dir (*~*) by using
     ```bash 
     Python3 blinkLed.py
     ```
@@ -29,12 +29,12 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
 <br>
    
 ## Opening *rsyocto* Info Paper (*Platform block diagram*)
-  * For every *rsyocto*-Version a information sheet is on the `Apache Webserver` pre-installed 
-  * This Paper describes the Configuration of the FPGA Soft-IP and there Addresses and the used I/O Pins of the default Configuration set was written during boot to the FPGA Fabric
+  * For every *rsyocto*-Version an information sheet is on the `Apache Webserver` pre-installed 
+  * This Paper describes the Configuration of the FPGA Soft-IP and their Addresses and the used I/O Pins of the default Configuration set was written during boot to the FPGA Fabric
   * **Open it by typing the iPv4-Address of your Board into a Web browser**
-  * Of cause it is possible to install any other homepage
+  * Of cause it is possible to install any other homepages
      * Insert the homepage files to: `/usr/share/apache2/default-site/htdocs` as shown in deeper guides
-     * Restart the Apache Server with following commands:
+     * Restart the `Apache` Server with the following commands:
         ````bash
             /etc/init.d/apache2 stop
             /etc/init.d/apache2 start
@@ -56,10 +56,10 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
   * **The Suffix `"-h"` (*help*) after any command gives detailed information about the *rstools* command**
   * The `rstools` are part of my [`meta-intelfpga`](https://github.com/robseb/meta-intelfpga) BSP-layer for the Yocto Project  
   
-  1. **Reading a AVALON-Bus FPGA Soft-IP Module connected to a ARM AXI Bridge Interface**
+  1. **Reading an AVALON-Bus FPGA Soft-IP Module connected to an ARM AXI Bridge Interface**
       * During the Boot process the FPGA-Configuration is written with a "*System ID Peripheral*"-component (*ID: 0xcafeacdc*)
-      * The Module is connected via the **Lightweight HPS-to-FPGA** (*LWHPS2FPGA; lwhps2fpga*) bridge to the HPS with a address offset of *0x30*
-      * Use following command to read the System ID:
+      * The Module is connected via the **Lightweight HPS-to-FPGA** (*LWHPS2FPGA; lwhps2fpga*) bridge to the HPS with an address offset of *0x30*
+      * Use the following command to read the System ID:
         ```bash
         FPGA-readBridge -lw 30
         ```
@@ -67,14 +67,14 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
 
       * The Suffix "`-lw`" selects the Lightweight HPS-to-FPGA (*LWHPS2FPGA*) bridge
       * "*30*" is the (*hex*) address offset of the *SysID* Soft-IP given by the *Intel Quartus Prime Platform Designer*
-      * The Suffix "`-b`" disables an detailed output
+      * The Suffix "`-b`" disables a detailed output
         * Useful for  *Python-*, *C++-* or *PHP-* application
            ```bash
            FPGA-readBridge -lw 30 -b
            ```
   2. **Turn off the FPGA LEDs with a single command**
       * The FPGA LEDs are connected via a Soft-IP "*PIO (Parallel IP)*" controller to the **Lightweight HPS-to-FPGA** bus
-      * For turning the LEDs off run following command
+      * For turning the LEDs off run the following command
           ```bash
           FPGA-writeBridge -lw 20 0
           ```
@@ -82,7 +82,7 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
       * "30" is the (*hex*) address offset of this Soft-Ip given by the *Intel Quartus Prime Platform Designer*
       
   3. **Put a Hex pattern to the FPGA LEDs**
-      * With the following command any hex pattern can be written over a *AXI-Bus* to FPGA Soft-IP 
+      * With the following command any hex pattern can be written over an *AXI-Bus* to FPGA Soft-IP 
         ```bash
         FPGA-writeBridge -lw 20 -h acdc
         ```
@@ -113,7 +113,7 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
  7. **Reading the FPGA switches for 15sec**
      * On the *LWHPS2FPGA* Bridge is with the address offset *0x00* a **PIO** (*Parallel I/O*) Soft-IP module connected 
      * It is assigned to the FPGA switches of the development baord
-     * Use following command allows to read the FPGA switches of your board  
+     * Use the following command to allow to read the FPGA switches of your board  
         ```bash
         FPGA-readBridge -lw 0
         ````
@@ -131,7 +131,7 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
     * But now the FPGA LEDs are connected to **Lightweight HPS-to-FPGA** (*LWHPS2FPGA*) Bridge
     * The FPGA Configuration must be changed to reconnect the FPGA LED...
     * The required `.rbf` Configuration file ("*gpiConf.rbf*") is pre-installed on the home directory (*~*)
-    * Execute following command to **re-configure the FPGA Fabric** with this FPGA Configuration file:
+    * Execute the following command to **re-configure the FPGA Fabric** with this FPGA Configuration file:
         * For the *Terasic* DE10 Standard Board 
           ```bash
           FPGA-writeConfig  -f gpiConfStd.rbf
@@ -144,7 +144,7 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
            ```bash
            FPGA-writeConfig -f gpiConfDe0.rbf
            ```
-    * That command will check that the FPGA Configuration file is vialed for the running FPGA Fabric, then it will reset the old FPGA Configuration, **loads the new FPGA Configuration with the help of the `FPGA Manger` to FPGA-Fabric** and release the FPGA Fabric reset 
+    * That command will check that the FPGA Configuration file is valid for the running FPGA Fabric, then it will reset the old FPGA Configuration, **load the new FPGA Configuration with the help of the `FPGA Manger` to FPGA-Fabric** and release the FPGA Fabric reset 
     * Now should be the LEDs connected with the direct 32-Bit GPO register
     * Enable the LEDs over this way
         ```bash
@@ -162,10 +162,10 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
         ```
 <br>
 
-9. **Reading a AVALON-Bus FPGA Module connect to the ARM AXI HPS-to-FPGA Bridge**
+9. **Reading an AVALON-Bus FPGA Module connect to the ARM AXI HPS-to-FPGA Bridge**
       * During the Boot process the FPGA Configuration is written with a "*System ID Peripheral*" Soft-IP component (*ID: 0x23456789*)
-      * The Module is connected via the **ARM AXI HPS-to-FPGA** (*HPS2FPGA; hps2fpga*) bridge to the HPS with a address offset of *0x00*
-      * Use following command to read the System ID:
+      * The Module is connected via the **ARM AXI HPS-to-FPGA** (*HPS2FPGA; hps2fpga*) bridge to the HPS with an address offset of *0x00*
+      * Use the following command to read the System ID:
         ```bash
         FPGA-readBridge -hf 0
         ```
@@ -177,7 +177,7 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
       * **This feature can be enabled with the attribute "`-mpu`"**
       * On the *Terasic* *DE10*- and *DE0*- *Cyclone V SoC-FPGA* boards is the **HPS_KEY** connected to **GPIO1[24]** (`GPIOB`)
       * The *"gpio_ext_portb"* of `GPIO1` has the address *0xFF709050* and holds the status of the *HPS_KEY* push button (*p. 3139 of the Cyclone V SoC-FPGA HPS handbook (2018.07.17)*)
-      * Use following command to read this Register:
+      * Use the following command to read this Register:
         ```bash
         FPGA-readBridge -mpu 0xFF709050 
         ```
@@ -196,7 +196,7 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
 
 **Inside the pre-configured FPGA Configuration are the HPS Hard-IP I/O pins routed over the `FPGA Interconnect` to FPGA I/O pins to enable the usage of `Arduino Uno shields`**. 
 
-Typically, dedicated HPS I/O pin headers are not available on SoC-FPGA development boards. It is for this reason that I chose this route to gain access. This can be seen inside the info papers and [**here**](https://github.com/robseb/HPS2FPGAmapping). For every Hard-IP components common Linux shell tools are available.
+Typically, dedicated HPS I/O pin headers are not available on SoC-FPGA development boards. For this reason I chose this route to gain access. This can be seen inside the info papers and [**here**](https://github.com/robseb/HPS2FPGAmapping). For every Hard-IP components common Linux shell tools are available.
     
 1. **I²c-Devices** 
     * The *Terasic DE10 Boards* have an [*ADXL345*](https://www.analog.com/en/products/adxl345.html)-Accelerometer on `i2c0`
@@ -228,13 +228,13 @@ Typically, dedicated HPS I/O pin headers are not available on SoC-FPGA developme
     * **This COM-Port is routed via the FPGA Interconnect to FPGA I/O Pins on the *DE10 SoC-FPGA* Boards**
     * Pres `CMD+A`, then `Z` and then `Q` to leave `minicom` 
 3. **SPI**
-    * *rsyocto* can be function as `SPI-Master` or as an `SPI-Slave`  
+    * *rsyocto* can be function as `SPI-Master` or as a `SPI-Slave`  
     * The `spi-tools` are installed
     * Please follow the documentation of the [spi-tools](https://github.com/cpb-/spi-tools)
 4. **CAN-Bus** (*Intel Cylone V only*)
     * **Intel Cyclone V SoC-FPGAs have two powerful Bosch `D_CAN`-Controllers embedded**
     * To interact with CAN Devices the `can-tools` with [`SocketCAN`](https://www.kernel.org/doc/html/v4.17/networking/can.html) are pre-installed
-    * `SocketCAN` allows over an internal network connection to read and write CAN-Packages and monitoring there traffic 
+    * `SocketCAN` allows over an internal network connection to read and write CAN-Packages and monitoring their traffic 
     * To enable the `CAN0` execute this command to enable the *CAN network Port*
         ```bash
         ip link set can0 type can bitrate 125000
@@ -250,7 +250,7 @@ Typically, dedicated HPS I/O pin headers are not available on SoC-FPGA developme
         cangen can0
         ```
     * For more information please read the [can-tools](https://github.com/linux-can/can-utils) documentation
-    * **A Python example show how to send a CAN-package with Python is also given in details** [here](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/appSpecificGuides/1_TransmittingCAN.md)
+    * **A Python example shows how to send a CAN-package with Python is also given in details** [here](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/appSpecificGuides/1_TransmittingCAN.md)
     
  
  ## Continue with the next level: [Debugging C++ applications remotely with Visual Studio](3_CPP.md)
