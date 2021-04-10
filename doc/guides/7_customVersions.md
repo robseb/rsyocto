@@ -22,7 +22,7 @@ ___
 
 This Python build system was designed to automate the always identical, but complicated and time consuming, build flow for *Intel SoC-FPGAs* to reduce the possible sources of error during design.
 
-It can use the information provided by the *Intel Quartus Prime* FPGA project to compile and configure the bootloader (*u-boot*) to boot up an embedded Linux and to configure the FPGA Fabric with the *Intel Quartus Prime FPGA project*. The build system changes the rootfs of the embedded Linux und uses XML-files for configuration to automate every essential step to archive a good experience of a modern Linux Distribution. 
+It can use the information provided by the *Intel Quartus Prime* FPGA project to compile and configure the bootloader (*u-boot*) to boot up an Embedded Linux and to configure the FPGA Fabric with the *Intel Quartus Prime FPGA project*. The build system changes the rootfs of the Embedded Linux und uses XML-files for configuration to automate every essential step to achieve a good experience of a modern Linux Distribution. 
 
 The Image folder contains a sub-folder for any partition of the final *SD-Card* image. **Files copied into these folders will automatically be pre-installed to the depending partition on the bootable *SD-Card* image**. To achieve this internally my  [*LinuxBootImageFileGenerator*](https://github.com/robseb/LinuxBootImageFileGenerator) is used to generate an image file. 
 
@@ -36,14 +36,14 @@ ___
 * **Allows *menuconfig* of *denx* *u-boot***
 * **Installs and uses the *Linaro* cross-platform toolchain**
 * **HPS Memory- and HPS I/O- configuration based on the Intel Quartus Prime FPGA project settings**
-* **Allows to use a pre-build bootloader execuatable and default u-boot script**
+* **Allow to use a pre-build bootloader execuatable and default u-boot script**
 * **In case of the u-boot script is configured to load a FPGA configuration the depending FPGA configuration will be generated**
 * **Uses the default *rsyocto* Linux files for the boot image**
 * **Allows to pre-install any files or operating systems to the SD-Card image**
 * **Enables to copy board- and SoC-FPGA- specific files to the specific folders**
 * **Give every board a private MAC-Address by writing it to the device tree**
 * **Configures e.g. the SSH-Server and the Apache web server**s 
-* **Boot image *(.img)* file generation for distributing embedded Linux Distributions**
+* **Boot image *(.img)* file generation for distributing Embedded Linux Distributions**
 * **Up to 4 freely configurable partitions**
 * **Configurable partition size in *Byte*, *Kilobyte*, *Megabyte* or *Gigabyte***
 * **File structure for each partition will be generated and user files can be added**
@@ -207,7 +207,7 @@ These folders can also contain the *rootfs*-, Linux Device Tree, or *zImage*-fil
 
 **Note: XXX represents the board specific- or SoC-FPGA specific- suffix**
 
-Inside **board specific folders** replace "*XXX*" with following:
+Inside **board specific folders** replace "*XXX*" with the following:
 
 |  **Suffix** | **Description**  | **Example** |
 |:--|:--|:--|
@@ -231,7 +231,7 @@ During further execution the Python build system will create new folders inside 
  | \"Image_partitions\" | Contains a sup folder for every disk image partition. Files copied here will be pre-installed onto the depending partition |
  <br>
 
-The "*rsyoctoConf.xml*" XML file is used to assign the **MAC-Address** to each development board. This address will then written to the Linux Device tree. In the following paragraph the content of the  "*rsyoctoConf.xml*" file is added. Change it for your requirements!
+The "*rsyoctoConf.xml*" XML file is used to assign the **MAC-Address** to each development board. This address will then be written to the Linux Device tree. In the following paragraph the content of the  "*rsyoctoConf.xml*" file is added. Change it for your requirements!
 ````xml
 <?xml version="1.0" encoding = "UTF-8" ?>
 <!-- rsyocto Linux configuration file -->
@@ -275,7 +275,7 @@ The following table summarizes the required file locations for *Intel* SoC-FPGAs
 
 The other XML file is called "*SocFPGABlueprint.xml*". It is used by the `LinuxBootImageFileGenerator` to **define the partition table of the final bootable image**. 
 
-Here it is enabled to change or to add new partitions to the image. However, the default configuration already allows to boot an embedded Linux on an *Intel* SoC-FPGA. The **"\*"** is used to select the **dynamic size mode**. That means the script will calculate the required file size for inserting the selected files for the partition.
+Here it is posibile to change or to add new partitions to the image. However, the default configuration already allows to boot an Embedded Linux on an *Intel* SoC-FPGA. The **"\*"** is used to select the **dynamic size mode**. That means the script will calculate the required file size for inserting the selected files for the partition.
 
 The offset value defines additional space. **Change the offset value of the partition with the type "*ext3*" (Id. 2) to increase the free available disk space on the *rootfs*.**  
      
@@ -320,13 +320,13 @@ The Python script will go through the following major steps that specific user i
     * Choose the development board for the final image
 2. **Image Version selection**
     * Give the ouput image file a name with a version number (*Syntax: "*rsyocto_X_XX.img*"*)
-    * The Version number will be written for instace to the *rootfs* location ("*/usr/rsyocto/version.txt*")
+    * The Version number will be written for instance to the *rootfs* location ("*/usr/rsyocto/version.txt*")
     * By pressing ENTER a date code will be used instead (e.g. "*rsYocto_20200830_1825_D10NANO.img*")
 3. **Check that the Quartus Prime Project is compatible to the selection**
     * In case the required SoC-FPGA device for the board is not the same as that on the *Quartus Prime Project* a warning will appear
     * Then a generation of a new FPGA configuration and the bootloader are not possible, the default files will be used
 4. **Check that the Quartus Prime Project contains no non-licend IP**
-    * In case a non-licend IP, for instace for an *Intel NIOS II* Soft-Core processor, a warning message will appear
+    * In case a non-licend IP, for instance for an *Intel NIOS II* Soft-Core processor, a warning message will appear
     * Then a generation of a new FPGA configuration is not possible, the default *".rbf"*-file  will be used instead
 5. **Selection how the bootloader should be generated**
     * The following question box will appear
@@ -343,7 +343,7 @@ The Python script will go through the following major steps that specific user i
 	* Make the *u-boot* bootloader for the Intel SoC-FPGA device
 	* The generated executable will be copied to the RAW partition folder
 6. **In case the default bootloader should be used**
-    * A pre-build bootloader with a default configuration will be copied to the RAW partition folder
+    * A pre-built bootloader with a default configuration will be copied to the RAW partition folder
 7. **Give the script super user privileges**
     * During the unzipping of the *rootfs* the script will ask for the super user (*sudo*) admin password
 8. **Change the *rootfs* or add files to the Board- or SoC-FPGA specfic folders manually**
@@ -389,7 +389,7 @@ The Python script will go through the following major steps that specific user i
     In case the *u-boot* is configured to write the FPGA configuration the script will generate 
     the depending FPGA configuration file. This is only possible if no unlicensed IP is available inside the Quartus Prime Project. 
     For instance Quartus Prime projects containing an *Intel NIOS II* Soft-Core processor can not be generated. 
-    The following inlustration shows the callcuated partition table for a custom *rsyocto* build:
+    The following inlustration shows the callculated partition table for a custom *rsyocto* build:
   
     ![Alt text](partitionTable.png?raw=true "Partition table")
     <br>
