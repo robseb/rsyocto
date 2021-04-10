@@ -11,7 +11,7 @@ The following illustration shows how *Linux* and Microsoft Visual Studio work to
 ![Alt text](IneractionRsYoctoVisalStudio.jpg?raw=true "Linux and Visual Studio")
 <br>
 
-**Note:** Instate of using the complex *Microsoft Visual Studio* for C++ development and debugging is a more pleasant way with the code editor **Microsoft Visual Studio Code** and `cmake` available. To demonstrate is approach I wrote following **GUIDE XXXXXXXXXXXXX**.
+**Note:** Instead of using the complex *Microsoft Visual Studio* for C++ development and debugging is a more pleasant way with the code editor **Microsoft Visual Studio Code** and `cmake` available.
 <br>
 
 # Installing Microsoft Visual Studio for Linux development
@@ -27,7 +27,7 @@ The following illustration shows how *Linux* and Microsoft Visual Studio work to
 3. Press "**next**" and give your project **a name**
 4. A new *Visual Studio Solution* should appear with a getting started guide
 5. This Guide shows how to configure the connection of the remote Linux machine
-6. Please follow this instructions with this settings:
+6. Please follow these instructions with these settings:
    * **Platform:** `ARM`
    * **Host Name:** `<IPv4-Address of your Board>`
    * **Port:** `22`
@@ -41,7 +41,7 @@ The following illustration shows how *Linux* and Microsoft Visual Studio work to
  <br>
 
 # Known issues with Microsoft Visual Studio and Linux
- * Read the console output only and ingnore the error windows 
+ * Read only the console output and ingnore the error windows 
  * Ingore the "*rysnc could not start error*" (*rsync* is installed properly)
  * After any issues try to `clean and rebuild the solution`
 
@@ -49,7 +49,7 @@ The following illustration shows how *Linux* and Microsoft Visual Studio work to
 I wrote further C++ Demo Visual Studio projects to show how to
   * Interact with the HPS Hard-IP 
   * Interact with FPGA Soft-IP
-  * Changing the FPGA Configuration with C++
+  * Change the FPGA Configuration with C++
   * And more...
 
   The projects and guide is **[Available here](https://github.com/robseb/LinuxVSCppFPGA)**.
