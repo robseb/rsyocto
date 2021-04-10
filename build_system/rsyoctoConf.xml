@@ -11,19 +11,19 @@
 
 <!-- For documentation with the Linux Kernal Version, Build date -->
 <!-- and a feature description -->
-<distro yocto_build="07-09-20" kernel_name ="linux-socfpga 5.7" 
+<distro yocto_build="10 Apr 2021" kernel_name ="linux-socfpga 5.11" 
 description_txt="
 -- MAIN FEATURES: \n
-	  python3, pip3, django 3.01, adminLTE, sqlite, openSSH Server, apache2, \n
-	  php, gcc, gcc++, make, cmake, wget, curl, gdb server, gatord, time, nano, \n
+	  python3, pip3, django, sqlite, openSSH Server, apache2, php, \n
+	  gcc, gcc++, make, cmake, wget, curl, gdb server, gatord, time, nano, \n
 	  minicom, i2c-tools, spi-tools, usbutils, ethtool, iputils, git, can-tools, \n
 	  rstools, opkg, update-rc.d, crontab, devmem, iproute2, devmem, iproute2, iw \n
 -- FPGA: \n
-	  Sys_ID, LEDs, Switches, ADC, Seven Segment Display, Display ... \n
+	  Sys_ID, LEDs, Switches, ADC, Seven Segment Display, Display, ... \n
 -- INCLUDE: \n
-	 Intel hwlib \n
+	 Intel hwlib for CY5 \n
 -- WEBITERFACE: \n
-	 Pinout- and Info-Page \n
+	 Pinout and Info Page \n
 	 "/>
 </rsyocto>
 

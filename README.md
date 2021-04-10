@@ -172,8 +172,7 @@ ___
 |:--|:--|:--|
 | 1 | **Booting *rsyocto* on your Board** | [**Getting started Guide**](doc/guides/1_Booting.md) |
 | 2 | **Use of Hard-IP, FPGA-IP and FPGA Configuration of the FPGA Fabric** |[Step by step guide 1](doc/guides/2_FPGA_HARDIP.md) |
-| 3a | **Debugging C++ applications remotely** with *Microsoft Visual Studio* | [Step by step guide 2a](doc/guides/3_CPP.md) |
-| 3b | **Debugging C++ applications remotely** with **CMAKE** and *Microsoft Visual Studio Code* | [Step by step guide 2b](doc/guides/3_CPP_CMAKE.md) |
+| 3 | **Debugging C++ applications remotely** with *Microsoft Visual Studio* | [Step by step guide 2a](doc/guides/3_CPP.md) |
 | 4 | **Debugging Python applications remotely** | [Step by step guide 3](doc/guides/4_Python.md) |
 | 5 | **Analyzation of applications with ARM DS-5 Streamline** | [Step by step guide 4](doc/guides/5_Streamline.md) |
 | 6 | **Developing a custom FPGA Configuration with Intel Quartus Prime**| [Step by step guide 5](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/6_newFPGAconf.md) |
@@ -184,7 +183,6 @@ ___
 | No. | Objective | Guide
 |:--|:--|:--|
 | 1 | **Designing of custom *rsyoto* versions** with your content and FPGA project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)  |
-| 2 | **Install additional Packages** with `opkg`- and `pip3` package manager  | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)  |
 | 2 | **Build your own custom Linux Distro for Intel SoC-FPGAs** with the Yocto Project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/9_customYoctoVersions.md)  |
 <br>
 
