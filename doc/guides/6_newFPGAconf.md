@@ -4,7 +4,7 @@
 
 **This guide describes how to design a new FPGA Configuration with a custom *Intel Quartus Prime* project. That FPGA Configuration can be written during boot or during runtime by Linux.** 
 
-For each board the used default FPGA Configuration and a version with a *Intel NIOS II Soft-Core processor* inside this repository are available. The *Intel Quartus Prime* Project with the *Intel NIOS II Soft-Core processor* is connected via the *FPGA-to-HPS*-Bridge to the Hard-IP of the HPS. This allows to use Hard-IP components, such as CAN with the *NIOS II* processor. 
+For each board the used default FPGA Configuration and a version with an *Intel NIOS II Soft-Core processor* inside this repository are available. The *Intel Quartus Prime* Project with the *Intel NIOS II Soft-Core processor* is connected via the *FPGA-to-HPS*-Bridge to the Hard-IP of the HPS. This allows to use Hard-IP components, such as CAN with the *NIOS II* processor. 
 
 ## Getting started with Intel Quartus Prime
 
@@ -25,7 +25,7 @@ For each board the used default FPGA Configuration and a version with a *Intel N
       FPGA-writeConfig  -f gpiConf.rbf
   ````   
   
- ## Steps to generate the FPGA Configuration files with a Intel Quartus Prime FPGA Project
+ ## Steps to generate the FPGA Configuration files with an Intel Quartus Prime FPGA Project
   **Note: The new build system can do these steps automatically!**
 
    1. **For the Arria 10 SX SoC-FPGA:**
