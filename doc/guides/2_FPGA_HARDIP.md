@@ -126,7 +126,7 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
     <br>
  
 8. **Using the GPI/GPO- Registers to the FPGA** 
-    * *Intel SoC-FPGAs* have two 32-Bit registers to interact directly with the FPGA Fabric
+    * *Intel SoC-FPGAs* have two general purpose 32-Bit registers to interact directly with the FPGA Fabric
     * To test this feature by connecting the FPGA LEDs with the GPO-Register
     * But now the FPGA LEDs are connected to **Lightweight HPS-to-FPGA** (*LWHPS2FPGA*) Bridge
     * The FPGA Configuration must be changed to reconnect the FPGA LED...
