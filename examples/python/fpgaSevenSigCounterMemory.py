@@ -23,12 +23,20 @@ import devmem
 from time import sleep
 
 
-# the HPS Lightweight HPS-to-FPGA bridge address offset
+# The HPS Lightweight HPS-to-FPGA bridge address offset (Cyclone V and Arria 10)
 HPS_LW_ADRS_OFFSET = 0xFF200000 
+
+# The HPS HPS-to-FPGA bridge address offset (Cyclone V and Arria 10)
+HPS_ADRS_OFFSET = 0xC0000000 
 
 # The offset address of the seven segment Display Controller
 #                       DE10 Standard, , HAN Pilot 
 SEVENSIG_ADDRES_OFFSET = [0x038,0x0,0x008]
+
+# The used bridge interface offset address for the baord 
+#                               DE10 Standard, , HAN Pilot 
+SEVENSIG_BRIDGE_ADDRES_OFFSET = [HPS_LW_ADRS_OFFSET,0x0,HPS_ADRS_OFFSET]
+
 
 ledValue = 0
 
@@ -55,12 +63,13 @@ if __name__ == '__main__':
             devboard = 2
 
     if devboard==1:
-        print("Error: This script only works with a Terasic DE10 Standard- or Han Pilot Board!")
+        print("Error: This script only works with a Terasic DE10 Standard- or Terasic HAN Pilot Board!")
         sys.exit()
 
     # Open the memory access to the Lightweight HPS-to-FPGA bridge
     #                  (Base address, byte len to accesses, interface)
-    de = devmem.DevMem(HPS_LW_ADRS_OFFSET, SEVENSIG_ADDRES_OFFSET[devboard]+1, "/dev/mem")
+    de = devmem.DevMem(SEVENSIG_BRIDGE_ADDRES_OFFSET[devboard], \
+                        SEVENSIG_ADDRES_OFFSET[devboard]+1, "/dev/mem")
 
     for var in range(SEVENSIG_MAX_VALUE[devboard]):
         print('Sample: '+str(var)+'/'+str(SEVENSIG_MAX_VALUE[devboard]))

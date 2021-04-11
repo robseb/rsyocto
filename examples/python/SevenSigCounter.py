@@ -21,7 +21,7 @@ SEVENSIG_MAX_VALUE = [2000,0,254]
 if __name__ == '__main__':
     print('Counting a number on the Seven Segment Display with a Linux shell command!\n')
 
-    # Check that the running board is a Terasic DE10-Standard-  or Han Pilot Development Board  
+    # Check that the running board is a Terasic DE10-Standard-  or Terasic Han Pilot Development Board  
     # Used development board 
     devboard = 1 # 0: DE10 Standard | 1: DE10 Nano | 2: Han Pilot 
 
@@ -42,9 +42,9 @@ if __name__ == '__main__':
     # Count the Seven Segment Display with a rstools shell command
     for count in range(SEVENSIG_MAX_VALUE[devboard]):
         print('Sample: '+str(count)+'/'+str(SEVENSIG_MAX_VALUE[devboard]))
-
-        if(devboard==2):
-            os.system('FPGA-writeBridge -lw 8 -h '+ str(count) +' -b')
+    
+        if(devboard==2): # HAN Pilot Board
+            os.system('FPGA-writeBridge -hf 8 -h '+ str(count) +' -b')
         else: # DE10 Standard Board 
             os.system('FPGA-writeBridge -lw 38 -h '+ str(count) +' -b')
 
