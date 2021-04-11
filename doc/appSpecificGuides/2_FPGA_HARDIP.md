@@ -24,7 +24,7 @@ Here are also commands given to change the FPGA fabric configuration.
    * Later a more pleasant way will be shown (Level 4) 
    
 ## Opening *rsyocto* Info Paper (*Platform block design*)
-  * For every *rsYocto*-Version  a Information Shied on the Apache Webserver is installed
+  * For every *rsYocto*-Version a *Information Shied* on the Apache Webserver is installed
   * This Paper contains information's about the configuration of the FPGA IP and there Addresses and the used I/O Pins 
   * **Open it by typing the iPv4-Address of your Board into a Web browser**
   * Of cause it is possible  to install any other homepage
