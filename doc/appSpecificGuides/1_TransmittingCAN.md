@@ -20,7 +20,7 @@ It is a part of my "*Mapping HPS Peripherals, like I²C or CAN, over the FPGA fa
    ````bash
    nano sendCanPackage.py
    ````
-  * Insert following lines to this Python file as shown in the [python-can documentation](https://python-can.readthedocs.io/en/master/)
+  * Insert the following lines to this Python file as shown in the [python-can documentation](https://python-can.readthedocs.io/en/master/)
 	````python
 	#!/usr/bin/env python
 	# coding: utf-8
@@ -33,10 +33,10 @@ It is a part of my "*Mapping HPS Peripherals, like I²C or CAN, over the FPGA fa
 
 	def send_one():
 
-		# this uses the default configuration (for example from the config file)
-		# see https://python-can.readthedocs.io/en/stable/configuration.html
+		# This uses the default configuration (for example from the config file)
+		# See: https://python-can.readthedocs.io/en/stable/configuration.html
 
-		# Using specific buses works similar:
+		# Using specific buses work similarly:
 		bus = can.interface.Bus(bustype='socketcan', channel='can0', bitrate=12500)
 		# ...
 
@@ -72,10 +72,10 @@ It is a part of my "*Mapping HPS Peripherals, like I²C or CAN, over the FPGA fa
   	![Alt text](CANoszigram.png?raw=true "CAN Osci")
 <br>
 
-If **no one acknowledged** this package the *Bosch CAN-Controller* ***re-transmit*** the package with the maximum available resources automatically until an ACK happens.
+If **no one acknowledged** this package the *Bosch CAN-Controller* ***re-transmits*** the package with the maximum available resources automatically until an ACK happens.
 
 The embedded *Bosch CAN-Controller* can also **detect linkage errors**. 
-I case of a missing connection to a CAN-Bus member a *Linux Kernel Message* will be triggered and the **CAN Controller shuts down**.
+In case of a missing connection to a CAN-Bus member a *Linux Kernel Message* will be triggered and the **CAN Controller shuts down**.
 Use the following command to **restart the CAN-Controller**:
 ````bash 
 link set down can0
