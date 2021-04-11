@@ -1,8 +1,8 @@
 [Back to the startpage](https://github.com/robseb/rsyocto)
 
 # Developing a Linux Startup script
-Linux Startup scripts are really important for embedded Linux systems. 
-Application services should start directly after a boot. This is particularly necessary, because *rsyocto* has a watchdog timer activated and the system can therefore restart unexpectedly.
+Linux Startup scripts are really important for Embedded Linux systems. 
+Application services should start directly after a boot. This is particularly necessary because *rsyocto* has a watchdog timer activated and the system can therefore restart unexpectedly.
 For this reason, three possible ways to activate startup scripts are shown.
 
 ## 1. Adding a startup script during runtime
