@@ -6,7 +6,7 @@ ___
 ![GitHub](https://img.shields.io/static/v1?label=Supported+SocFPGA&message=Intel+Arria10,+Cyclone+V&color=red")
 <br>
 
-**This is a more advanced guide of my  [ 	Designing of custom rsyoto versions](7_customVersions.md) to show to use the build system with custom Yocto Project Linux distributions to automate the entire bootflow for Intel Cyclone V- and Intel Arria 10 SX SoC-FPGA.** The Python scripts work with any Intel Cyclone V and Intel Arria 10 SoC-FPGA board with booting via SD-Card.  
+**This is a more advanced guide of my [Designing of custom rsyoto versions](7_customVersions.md) to show how to use the build system with custom Yocto Project Linux distributions to automate the entire bootflow for *Intel Cyclone V* and *Intel Arria 10 SX* SoC-FPGA.** The Python scripts work with any *Intel Cyclone V* and *Intel Arria 10* SoC-FPGA board with booting via SD-Card.  
 
 ![Alt text](BuildSystemHead.png?raw=true "Symbol of the build system")
 
@@ -20,7 +20,7 @@ ___
 **Block diagram of the fully automated build system to design new releases**
 <br>
 
-**This is a more advanced guide of my  [Designing of custom rsyoto versions](7_customVersions.md) to show to use of the build system with custom OpenEmbbeded Yocto Project Linux distributions to automate the entire bootflow for Intel Cyclone V- and Intel Arria 10 SX SoC-FPGA.**
+**This is a more advanced guide of my [Designing of custom rsyoto versions](7_customVersions.md) to show to how use the build system with custom *OpenEmbbeded Yocto Project Linux Distributions* to automate the entire bootflow for *Intel Cyclone V*- and *Intel Arria 10 SX* SoC-FPGA.**
 ___
 <br>
 
@@ -30,7 +30,7 @@ ___
     * For installing and setting up of your build computer please follow the instructions of the [Designing of custom rsyoto versions](7_customVersions.md) guide
 
 2. **Download and unzip the SD-Card folder** 
-    * Download the "**rsyocto_SDxx-Folder**" from the "**releases Part**" of this Github repository 
+    * Download the "**rsyocto_SDxx-Folder**" from the "**releases Part**" of this *Github* repository 
     
     <p align="center">
     <a href="https://github.com/robseb/rsyocto/releases">
@@ -39,11 +39,11 @@ ___
     </p>
 
     * Unzip the folder
-4. **Copy this folder into your *Intel Quartus Prime* FPGA project folder**
-5. **Change the files of the SD-Card folder for your requirements**
-    * To allow to generate special Linux Distributions chnage the SD-Card folder as described in the [Designing of custom rsyoto versions](7_customVersions.md) guide
-6. **Run the *rsyocto* build script with your Yocto-Project Linux files** 
-    * The "*makersyoctoSDImage.py*" Python script allow some specific attributes:
+3. **Copy this folder into your *Intel Quartus Prime* FPGA project folder**
+4. **Change the files of the SD-Card folder for your requirements**
+    * To allow to generate special Linux Distributions change the SD-Card folder as described in the [Designing of custom rsyoto versions](7_customVersions.md) guide
+5. **Run the *rsyocto* build script with your Yocto-Project Linux files** 
+    * The "*makersyoctoSDImage.py*" Python script allows some specific attributes:
     ````shell
     vm@yoctoBuntoX:~/Desktop/DE10NANOrsyocto/socfpgaPlatformGenerator$ python3 makersyoctoSDImage.py -h
     ##############################################################################
@@ -57,7 +57,7 @@ ___
     #    ##     ##  ######        ##     #######   ######     ##     #######     #
     #                                                                            #
     #       AUTOMATIC SCRIPT FOR BRINGING A CUSTOM RSYOCTO LINUX FLAVOR          #
-    #                         TO BOOTABLE IMAGE FILE                             #
+    #                         TO A BOOTABLE IMAGE FILE                           #
     #                                                                            #
     #               by Robin Sebastian (https://github.com/robseb)               #
     #                          Contact: git@robseb.de                            #
@@ -75,18 +75,18 @@ ___
                             Use SoC EDS DeviceTree Generator ["-g 1 --> no GUI | 2
                             --> GUI"]
     ````
-    * Posibile arguments of the script:
+    * Possible arguments of the script:
         * **"`-y`"** or **"`--yocto_linux`"** enables to **use the output files of the Yocto Project** (*zImage, rootfs and Linux Device Tree*) for the build
-            * The script copies these file form the Yocto Project output folder to the SD-Card partitions, instate of the Linux files located inside the SD-Card folder
+            * The script copies these files from the Yocto Project output folder to the SD-Card partitions, instead of the Linux files located inside the SD-Card folder
         * **"`-g`"** or **"`--devicetree_gen`"** uses the  **Intel Device Tree generated to automatically generate a Linux Device Tree** based on *Intel Quartus Prime* FPGA Project settings  
             * The Device Tree file will be located inside the SD-Card partition folder and can only be seen as reference because the Intel Device Tree generator is not recommenced by Intel any more
     * **Start the build script to generate a Linux Distribution with your Yocto-Project files**
     ````shell
     python3 makersyoctoSDImage.py -y 1
     ````
-7. **Follow the instruction of the Python build script**
-    * The procdure will be identical as shown in the [Designing of custom rsyoto versions](7_customVersions.md) guide
-    * Only following message box will appear to show the available Yocto Project output Linux Distribution files
+6. **Follow the instruction of the Python build script**
+    * The procedure will be identical as shown in the [Designing of custom rsyoto versions](7_customVersions.md) guide
+    * Only the following message box will appear to show the available Yocto Project output Linux Distribution files
     ````shell
     ##########################################################################################
     #                  COMPATIBLE YOCTO PROJECT LINUX DISTRIBUTION WAS FOUND                 #
@@ -118,11 +118,11 @@ ___
     #   Select a item by typing a number (1-3) [q=Abort]                  #
     #  Please input a number: $    
     ````
-    * Type `1` to let the script use this files for the build
+    * Type `1` to let the script use these files for the build
 
-8. **Select the Linux *Device Tree* for the build**
-    * My [**meta-intelfpga**](https://github.com/robseb/meta-intelfpga) BSP layer for the OpenEmbedded Yocto Project did not build the Linux *Device Tree*
-    * Instate, the build script will ask the user to **copy a Linux *Device Tree file* with a specific name to the Image Partition folder** as shown:
+7. **Select the Linux *Device Tree* for the build**
+    * My [**meta-intelfpga**](https://github.com/robseb/meta-intelfpga) BSP layer for the OpenEmbedded Yocto Project did not built the Linux *Device Tree*
+    * Instead, the build script will ask the user to **copy a Linux *Device Tree file* with a specific name to the Image Partition folder** as shown:
     ````shell
     #################################################################################################################
     #                  Inside the Yocto Project Repo. folder no Linux Devicetree (.dts) was found!                  #
@@ -138,12 +138,12 @@ ___
     #                                                                                                               #
     #################################################################################################################
     ````
-    * For reference the Intel Device Tree generator can also be used. To doe this run this script
+    * For reference the Intel Device Tree generator can also be used. To do this run this script
         ````shell
         python3 makersyoctoSDImage.py -g 1
         ````
         * The Python script will place this Linux Device Tree file with the name "*_reference.dts*" to the *Board folder*
-    * Copy the file with shown name to the shown location and continue the script 
+    * Copy the file with the shown name to the shown location and continue the script 
     * The script will generate a bootable Linux Distribution image for the *Intel Quartus Prime FPGA* project 
       
 9. **Flash the image to a SD-Card and boot your *Intel SoC-FPGA* board up**
