@@ -170,7 +170,7 @@ ___
 | 2 | **Use of Hard-IP, FPGA-IP and FPGA Configuration of the FPGA Fabric** |[Step by step guide 1](doc/guides/2_FPGA_HARDIP.md) |
 | 3 | **Debugging C++ applications remotely** with *Microsoft Visual Studio* | [Step by step guide 2](doc/guides/3_CPP.md) |
 | 4 | **Debugging Python applications remotely** | [Step by step guide 3](doc/guides/4_Python.md) |
-| 5 | **Analyzation of applications with ARM DS-5 Streamline** | [Step by step guide 4](doc/guides/5_Streamline.md) |
+| 5 | **Analyzation of applications with ARM Development Studio (*DS-5*) Streamline** | [Step by step guide 4](doc/guides/5_Streamline.md) |
 | 6 | **Developing a custom FPGA Configuration with Intel Quartus Prime**| [Step by step guide 5](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/6_newFPGAconf.md) |
 <br>
 
@@ -205,6 +205,12 @@ ___
 The **C++-Demo Project** for *Microsoft Visual Studio* is available [here](https://github.com/robseb/LinuxVSCppFPGA).
 
 The final *rsyocto* boot images (*img*) are available inside the **packages-Part of this repository**!
+<p align="center">
+	<a href="https://github.com/robseb/rsyocto/releases">
+		<img alt="GitHub release (latest by date)" src="https://img.shields.io/github/v/release/robseb/rsyocto">
+	</a>	 
+</p>
+       
 
 
 
@@ -340,6 +346,8 @@ Currently I am working on a Windows 10 .net Desktop application to manage FPGA c
 
 *rsyocto* is a project, that I have fully developed on my own. No companies are involved in my projects. 
 I’m recently graduated as a master in electrical engineering with the major embedded systems (*M. Sc.*).
+
+I'm open for cooperations as a freelancer to realize your specific requirements. Otherwise, I‘m looking for an interesting full time job offer to share and deepen my shown skills.
 
 **[Github sponsoring is welcome.](https://github.com/sponsors/robseb)**
 
