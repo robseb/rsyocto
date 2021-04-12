@@ -82,6 +82,9 @@
 # (2021-02-17) Vers. 3.11
 #  Small bug with the ".zip" archive file output name
 #
+# (2021-04-12) Vers. 3.12
+#  Changend output name to "rsyocto_"
+# 
 
 version = "3.11"
 
@@ -527,7 +530,7 @@ if __name__ == '__main__':
     print('#                    Q: Abort                                                  #')
     print('------------------------------------------------------------------------------')
 
-    nb = input('Please input a version Number: rsYocto_')
+    nb = input('Please input a version Number: rsyocto_')
 
     if nb =='q' or nb=='Q':
         sys.exit()
@@ -537,13 +540,13 @@ if __name__ == '__main__':
         now = datetime.now()
         nb = now.strftime("%Y%m%d_%H%M")
 
-    if not re.match("^[a-z0-9_]+$", nb, re.I):
-        print('ERROR: The selected output file with the name:"rsYocto_'+nb+'"')
+    if not re.match("^[a-z0-9_.]+$", nb, re.I):
+        print('ERROR: The selected output file with the name:"rsyocto_'+nb+'"')
         print('        has caracters witch are not allowed!')
         sys.exit()
 
-    image_name = 'rsYocto_'+str(nb)+BOARD_SUFFIX_NAME[BOARD_ID]+'.img'
-    zip_name = 'rsYocto_'+str(nb)+BOARD_SUFFIX_NAME[BOARD_ID]+'.zip'
+    image_name = 'rsyocto_'+str(nb)+BOARD_SUFFIX_NAME[BOARD_ID]+'.img'
+    zip_name = 'rsyocto_'+str(nb)+BOARD_SUFFIX_NAME[BOARD_ID]+'.zip'
 
     print ('Name of the final image: "'+image_name+'"')
  
