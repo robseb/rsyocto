@@ -92,6 +92,7 @@ ___
 * **Accelerometer** and **ADC** can be accessed via Python or C++ (*Demos available*) (*only for the Cyclone V boards*)
 * `socketCAN` pre-installed and pre-configured (*examples available!*) (*Only for Cyclone V SoC-FPGAs*)
 * Console based Bus test tools (e.g. `can-utils`)
+* **USB Host** support with test tools (e.g `lsusb`) 
 * Console memory dump tools (e.g. `devmem2`) 
 <br>
 
