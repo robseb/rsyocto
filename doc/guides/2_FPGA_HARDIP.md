@@ -251,6 +251,44 @@ Typically, dedicated HPS I/O pin headers are not available on SoC-FPGA developme
         ```
     * For more information please read the [can-tools](https://github.com/linux-can/can-utils) documentation
     * **A Python example shows how to send a CAN-package with Python is also given in details** [here](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/appSpecificGuides/1_TransmittingCAN.md)
+
+5. **USB-Host (*USB OTG*)**
+    * *rsyocto* enables USB Host mode (*USB on-the-go*) support with all boards
+    * For some boards are additional Micro USB OTG- (*Teraisc DE10- Nano* and *Teraisc DE0-Nano SoC*) or Mini USB-OTG (*Teraisc HAN Pilot*) adapters required  
+    * For example to **access a USB mass storage Flash drive** via the *USB mass storage device class* (**USB MSC**) do the following steps
+        1. Check that the USB device was detected use the `lsusb` command to scan the USB Bus
+            ````shell
+            root@cyclone5:~# lsusb
+            Bus 001 Device 002: ID 8564:1000 Transcend Information, Inc. JetFlash
+            Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
+            root@cyclone5:~#
+            ````
+        2. Check that the USB mass storage device has a readable filesystem
+            ````shell
+            root@cyclone5:~# lsblk
+            NAME        MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+            sda           8:0    1 28.5G  0 disk
+            `-sda1        8:1    1 28.5G  0 part
+            mmcblk0     179:0    0 29.7G  0 disk
+            |-mmcblk0p1 179:1    0 14.2M  0 part
+            |-mmcblk0p2 179:2    0  3.9G  0 part /
+            `-mmcblk0p3 179:3    0 19.8M  0 part
+            ````
+            * `/dev/sda1` is here the partition of the USB Flash drive
+        3. Mount the USB mass storage device   
+            ````shell
+            sudo mount /dev/sda1 /mnt
+            ````
+            * `/mnt` is the directory the assembly point should point to 
+        4. Access the USB Flash drive with the mounting point filesystem directory (`/mnt`) 
+        5. Before the USB Flash drive can be removed from the board umount the mounting point
+            ````shell
+            sudo umount /mnt
+            ````
+
+            
+            
+
     
  
  ## Continue with the next level: [Debugging C++ applications remotely with Visual Studio](3_CPP.md)
