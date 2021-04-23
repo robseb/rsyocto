@@ -107,8 +107,8 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
         ```bash
         FPGA-readMSEL
         ````
-      * The **MSEL** (*mode select*) switch is used to give the HPS the **right** to access the **HPS-to-FPGA Bridges** and to change the **FPGA Configuration**
-      * Also with the MSEL the type and the source of the FPGA Configuration file is chosen
+      * The **MSEL** (*mode select*) switch is used to give the HPS the **right** to access the **HPS-to-FPGA Bridges** and to change the **FPGA-Configuration**
+      * Also with the MSEL the type and the source of the FPGA-Configuration file is chosen
       * The MSEL bit-switch is reachable over the HPS `FPGA Manager` (*Hard-IP part of any Intel SoC-FPGA*)
  7. **Reading the FPGA switches for 15sec**
      * On the *LWHPS2FPGA* Bridge is with the address offset *0x00* a **PIO** (*Parallel I/O*) Soft-IP module connected 
@@ -127,24 +127,24 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
  
 8. **Using the GPI/GPO- Registers to the FPGA** 
     * *Intel SoC-FPGAs* have two general purpose 32-Bit registers to interact directly with the FPGA Fabric
-    * To test this feature by connecting the FPGA LEDs with the GPO-Register
+    * To test this feature connect the FPGA LEDs with the GPO-Register
     * But now the FPGA LEDs are connected to **Lightweight HPS-to-FPGA** (*LWHPS2FPGA*) Bridge
-    * The FPGA Configuration must be changed to reconnect the FPGA LED...
+    * The **FPGA-Configuration must be changed** to reorder the FPGA LED...
     * The required `.rbf` Configuration file ("*gpiConf.rbf*") is pre-installed on the home directory (*~*)
-    * Execute the following command to **re-configure the FPGA Fabric** with this FPGA Configuration file:
-        * For the *Terasic* DE10 Standard Board 
+    * Execute the following command to **re-configure the FPGA Fabric** with this FPGA-Configuration file:
+        * For the *Terasic DE10 Standard* Board 
           ```bash
           FPGA-writeConfig  -f gpiConfStd.rbf
           ```
-         * For the *Terasic* DE10 Nano Board 
+         * For the *Terasic DE10 Nano* Board 
            ```bash
            FPGA-writeConfig -f gpiConfNano.rbf
            ```
-        * For the *Terasic* DE0 Nano SoC Kit 
+        * For the *Terasic DE0 Nano SoC* Kit 
            ```bash
            FPGA-writeConfig -f gpiConfDe0.rbf
            ```
-    * That command will check that the FPGA Configuration file is valid for the running FPGA Fabric, then it will reset the old FPGA Configuration, **load the new FPGA Configuration with the help of the `FPGA Manger` to FPGA-Fabric** and release the FPGA Fabric reset 
+    * This command will check that the FPGA-Configuration file is valid for the running FPGA Fabric, then it will reset the old FPGA-Configuration, **load the new FPGA-Configuration with the help of the `FPGA Manager` to FPGA-Fabric** and release the FPGA Fabric reset 
     * Now should be the LEDs connected with the direct 32-Bit GPO register
     * Enable the LEDs over this way
         ```bash
@@ -154,16 +154,16 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
         ```bash
         FPGA-gpiRead
         ```
-     * After this test install the original FPGA Configuration again
-     * On *rsyocto* the startup FPGA Configuration is located here: `/usr/rsyocto/running_bootloader_fpgaconfig.rbf`
-     * Use the Suffix "`-r`" to install the original FPGA Configuration on the FPGA Fabric(*roll back*)
+     * After this test install the original FPGA-Configuration again
+     * On *rsyocto* the startup FPGA-Configuration is located here: `/usr/rsyocto/running_bootloader_fpgaconfig.rbf`
+     * Use the Suffix "`-r`" to install the original FPGA-Configuration on the FPGA Fabric(*roll back*)
         ```bash
         FPGA-writeConfig -r 
         ```
 <br>
 
 9. **Reading an AVALON-Bus FPGA Module connect to the ARM AXI HPS-to-FPGA Bridge**
-      * During the Boot process the FPGA Configuration is written with a "*System ID Peripheral*" Soft-IP component (*ID: 0x23456789*)
+      * During the Boot process the FPGA-Configuration is written with a "*System ID Peripheral*" Soft-IP component (*ID: 0x23456789*)
       * The Module is connected via the **ARM AXI HPS-to-FPGA** (*HPS2FPGA; hps2fpga*) bridge to the HPS with an address offset of *0x00*
       * Use the following command to read the System ID:
         ```bash
@@ -194,7 +194,7 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
  ## Interacting with HPS Hard-IP (I²C, SPI, CAN, ...)
 **In *rsyocto* Linux drivers for all Hard-IP components are pre-installed.** This was done within the *Linux Device Tree* and the *u-boot* secondary bootloader script.
 
-**Inside the pre-configured FPGA Configuration are the HPS Hard-IP I/O pins routed over the `FPGA Interconnect` to FPGA I/O pins to enable the usage of `Arduino Uno shields`**. 
+**Inside the pre-configured FPGA-Configuration are the HPS Hard-IP I/O pins routed over the `FPGA Interconnect` to FPGA I/O pins to enable the usage of `Arduino Uno shields`**. 
 
 Typically, dedicated HPS I/O pin headers are not available on SoC-FPGA development boards. For this reason I chose this route to gain access. This can be seen inside the info papers and [**here**](https://github.com/robseb/HPS2FPGAmapping). For every Hard-IP components common Linux shell tools are available.
     
