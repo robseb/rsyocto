@@ -255,13 +255,13 @@ Typically, dedicated HPS I/O pin headers are not available on SoC-FPGA developme
 5. **USB-Host (*USB OTG*)**
     * *rsyocto* enables USB Host mode (*USB on-the-go*) support with all boards
     * For some boards are additional Micro USB OTG- (*Teraisc DE10- Nano* and *Teraisc DE0-Nano SoC*) or Mini USB-OTG (*Teraisc HAN Pilot*) adapters required  
+        * **Note:** Before the usage of any USB devices check the required power consummation of the device and the maximum allowed of your board!
     * For example to **access a USB mass storage Flash drive** via the *USB mass storage device class* (**USB MSC**) do the following steps
-        1. Check that the USB device was detected use the `lsusb` command to scan the USB Bus
+        1. To check that the USB device was detected use the `lsusb` command to scan the USB Bus
             ````shell
             root@cyclone5:~# lsusb
             Bus 001 Device 002: ID 8564:1000 Transcend Information, Inc. JetFlash
             Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub
-            root@cyclone5:~#
             ````
         2. Check that the USB mass storage device has a readable filesystem
             ````shell
