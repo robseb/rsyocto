@@ -40,32 +40,6 @@ DELAY_MS = 1 # Delay after critical tasks in milliseconds
 QURTUS_DEF_FOLDER         = "intelFPGA"
 QURTUS_DEF_FOLDER_LITE    = "intelFPGA_lite"
 EDS_EMBSHELL_DIR          = ["/embedded/embedded_command_shell.sh","\\embedded\\embedded_command_shell.bat"]
-BOOTLOADER_FILE_NAME      = 'u-boot-with-spl.sfp'
-
-# Arria 10 only
-U_BOOT_IMAGE_FILE_NAME  ='u-boot.img'
-SFP_OUTPUT_FILE_NAME    ='spl_w_dtb-mkpimage.bin'
-SFP_INPUT_FILE_NAME     ='u-boot-spl-dtb.bin'
-FIT_FPGA_FILE_NAME      ='fit_spl_fpga.itb'
-
-YOCTO_BASE_FOLDER         = 'poky'
-
-IMAGE_FOLDER_NAME         = 'Image_partitions'
-
-GITNAME                   = "socfpgaplatformgenerator"
-GIT_SCRIPT_URL            = "https://github.com/robseb/socfpgaPlatformGenerator.git"
-GIT_U_BOOT_SOCFPGA_URL    = "https://github.com/altera-opensource/u-boot-socfpga"
-GIT_U_BOOT_SOCFPGA_BRANCH = "socfpga_v2020.04" # default: master --> Arria 10 SX and Cyclone working: "socfpga_v2020.04"
-
-GIT_LINUXBOOTIMAGEGEN_URL = "https://github.com/robseb/LinuxBootImageFileGenerator.git"
-
-# The Linux devicetree names required for bootloader generation
-DEVICETREE_OUTPUT_NAME = ['socfpga_cyclone5_socdk.dts','', \
-                          'socfpga_arria10_socdk_sdmmc.dts']
-
-
-
-
 
 #
 # @brief default XML settings file name 
@@ -88,55 +62,13 @@ FLASHFPGA_SETTINGS_XML_FILE ='<?xml version="1.0" encoding = "UTF-8" ?>\n'+\
     '<FlashFPGA2Linux>\n'+\
     '   <board set_ip="192.168.0.165" set_user="root" set_pw="eit" set_flashBoot="Y" />\n'+\
     '</FlashFPGA2Linux>\n'
-#
-# Run the bootloader filter script (Cyclone V) 
-#                        
-#        Cyclone V    |  Arria V     | Arria 10 
+    
 
-
-run_filter_script =[True, True, True]
-qts_filter_script_name = ['qts-filter.sh','','qts-filter-a10.sh']
-
-u_boot_bsp_qts_dir_list = ['/board/altera/cyclone5-socdk/qts/', '/board/altera/arria5-socdk/qts/', \
-                    ' ']
-
-# SFP BootROM File for the RAW partition 
-sfp_inputflile_suffix = ['.sfp','','.bin']
-#
-# Name of the DeviceTree used by the primary bootloader (only Arria 10 SX)
-#
-preloader_deviceTree_name = ['','','socfpga_arria10_socdk_sdmmc.dtb']
-
-#
-# Generate the bootable SFP image file
-# For the Intel Arria 10 SX is a ".img" file required 
-#                        
-#        Cyclone V    |  Arria V     | Arria 10 
-generate_sfp_image_file = [True,True,False]
-
-#
-# "u-boot-socfpga deconfig" file name for make (u-boot-socfpga/configs/)
-#                                Cyclone V    |  Arria V     | Arria 10 
-u_boot_defconfig_list = ['socfpga_cyclone5_defconfig', 'socfpga_arria5_defconfig', \
-                    'socfpga_arria10_defconfig']
-
-#                                Cyclone V    |  Arria V     | Arria 10 
-linaro_version_list = ['gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf','gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf',\
-    'gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf']
-linaro_url_list = ['https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabihf/'\
-    'gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz', \
-        'https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabihf/'\
-    'gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz', \
-        'https://releases.linaro.org/components/toolchain/binaries/7.5-2019.12/arm-linux-gnueabihf/'\
-    'gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf.tar.xz']
-
-#                                Cyclone V    |  Arria V     | Arria 10 
-gcc_toolchain_path_list= ['gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/:$PATH', \
-                'gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/:$PATH', \
-                    'gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/bin/:$PATH']
-#
-# 
-#
+RSYOCTO_BANNER_CHECK_LINE =  ['created by Robin Sebastian (github.com/robseb)', \
+                              'Contact: git@robseb.de', \
+                              'https://github.com/robseb/rsyocto'\
+                             ]
+RSYOCTO_FPGAWRITECONF_CHECK = 'Command to change the FPGA fabric configuration'
 
 #
 #
@@ -147,33 +79,31 @@ gcc_toolchain_path_list= ['gcc-linaro-7.5.0-2019.12-x86_64_arm-linux-gnueabihf/b
 #
 import sys
 
-if sys.platform =='linux':
-    try:
-        import git
-        from git import RemoteProgress
-        import wget
 
-    except ImportError as ex:
-        print('Msg: '+str(ex))
-        print('This Python Application requirers "git"')
-        print('Use following pip command to install it:')
-        print('$ pip3 install GitPython wget')
-        sys.exit()
-    
+try:
+    import paramiko
 
-import os
+
+except ImportError as ex:
+    print('Msg: '+str(ex))
+    print('This Python Script uses "paramiko"')
+    print('to enable SSH access to SoC-FPGA board')
+    print('Use following pip command to install it:')
+    print('$ pip3 install paramiko')
+    sys.exit()
+
+
+
+import os, platform, io, warnings
 import time
-import io
-import re
 import shutil
+import re
+from threading import Thread
 import subprocess
+from subprocess import DEVNULL
 import xml.etree.ElementTree as ET
-from typing import NamedTuple
-import math
 import glob
 from pathlib import Path
-from datetime import datetime
-from datetime import timedelta
 import argparse
 
     
@@ -182,7 +112,9 @@ import argparse
 # @brief Class for automatization the entry FPGA configuration generation process 
 #        and to write the FPGA-Configuration via SSH
 #   
-class FlashFPGA2Linux:
+class FlashFPGA2Linux(Thread):
+
+    ## Intel Quartus Prime and Intel SoC-EDS related properties 
 
     EDS_Folder_dir              : str # Directory of the Intel EDS folder
     Quartus_proj_top_dir        : str # Directory of the Quartus Project folder 
@@ -193,30 +125,45 @@ class FlashFPGA2Linux:
     Qsys_file_name              : str # Name of the Quartus Project ".qsys"-file
     Handoff_folder_name         : str # Name of the Quartus Project Hand-off folder
     UbootSFP_default_preBuild_dir : str # Directory of the pre-build u-boot for the device 
-    Quartus_bootloder_dir       : str # Directory of the Quartus Project "/software/bootloader"-folder
     Sof_folder                  : str # Name of the Quartus Project folder containing the ".sof"-file 
     U_boot_socfpga_dir          : str # Directory of u-boot SoC-FPGA folder 
     Uboot_default_file_dir      : str # Directory of the pre-build default u-boot file 
-    unlicensed_ip_found         : bool# Quartus project contains an unlicensed IP (e.g. NIOS II Core) 
+
+    ## SoC-FPGA Development board and rsyocto related properties
 
     Device_id                   : int # SocFPGA ID (0: Cyclone V; 1: Arria V;2: Arria 10)
+    Device_name                 = ['Intel Cyclone V','Intel Arria V','Intel Arria 10']
+    unlicensed_ip_found         : bool# Quartus project contains an unlicensed IP (e.g. NIOS II Core) 
+    board_ip_addrs              : ''  # IPv4 Address of the SoC-FPGA Linux Distribution (rsyocto)
+    board_user                  : ''  # SoC-FPGA Linux Distribution (rsyocto) Linux user name
+    board_pw                    : ''  # SoC-FPGA Linux Distribution (rsyocto) Linux user password
 
-    Raw_folder_dir              : str # Directory of the RAW Partition folder (u-boot)
-    Vfat_folder_dir             : str # Directory of the VFAT Partition folder
-    Ext_folder_dir              : str # Directory of the EXT3 Partition folder (rootfs)
+    ## Network related properties
 
-    Socfpga_devices_list = ['cyclone5', 'arria5', 'arria10' ]
-    Socfpga_arch_list    = ['arm',      'arm',    'arm']
+    __sshClient                 : paramiko # Object of SSH client connection to the baord 
 
-    OutputZipFileName           : str  # Name of the output ".zip" compressed image file 
-    ImageFileName               : str  # Name of the output ".img" image file
-    Bootloader_available        : bool # Is a bootloader executable available 
+    __SPLM = ['/','\\']               # Slash for Linux, Windows 
+    __SPno = 0                        # OS ID 0=Linux | 1=Windows 
 
-    
-    __SPLM = ['/','\\'] # Linux, Windows 
-    __SPno = 0
+    #
+    # @brief Constructor
+    # @param board_ip_addrs     IPv4 Address of the SoC-FPGA Linux Distribution (rsyocto)
+    #                           Format 100.100.100.100
+    # @param board_user         SoC-FPGA Linux Distribution (rsyocto) Linux user name
+    # @param board_pw           SoC-FPGA Linux Distribution (rsyocto) Linux user password
+    #
+    def __init__(self,board_ip_addrs, board_user,board_pw):
+        
+        # Read the input paramters 
+        regex_pattern = "^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"
+        if not bool( re.match( regex_pattern, board_ip_addrs)):
+            print('[ERROR] The given IP Address is not in the proper format (0.0.0.0)')
+            sys.exit()
 
-    def __init__(self):
+        self.board_ip_addrs = board_ip_addrs
+        self.board_user     = board_user
+        self.board_pw       = board_pw
+        
         ######################################### Find the Intel EDS Installation Path ####################################
 
         if sys.platform =='linux':
@@ -443,7 +390,187 @@ class FlashFPGA2Linux:
         print('[INFO] A valid Intel Quartus Prime '+device_name_temp+' SoC-FPGA project was found') 
 
 
+    def __ping(self, host_or_ip, packets=1, timeout=1000):
+        ''' Calls system "ping" command, returns True if ping succeeds.
+        Required parameter: host_or_ip (str, address of host to ping)
+        Optional parameters: packets (int, number of retries), timeout (int, ms to wait for response)
+        Does not show any output, either as popup window or in command line.
+        Python 3.5+, Windows and Linux compatible (Mac not tested, should work)
+        '''
+        # The ping command is the same for Windows and Linux, except for the "number of packets" flag.
+        if platform.system().lower() == 'windows':
+            command = ['ping', '-n', str(packets), '-w', str(timeout), host_or_ip]
+            # run parameters: capture output, discard error messages, do not show window
+            result = subprocess.run(command, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, creationflags=0x08000000)
+            # 0x0800000 is a windows-only Popen flag to specify that a new process will not create a window.
+            # On Python 3.7+, you can use a subprocess constant:
+            #   result = subprocess.run(command, capture_output=True, creationflags=subprocess.CREATE_NO_WINDOW)
+            # On windows 7+, ping returns 0 (ok) when host is not reachable; to be sure host is responding,
+            # we search the text "TTL=" on the command output. If it's there, the ping really had a response.
+            return result.returncode == 0 and b'TTL=' in result.stdout
+        else:
+            command = ['ping', '-c', str(packets), '-w', str(timeout), host_or_ip]
+            # run parameters: discard output and error messages
+            result = subprocess.run(command, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return result.returncode == 0
 
+
+    #
+    # @brief    Check the Network connection from the development machine to the embedded Linux Distribution
+    # @return   Pinging the board was successful
+    #
+    def CheckNetworkConnection2Board(self):
+        return self.__ping(self.board_ip_addrs)
+        
+    #
+    # @brief    Establish a SSH connection the SoC-FPGA baord running rsyocto
+    # @return   success
+    #
+    def EstablishSSHcon(self):
+        Thread.__init__(self)
+        self.start()
+        return False
+
+
+    def __sendCmd(self,cmd=''):
+        ssh_stdin, ssh_stdout, ssh_stderr = self.__sshClient.exec_command(cmd)
+        err = ssh_stderr.read().decode("utf-8") 
+        if not err == '':
+            print('[ERROR] Failed to execute a Linux cmd via SSH!\n'+\
+                  '        CMD  : "'+cmd+'"\n'+\
+                  '        ERROR: "'+err+'"')    
+            return ''
+
+        return ssh_stdout.read().decode("utf-8") 
+
+    def __decodeDiskSpace(self,str_df=''):
+        root_pos = str_df.find('/dev/root')
+        if root_pos==-1: return -1
+        line_end_pos = str_df.find('\n',root_pos)
+        if line_end_pos==-1: return -1
+
+        line = str_df[root_pos:line_end_pos]
+
+        '''
+        \Filesystem     1K-blocks   Used Available Use% Mounted on
+        /dev/root        3978548 640080   3133036  17% /
+        '''
+        # Find the % character and number
+        perc_pos = line.find('%')
+        begin_number_pos =-1
+        if perc_pos==-1: return -1
+
+        for i in range(perc_pos-1,0,-1):
+            try:
+                vao = line[i]
+                null = int(line[i]) 
+            except ValueError:
+                begin_number_pos = i+1
+                break
+        if begin_number_pos==-1: return -1
+
+        number = line[begin_number_pos:perc_pos]
+        try:
+            number = int(number)
+        except ValueError:
+            return -1
+        return number
+
+
+    #
+    # @breif Override the run() function of Thread class
+    #        Thread to for handling the SSH connection to SoC-FPGA baord
+    #
+    def run(self):
+        print('[INFO] Start to establish a SSH connection to the board')
+
+        # Start a new SSH client connection to the development board
+        self.__sshClient = None
+        self.__sshClient = paramiko.SSHClient()
+        self.__sshClient.load_system_host_keys()
+        warnings.filterwarnings("ignore")
+        self.__sshClient.set_missing_host_key_policy(paramiko.WarningPolicy())
+        paramiko.util.log_to_file(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+'sshClientlog.txt')
+        
+        try:
+            #
+            ## 1. Step: Establish a SSH connection to the board
+            #  
+            self.__sshClient.connect(self.board_ip_addrs, username=self.board_user, 
+                        password=self.board_pw, allow_agent=False,
+                look_for_keys=False, banner_timeout=500)
+
+            #
+            ##  2. Step: Check that the embedded Linux Distribution is okay for the tasks 
+            #
+
+            # Load the rsyocto banner  
+            banner = str(self.__sshClient._transport.get_banner())
+
+            # Check the the connected board is really rsyocto
+            is_not_rsyocto =False
+            for checkstr in RSYOCTO_BANNER_CHECK_LINE:
+                if not checkstr in banner:
+                    is_not_rsyocto = True
+                    break
+            
+            if is_not_rsyocto:
+                print('[ERROR] The connected board does not run rsyocto!\n'+
+                      '        This script works only with together with the \n'+\
+                      '        embedded Linux Distribution rsyocto!\n'+\
+                      '        ==> github.com/robseb/rsyocto')
+                self.__sshClient.close()
+                sys.exit()
+    
+            # Check that the connected rsyocto runs on the same SoC-FPGA family as the 
+            # the Intel Quartus Prime project
+            cmd = 'cat /usr/rsyocto/device.txt'
+            rsyocto_devicename = self. __sendCmd(cmd)
+            if not self.Device_name[self.Device_id] in rsyocto_devicename:
+                print('[ERROR] SoC-FPGA device of connected Board is incompatible \n'+\
+                      '        to this Intel Quartus Prime FPGA project!\n'+\
+                      '        Device of the Board          : "'+\
+                          rsyocto_devicename+'" \n'+\
+                      '        Quartus Prime Project device : "'+\
+                          self.Device_name[self.Device_id]+'"')
+                self.__sshClient.close()
+                sys.exit()
+
+            # Check that the "FPGA-writeConfig" command is available 
+            #
+            fpga_writecmd_ret = self. __sendCmd("FPGA-writeConfig") 
+            if not RSYOCTO_FPGAWRITECONF_CHECK in fpga_writecmd_ret:
+                print('[ERROR] The connect rsyocto Linux Distribution has no '+\
+                      '"FPGA-writeConfig" Linux command of the rstools installed! \n'+\
+                      '        This command allows to write the FPGA-Configuration and is need by this script!')
+                self.__sshClient.close()
+                sys.exit()
+            
+            # Check that enough memory space is available on rsyocto for 
+            # uploading the FPGA configuration files
+            cmd = 'df'
+            diskpace = self.__decodeDiskSpace(self. __sendCmd(cmd))
+            if diskpace==-1: 
+                print('[ERROR] Failed to get the available diskpace from the embedded Linux')  
+                self.__sshClient.close()
+                sys.exit()
+            elif diskpace >= 99:
+                print('[ERROR] It is not enough diskspace left on rsyocto on the SoC-FPGA board \n'+\
+                      '        for uploading the FPGA-Configuration!\n'+\
+                      '        Disk space on the rootfs used: '+str(diskpace)+'%\n'+\
+                      '        At least 1% must be free available!')
+                self.__sshClient.close()
+                sys.exit()
+
+            print('[INFO] SSH Connection established to rsyocto ('+\
+                str(100-diskpace)+'% free space remains on the rootfs)')
+            
+        
+        except paramiko.ssh_exception.SSHException as ex: 
+            print('[ERROR] Failed to open network connection!\n'+
+            '              Msg.: "'+str(ex)+'"')
+
+        self.__sshClient.close()
     #
     #
     # @brief Create a FPGA configuration file for configure the FPGA during boot or with Linux in case this
@@ -483,11 +610,11 @@ class FlashFPGA2Linux:
                 
         try:
             with subprocess.Popen(self.EDS_Folder+\
-                EDS_EMBSHELL_DIR[self.__SPno], stdin=subprocess.PIPE) as edsCmdShell:
+                EDS_EMBSHELL_DIR[self.__SPno], stdin=subprocess.PIPE,stdout=DEVNULL) as edsCmdShell:
 
                 time.sleep(DELAY_MS)
                 if not boot_linux: 
-                    print('[INFO] Generate a new FPGA configuration file for configuration during boot')
+                    print('[INFO] Generating a new FPGA-Configuration file for configuration during boot')
                     print('       with the output name "'+linux_filename+'"')
 
                     sof_file_dir2 = sof_file_dir.replace('\\', '/')
@@ -504,7 +631,7 @@ class FlashFPGA2Linux:
                     b = bytes('quartus_cpf -c '+pre_fix+' '+self.Sof_file_name+' '+linux_filename+' \n','utf-8')
                     edsCmdShell.stdin.write(b) 
                 else:
-                    print('[INFO] Generate a new FPGA configuration file for configuration with the HPS (Linux)')
+                    print('[INFO] Generating a new FPGA-Configuration file for configuration with the Linux')
                     print('       with the output name "'+linux_filename+'"')
 
                     sof_file_dir2 = sof_file_dir.replace('\\', '/')
@@ -776,21 +903,45 @@ if __name__ == '__main__':
 
     # Enable and read input arguments or the settings from a XML file
     arg_set_ip, arg_set_user,arg_set_pw,arg_set_flashBoot = praseInputArgs()
+    
+    #
+    ## 1. Step: Read the execution environment and scan the Intel Quartus Prime FPGA project
+    #
+    flashFPGA2Linux = FlashFPGA2Linux(arg_set_ip, arg_set_user,arg_set_pw)
 
-    # Read the execution environment 
-    ## 1. Step:  Scan the Intel Quartus Prime FPGA project
-    flashFPGA2Linux = FlashFPGA2Linux()
+    #
+    ## 2.Step: Check the network connection to the baord
+    #
+    if not flashFPGA2Linux.CheckNetworkConnection2Board():
+        print('[ERROR] It was not posibile to ping rsyocto with the given IP-Address '+\
+              '"'+arg_set_ip+'"!\n'+\
+              '        Please check the network connection of this computer'+\
+              ' and of the SoC-FPGA board\n'+\
+              '        You can change the IP-Address with the attribute: "-ip"')
+        sys.exit()
 
-    ## 2. Step: Generate the FPGA-Configuration that can be written with Linux 
+    #
+    ## 3. Step: Generate the FPGA-Configuration that can be written with Linux 
+    #
+    '''
     rbf_dir =  flashFPGA2Linux.Quartus_proj_top_dir+SPLM[SPno]+flashFPGA2Linux.Sof_folder
 
+    # Generate a FPGA Configuration file that can be written by Linux (rsyocto)
     if not flashFPGA2Linux.GenerateFPGAconf(True,'rsyocto_fpga_conf.rbf',rbf_dir):
         print('[ERROR] Failed to generate the Linux FPGA-Configuration file')
+        sys.exit()
 
+    # Generate a FPGA Configuration file that can be written by u-boot
     if arg_set_flashBoot:
-        # Generate a FPGA Configuration file that can be written by u-boot
         if not flashFPGA2Linux.GenerateFPGAconf(False,'socfpga.rbf',rbf_dir):
             print('[ERROR] Failed to generate the u-boot (bootloader) FPGA-Configuration file')
+            sys.exit()
+    '''
+    #
+    ## 4. Step: Establish a SSH Connection to the embedded baord
+    #
+    if not flashFPGA2Linux.EstablishSSHcon():
+        sys.exit()
 
-
+    print('[SUCCESS] Support the author Robin Sebastian (git@robseb.de)')
 # EOF
