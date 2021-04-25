@@ -537,11 +537,16 @@ class FlashFPGA2Linux(Thread):
                 stderr=subprocess.DEVNULL, creationflags=0x08000000)
             return res.returncode == 0 and b'TTL=' in res.stdout
         else:
-            command = ['ping', '-c', str(packets), '-w', str(timeout), host_or_ip]
-            # run parameters: discard output and error messages
-            res = subprocess.run(command, stdin=subprocess.DEVNULL, \
-                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            return res.returncode == 0
+            ping_response =''
+            try:
+                ping_response = subprocess.Popen(["/bin/ping", "-c5", "-w100",host_or_ip], stdout=subprocess.PIPE, \
+                    stdin=subprocess.DEVNULL).stdout.read()
+                ping_response = ping_response.decode("utf-8") 
+            except Exception:
+                return False
+            if ping_response.find('Host Unreachable')==-1:
+                return True
+            return False
 
 
     #
@@ -921,7 +926,7 @@ class FlashFPGA2Linux(Thread):
             
 
         except Exception as ex: 
-            print('[ERROR] Failed to open network connection!\n'+
+            print('[ERROR] Failed to open SSH network connection to the board!\n'+
             '              Msg.: "'+str(ex)+'"')
 
             self.__cleanupSSH(True,True)
