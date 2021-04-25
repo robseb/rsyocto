@@ -21,7 +21,7 @@
 # Python Script to generate FPGA-Configuration files for the Linux and bootloader FPGA Configuration 
 # and to copy these file to the depending positions on rsyocto
 #
-# (2021-04-23) Vers.1.0 
+# (2021-04-25) Vers.1.0 
 #   first Version 
 #
 
@@ -37,9 +37,11 @@ version = "1.0"
 
 DELAY_MS = 1 # Delay after critical tasks in milliseconds 
 
-QURTUS_DEF_FOLDER         = "intelFPGA"
 QURTUS_DEF_FOLDER_LITE    = "intelFPGA_lite"
+QURTUS_DEF_FOLDER         = "intelFPGA"
+QURTUS_DEF_FOLDER_PRO     = "intelFPGA_pro"
 EDS_EMBSHELL_DIR          = ["/embedded/embedded_command_shell.sh","\\embedded\\embedded_command_shell.bat"]
+QUARTUS_CMDSHELL_EXE      = ['quartus_sh','quartus_sh.exe']
 
 #
 # @brief default XML settings file name 
@@ -59,11 +61,14 @@ FLASHFPGA_SETTINGS_XML_FILE ='<?xml version="1.0" encoding = "UTF-8" ?>\n'+\
     '<!-- L "set_password"  => The Linux User password of the board  -->\n'+\
     '<!-- L "set_flashBoot" => Enable or Disable of the writing of the u-boot bootloader FPGA-Configuration file -->\n'+\
     '<!--    L "Y"  => Enable | "N" => Disable  -->\n'+\
+    '<!-- set_quartus_prime_ver Intel Quartus Prime Version to use <Version><Version No> -->\n'+\
+    '<!--    L -> Quartus Prime Lite      (e.g. L16.1)  -->\n'+\
+    '<!--    S -> Quartus Prime Standard  (e.g. S18.1)  -->\n'+\
+    '<!--    P -> Quartus Prime Pro       (e.g. P20.1)  --> \n'+\
     '<FlashFPGA2Linux>\n'+\
-    '   <board set_ip="192.168.0.165" set_user="root" set_pw="eit" set_flashBoot="Y" />\n'+\
+    '   <board set_ip="192.168.0.165" set_user="root" set_pw="eit" set_flashBoot="Y" set_quartus_prime_ver="L20.1" />\n'+\
     '</FlashFPGA2Linux>\n'
     
-
 RSYOCTO_BANNER_CHECK_LINE =  ['created by Robin Sebastian (github.com/robseb)', \
                               'Contact: git@robseb.de', \
                               'https://github.com/robseb/rsyocto'\
@@ -80,12 +85,8 @@ RSYOCTO_TEMPCOPYFOLDER      = '.flashFPGA2rsyocto'
 #
 #
 import sys
-
-
 try:
     import paramiko
-
-
 except ImportError as ex:
     print('Msg: '+str(ex))
     print('This Python Script uses "paramiko"')
@@ -94,14 +95,13 @@ except ImportError as ex:
     print('$ pip3 install paramiko')
     sys.exit()
 
-
-
 import os, platform, io, warnings
 import time
+from datetime import datetime
 import shutil
 import re
 from threading import Thread
-import subprocess
+import subprocess, queue
 from subprocess import DEVNULL
 import xml.etree.ElementTree as ET
 import glob
@@ -110,7 +110,6 @@ import argparse
 
     
 # 
-#
 # @brief Class for automatization the entry FPGA configuration generation process 
 #        and to write the FPGA-Configuration via SSH
 #   
@@ -139,14 +138,26 @@ class FlashFPGA2Linux(Thread):
     board_ip_addrs              : ''  # IPv4 Address of the SoC-FPGA Linux Distribution (rsyocto)
     board_user                  : ''  # SoC-FPGA Linux Distribution (rsyocto) Linux user name
     board_pw                    : ''  # SoC-FPGA Linux Distribution (rsyocto) Linux user password
+    __temp_folder_dir           : ''  # Directory of the Temp folder on rsyocto 
+    __temp_partfolder_dir       : ''  # Directory of the Temp partition folder 
+
+    
+    #
+    # @brief Directories to Intel FPGA shells
+    #
+    shell_quartus_dir                 : str # Directory of the Intel Quartus Prime command shell
 
     ## Network related properties
 
     __sshClient                 : paramiko # Object of the SSH client connection to the baord 
     __sftpClient                : paramiko # Object of the SFTP client connection to the board
 
+    __queue                     : queue.Queue # Queue of the SSH Thread
+
     __SPLM = ['/','\\']               # Slash for Linux, Windows 
     __SPno = 0                        # OS ID 0=Linux | 1=Windows 
+
+    ThreadStatus                  : False # Was the SSH Thread executed successfully?
 
     #
     # @brief Constructor
@@ -154,8 +165,14 @@ class FlashFPGA2Linux(Thread):
     #                           Format 100.100.100.100
     # @param board_user         SoC-FPGA Linux Distribution (rsyocto) Linux user name
     # @param board_pw           SoC-FPGA Linux Distribution (rsyocto) Linux user password
+    # @prarm compile_project    Before writing FPGA-Configuration compile the Intel Quartus 
+    #                           Prime FPGA project  
+    # @param QuartusForceVersion    Quartus Prime Version to use <Version><Version No>
+    #                               L -> Quartus Prime Lite      (e.g. L16.1)
+    #                               S -> Quartus Prime Standard  (e.g. S18.1)
+    #                               P -> Quartus Prime Pro       (e.g. P20.1)
     #
-    def __init__(self,board_ip_addrs, board_user,board_pw):
+    def __init__(self,board_ip_addrs, board_user,board_pw,compile_project,QuartusForceVersion):
         
         # Read the input paramters 
         regex_pattern = "^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"
@@ -283,27 +300,25 @@ class FlashFPGA2Linux(Thread):
             self.unlicensed_ip_found=True
             sys.exit()
 
-
         # Find the Platform Designer folder
-        if self.Qsys_file_name=='' or self.Qpf_file_name=='' or self.Sof_file_name=='':
-            print('\n[ERROR]  The script was not executed inside the cloned Github- and Quartus Prime project folder!')
-            print('           Please clone this script with its folder from Github,')
-            print('           copy it to the top folder of your Quartus project and execute the script')
-            print('           directly inside the cloned folder!')
-            print(' NOTE:     Be sure that the QPF,SOF and QSYS folder was found!')
-            print('           These files must be in the top project folder')
-            print('           The SOF file can also be inside a sub folder with the name "output_files" and "output"')
-            print('           URL: '+GIT_SCRIPT_URL+'\n')
-            print('       --- Required folder structure  ---')
-            print('          YOUR_QURTUS_PROJECT_FOLDER ')
-            print('       |     L-- PLATFORM_DESIGNER_FOLDER')
-            print('       |     L-- platform_designer.qsys')
-            print('       |     L-- _handoff')
-            print('       |     L-- quartus_project.qpf')
-            print('       |     L-- socfpgaPlatformGenerator <<<----')
-            print('       |         L-- socfpgaPlatformGenerator.py')
-            print('       Note: File names can be chosen freely\n')
-            print('NOTE: It is necessary to build the Prime Quartus Project for the bootloader generation!')
+        if self.Qsys_file_name=='' or self.Qpf_file_name=='':
+            print('[ERROR] The script was not executed inside the Intel Quartus Prime project folder!')
+            print('        Please copy it into the top-project folder of a Intel Quartus Prime FPGA project')
+            print('        --- Required folder structure  ---')
+            print('        YOUR_QURTUS_PROJECT_FOLDER ')
+            print('        |     L-- PLATFORM_DESIGNER_FOLDER')
+            print('        |     L-- platform_designer.qsys')
+            print('        |     L-- _handoff')
+            print('        |     L-- quartus_project.qpf')
+            print('        |     L-- flashFPGA2rsyocto.py   <<<<<<<<=====')
+            print('        Note: File names can be chosen freely\n')
+            sys.exit()
+        
+        if self.Sof_file_name=='' and not compile_project:
+            print('[ERROR] The linked Intel Quartus Prime FPGA Project was not compiled!')
+            print('        For FPGA-Configuration file generation is this necessary!')
+            print('        Use the argument "-cf 1" to compile this FPGA project')
+            print('        and then to write the FPGA-Configuration with rsyocto')
             sys.exit()
 
         # Find the handoff folder
@@ -363,11 +378,13 @@ class FlashFPGA2Linux(Thread):
             '''
         elif device_name_temp == 'Arria 10':
             self.Device_id = 2
+            print('[ERROR] The Arria 10 SX SoC-FPGA is right now not supported!')
+            print('         I am working on it...')
+            sys.exit()
         
             ## NOTE: ADD ARRIA V/ SUPPORT HERE 
         else:
-            print('[ERROR]  Your Device ('+device_name_temp+') is not supported right now!')
-            print('         I am working on it...')
+            print('[ERROR]  Your Device ('+device_name_temp+') is not supported!')
             sys.exit()
     
         # For Arria 10 SX: The early I/O release must be enabled inside Quartus Prime!
@@ -393,29 +410,138 @@ class FlashFPGA2Linux(Thread):
         print('[INFO] A valid Intel Quartus Prime '+device_name_temp+' SoC-FPGA project was found') 
 
 
+        ################################ COMPILE THE INTEL QUARTUS PRIME FPGA PROJECT ################################
+        if compile_project:
+            quVers=0
+            if QuartusForceVersion =='':
+                print('[ERROR] For the Intel Quartus Prime FPGA Project compilation mode ')
+                print('        it is necessary to select the Intel Quartus Prime Version! ')
+                print('        Use the argument "-h" for help')
+                sys.exit()
+
+            if re.match("^[LSP]+[0-9]+[.]+[0-9]?$", QuartusForceVersion, re.I) == None:
+                print('ERROR: The selected Quartus Version is in the wrong format')
+                sys.exit()
+            # Decode the Version No and Version Type input 
+            if not QuartusForceVersion.find('S')==-1:
+                quVers=1
+            elif not QuartusForceVersion.find('P')==-1:
+                quVers=2
+
+            quartus_folder= [QURTUS_DEF_FOLDER_LITE,QURTUS_DEF_FOLDER,QURTUS_DEF_FOLDER_PRO]
+            if self.__SPno== 0:
+                # Find the Linux default hard drive directory
+                sys_folder_dir = os.path.join(os.path.join(os.path.expanduser('~'))) + '/'
+            else: 
+                # Windows C:// directory 
+                sys_folder_dir = 'C:\\' 
+        
+            self.installDir_Quartus = sys_folder_dir+quartus_folder[quVers]+\
+                self.__SPLM[self.__SPno]+QuartusForceVersion[1:]
+            
+            if not os.path.isdir(self.installDir_Quartus +self.__SPLM[self.__SPno]+"quartus"):
+                print('[ERROR] The chosen Intel Quartus Prime Version is not available \n'+\
+                      '        on this Computer ("'+self.installDir_Quartus +'")\n'+
+                      '        Please install this version or chose a diffrent Intel Quartus Version!\n'+\
+                      '        Use the argument "-h" to get help')
+                sys.exit()
+
+            # Check if the Quartus Prime "bin64" 64-bit version folder is there
+            self.installDir_Quartus_bin= self.installDir_Quartus +self.__SPLM[self.__SPno]+\
+                "quartus"+self.__SPLM[self.__SPno]+"bin64"
+            if not os.path.isdir(self.installDir_Quartus_bin):
+                self.installDir_Quartus_bin= self.installDir_Quartus +self.__SPLM[self.__SPno]+\
+                "quartus"+self.__SPLM[self.__SPno]+"bin"
+                if not os.path.isdir(self.installDir_Quartus_bin):
+                    print('[ERROR] The Intel Quartus Prime bin or bin64 folder does not exist!\n'+\
+                          '        search dir: "'+self.installDir_Quartus_bin+'"')
+                    self.installDir_Quartus_bin=''
+                    sys.exit()
+
+            # Find the Quartus Prime Command Shell    
+            self.shell_quartus_dir = self.installDir_Quartus_bin+self.__SPLM[self.__SPno]+\
+                QUARTUS_CMDSHELL_EXE[self.__SPno]
+            
+            if not os.path.isfile(self.shell_quartus_dir):
+                print('[ERROR] The Intel Quartus Prime shell  \n'+\
+                      '        was not found ("'+self.shell_quartus_dir+'")')
+                sys.exit()
+
+            print('[INFO] The vailed Intel Quartus Prime project was found ('+QuartusForceVersion+')') 
+            print('[INFO] Start compiling the Intel Quartus Prime FPGA project')
+            if not self.command_quartusShell_flow():
+                    print('[ERROR] Compilation of the Intel Quartus Prime Project failed!')
+                    sys.exit()
+            print('[INFO] Compiling the Intel Quartus Prime FPGA project is done')
+
+    #
+    # @brief Start the Quartus Prime deasign flow compatlation, routing with 
+    #        compilation, timing analysis, and programming file generation
+    # @param mode
+    #               compile      =  Basic compilation
+    #               implement    =  Run compilation up to route stage
+    #               finalize     =  Perform pre-POF finalization operations
+    #               recompile    =  Perform a Rapid Recompile after making a design change
+    #               signalprobe  =  Run project signalprobing 
+    #           export_database  =  Export database
+    #           import_database  =  import database
+    # @return success 
+    def command_quartusShell_flow(self,mode='compile'):
+        if not (mode =='compile' or mode== 'implement' or mode == 'finalize' or \
+                mode == 'recompile' or mode== 'signalprobe' or mode =='export_database' or \
+                mode == 'import_database'):
+            print('[ERROR] The selected input mode is not allowed!') 
+            return False
+ 
+        print('--> Start the Quartus Prime project design flow ')
+        print('    in the mode "'+mode+'"')
+        
+        if self.Quartus_proj_top_dir =='': 
+            print('[ERROR] The Quartus Project top folder is not specified')
+            return False
+        
+        os.system(self.shell_quartus_dir+' --flow '+mode+' '+self.Quartus_proj_top_dir+\
+                self.__SPLM[self.__SPno]+self.Qpf_file_name)
+        
+        print('\n--> The Design flow command was executed')
+
+        # Check that the output file (".sof") has be changed
+        if not os.path.isfile(self.Quartus_proj_top_dir+self.Sof_folder+\
+                self.__SPLM[self.__SPno]+self.Sof_file_name):
+            print('[ERROR] The output file (".sof") does not exist!')
+            
+
+        modification_time = os.path.getmtime(self.Quartus_proj_top_dir+\
+                self.Sof_folder+\
+                self.__SPLM[self.__SPno]+self.Sof_file_name) 
+        current_time =  datetime.now().timestamp()
+        
+        # Offset= 5 min 
+        if modification_time+ 5*60 < current_time:
+            print('[ERROR] The comand failed! The output file (".sof") is the same!')
+            return False
+        
+        return True 
+
+    #
+    # @brief Ping a Network device
+    # @param host_or_ip     IPv4 address of the device 
+    # @param packets        Number of Packages to send
+    # @param timeout        Timout in sec
+    # @return   Pinging the board was successful
+    #
     def __ping(self, host_or_ip, packets=1, timeout=1000):
-        ''' Calls system "ping" command, returns True if ping succeeds.
-        Required parameter: host_or_ip (str, address of host to ping)
-        Optional parameters: packets (int, number of retries), timeout (int, ms to wait for response)
-        Does not show any output, either as popup window or in command line.
-        Python 3.5+, Windows and Linux compatible (Mac not tested, should work)
-        '''
-        # The ping command is the same for Windows and Linux, except for the "number of packets" flag.
         if platform.system().lower() == 'windows':
             command = ['ping', '-n', str(packets), '-w', str(timeout), host_or_ip]
-            # run parameters: capture output, discard error messages, do not show window
-            result = subprocess.run(command, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, stderr=subprocess.DEVNULL, creationflags=0x08000000)
-            # 0x0800000 is a windows-only Popen flag to specify that a new process will not create a window.
-            # On Python 3.7+, you can use a subprocess constant:
-            #   result = subprocess.run(command, capture_output=True, creationflags=subprocess.CREATE_NO_WINDOW)
-            # On windows 7+, ping returns 0 (ok) when host is not reachable; to be sure host is responding,
-            # we search the text "TTL=" on the command output. If it's there, the ping really had a response.
-            return result.returncode == 0 and b'TTL=' in result.stdout
+            res= subprocess.run(command, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, \
+                stderr=subprocess.DEVNULL, creationflags=0x08000000)
+            return res.returncode == 0 and b'TTL=' in res.stdout
         else:
             command = ['ping', '-c', str(packets), '-w', str(timeout), host_or_ip]
             # run parameters: discard output and error messages
-            result = subprocess.run(command, stdin=subprocess.DEVNULL, stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-            return result.returncode == 0
+            res = subprocess.run(command, stdin=subprocess.DEVNULL, \
+                stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+            return res.returncode == 0
 
 
     #
@@ -427,29 +553,38 @@ class FlashFPGA2Linux(Thread):
         
     #
     # @brief    Establish a SSH connection the SoC-FPGA baord running rsyocto
-    # @param rbf_dir            Direcotory of the FPGA-Configuration file 
-    # @param fpga_linux_file    FPGA Configuration file that are written by Linux
-    # @param fpga_boot_file     FPGA Configuration file that are written by the bootloader
-    #                           '' -> Bootloader FPGA-Configuration file change disabled
-    # @return   success
     #
-    def EstablishSSHcon(self,rbf_dir='', fpga_linux_file='', fpga_boot_file=''):
+    def EstablishSSHcon(self):
         Thread.__init__(self)
+        self.__queue = queue.Queue()
+        self.daemon = True
         self.start()
-        return False
 
-
-    def __sendCmd(self,cmd=''):
+    #
+    # @brief Send a Linux Shell command via SSH to rsyocto
+    # @param  cmd           Linux Shell command to execute
+    #                       as string
+    # @param ignore_error   Ignore all errors
+    # @return               responce string of the command 
+    #
+    def __sendCmd(self,cmd='',ignore_error=False):
         ssh_stdin, ssh_stdout, ssh_stderr = self.__sshClient.exec_command(cmd)
         err = ssh_stderr.read().decode("utf-8") 
         if not err == '':
-            print('[ERROR] Failed to execute a Linux cmd via SSH!\n'+\
-                  '        CMD  : "'+cmd+'"\n'+\
-                  '        ERROR: "'+err+'"')    
-            return ''
+            if not ignore_error:
+                print('[ERROR] Failed to execute a Linux cmd via SSH!\n'+\
+                    '        CMD  : "'+cmd+'"\n'+\
+                    '        ERROR: "'+err+'"')    
+            return 'ERROR'
 
         return ssh_stdout.read().decode("utf-8") 
 
+    #
+    # @brief Decode the used diskspace of the
+    #        rootfs of rsyocto in %
+    # @param str_df     output of the "df" command
+    # @return           available diskspace in % 
+    #
     def __decodeDiskSpace(self,str_df=''):
         root_pos = str_df.find('/dev/root')
         if root_pos==-1: return -1
@@ -483,9 +618,64 @@ class FlashFPGA2Linux(Thread):
             return -1
         return number
 
+    #
+    # @brief Decode the partition table of rsyocto
+    #        and check that all execpected partitions 
+    #        are available 
+    # @param str_lsblk      output of the "lsblk" command
+    # @param mountingpoint  name of a mounting point to found
+    # @return is the partition table vialed
+    #
+    def __decodePartitions(self,str_lsblk='',mountingpoint=''):
+        if str_lsblk.find('mmcblk0p1')==-1 or str_lsblk.find('mmcblk0p2')==-1 or \
+           str_lsblk.find('mmcblk0p3')==-1:
+            return False
+        if not mountingpoint=='' and str_lsblk.find(mountingpoint)==-1:
+            return False
+        return True 
 
     #
-    # @breif Override the run() function of Thread class
+    # @brief Check that are a FPGA-Configuration file on the rootfs 
+    #        with the "ls" command
+    # @param str_ls          output of the "ls" command
+    # @param fpga_conf_name  name of the FPGA-Configuration file to find
+    # @return                was the file found?
+    #  
+    def __checkforFPGAFiles(self,str_ls='',fpga_conf_name=''):
+        if str_ls=='' or fpga_conf_name=='' : return False
+        if str_ls.find(fpga_conf_name)==-1:   return False
+        return True 
+
+    #
+    # @brief Cleanup the SSH/SFTP Connection and the process of 
+    #        writing a new FPGA-Configuration to rsyocto
+    # @param remove_files       Remove the temp files from the 
+    #                           rsyocto rootfs
+    # @param close_connection   Close the SSH/SFTP connection 
+    #
+    def __cleanupSSH(self,remove_files=False, close_connection=True):
+        print('[INFO] Cleanup SSH- and SFTP connection to rsyocto')
+
+        if remove_files:
+            # Remove the old mounting point if available 
+            try: 
+                self. __sendCmd('sudo umount '+self.__temp_partfolder_dir,True)
+            except Exception:
+                pass
+
+            # Remove the temp folder 
+            cmd = 'sudo rm -r '+self.__temp_folder_dir
+            try:
+                rm_mes = self. __sendCmd(cmd,True)
+            except Exception:
+                pass
+        if close_connection:
+            if not self.__sftpClient== None: self.__sftpClient.close()
+            if not self.__sshClient== None: self.__sshClient.close()
+
+
+    #
+    # @brief Override the run() function of Thread class
     #        Thread to for handling the SSH connection to SoC-FPGA baord
     #
     def run(self):
@@ -493,12 +683,15 @@ class FlashFPGA2Linux(Thread):
 
         # Start a new SSH client connection to the development board
         self.__sshClient = None
+        self.__sftpClient= None
+        self.ThreadStatus= False
         self.__sshClient = paramiko.SSHClient()
         self.__sshClient.load_system_host_keys()
         warnings.filterwarnings("ignore")
+        self.__temp_folder_dir = '/home/'+self.board_user+'/'+RSYOCTO_TEMPCOPYFOLDER
+        self.__temp_partfolder_dir= self.__temp_folder_dir+'/'+'bootloader'
         self.__sshClient.set_missing_host_key_policy(paramiko.WarningPolicy())
-        paramiko.util.log_to_file(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+'sshClientlog.txt')
-        
+  
         try:
             #
             ## 1. Step: Establish a SSH connection to the board
@@ -526,8 +719,8 @@ class FlashFPGA2Linux(Thread):
                       '        This script works only with together with the \n'+\
                       '        embedded Linux Distribution rsyocto!\n'+\
                       '        ==> github.com/robseb/rsyocto')
-                self.__sshClient.close()
-                sys.exit()
+                self.__cleanupSSH(False,True)
+                return False
     
             # Check that the connected rsyocto runs on the same SoC-FPGA family as the 
             # the Intel Quartus Prime project
@@ -540,8 +733,8 @@ class FlashFPGA2Linux(Thread):
                           rsyocto_devicename+'" \n'+\
                       '        Quartus Prime Project device : "'+\
                           self.Device_name[self.Device_id]+'"')
-                self.__sshClient.close()
-                sys.exit()
+                self.__cleanupSSH(False,True)
+                return False
 
             # Check that the "FPGA-writeConfig" command is available 
             #
@@ -550,8 +743,8 @@ class FlashFPGA2Linux(Thread):
                 print('[ERROR] The connect rsyocto Linux Distribution has no '+\
                       '"FPGA-writeConfig" Linux command of the rstools installed! \n'+\
                       '        This command allows to write the FPGA-Configuration and is need by this script!')
-                self.__sshClient.close()
-                sys.exit()
+                self.__cleanupSSH(False,True)
+                return False
             
             # Check that enough memory space is available on rsyocto for 
             # uploading the FPGA configuration files
@@ -559,45 +752,179 @@ class FlashFPGA2Linux(Thread):
             diskpace = self.__decodeDiskSpace(self. __sendCmd(cmd))
             if diskpace==-1: 
                 print('[ERROR] Failed to get the available diskpace from the embedded Linux')  
-                self.__sshClient.close()
-                sys.exit()
+                self.__cleanupSSH(False,True)
+                return False
             elif diskpace >= 99:
                 print('[ERROR] It is not enough diskspace left on rsyocto on the SoC-FPGA board \n'+\
                       '        for uploading the FPGA-Configuration!\n'+\
                       '        Disk space on the rootfs used: '+str(diskpace)+'%\n'+\
                       '        At least 1% must be free available!')
-                self.__sshClient.close()
-                sys.exit()
+                self.__cleanupSSH(False,True)
+                return False
+
+            # Check that all partitions are available on rsyocto
+            # primary the bootloader partition
+            cmd = 'lsblk'
+            if not self.__decodePartitions(self. __sendCmd(cmd)): 
+                print('[ERROR] Not all expected partitions available on rsyocto!\n'+\
+                        '        The bootloader partition could not be located!')
+                self.__cleanupSSH(False,True)
+                return False
 
             print('[INFO] SSH Connection established to rsyocto ('+\
                 str(100-diskpace)+'% free disk space remains on the rootfs)')
             
             #
-            ##  3. Step: Transfering the FPGA-Configuration files to the board
+            ##  3. Step: Transfering the FPGA-Configuration file 
+            #            that can be written by Linux to the temp folder
             #
-            
+            [rbf_dir,fpga_linux_file,fpga_boot_file] =  self.__queue.get()
+
+            print('[INFO] Starting SFTP Data transfer!')
+
             #Transfering files to and from the remote machine
             self.__sftpClient = self.__sshClient.open_sftp()
-            temp_folder_dir = '/home/'+self.board_user+'/'+RSYOCTO_TEMPCOPYFOLDER
  
+            # Remove the temp folder from rsyocto
+            self.__cleanupSSH(True,False)
+
             # Create a new empty temp folder 
-            self.__sftpClient.rmdir(temp_folder_dir)
-            self.__sftpClient.mkdir(temp_folder_dir)
+            cmd = 'mkdir '+self.__temp_folder_dir
+            if not self. __sendCmd(cmd)=='':
+                print('[ERROR] Failed to create a new temp folder on rsyocto!')
+                self.__cleanupSSH(False,True)
+                return False
+
 
             # Copy the FPGA configuration file for writing with Linux to the rootfs
+            print('[INFO] Start coping the new Linux FPGA-Configuration file to rsyocto')
+            local_path = rbf_dir+fpga_linux_file
+            try:
+                self.__sftpClient.put(local_path, self.__temp_folder_dir+'/'+fpga_linux_file)
+            except Exception as ex:
+                print('[ERROR] Exception occurred during SFTP File transfer!\n'+\
+                      '        MSG.        : "'+str(ex)+'"')
+                self.__cleanupSSH(True,True)
+                return False
+
+            # Check that the new FPGA-Configuration is now located on the rootfs
+            cmd = 'ls '+self.__temp_folder_dir
+            if not self.__checkforFPGAFiles(self. __sendCmd(cmd),fpga_linux_file): 
+                print('[ERROR] The Linux FPGA-Configuration could not be found \n'+\
+                        '        in the bootloader partition!')
+                self.__cleanupSSH(True,True)
+                return False
+
+            # Write the new FPGA-Configuration to the FPGA-Fabric
+            print('[INFO] Changing the FPGA-Configuration of FPGA-Fabric with the new one')
+            cmd = 'FPGA-writeConfig -f '+self.__temp_folder_dir+'/'+fpga_linux_file
+            if self. __sendCmd(cmd).find('Succses: The FPGA runs now with')==-1:
+                print('[ERROR] Failed to write the FPGA Configuration!')
+                self.__cleanupSSH(True,True)
+                return False
+
+            # Remove the FPGA-Configuration file from the rootfs
+            cmd = 'sudo rm '+self.__temp_folder_dir+'/'+fpga_linux_file
+            rm_mes = self. __sendCmd(cmd)
+            if not rm_mes=='':
+                print('[ERROR] Failed to remove the Linux FPGA-Configuration file \n'+\
+                        '        from the rootfs!')
+                self.__cleanupSSH(True,True)
+                return False
+
+            print('[INFO] Running FPGA-Configuration was changed successfully')
+
+            #
+            ## 4. Step: Copy the FPGA-Configuration file to the bootloader partition
+            #
+            #
+            if not fpga_boot_file=='':
+                # Create a new empty temp folder for the bootloader 
+                cmd = 'mkdir '+self.__temp_partfolder_dir
+                if not self. __sendCmd(cmd)=='':
+                    print('[ERROR] Failed to create a new bootloader temp folder on rsyocto!')
+                    self.__cleanupSSH(False,True)
+                    return False
+
+                # Remove the old mounting point if available 
+                self. __sendCmd('sudo umount '+self.__temp_partfolder_dir,True)
+
+                # Mount the bootloader partition to the temp foler
+                self. __sendCmd('sudo mount /dev/mmcblk0p1 '+self.__temp_partfolder_dir)
+                
+                # Check that the partition was mounted
+                cmd = 'lsblk'
+                if not self.__decodePartitions(self. __sendCmd(cmd),'/home/root/.flashFP'): 
+                    print('[ERROR] The mounting of the bootloader partition on rsyocto failed!')
+                    self.__cleanupSSH(True,True)
+                    return False
+
+                # Read the bootloader files and look for the FPGA-Configuration file
+                cmd = 'ls '+self.__temp_partfolder_dir
+                if not self.__checkforFPGAFiles(self. __sendCmd(cmd),fpga_boot_file): 
+                    print('[ERROR] The bootloader FPGA-Configuration could not be found \n'+\
+                          '        in the bootloader partition!')
+                    self.__cleanupSSH(True,True)
+                    return False
+
+                # Remove the old FPGA-Configuration file from the bootloader partition
+                print('[INFO] Removing the old bootloader FPGA-Configuration from rsyocto')
+                cmd = 'sudo rm '+self.__temp_partfolder_dir+'/'+fpga_boot_file
+                rm_mes = self. __sendCmd(cmd)
+                if not rm_mes=='':
+                    print('[ERROR] Failed to remove the old FPGA-Configuration file \n'+\
+                          '        from the bootloader partition!')
+                    self.__cleanupSSH(True,True)
+                    return False
+                
+                # Copy the new FPGA-Configuration file to the bootloader partition
+                print('[INFO] Copying the new bootloader FPGA-Configuration to rsyocto')
+                local_path_bootconf = rbf_dir+fpga_boot_file
+                try:
+                    self.__sftpClient.put(local_path_bootconf, self.__temp_partfolder_dir+'/'+fpga_boot_file)
+                except Exception as ex:
+                    print('[ERROR] Exception occurred during SFTP File transfer!\n'+\
+                        '        MSG.        : "'+str(ex)+'"')
+                    self.__cleanupSSH(True,True)
+                    return False
+
+                # Check that the new FPGA-Configuration is inside the partition folder 
+                cmd = 'ls '+self.__temp_partfolder_dir
+                if not self.__checkforFPGAFiles(self. __sendCmd(cmd),fpga_boot_file): 
+                    print('[ERROR] The new bootloader FPGA-Configuration could not be found \n'+\
+                          '        in the bootloader partition!')
+                    self.__cleanupSSH(True,True)
+                    return False
+
+                # Remove the old mounting point if available 
+                self. __sendCmd('sudo umount '+self.__temp_partfolder_dir,True)
+
+                # Remove the mounting point folder 
+                cmd = 'sudo rm -r '+self.__temp_partfolder_dir
+                rm_mes = self. __sendCmd(cmd)
+                if not rm_mes=='':
+                    print('[ERROR] Failed to remove the mounting point folder \n'+\
+                            '        from the rootfs!')
+                    # ADD CLEAN UP
+                    self.__sftpClient.close()
+                    self.__sshClient.close()
+                    return False
+
+                print('[INFO] Bootloader FPGA-Configuration was changed successfully')
+
+            # Clean up 
+            self.__cleanupSSH(True,True)
+
+            print('[INFO] SSH Thread and SFTP Data transfer done')
+            self.ThreadStatus= True
+            return True
             
 
-            self.__sftpClient.close()
-
-            #RSYOCTO_TEMPCOPYFOLDER
-
-            
-        
-        except paramiko.ssh_exception.SSHException as ex: 
+        except Exception as ex: 
             print('[ERROR] Failed to open network connection!\n'+
             '              Msg.: "'+str(ex)+'"')
 
-        self.__sshClient.close()
+            self.__cleanupSSH(True,True)
     #
     #
     # @brief Create a FPGA configuration file for configure the FPGA during boot or with Linux in case this
@@ -612,11 +939,11 @@ class FlashFPGA2Linux(Thread):
     # @return                      success
     #
     def GenerateFPGAconf(self, boot_linux =False, linux_filename='', linux_copydir=''):
-  
+
         if self.Device_id==2 and boot_linux:
             print('[ERROR]  FPGA configuration file that can be written by Linux (HPS)')
-            print('       is for the Arria 10 SX right now not supported!')
-            return True
+            print('         is for the Arria 10 SX right now not supported!')
+            return True # Ignore this message 
 
         gen_fpga_conf=False
         early_io_mode =False
@@ -634,7 +961,6 @@ class FlashFPGA2Linux(Thread):
                 os.remove(sof_file_dir+self.__SPLM[self.__SPno]+linux_filename)
             except Exception:
                 print('[ERROR]  Failed to remove the old project folder FPGA config file')
-                
         try:
             with subprocess.Popen(self.EDS_Folder+\
                 EDS_EMBSHELL_DIR[self.__SPno], stdin=subprocess.PIPE,stdout=DEVNULL) as edsCmdShell:
@@ -642,7 +968,6 @@ class FlashFPGA2Linux(Thread):
                 time.sleep(DELAY_MS)
                 if not boot_linux: 
                     print('[INFO] Generating a new FPGA-Configuration file for configuration during boot')
-                    print('       with the output name "'+linux_filename+'"')
 
                     sof_file_dir2 = sof_file_dir.replace('\\', '/')
                     b = bytes(' cd '+sof_file_dir2+' \n', 'utf-8')
@@ -659,7 +984,6 @@ class FlashFPGA2Linux(Thread):
                     edsCmdShell.stdin.write(b) 
                 else:
                     print('[INFO] Generating a new FPGA-Configuration file for configuration with the Linux')
-                    print('       with the output name "'+linux_filename+'"')
 
                     sof_file_dir2 = sof_file_dir.replace('\\', '/')
                     b = bytes(' cd '+sof_file_dir2+' \n', 'utf-8')
@@ -776,8 +1100,39 @@ class FlashFPGA2Linux(Thread):
                 print('[ERROR]  Failed to move the rbf configuration '+ \
                     'file to the vfat folder MSG:'+str(ex))
                 return False
-    
         return True
+    # @param rbf_dir            Direcotory of the FPGA-Configuration file 
+    # @param fpga_linux_file    FPGA Configuration file name that are written by Linux
+    # @param fpga_boot_file     FPGA Configuration file name that are written by the bootloader
+    #                           '' -> Bootloader FPGA-Configuration file change disabled
+
+    def startCopingFPGAconfig(self,rbf_dir,fpga_linux_file,fpga_boot_file):
+        if not os.path.isdir(rbf_dir):
+            print('[ERROR] The Direcotory of the FPGA-Configuration Folder on the Computer does not exsit!')
+            return False
+        if not os.path.isfile(rbf_dir+self.__SPLM[self.__SPno]+fpga_linux_file):
+            print('[ERROR] The FPGA-Configuration for Linux file on the Computer does not exsit!\n'+\
+                  '        File Dir: "'+rbf_dir+self.__SPLM[self.__SPno]+fpga_linux_file+'"')
+            return False
+        if not fpga_boot_file=='' and not os.path.isfile(rbf_dir+self.__SPLM[self.__SPno]+fpga_boot_file):
+            print('[ERROR] The FPGA-Configuration for the bootloader file on the Computer does not exsit!\n'+\
+                  '        File Dir: "'+rbf_dir+self.__SPLM[self.__SPno]+fpga_boot_file+'"')
+            return False
+        # Check that the SSH thread is running
+        if not self.is_alive() or self.__queue == None: 
+            print('[ERROR] The SSH Clinet Thread is not running!\n'+\
+                  '        A upload of the FPGA-Configuration files via SFTP is not posibile!\n'+\
+                  '        Check the output of the SSH Thread!')
+            return False
+
+        # Write the data to the Queue
+        it =  [rbf_dir,fpga_linux_file,fpga_boot_file]
+        self.__queue.put(it)
+
+        return True
+
+
+
 
 
 
@@ -791,8 +1146,11 @@ def praseInputArgs():
     arg_set_user            = ''
     arg_set_pw              = ''
     arg_set_flashBoot       = False
+    arg_compile_project     = False
+    arg_quartus_ver         = ''
 
     flashBoot_chnaged       = False
+    quartusver_changed      = False
 
     # Create the default XML setting file 
     if not os.path.exists(FLASHFPGA_SETTINGS_XML_FILE_NAME):
@@ -808,9 +1166,19 @@ def praseInputArgs():
         parser.add_argument('-ip','--set_ipaddres', required=False, help='Set the IPv4 Address of the board')
         parser.add_argument('-us','--set_user',     required=False, help='Set the Linux username of the board')
         parser.add_argument('-pw','--set_password', required=False, help='Set the Linux user password of the board')
+        parser.add_argument('-cf','--en_complie_project', required=False, help='Complile the Intel Quartus Prime '+\
+                                  'FPGA project (use "-cf 1")')
         parser.add_argument('-fb','--en_flashBoot', required=False, \
                         help='Enable or Disable of the writing of the u-boot bootloader FPGA-Configuration file'\
                             'FPGA-Configuration [ 0: Disable]')
+
+        parser.add_argument('-qv','--set_quartus_prime_ver',required=False, \
+            help=' Set the Intel Quartus Prime Version \n'+\
+                 ' Note: Only requiered for FPGA Project Compilation! |\n'+\
+                 ' Quartus Prime Version to use <Version><Version No> |\n'+\
+                 '     L -> Quartus Prime Lite      (e.g. L16.1) |\n'+\
+                 '     S -> Quartus Prime Standard  (e.g. S18.1) | \n'+\
+                 '     P -> Quartus Prime Pro       (e.g. P20.1)\n')
 
         args = parser.parse_args()
 
@@ -828,6 +1196,30 @@ def praseInputArgs():
 
         # Set the Linux user password of the baord
         if args.set_password != None: arg_set_pw=args.set_password
+
+        # Complie the Intel Quartus Prime FPGA project
+        if args.en_complie_project != None:
+            try: tmp = int(args.en_complie_project)
+            except Exception:
+                print('[ERROR] Failed to convert the [--en_complie_project/-cf] input argument!')
+                print('        Only integer numbers are allowed!')
+                sys.exit()
+            if tmp >0: arg_compile_project= True
+
+        # Set the Intel Quartus Prime project version
+        if args.set_quartus_prime_ver != None:
+            if re.match("^[LSP]+[0-9]+[.]+[0-9]?$",args.set_quartus_prime_ver, re.I) == None:
+                print('[ERROR] The selected Quartus Version is in the wrong format!')
+                print('        Quartus Prime Version to use <Version><Version No> \n'+\
+                      '           L -> Quartus Prime Lite      (e.g. L16.1) \n'+\
+                      '           S -> Quartus Prime Standard  (e.g. S18.1)  \n'+\
+                      '           P -> Quartus Prime Pro       (e.g. P20.1)')
+                sys.exit()
+            arg_quartus_ver=args.set_quartus_prime_ver
+            quartusver_changed = True
+            print('[INFO] The Intel Quartus Prime Version is set to "'+arg_quartus_ver+'"')
+            
+
 
         # Enable or Disable of the writing of the u-boot bootloader FPGA-Configuration file 
         if args.en_flashBoot != None:
@@ -875,6 +1267,12 @@ def praseInputArgs():
             for elem in root.iter('board'):
                 if arg_set_flashBoot: elem.set('set_flashBoot','Y')
                 else: elem.set('set_flashBoot','N')
+        
+        # Write the Intel Quartus Prime Version to the XML file
+        if quartusver_changed:
+            for elem in root.iter('board'):
+                elem.set('set_quartus_prime_ver',arg_quartus_ver)
+
         # Flash settings
         tree.write(FLASHFPGA_SETTINGS_XML_FILE_NAME)
 
@@ -893,9 +1291,11 @@ def praseInputArgs():
 
     for part in root.iter('board'):
         try:
-            arg_set_ip = str(part.get('set_ip'))
-            arg_set_user = str(part.get('set_user'))
-            arg_set_pw = str(part.get('set_pw'))
+            arg_set_ip      = str(part.get('set_ip'))
+            arg_set_user    = str(part.get('set_user'))
+            arg_set_pw      = str(part.get('set_pw'))
+            arg_set_pw      = str(part.get('set_pw'))
+            arg_quartus_ver = str(part.get('set_quartus_prime_ver'))
 
             if str(part.get('set_flashBoot'))=='Y':
                 arg_set_flashBoot = True
@@ -907,7 +1307,7 @@ def praseInputArgs():
 
 
       
-    return arg_set_ip, arg_set_user,arg_set_pw,arg_set_flashBoot
+    return arg_set_ip, arg_set_user,arg_set_pw,arg_set_flashBoot,arg_compile_project,arg_quartus_ver
 
 ############################################                                ############################################
 ############################################             MAIN               ############################################
@@ -929,12 +1329,12 @@ if __name__ == '__main__':
     SPLM = ['/','\\'] # Linux, Windows 
 
     # Enable and read input arguments or the settings from a XML file
-    arg_set_ip, arg_set_user,arg_set_pw,arg_set_flashBoot = praseInputArgs()
-    
+    arg_set_ip, arg_set_user,arg_set_pw,arg_set_flashBoot,\
+        arg_compile_project,arg_quartus_ver  = praseInputArgs()
     #
     ## 1. Step: Read the execution environment and scan the Intel Quartus Prime FPGA project
     #
-    flashFPGA2Linux = FlashFPGA2Linux(arg_set_ip, arg_set_user,arg_set_pw)
+    flashFPGA2Linux = FlashFPGA2Linux(arg_set_ip, arg_set_user,arg_set_pw,arg_compile_project,arg_quartus_ver)
 
     #
     ## 2.Step: Check the network connection to the baord
@@ -946,29 +1346,49 @@ if __name__ == '__main__':
               ' and of the SoC-FPGA board\n'+\
               '        You can change the IP-Address with the attribute: "-ip"')
         sys.exit()
+    #
+    ## 3. Step: Start the SSH/SFT Thread to establish a connection
+    #
+    flashFPGA2Linux.EstablishSSHcon()
 
     #
-    ## 3. Step: Generate the FPGA-Configuration that can be written with Linux 
+    ## 4. Step: Generate the FPGA-Configuration files
     #
-    '''
     rbf_dir =  flashFPGA2Linux.Quartus_proj_top_dir+SPLM[SPno]+flashFPGA2Linux.Sof_folder
 
     # Generate a FPGA Configuration file that can be written by Linux (rsyocto)
-    if not flashFPGA2Linux.GenerateFPGAconf(True,'rsyocto_fpga_conf.rbf',rbf_dir):
+    linux_fpga_file_name = 'rsyocto_fpga_conf.rbf'
+    if not flashFPGA2Linux.GenerateFPGAconf(True,linux_fpga_file_name,rbf_dir):
         print('[ERROR] Failed to generate the Linux FPGA-Configuration file')
         sys.exit()
 
     # Generate a FPGA Configuration file that can be written by u-boot
+    boot_fpga_file_name= ''
     if arg_set_flashBoot:
-        if not flashFPGA2Linux.GenerateFPGAconf(False,'socfpga.rbf',rbf_dir):
+        boot_fpga_file_name= 'socfpga.rbf'
+        if not flashFPGA2Linux.GenerateFPGAconf(False,boot_fpga_file_name,rbf_dir):
             print('[ERROR] Failed to generate the u-boot (bootloader) FPGA-Configuration file')
             sys.exit()
-    '''
+    
     #
-    ## 4. Step: Establish a SSH Connection to the embedded baord
+    ## 5.Step: Coyp the FPGA-Configuration files via SSH to rsyocto and write the FPGA-Fabric with it
     #
-    if not flashFPGA2Linux.EstablishSSHcon(rbf_dir,fpga_linux_file,fpga_boot_file):
-        sys.exit()
+    flashFPGA2Linux.startCopingFPGAconfig(rbf_dir,linux_fpga_file_name,boot_fpga_file_name)
 
-    print('[SUCCESS] Support the author Robin Sebastian (git@robseb.de)')
+    # Wait until the SSH Thread is done
+    flashFPGA2Linux.join()
+
+    # Remove the FPGA-Configuration files from the Intel Quartus Prime Project folder 
+    if os.path.isfile(rbf_dir+SPLM[SPno]+linux_fpga_file_name):
+        try:
+            os.remove(rbf_dir+SPLM[SPno]+linux_fpga_file_name)
+        except Exception:
+            pass
+    if arg_set_flashBoot and os.path.isfile(rbf_dir+SPLM[SPno]+boot_fpga_file_name):
+        try:
+            os.remove(rbf_dir+SPLM[SPno]+boot_fpga_file_name)
+        except Exception:
+            pass
+    if flashFPGA2Linux.ThreadStatus:
+        print('[SUCCESS] Support the author Robin Sebastian (git@robseb.de)')
 # EOF
