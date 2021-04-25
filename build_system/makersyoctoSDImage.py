@@ -452,7 +452,7 @@ if __name__ == '__main__':
         print('ERROR: This script can not run with root privileges!')
         sys.exit()
     
-     # Enable and read input arguments 
+    # Enable and read input arguments 
     arg_use_yocto_project,arg_use_devicetree_gen = praseInputArgs()
 
     headline = ['SELECT YOUR DEVELOPMENT BOARD']
