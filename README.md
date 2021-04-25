@@ -27,11 +27,11 @@ To realize that **Python3** with the Python Package manager **pip (PyPI)** and t
 
 During development, a major concern was placed on the integration of **powerful and simple to install development IDEs** that do not require a JTAG-connection or any cross-building environment. All kinds of *rsyocto* applications and parts can be **build, deployed and even debugged over the network** (fully routable over the Internet). With the implementation of *Microsoft Visual Studio* and *Visual Studio Code* a simple installment and quick jump start in the development process is possible, because all required compilers run directly on *rsyocto*. The custom developed build system goes even a step further. 
 
-*rsyocto* was designed with an automatically Python based `build system`. That generates a highly optimized **customized *rsyocto*-image** with the installment of users **private** **applications**, **boot configurations**, **scripts**, **FPGA configuration files, that will be configured on the FPGA Fabric before the Linux boots** and a lot more with only an *Intel Quartus Prime* FPGA project. This feature enables users, without the requirement of deep Linux knowledge, to design own *rsyocto* flavors with it own FPGA projects for complex Intel SoC-FPGAs. The `build system` generates the 3-stage bootloader, finds the right Embedded Linux Distribution files, configures the partitions of the final image in the right way, configures the`OpenSSH Server` and automates a lot more with only an single shell command.    
+*rsyocto* was designed with an automatically Python based `build system`. That generates a highly optimized **customized *rsyocto*-image** with the installment of users **private** **applications**, **boot configurations**, **scripts**, **FPGA-Configuration files, that will be configured on the FPGA Fabric before the Linux boots** and a lot more with only an *Intel Quartus Prime* FPGA project. This feature enables users, without the requirement of deep Linux knowledge, to design own *rsyocto* flavors with it own FPGA projects for complex Intel SoC-FPGAs. The `build system` generates the 3-stage bootloader, finds the right Embedded Linux Distribution files, configures the partitions of the final image in the right way, configures the`OpenSSH Server` and automates a lot more with only an single shell command.    
 
-For FPGA developers, a **Python script** has been developed that allows the **FPGA-configuration to be written over the network** (*SSH/SFT*) by simply running it in an *Intel Quartus Prime* FPGA project folder. The script can compile the FPGA project or change the FPGA configuration of the bootloader (*u-boot*) to start the FPGA configuration after a restart. This has the same effect as a classic *FPGA configuration device*. 
+For FPGA developers, a **Python script** has been developed that allows the **FPGA-Configuration to be written over the network** (*SSH/SFT*) by simply running it in an *Intel Quartus Prime* FPGA project folder. The script can compile the FPGA project and change the FPGA-Configuration of the bootloader (*u-boot*) to start the FPGA-Configuration after a restart. This has the same effect as a classic *FPGA-Configuration device*. 
 
-*rsyocto* is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C-, CAN-BUS,…**), **all Interfaces between hard processor system (HPS) and the FPGA Fabric**  and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for the development of industrial connected solutions. For instance, with a single command *rsyocto* is capable to **load a new FPGA configuration** (`FPGA Manager`) or to **read and write the ARM AXI-Bridge Interface to the FPGA Fabric**. The Linux test commands allow in a simple fashion to communicate with the FPGA Fabric via all available interfaces, such as **Lightweight HPS-to-FPGA-** (`lwhps2fpga`) , **HPS-to-FPGA-Bridge**  (`hps2fpga`) , **shared-memory** (`hps2sdram`) or **general purpose signals** (`gpi` and `gpo`). Python- and C++- demo applications show a powerful way with a high throughput to interact with FPGA Soft-IP. 
+*rsyocto* is with the implementation of drivers for **all Hard-IP Interfaces** (e.g. **I²C-, CAN-BUS,…**), **all Interfaces between hard processor system (HPS) and the FPGA Fabric**  and simple Linux test commands (e.g. **i2c-tools** or **can-utils**) ready for the development of industrial connected solutions. For instance, with a single command *rsyocto* is capable to **load a new FPGA-Configuration** (`FPGA Manager`) or to **read and write the ARM AXI-Bridge Interface to the FPGA Fabric**. The Linux test commands allow in a simple fashion to communicate with the FPGA Fabric via all available interfaces, such as **Lightweight HPS-to-FPGA-** (`lwhps2fpga`) , **HPS-to-FPGA-Bridge**  (`hps2fpga`) , **shared-memory** (`hps2sdram`) or **general purpose signals** (`gpi` and `gpo`). Python- and C++- demo applications show a powerful way with a high throughput to interact with FPGA Soft-IP. 
 
 
 The final *rsyocto*-Image can be **installed** on a **SD-Card** with any commonly **used Boot-Image creating tools**. Versions are available for the **Terasic DE10 Standard-** (*Intel Cyclone V SoC-FPGA*), **Terasic DE10 Nano-** (*Intel Cyclone V SoC-FPGA*), **Terasic Han Pilot** (*Intel Arria 10 SX SoC-FPGA*) and **Terasic DE0-Nano SoC** (*Intel Cyclone V SoC-FPGA*).
@@ -80,7 +80,6 @@ ___
 * For the best performance completely custom optimized 
 * **Console based** (**GUI less**) with `Busybox`
 * **Watchdog** timer is enabled    
-<br>
 
 * **FPGA Fabric configuration during the boot (*u-boot script*) and with a single Linux command**
 * **All Bridge Interfaces between the HPS and FPGA are tested, enabled and ready for use!**
@@ -94,7 +93,7 @@ ___
 * Console based Bus test tools (e.g. `can-utils`)
 * **USB Host** support with test tools (e.g `lsusb`) 
 * Console memory dump tools (e.g. `devmem2`) 
-<br>
+
 
 * Full `Linux Network stack` with **dynamic and static iPv4** is supported
 * `OpenSSH-Server` starts automatically during boot and is configured for user authentications 
@@ -118,7 +117,6 @@ ___
 • `gcc-compiler` and `gdb-server`
 * **ARM Development Studio (DS-5) Streamline** is pre-installed and immediately after boot is ready for **trace analysis**
 * The ["`NIOSII_EclipseCompProject`](https://github.com/robseb/NIOSII_EclipseCompProject)" can generate custom **Eclipse for NIOS II** projects with for instance the real-time operating system (*RTOS*) **FreeRTOS**
-<br>
 
 * **`Python`**,**`Python3`**
 * `Apache` webserver with `PHP` and `SQLite`
@@ -127,8 +125,6 @@ ___
 * `udate-rc.d` and `crontab` for startup- and time-triggered shell script scheduling
 * **Full integrated Python `pip3` (*Python-pip*) package manager**
 * `opkg` **package manager** *0.4.2* enables to add some packages from different Linux Distributions.
-
-<br>
 
 * **Custom designed `Build System` to generate the entire bootflow for Intel SoC-FPGAs automatically**
     * **Allows to design highly optimized *rsyocto* flavors for your specific requirements**
