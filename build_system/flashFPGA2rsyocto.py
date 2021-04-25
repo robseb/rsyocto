@@ -70,6 +70,8 @@ RSYOCTO_BANNER_CHECK_LINE =  ['created by Robin Sebastian (github.com/robseb)', 
                              ]
 RSYOCTO_FPGAWRITECONF_CHECK = 'Command to change the FPGA fabric configuration'
 
+
+RSYOCTO_TEMPCOPYFOLDER      = '.flashFPGA2rsyocto'
 #
 #
 #
@@ -140,7 +142,8 @@ class FlashFPGA2Linux(Thread):
 
     ## Network related properties
 
-    __sshClient                 : paramiko # Object of SSH client connection to the baord 
+    __sshClient                 : paramiko # Object of the SSH client connection to the baord 
+    __sftpClient                : paramiko # Object of the SFTP client connection to the board
 
     __SPLM = ['/','\\']               # Slash for Linux, Windows 
     __SPno = 0                        # OS ID 0=Linux | 1=Windows 
@@ -424,9 +427,13 @@ class FlashFPGA2Linux(Thread):
         
     #
     # @brief    Establish a SSH connection the SoC-FPGA baord running rsyocto
+    # @param rbf_dir            Direcotory of the FPGA-Configuration file 
+    # @param fpga_linux_file    FPGA Configuration file that are written by Linux
+    # @param fpga_boot_file     FPGA Configuration file that are written by the bootloader
+    #                           '' -> Bootloader FPGA-Configuration file change disabled
     # @return   success
     #
-    def EstablishSSHcon(self):
+    def EstablishSSHcon(self,rbf_dir='', fpga_linux_file='', fpga_boot_file=''):
         Thread.__init__(self)
         self.start()
         return False
@@ -482,7 +489,7 @@ class FlashFPGA2Linux(Thread):
     #        Thread to for handling the SSH connection to SoC-FPGA baord
     #
     def run(self):
-        print('[INFO] Start to establish a SSH connection to the board')
+        print('[INFO] Start to establish a SSH connection to the SoC-FPGA board with rsyocto')
 
         # Start a new SSH client connection to the development board
         self.__sshClient = None
@@ -563,7 +570,27 @@ class FlashFPGA2Linux(Thread):
                 sys.exit()
 
             print('[INFO] SSH Connection established to rsyocto ('+\
-                str(100-diskpace)+'% free space remains on the rootfs)')
+                str(100-diskpace)+'% free disk space remains on the rootfs)')
+            
+            #
+            ##  3. Step: Transfering the FPGA-Configuration files to the board
+            #
+            
+            #Transfering files to and from the remote machine
+            self.__sftpClient = self.__sshClient.open_sftp()
+            temp_folder_dir = '/home/'+self.board_user+'/'+RSYOCTO_TEMPCOPYFOLDER
+ 
+            # Create a new empty temp folder 
+            self.__sftpClient.rmdir(temp_folder_dir)
+            self.__sftpClient.mkdir(temp_folder_dir)
+
+            # Copy the FPGA configuration file for writing with Linux to the rootfs
+            
+
+            self.__sftpClient.close()
+
+            #RSYOCTO_TEMPCOPYFOLDER
+
             
         
         except paramiko.ssh_exception.SSHException as ex: 
@@ -940,7 +967,7 @@ if __name__ == '__main__':
     #
     ## 4. Step: Establish a SSH Connection to the embedded baord
     #
-    if not flashFPGA2Linux.EstablishSSHcon():
+    if not flashFPGA2Linux.EstablishSSHcon(rbf_dir,fpga_linux_file,fpga_boot_file):
         sys.exit()
 
     print('[SUCCESS] Support the author Robin Sebastian (git@robseb.de)')
