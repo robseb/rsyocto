@@ -55,7 +55,7 @@ Within this repository I have also integrated a step by step guide to show my so
 
 # System Overview of rsyocto
 
-![Alt text](https://github.com/robseb/rsyocto/raw/rsYocto-1.042/doc/symbols/rsYoctoInterfaces.png?raw=true "System Overview")
+![Alt text](https://raw.githubusercontent.com/robseb/rsyocto/rsYocto-1.042/doc/symbols/rsYoctoLayers.jpg?raw=true "System Overview")
 ___
 
 **Build, debug and deploy your applications over the network**
