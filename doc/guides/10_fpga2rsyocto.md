@@ -1,7 +1,7 @@
 [Back to the startpage](https://github.com/robseb/rsyocto)
 
 
-## Writing the FPGA-COnfiguration over the network with your *Intel Quartus Prime* FPGA Project
+## Writing the FPGA-Configuration over the network with your *Intel Quartus Prime* FPGA Project
 
 
 ![Alt text](flashFPGASymbol.jpg?raw=true "Symbol Python script")
@@ -51,6 +51,7 @@ python3 flashFPGA2rsyocto.py
 However, to enable this features  the Python build script uses the `Intel SoC-EDS Command Shell` and the `Intel Quartus Prime Shell`. 
 These are part of *Intel Embedded Development Suite (*SoC-EDS*)* and of *Intel Quartus Prime*. This guide shows how to install this tools properly.
 *Intel Quartus Prime* must be only installed in case the script should compile and build the FPGA project. 
+<br>
 
 #### Install development tools
 <br>
@@ -76,12 +77,13 @@ These are part of *Intel Embedded Development Suite (*SoC-EDS*)* and of *Intel Q
 *  A step-by-step guide how to install *Python* on **Linux** or **Windows** is available [here](https://github.com/robseb/NIOSII_EclipseCompProject#i-installment-of-intel-quartus-prime-191-and-201-with-nios-ii-support)
 
 
-**3. Install the required Python pip (*PyPip*) packages `paramiko`**
+**4. Install the required Python pip (*PyPip*) packages `paramiko`**
 
 * Execute the following command on Linux or Windows to install `paramiko` (*a API for SSH/SFTP for Python*)
 ````shell
 pip3 install paramiko
 ````
+<br>
 
 #### Run the script inside a Quartus Prime FPGA project
 <br>
@@ -98,6 +100,7 @@ git clone https://github.com/robseb/rsyocto.git
     * Location Destination: *Intel Quartus Prime* FPGA Top Folder
 
     ![Alt text](flashFPGAQuartus.jpg?raw=true "Symbol Python script")
+    
     **Just copy the Python script into the top-folder of the *Intel Quartus Prime* FPGA project**
 
 
@@ -173,23 +176,20 @@ After the output file was created the script will generate the FPGA-Configuratio
 and write it to the FPGA-Fabric over the network of your board.
 
 * **Select your *Intel Quartus Prime* Version**
-    * Use the following argument to select *Intel Quartus Prime* Version that will be used to compile the FPGA project
+    * Use the following argument to select the *Intel Quartus Prime* Version that will be used to compile the FPGA project
     ````shell
-    python3 flashFPGA2rsyocto.py
+    python3 flashFPGA2rsyocto.py -qv L20.1
     ````
     * **Note:** On Windows use `python` instate of `python3`
-    ````shell
-    flashFPGA2rsyocto.py -qv L20.1
-    ````
     * In the example is *Intel Quartus Prime* Lite 20.1 selected
     * Syntax: `<Version><Version No.>`
         * `L` --> `Intel Quartus Prime Lite`  
         * `S` --> `Intel Quartus Prime Standard`
         * `P` --> `Intel Quartus Prime Pro`
     * For example for *Intel Quartus Prime* Standard 16.1 use `S16.1`
-* **Run the python script as usual**
+* **Run the Python script**
     ````shell
-    python3 flashFPGA2rsyocto.py
+    python3 flashFPGA2rsyocto.py -cf 1
     ````
 <br>
 
@@ -204,6 +204,30 @@ python3 flashFPGA2rsyocto.py -fb 0
 ````
 **Note:** On Windows use `python` instate of `python3`
 
+**Help output**
+````shell
+D:\Tresorit\Robin\GithubProjects\rsyocvto_relase\v1.042\DE10STDrsyocto>python flashFPGA2rsyocto.py -h
+usage: flashFPGA2rsyocto.py [-h] [-ip SET_IPADDRES] [-us SET_USER] [-pw SET_PASSWORD] [-cf EN_COMPLIE_PROJECT]
+                            [-fb EN_FLASHBOOT] [-qv SET_QUARTUS_PRIME_VER]
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -ip SET_IPADDRES, --set_ipaddres SET_IPADDRES
+                        Set the IPv4 Address of the board
+  -us SET_USER, --set_user SET_USER
+                        Set the Linux username of the board
+  -pw SET_PASSWORD, --set_password SET_PASSWORD
+                        Set the Linux user password of the board
+  -cf EN_COMPLIE_PROJECT, --en_complie_project EN_COMPLIE_PROJECT
+                        Complile the Intel Quartus Prime FPGA project (use "-cf 1")
+  -fb EN_FLASHBOOT, --en_flashBoot EN_FLASHBOOT
+                        Enable or Disable of the writing of the u-boot bootloader FPGA-Configuration fileFPGA-
+                        Configuration [ 0: Disable]
+  -qv SET_QUARTUS_PRIME_VER, --set_quartus_prime_ver SET_QUARTUS_PRIME_VER
+                        Set the Intel Quartus Prime Version Note: Only requiered for FPGA Project Compilation! |
+                        Quartus Prime Version to use <Version><Version No> | L -> Quartus Prime Lite (e.g. L16.1) | S
+                        -> Quartus Prime Standard (e.g. S18.1) | P -> Quartus Prime Pro (e.g. P20.1)
+````
 
 
 [Back to the startpage](https://github.com/robseb/rsyocto)
