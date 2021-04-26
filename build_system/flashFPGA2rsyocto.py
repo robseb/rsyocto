@@ -24,8 +24,11 @@
 # (2021-04-25) Vers.1.0 
 #   first Version 
 #
+# (2021-04-26) Vers.1.01 
+#   fixing a issue with detection of the Intel Quartus Prime FPGA compile mode 
+#
 
-version = "1.0"
+version = "1.01"
 
 #
 #
@@ -1209,7 +1212,9 @@ def praseInputArgs():
                 print('[ERROR] Failed to convert the [--en_complie_project/-cf] input argument!')
                 print('        Only integer numbers are allowed!')
                 sys.exit()
-            if tmp >0: arg_compile_project= True
+            if tmp >0: 
+                arg_compile_project= True
+                print('[INFO] Compile the Intel Quartus Pirme FPGA Project is enabeled')
 
         # Set the Intel Quartus Prime project version
         if args.set_quartus_prime_ver != None:
@@ -1282,7 +1287,8 @@ def praseInputArgs():
         tree.write(FLASHFPGA_SETTINGS_XML_FILE_NAME)
 
         # In set mode end script here 
-        sys.exit()
+        if not arg_compile_project:
+            sys.exit()
 
     ################################### Read the settings from the XML file  ##################################
     
@@ -1336,6 +1342,7 @@ if __name__ == '__main__':
     # Enable and read input arguments or the settings from a XML file
     arg_set_ip, arg_set_user,arg_set_pw,arg_set_flashBoot,\
         arg_compile_project,arg_quartus_ver  = praseInputArgs()
+
     #
     ## 1. Step: Read the execution environment and scan the Intel Quartus Prime FPGA project
     #
