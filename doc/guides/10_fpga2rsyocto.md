@@ -176,7 +176,7 @@ After the output file was created the script will generate the FPGA-Configuratio
 and write it to the FPGA-Fabric over the network of your board.
 
 * **Select your *Intel Quartus Prime* Version**
-    * Use the following argument to select *Intel Quartus Prime* Version that will be used to compile the FPGA project
+    * Use the following argument to select the *Intel Quartus Prime* Version that will be used to compile the FPGA project
     ````shell
     python3 flashFPGA2rsyocto.py
     ````
