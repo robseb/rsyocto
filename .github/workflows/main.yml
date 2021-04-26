@@ -1,0 +1,25 @@
+# This is a basic workflow to help you get started with Actions
+
+name: GithubStatistic
+on:
+  schedule:
+    # Run this once per day.
+    # The specific hour is interpreted in UTC time zone.
+    # Do this towards the end of the UTC day.
+    - cron: "* 22 * * *"
+  workflow_dispatch: # Allow for running this manually
+    
+jobs:
+  j1:
+    name: repostats-for-rsyocto
+    runs-on: ubuntu-latest
+    steps:
+      - name: run-ghrs
+        uses: jgehrcke/github-repo-stats@v1.1.0
+        with:
+          # Set a GitHub API token that can read the stats
+          # repository, and that can push to the data
+          # repository (which this workflow file lives in),
+          # to store data and the report files.
+          ghtoken: ${{ secrets.ghrs_github_api_token }}
+  
