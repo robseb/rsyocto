@@ -98,6 +98,7 @@ git clone https://github.com/robseb/rsyocto.git
     * Location Destination: *Intel Quartus Prime* FPGA Top Folder
 
     ![Alt text](flashFPGAQuartus.jpg?raw=true "Symbol Python script")
+    
     **Just copy the Python script into the top-folder of the *Intel Quartus Prime* FPGA project**
 
 
