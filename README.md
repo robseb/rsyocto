@@ -91,7 +91,7 @@ ___
 * **Accelerometer** and **ADC** can be accessed via Python or C++ (*Demos available*) (*only for the Cyclone V boards*)
 * `socketCAN` pre-installed and pre-configured (*examples available!*) (*Only for Cyclone V SoC-FPGAs*)
 * Console based Bus test tools (e.g. `can-utils`)
-* **USB Host** support with test tools (e.g `lsusb`) 
+* **USB Host** support with test tools (e.g. `lsusb`) 
 * Console memory dump tools (e.g. `devmem2`) 
 
 
@@ -150,12 +150,11 @@ ___
 * **Python script to write the FPGA-Configuration over the Network**
     * Just executed inside the *Intel Quartus Prime* FPGA project folder
     * Communicates with the SoC-FPGA board over the network by using SSH and SFTP 
-    *   *to:*
-        * Compiling the *Intel Quartus Prime* FPGA project 
-        * Changing the running FPGA-Configuration of the FPGA-Fabric
-        * Changing the bootloader (*u-boot*) FPGA-Configuration
-            * After a restart, *u-boot* writes the new FPGA-Configuration into the FPGA-Fabric 
-            * Behavior like a classical FPGA configuration device
+    * Compiling the *Intel Quartus Prime* FPGA project 
+    * Changing the running FPGA-Configuration of the FPGA-Fabric
+    * Changing the bootloader (*u-boot*) FPGA-Configuration
+        * After a restart, *u-boot* writes the new FPGA-Configuration into the FPGA-Fabric 
+        * Behavior like a classical FPGA configuration device
 
 <br>
 
@@ -174,19 +173,20 @@ ___
 | Level | Objective | Guide
 |:--|:--|:--|
 | 1 | **Booting *rsyocto* on your Board** | [**Getting started Guide**](doc/guides/1_Booting.md) |
-| 2 | **Use of Hard-IP, FPGA-IP and FPGA Configuration of the FPGA Fabric** |[Step by step guide 1](doc/guides/2_FPGA_HARDIP.md) |
+| 2 | **Use of Hard-IP, FPGA-IP and FPGA-Configuration of the FPGA-Fabric** |[Step by step guide 1](doc/guides/2_FPGA_HARDIP.md) |
 | 3 | **Debugging C++ applications remotely** with *Microsoft Visual Studio* | [Step by step guide 2](doc/guides/3_CPP.md) |
 | 4 | **Debugging Python applications remotely** | [Step by step guide 3](doc/guides/4_Python.md) |
 | 5 | **Analyzation of applications with ARM Development Studio (*DS-5*) Streamline** | [Step by step guide 4](doc/guides/5_Streamline.md) |
-| 6 | **Developing a custom FPGA Configuration with Intel Quartus Prime**| [Step by step guide 5](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/6_newFPGAconf.md) |
+| 6 | **Developing a custom FPGA-Configuration with Intel Quartus Prime**| [Step by step guide 5](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/6_newFPGAconf.md) |
 <br>
 
 ### Customization Guides 
 
 | No. | Objective | Guide
 |:--|:--|:--|
-| 1 | **Designing of custom *rsyoto* versions** with your content and FPGA project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)  |
-| 2 | **Build your own custom Linux Distro for Intel SoC-FPGAs** with the Yocto Project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/9_customYoctoVersions.md)  |
+| 1 | **Changing the FPGA-Configuration of *rsyocto* over the network with your FPGA project** | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/10_fpga2rsyocto.md)  |
+| 2 | **Designing of custom *rsyoto* versions** with your content and FPGA project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/7_customVersions.md)  |
+| 3 | **Build your own custom Linux Distribution for Intel SoC-FPGAs** with the Yocto Project | [Guide](https://github.com/robseb/rsyocto/blob/rsYocto-1.042/doc/guides/9_customYoctoVersions.md)  |
 <br>
 
 ### Application-specific Guides
