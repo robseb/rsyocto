@@ -1,7 +1,7 @@
 [Back to the startpage](https://github.com/robseb/rsyocto)
 
 
-## Writing the FPGA-COnfiguration over the network with your *Intel Quartus Prime* FPGA Project
+## Writing the FPGA-Configuration over the network with your *Intel Quartus Prime* FPGA Project
 
 
 ![Alt text](flashFPGASymbol.jpg?raw=true "Symbol Python script")
@@ -51,6 +51,7 @@ python3 flashFPGA2rsyocto.py
 However, to enable this features  the Python build script uses the `Intel SoC-EDS Command Shell` and the `Intel Quartus Prime Shell`. 
 These are part of *Intel Embedded Development Suite (*SoC-EDS*)* and of *Intel Quartus Prime*. This guide shows how to install this tools properly.
 *Intel Quartus Prime* must be only installed in case the script should compile and build the FPGA project. 
+<br>
 
 #### Install development tools
 <br>
@@ -76,12 +77,13 @@ These are part of *Intel Embedded Development Suite (*SoC-EDS*)* and of *Intel Q
 *  A step-by-step guide how to install *Python* on **Linux** or **Windows** is available [here](https://github.com/robseb/NIOSII_EclipseCompProject#i-installment-of-intel-quartus-prime-191-and-201-with-nios-ii-support)
 
 
-**3. Install the required Python pip (*PyPip*) packages `paramiko`**
+**4. Install the required Python pip (*PyPip*) packages `paramiko`**
 
 * Execute the following command on Linux or Windows to install `paramiko` (*a API for SSH/SFTP for Python*)
 ````shell
 pip3 install paramiko
 ````
+<br>
 
 #### Run the script inside a Quartus Prime FPGA project
 <br>
