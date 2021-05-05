@@ -146,15 +146,17 @@ ___
 		* Software Libraries 
 		* Web sites 
 		* Linux Shell Startup scripts 
-		* Network Interface settings 
-* **Python script to write the FPGA-Configuration over the Network**
-    * Just executed inside the *Intel Quartus Prime* FPGA project folder
-    * Communicates with the SoC-FPGA board over the network by using SSH and SFTP 
-    * Compiling the *Intel Quartus Prime* FPGA project 
+    		* Network Interface settings 
+    * **Python script to write the FPGA-Configuration over the Network and via JTAG**
+        * Just executed inside the *Intel Quartus Prime* FPGA project folder
+        * JTAG mode allows to write the FPGA-Fabric with **unlicensed IP** (e.g. *NIOS II Core*) for test purposes
+        * Communicates with the SoC-FPGA board over the network by using SSH and SFTP 
+        * Compiling the *Intel Quartus Prime* FPGA project 
     * Changing the running FPGA-Configuration of the FPGA-Fabric
     * Changing the bootloader (*u-boot*) FPGA-Configuration
         * After a restart, *u-boot* writes the new FPGA-Configuration into the FPGA-Fabric 
         * Behavior like a classical FPGA configuration device
+    
 
 <br>
 

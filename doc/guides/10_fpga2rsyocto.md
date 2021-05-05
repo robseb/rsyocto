@@ -20,11 +20,15 @@ For FPGA developers, a **Python script** has been developed that allows the **FP
     * **Changing the bootloader (*u-boot*) FPGA-Configuration**
         * **After a restart, *u-boot* writes the new FPGA-Configuration into the FPGA-Fabric** 
         * Behavior like a *classical FPGA configuration device*
-* **Network Interface**
+* **Network Interface Mode** (*default*)
     * Script uses a the *Secure Shell Protocol* (**SSH**) and the *SSH File Transfer Protocol* (**SFTP**) for the communication with the *rsyocto*
     * Any other connection, like JTAG or USB, to the board is not required
     * Uses SSH with user authentication to make attaching to the card as easy as possible 
         * It is only necessary to insert the IPv4-Address of the SoC-FPGA board
+* **JTAG Mode**
+    * Write the FPGA-Configuration over JTAG directly to a FPGA- or SoC-FPGA- Fabric 
+    * Allows to write the FPGA-Fabric with **unlicensed IP** (e.g. *NIOS II Core*) for test purposes
+    * The required *JTAG Chain file* (*.cdf*) will be automatic generated based on the JTAG Chain of the connect hardware
 
 * **Supported Development Environments**
     * **Windows 10**
@@ -40,6 +44,7 @@ For FPGA developers, a **Python script** has been developed that allows the **FP
     * *Intel Quartus Prime* **Pro** 16.1 or later for Windows or Linux 
 * **Supported Intel SoC-FPGAs running *rsyocto***
     * **Intel Cyclone V**
+    * **Intel Arria 10 SX** (*Currently only via JTAG*)
 
 ### Getting Started 
 
@@ -50,7 +55,7 @@ python3 flashFPGA2rsyocto.py
 
 However, to enable this features  the Python build script uses the `Intel SoC-EDS Command Shell` and the `Intel Quartus Prime Shell`. 
 These are part of *Intel Embedded Development Suite (*SoC-EDS*)* and of *Intel Quartus Prime*. This guide shows how to install this tools properly.
-*Intel Quartus Prime* must be only installed in case the script should compile and build the FPGA project. 
+*Intel Quartus Prime* must be only installed in case the script should compile and build the FPGA project or should use a JTAG connection.  
 <br>
 
 #### Install development tools
@@ -69,7 +74,7 @@ These are part of *Intel Embedded Development Suite (*SoC-EDS*)* and of *Intel Q
 
 **2. Instal Intel Quartus Prime (18.1 or later) for Windows or Linux**
 
-* **Note:** *Intel Quartus Pirme* is only required for compiling the FPGA project. FPGA-Configuration files are generated with SoC-EDS 
+* **Note:** *Intel Quartus Pirme* is only required for compiling the FPGA project or for using JTAG. FPGA-Configuration files are generated with SoC-EDS 
 *   A step-by-step guide how to install *Intel Quartus Prime* on **Linux** or **Windows** is available [here](https://github.com/robseb/NIOSII_EclipseCompProject#i-installment-of-intel-quartus-prime-191-and-201-with-nios-ii-support) (*NIOS II support is for this project not required*)
 
 **3. Instal Python and Python pip (*PyPip*)**
@@ -193,6 +198,60 @@ and write it to the FPGA-Fabric over the network of your board.
     ````
 <br>
 
+**4. Run the Python Script to write the FPGA-Fabric via JTAG**
+
+In addition to an *SSH* connection, the script can also use a **JTAG-Debugger** instead. 
+This is useful because it enables to write FPGA-Configurations of *Intel Quartus Prime* projects with unlicensed IP.
+This is for instance the case with a *Intel NIOS II Soft-Core* Processor project.
+
+* **Select your *Intel Quartus Prime* Version**
+    * Use the following argument to select the *Intel Quartus Prime* Version that will be used to compile the FPGA project
+    ````shell
+    python3 flashFPGA2rsyocto.py -qv L20.1
+    ````
+    * **Note:** On Windows use `python` instate of `python3`
+    * In the example is *Intel Quartus Prime* Lite 20.1 selected
+    * Syntax: `<Version><Version No.>`
+        * `L` --> `Intel Quartus Prime Lite`  
+        * `S` --> `Intel Quartus Prime Standard`
+        * `P` --> `Intel Quartus Prime Pro`
+    * For example for *Intel Quartus Prime* Standard 16.1 use `S16.1`
+* **Run the Python script**
+    ````shell
+    python3 flashFPGA2rsyocto.py -j 1
+    ````
+* For compilation the FPGA project before add `-cf 1`
+    ````shell
+    python3 flashFPGA2rsyocto.py -cf 1 -j 1
+    ````
+* **In case the *Intel Quartus Prime* FPGA project contains a unlicensed IP the following message will appear**
+    ````shell
+    ********************************************************************************
+    *               Unlicensed IP inside the FPGA project was found!               *
+    *          After the FPGA-Configuration is done the task will freeze           *
+    *      and allow to run unlicensed IP during this JTAG connection is active    *
+    ********************************************************************************
+    *            use CTL + C to abort the script after you are done                *
+    *             Support the author Robin Sebastian (git@robseb.de)               *
+********************************************************************************
+    ````
+    * Use the shortcut `CTL + C` to abort the script after you are done
+    <details>
+    <summary><strong>Output of the Python script</strong></summary>
+    <a name="Pos9"></a>
+        
+    ````shell
+    [INFO] Use JTAG with a JTAG Blaster instate Network is enabled
+    [WARNING] The used output file "\DE10STDrsyocto.sof" is older then 10 min!  Modification Date: 11-04-2021 16:44
+    [INFO] A valid Intel Quartus Prime Cyclone V SoC-FPGA project was found
+    [INFO] The vialed Intel Quartus Prime project was found (S18.1)
+    [INFO] A valid JTAG Debugger was found with the ID="DE-SoC [USB-1]"
+    [INFO] FPGA-Configuration was written successfully via JTAG
+    [SUCCESS] Support the author Robin Sebastian (git@robseb.de)
+    ````
+    </details>
+
+<br>
 
 **Optional: Disable the change of the boot (u-boot) FPGA-Configuration file**
 
@@ -206,9 +265,9 @@ python3 flashFPGA2rsyocto.py -fb 0
 
 **Help output**
 ````shell
-D:\Tresorit\Robin\GithubProjects\rsyocvto_relase\v1.042\DE10STDrsyocto>python flashFPGA2rsyocto.py -h
+python flashFPGA2rsyocto.py -h
 usage: flashFPGA2rsyocto.py [-h] [-ip SET_IPADDRES] [-us SET_USER] [-pw SET_PASSWORD] [-cf EN_COMPLIE_PROJECT]
-                            [-fb EN_FLASHBOOT] [-qv SET_QUARTUS_PRIME_VER]
+                            [-fb EN_FLASHBOOT] [-j USE_JTAG] [-qv SET_QUARTUS_PRIME_VER]
 
 optional arguments:
   -h, --help            show this help message and exit
@@ -223,6 +282,8 @@ optional arguments:
   -fb EN_FLASHBOOT, --en_flashBoot EN_FLASHBOOT
                         Enable or Disable of the writing of the u-boot bootloader FPGA-Configuration fileFPGA-
                         Configuration [ 0: Disable]
+  -j USE_JTAG, --use_jtag USE_JTAG
+                        Use JTAG via a JTAG Blaster to write the FPGA-Configuration (use "-j 1")
   -qv SET_QUARTUS_PRIME_VER, --set_quartus_prime_ver SET_QUARTUS_PRIME_VER
                         Set the Intel Quartus Prime Version Note: Only requiered for FPGA Project Compilation! |
                         Quartus Prime Version to use <Version><Version No> | L -> Quartus Prime Lite (e.g. L16.1) | S

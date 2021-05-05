@@ -27,8 +27,13 @@
 # (2021-04-26) Vers.1.01 
 #   fixing a issue with detection of the Intel Quartus Prime FPGA compile mode 
 #
-
-version = "1.01"
+# (2021-05-05) Vers.1.10
+#   fixing a issue with unlicensed IP during FPGA project compilation 
+#   fixing a issue with multiple .sof FPGA files in a project
+#   adding the JTAG mode to enable the writing of 
+#       unlicensed IP/regular FPGA-Configuration via JTAG 
+#
+version = "1.10"
 
 #
 #
@@ -99,7 +104,7 @@ except ImportError as ex:
     sys.exit()
 
 import os, platform, io, warnings
-import time
+import time, math
 from datetime import datetime
 import shutil
 import re
@@ -141,6 +146,7 @@ class FlashFPGA2Linux(Thread):
     board_ip_addrs              : ''  # IPv4 Address of the SoC-FPGA Linux Distribution (rsyocto)
     board_user                  : ''  # SoC-FPGA Linux Distribution (rsyocto) Linux user name
     board_pw                    : ''  # SoC-FPGA Linux Distribution (rsyocto) Linux user password
+    use_jtag                    : False  # Use JTAG to write the FPGA-Configuration
     __temp_folder_dir           : ''  # Directory of the Temp folder on rsyocto 
     __temp_partfolder_dir       : ''  # Directory of the Temp partition folder 
 
@@ -174,8 +180,9 @@ class FlashFPGA2Linux(Thread):
     #                               L -> Quartus Prime Lite      (e.g. L16.1)
     #                               S -> Quartus Prime Standard  (e.g. S18.1)
     #                               P -> Quartus Prime Pro       (e.g. P20.1)
+    # @param use_jtag          Use JATG for writing the FPGA-Configuration
     #
-    def __init__(self,board_ip_addrs, board_user,board_pw,compile_project,QuartusForceVersion):
+    def __init__(self,board_ip_addrs, board_user,board_pw,compile_project,QuartusForceVersion, use_jtag):
         
         # Read the input paramters 
         regex_pattern = "^([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])\.([0-9]|[1-9][0-9]|1[0-9][0-9]|2[0-4][0-9]|25[0-5])$"
@@ -186,6 +193,8 @@ class FlashFPGA2Linux(Thread):
         self.board_ip_addrs = board_ip_addrs
         self.board_user     = board_user
         self.board_pw       = board_pw
+        self.use_jtag       = use_jtag
+        self.ThreadStatus   = False
         
         ######################################### Find the Intel EDS Installation Path ####################################
 
@@ -269,23 +278,57 @@ class FlashFPGA2Linux(Thread):
 
         # Find the Quartus  (.sof) (SRAM Object) file 
         self.Sof_file_name = ''
+        Sof_file_name_list =[]
+
         self.Sof_folder = ''
         # Looking in the top folder for the sof file
-        for file in os.listdir(self.Quartus_proj_top_dir):
-                if ".sof" in file:
-                    self.Sof_file_name =file
-                    break
-        if self.Sof_file_name == '':
+        # Sort the file by the modification date (latest date --> first)
+        files = [s for s in os.listdir(self.Quartus_proj_top_dir)
+            if os.path.isfile(os.path.join(self.Quartus_proj_top_dir, s))]
+        files.sort(key=lambda s: os.path.getmtime(\
+            os.path.join(self.Quartus_proj_top_dir, s)),reverse=True)
+
+        for file in files:
+            if ".sof" in file:
+                Sof_file_name_list.append(file)
+
+        if len(Sof_file_name_list)==0:
             # Looking inside the "output_files" and "output" folders
             if os.path.isdir(self.Quartus_proj_top_dir+'/output_files'):
-                self.Sof_folder = '/output_files'
+                self.Sof_folder ='output_files'
             if os.path.isdir(self.Quartus_proj_top_dir+'/output'):
-                self.Sof_folder = '/output'
-            for file in os.listdir(self.Quartus_proj_top_dir+self.Sof_folder):
-                if ".sof" in file:
-                    self.Sof_file_name =file
-                    break
+                self.Sof_folder = 'output'
             
+            # Sort the file by the modification date (latest date --> first)
+            files = [s for s in os.listdir(self.Quartus_proj_top_dir+\
+                    self.__SPLM[self.__SPno]+self.Sof_folder)
+                if os.path.isfile(os.path.join(self.Quartus_proj_top_dir+\
+                    self.__SPLM[self.__SPno]+self.Sof_folder, s))]
+            files.sort(key=lambda s: os.path.getmtime(\
+                os.path.join(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+\
+                    self.Sof_folder, s)),reverse=True)
+
+            for file in files:
+                if ".sof" in file:
+                    Sof_file_name_list.append(file)
+            
+        # Use the latest SOF file available inside the Quartus Prime Project
+        self.Sof_file_name==''
+        if len(Sof_file_name_list)>0:
+            self.Sof_file_name=Sof_file_name_list[0]
+
+        # Check if the file is older then 10min --> raise a warning! 
+        current_time =  datetime.now().timestamp()
+        modification_time = os.path.getmtime(self.Quartus_proj_top_dir+\
+                self.__SPLM[self.__SPno]+self.Sof_folder+\
+                self.__SPLM[self.__SPno]+self.Sof_file_name) 
+        if modification_time+ 10*60 < current_time:
+            mod= datetime.fromtimestamp(modification_time).strftime('%d-%m-%Y %H:%M')
+            print('[WARNING] The used output file "'+self.Sof_folder+\
+                self.__SPLM[self.__SPno]+self.Sof_file_name+\
+                '" is older then 10 min!  Modification Date: '+mod)
+
+
         # Find the Platform Designer (.qsys) file  
         self.Qsys_file_name = ''
         for file in os.listdir(self.Quartus_proj_top_dir):
@@ -296,12 +339,22 @@ class FlashFPGA2Linux(Thread):
         # Does the SOF file contains an IP with a test licence, such as a NIOS II Core?
         self.unlicensed_ip_found=False
         if self.Sof_file_name.find("_time_limited")!=-1:
-            print('********************************************************************************')
-            print('*                 Unlicensed IP inside the project was found!                  *')
-            print('*            Generation of the ".rbf"- FPGA-Configuration is not enabled       *')
-            print('********************************************************************************\n')
+            if self.use_jtag==False:
+                # Use the network for writting the FPGA-Configuration
+                print('********************************************************************************')
+                print('*               Unlicensed IP inside the FPGA project was found!               *')
+                print('*            Generation of the ".rbf"- FPGA-Configuration is not enabled       *')
+                print('*     --> It is not allowed to generate a static FPGA-Configuration file       *')
+                print('********************************************************************************')
+                print('*                                                                              *')
+                print('* Use the argument "-j <JTAG ID>" to write the FPGA-Configuration via JTAG     *')
+                print('*                                                                              *')
+                print('********************************************************************************')
+                sys.exit()
+            else: 
+                # Use JTAG
+                print('[WARNING] The FPGA project contains unlicensed IP. Only JTAG RAM writing allowed!')
             self.unlicensed_ip_found=True
-            sys.exit()
 
         # Find the Platform Designer folder
         if self.Qsys_file_name=='' or self.Qpf_file_name=='':
@@ -414,7 +467,7 @@ class FlashFPGA2Linux(Thread):
 
 
         ################################ COMPILE THE INTEL QUARTUS PRIME FPGA PROJECT ################################
-        if compile_project:
+        if compile_project or use_jtag:
             quVers=0
             if QuartusForceVersion =='':
                 print('[ERROR] For the Intel Quartus Prime FPGA Project compilation mode ')
@@ -471,11 +524,13 @@ class FlashFPGA2Linux(Thread):
                 sys.exit()
 
             print('[INFO] The vailed Intel Quartus Prime project was found ('+QuartusForceVersion+')') 
-            print('[INFO] Start compiling the Intel Quartus Prime FPGA project')
-            if not self.command_quartusShell_flow():
-                    print('[ERROR] Compilation of the Intel Quartus Prime Project failed!')
-                    sys.exit()
-            print('[INFO] Compiling the Intel Quartus Prime FPGA project is done')
+
+            if compile_project:
+                print('[INFO] Start compiling the Intel Quartus Prime FPGA project')
+                if not self.command_quartusShell_flow():
+                        print('[ERROR] Compilation of the Intel Quartus Prime Project failed!')
+                        sys.exit()
+                print('[INFO] Compiling the Intel Quartus Prime FPGA project is done')
 
     #
     # @brief Start the Quartus Prime deasign flow compatlation, routing with 
@@ -515,16 +570,292 @@ class FlashFPGA2Linux(Thread):
             
 
         modification_time = os.path.getmtime(self.Quartus_proj_top_dir+\
-                self.Sof_folder+\
+                self.__SPLM[self.__SPno]+self.Sof_folder+\
                 self.__SPLM[self.__SPno]+self.Sof_file_name) 
         current_time =  datetime.now().timestamp()
+
         
-        # Offset= 5 min 
-        if modification_time+ 5*60 < current_time:
-            print('[ERROR] The comand failed! The output file (".sof") is the same!')
-            return False
+        # Offset= 10 min 
+        new_file=False
+        if modification_time+ 10*60 < current_time:
+            # Was a new File created 
+            files = [s for s in os.listdir(self.Quartus_proj_top_dir+\
+                    self.__SPLM[self.__SPno]+self.Sof_folder)
+                if os.path.isfile(os.path.join(self.Quartus_proj_top_dir+\
+                    self.__SPLM[self.__SPno]+self.Sof_folder, s))]
+            files.sort(key=lambda s: os.path.getmtime(\
+                os.path.join(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+\
+                    self.Sof_folder, s)),reverse=True)
+            if not len(files)==0:
+                for file in files:
+                    if ".sof" in file:
+                        print(file)
+                        modification_time = os.path.getmtime(file)
+                        if modification_time+ 400*60 < current_time:
+                            print('[ERROR] The compilation failed!')
+                            return False
+                        self.Sof_file_name=file
+                        print('[NOTE] New FPGA-Configuration file name "'+file+'"')
+                        new_file = True
+                        break
+            else:
+                return False
+            
+            if  self.Sof_file_name.find('_time_limited')>-1: self.unlicensed_ip_found=True
+            else:                                            self.unlicensed_ip_found=False
+
+            if self.unlicensed_ip_found and not self.use_jtag:
+                print('[ERROR] The compilation is done and contains a unlicensed IP!')
+                print('        It is not allowed to write a .rbf FPGA-Configuration file with it!')
+                print('        Use the argument "-j 1" to write it via JTAG to RAM')
+                return False                
+
+            if not new_file:
+                print('[ERROR] The comand failed! The output file (".sof") is the same!')
+                return False
         
         return True 
+
+    #
+    # @brief Write the FPGA-Configuration with JTAG to RAM
+    # @return success 
+    #
+    def command_jtag_writeConfRAM(self):
+        # quartus_pgm.exe -c1 -m JTAG -o P;D:\Tresorit\Robin\FPGA\DE10STD_NIOS\DE10STDrsyocto_NIOS2_1\output_files\DE10STDrsyocto.sof
+
+        if not os.path.isfile(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+self.Sof_folder+\
+                self.__SPLM[self.__SPno]+self.Sof_file_name):
+            print('[ERROR] The output file (".sof") does not exist! --> JTAG Flash impossible!')
+            return False
+            
+        sof_file_dir = self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+self.Sof_folder
+
+        jtagconfig_cmd_dir = self.shell_quartus_dir = self.installDir_Quartus_bin+self.__SPLM[self.__SPno]+\
+                            'jtagconfig.exe'
+        '''
+        C:\intelFPGA\18.1\quartus\bin64>jtagconfig.exe
+        1) DE-SoC [USB-1]
+        4BA00477   SOCVHPS
+        02D020DD   5CSEBA6(.|ES)/5CSEMA6/..
+        '''
+
+        #
+        ### 1. Step: Run "jtagconfig" to scan the JTAG Chain 
+        #
+        out_chain =''
+        err =''
+        try:
+            with subprocess.Popen(jtagconfig_cmd_dir, stdin=subprocess.PIPE,\
+                stdout=subprocess.PIPE,stderr = subprocess.PIPE) as edsCmdShell:
+
+                time.sleep(DELAY_MS)
+       
+                out_chain, err = edsCmdShell.communicate()
+
+            
+        except Exception as ex:
+            print('[ERROR] Failed to execute the "jtagconfig" command MSG:'+ str(ex))
+            return False
+
+        # Check that a vialed JTAG Debugger was connected  
+        out_chain= out_chain.decode("utf-8") 
+        err= err.decode("utf-8")
+        if out_chain=='' or err.find('No JTAG hardware available')>-1:
+            print('[ERROR] No supported JTAG Debugger was found!')
+            print('        Check the connection between the FPGA device and the debugger')
+            err= err.replace('\n','')
+            print('        MSG: '+err)
+            return False
+        if not err=='' or out_chain=='':
+            print('[ERROR] During JTAG Debugger connection attempt unknown Error occurred!')
+            err= err.replace('\n','')
+            print('        MSG: '+err)
+            return False
+        
+        start_symbol_pos = out_chain.find('1)')
+        JTAG_debugger_id_start_pos = out_chain.find('[USB-1]')
+        
+        if start_symbol_pos==-1 or JTAG_debugger_id_start_pos==-1:
+            print('[ERROR] No USB JTAG Debugger found! Only USB Debuggers are supported!')
+            return False
+
+        # At least one JTAG Debugger was connected --> read the ID of the Debugger
+        JTAG_debugger_id = out_chain[start_symbol_pos+3:JTAG_debugger_id_start_pos+7]
+
+        # Are more then one debugger connected --> not supported
+        if not out_chain.find('2)',JTAG_debugger_id_start_pos)==-1:
+            print('[ERROR] More then one USB JTAG Debugger found! Only one is allowed!')
+            print('        Disconnect one JTAG Debugger to use this script!')
+            return False
+
+        print('[INFO] A valid JTAG Debugger was found with the ID="'+JTAG_debugger_id+'"')
+
+        #
+        ## 2. Step: Create a Chain Description File (.cdf)
+        #
+
+        # Check if a CDF file is allready there 
+        cdf_file_name=self.Sof_file_name.replace('.sof', '.cdf')
+        if os.path.isfile(sof_file_dir+self.__SPLM[self.__SPno]+cdf_file_name):
+            try:
+                os.remove(sof_file_dir+self.__SPLM[self.__SPno]+cdf_file_name)
+            except Exception:
+                print('[ERROR] Failed to remove the old CDF File! Please remove it by hand!')
+                print('        File dir: "'+of_file_dir+self.__SPLM[self.__SPno]+cdf_file_name+'"')
+                return False
+
+        # Analyse the JTAG Chain
+        JTAG_id_list = []
+        Device_id_list=[]
+        first_line =True
+
+        for line in out_chain.splitlines():
+            if first_line:
+                first_line=False
+                continue
+
+            # Format <JTAG ID> <DEVICE ID>
+            jtag_id_start=2
+            jtag_id_end =0
+            # Find the <JTAG_ID>
+            for i in range(2,len(line)): 
+                jtag_id_end=i
+                if not bool(re.match("^[A-F0-9]?$", line[i], re.I)): 
+                    break
+
+            if jtag_id_end>0:
+                JTAG_id_list.append(line[jtag_id_start:jtag_id_end])
+                # Find the <DEVICE ID>
+                # Find first non ' ' char pos
+                device_id_start=0
+                device_id_end=0
+                for i in range(jtag_id_end+1,len(line)):
+                    if not line[i] ==' ':
+                        device_id_start = i
+                        break
+                if device_id_start > 0: 
+                    device_id_end=line.find('(.',device_id_start)
+                    if device_id_end==-1: device_id_end=len(line)
+
+                    Device_id_list.append(line[device_id_start:device_id_end])
+
+        if (len(JTAG_id_list) ==0 or len(Device_id_list) ==0) or \
+            (not len(JTAG_id_list) == len(Device_id_list)):
+            print('[ERROR] Failed to decode JTAG Chain Scan output!')
+            return False
+
+        if len(JTAG_id_list)>2 or len(Device_id_list)>2:
+            print('[ERROR] More then 2 JTAG Devices inside the chain! This is is not supported!')
+            return False
+
+        if len(JTAG_id_list)==2 and Device_id_list[0].find('SOC')==-1:
+            print('[ERROR] JTAG Chain with 2 Devices found! The first is not the HPS...')
+            print('        This is not supported. Single Device or first device must the HPS!')
+            return False
+
+        # Check that the JTAG Chain family matches the Quartus Project one
+        wrong_device =False
+        if len(JTAG_id_list)==2:
+            if self.Device_id==0 and Device_id_list[0].find('SOCVHPS')==-1:  wrong_device= True
+            if self.Device_id==1 and Device_id_list[0].find('SOVHPS')==-1:   wrong_device= True
+            if self.Device_id==2 and Device_id_list[0].find('SOC10HPS')==-1: wrong_device= True
+            
+        else:
+            if self.Device_id==0 and Device_id_list[0].find('5C')==-1:      wrong_device= True
+            if self.Device_id==1 and Device_id_list[0].find('5A')==-1:      wrong_device= True
+            if self.Device_id==2 and Device_id_list[0].find('10A')==-1:     wrong_device= True
+
+        if wrong_device:
+            print('[ERROR] The FPGA Device family of the FPGA project was not found in the JTAG Chain!')
+            return False
+
+        cdf_file_content=''
+        # Create the JTAG Chain file
+        sof_file_dir_2 = sof_file_dir.replace('\\','/',50)+'/'
+
+        if len(JTAG_id_list)==2:
+            # CDF file for SoC-FPGAs
+            cdf_file_content= '/* Generated file by "flashFPGA2rsyocto.py" by Robin Sebastian (git@robseb.de) */\n' + \
+            'JedecChain;\n' + \
+            '   FileRevision(JESD32A);\n' + \
+            '   DefaultMfr(6E);\n' +'\n' + \
+            '   P ActionCode(Ign)\n' + \
+            '	    Device PartName('+Device_id_list[0]+') MfrSpec(OpMask(0));\n' + \
+            '   P ActionCode(Cfg)\n' + \
+            '	    Device PartName('+Device_id_list[1]+') Path("'+sof_file_dir_2+\
+                '") File("'+self.Sof_file_name+'") MfrSpec(OpMask(1));\n' + \
+            '\n' + \
+            'ChainEnd;\n' + '\n' + \
+            'AlteraBegin;\n' + \
+            '	ChainType(JTAG);\n' + \
+            'AlteraEnd;\n'
+        else:
+            # CDF file for regular FPGAs
+            print('[ERROR] Regular FPGA CDF file generation not implemnetnet!')
+            return False
+
+        # Write the CDF File
+        cdf_file_dir = sof_file_dir+self.__SPLM[self.__SPno]+cdf_file_name
+        with open(cdf_file_dir,"w") as f: 
+            f.write(cdf_file_content)
+
+        # 
+        ## 3. Step: Write the FPGA-Configuration with "quartus_pgm"
+        #
+
+        # quartus_pgm.exe -m JTAG -c 1 D:\Tresorit\Robin\FPGA\DE10STD_NIOS\DE10STDrsyocto_NIOS2_1\output_files\DE10STD.cdf
+        quartus_pgm_cmd_dir = self.shell_quartus_dir = self.installDir_Quartus_bin+self.__SPLM[self.__SPno]+\
+                            'quartus_pgm.exe'
+        cmd = quartus_pgm_cmd_dir+' -m JTAG -c 1 '+cdf_file_dir
+
+        if self.unlicensed_ip_found: 
+            print('********************************************************************************')
+            print('*               Unlicensed IP inside the FPGA project was found!               *')
+            print('*          After the FPGA-Configuration is done the task will freeze           *')
+            print('*      and allow to run unlicensed IP during this JTAG connection is active    *')
+            print('********************************************************************************')
+            print('*            use CTL + C to abort the script after you are done                *')
+            print('*             Support the author Robin Sebastian (git@robseb.de)               *')
+            print('********************************************************************************')
+
+        err=''
+        out_pgm=''
+        try:
+            with subprocess.Popen(cmd,\
+                stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr = subprocess.PIPE) as edsCmdShell:
+
+                time.sleep(DELAY_MS)
+
+                out_pgm, err = edsCmdShell.communicate()
+
+        except Exception as ex:
+            print('[ERROR] Failed to execute the "quartus_pgm" command MSG:'+ str(ex))
+            return False
+        finally:
+            if os.path.isfile(sof_file_dir+self.__SPLM[self.__SPno]+cdf_file_name):
+                try:
+                    os.remove(sof_file_dir+self.__SPLM[self.__SPno]+cdf_file_name)
+                except Exception:
+                    print('[ERROR] Failed to remove the old CDF File! Please remove it by hand!')
+                    print('        File dir: "'+of_file_dir+self.__SPLM[self.__SPno]+cdf_file_name+'"')
+
+        # Check that the FPGA Configuration was successfull with JTAG
+        out_pgm= out_pgm.decode("utf-8") 
+        err= err.decode("utf-8")
+
+        if err=='' and out_pgm.find('Info: Quartus Prime Programmer was successful')>-1:
+            print('[INFO] FPGA-Configuration was written successfully via JTAG')
+        else:
+            print('[ERROR] Failed to write the FPGA-Configuration via JTAG')
+            err= err.replace('\n','')
+            print('        MSG: '+err)
+            print('        OUT: '+out_pgm)
+            return False
+
+        # Set status to true
+        self.ThreadStatus=True
+
+        return True
 
     #
     # @brief Ping a Network device
@@ -931,7 +1262,7 @@ class FlashFPGA2Linux(Thread):
         except Exception as ex: 
             print('[ERROR] Failed to open SSH network connection to the board!\n'+
             '              Msg.: "'+str(ex)+'"')
-
+            print('        Maybe try to remove the SSH-Keys from the SSH folder')
             self.__cleanupSSH(True,True)
     #
     #
@@ -1156,6 +1487,7 @@ def praseInputArgs():
     arg_set_flashBoot       = False
     arg_compile_project     = False
     arg_quartus_ver         = ''
+    arg_use_jtag            = False
 
     flashBoot_chnaged       = False
     quartusver_changed      = False
@@ -1179,6 +1511,9 @@ def praseInputArgs():
         parser.add_argument('-fb','--en_flashBoot', required=False, \
                         help='Enable or Disable of the writing of the u-boot bootloader FPGA-Configuration file'\
                             'FPGA-Configuration [ 0: Disable]')
+        
+        parser.add_argument('-j','--use_jtag', required=False, \
+                        help='Use JTAG via a JTAG Blaster to write the FPGA-Configuration (use "-j 1")')
 
         parser.add_argument('-qv','--set_quartus_prime_ver',required=False, \
             help=' Set the Intel Quartus Prime Version \n'+\
@@ -1230,7 +1565,6 @@ def praseInputArgs():
             print('[INFO] The Intel Quartus Prime Version is set to "'+arg_quartus_ver+'"')
             
 
-
         # Enable or Disable of the writing of the u-boot bootloader FPGA-Configuration file 
         if args.en_flashBoot != None:
             try: tmp = int(args.en_flashBoot)
@@ -1245,6 +1579,17 @@ def praseInputArgs():
             else:  
                 print('[INFO] Writing of the u-boot FPGA-Configuration file enabled')
                 arg_set_flashBoot=True
+
+        # Use JTAG
+        if args.use_jtag != None:
+            try: tmp = int(args.use_jtag)
+            except Exception:
+                print('[ERROR] Failed to convert the [--use_jtag/-j] input argument!')
+                print('        Only integer numbers are allowed!')
+                sys.exit()
+            if tmp >0: 
+                arg_use_jtag= True
+                print('[INFO] Use JTAG with a JTAG Blaster instate Network is enabled')
 
 
         ############################################ Write settings to a XML file ###########################################
@@ -1287,7 +1632,7 @@ def praseInputArgs():
         tree.write(FLASHFPGA_SETTINGS_XML_FILE_NAME)
 
         # In set mode end script here 
-        if not arg_compile_project:
+        if  arg_set_ip or  arg_set_user or arg_set_pw or flashBoot_chnaged:
             sys.exit()
 
     ################################### Read the settings from the XML file  ##################################
@@ -1318,7 +1663,7 @@ def praseInputArgs():
 
 
       
-    return arg_set_ip, arg_set_user,arg_set_pw,arg_set_flashBoot,arg_compile_project,arg_quartus_ver
+    return arg_set_ip, arg_set_user,arg_set_pw,arg_set_flashBoot,arg_compile_project,arg_quartus_ver,arg_use_jtag
 
 ############################################                                ############################################
 ############################################             MAIN               ############################################
@@ -1341,66 +1686,77 @@ if __name__ == '__main__':
 
     # Enable and read input arguments or the settings from a XML file
     arg_set_ip, arg_set_user,arg_set_pw,arg_set_flashBoot,\
-        arg_compile_project,arg_quartus_ver  = praseInputArgs()
+        arg_compile_project,arg_quartus_ver,arg_use_jtag  = praseInputArgs()
+
+    if arg_use_jtag and SPno == 0:
+        print('[ERROR] JATG FPGA-Configuration is on Linux not supported right now!')
+        sys.exit()
 
     #
     ## 1. Step: Read the execution environment and scan the Intel Quartus Prime FPGA project
     #
-    flashFPGA2Linux = FlashFPGA2Linux(arg_set_ip, arg_set_user,arg_set_pw,arg_compile_project,arg_quartus_ver)
+    flashFPGA2Linux = FlashFPGA2Linux(arg_set_ip, arg_set_user,\
+                        arg_set_pw,arg_compile_project,arg_quartus_ver,arg_use_jtag)
 
     #
     ## 2.Step: Check the network connection to the baord
+    #          --> Only requiered for the non JTAG mode
     #
-    if not flashFPGA2Linux.CheckNetworkConnection2Board():
-        print('[ERROR] It was not posibile to ping rsyocto with the given IP-Address '+\
-              '"'+arg_set_ip+'"!\n'+\
-              '        Please check the network connection of this computer'+\
-              ' and of the SoC-FPGA board\n'+\
-              '        You can change the IP-Address with the attribute: "-ip"')
-        sys.exit()
-    #
-    ## 3. Step: Start the SSH/SFT Thread to establish a connection
-    #
-    flashFPGA2Linux.EstablishSSHcon()
-
-    #
-    ## 4. Step: Generate the FPGA-Configuration files
-    #
-    rbf_dir =  flashFPGA2Linux.Quartus_proj_top_dir+SPLM[SPno]+flashFPGA2Linux.Sof_folder
-
-    # Generate a FPGA Configuration file that can be written by Linux (rsyocto)
-    linux_fpga_file_name = 'rsyocto_fpga_conf.rbf'
-    if not flashFPGA2Linux.GenerateFPGAconf(True,linux_fpga_file_name,rbf_dir):
-        print('[ERROR] Failed to generate the Linux FPGA-Configuration file')
-        sys.exit()
-
-    # Generate a FPGA Configuration file that can be written by u-boot
-    boot_fpga_file_name= ''
-    if arg_set_flashBoot:
-        boot_fpga_file_name= 'socfpga.rbf'
-        if not flashFPGA2Linux.GenerateFPGAconf(False,boot_fpga_file_name,rbf_dir):
-            print('[ERROR] Failed to generate the u-boot (bootloader) FPGA-Configuration file')
+    if not arg_use_jtag:
+        if not flashFPGA2Linux.CheckNetworkConnection2Board():
+            print('[ERROR] It was not posibile to ping rsyocto with the given IP-Address '+\
+                '"'+arg_set_ip+'"!\n'+\
+                '        Please check the network connection of this computer'+\
+                ' and of the SoC-FPGA board\n'+\
+                '        You can change the IP-Address with the attribute: "-ip"')
             sys.exit()
-    
+        #
+        ## 3. Step: Start the SSH/SFT Thread to establish a connection
+        #
+        flashFPGA2Linux.EstablishSSHcon()
+
+        #
+        ## 4. Step: Generate the FPGA-Configuration files
+        #
+        rbf_dir =  flashFPGA2Linux.Quartus_proj_top_dir+SPLM[SPno]+flashFPGA2Linux.Sof_folder
+
+        # Generate a FPGA Configuration file that can be written by Linux (rsyocto)
+        linux_fpga_file_name = 'rsyocto_fpga_conf.rbf'
+        if not flashFPGA2Linux.GenerateFPGAconf(True,linux_fpga_file_name,rbf_dir):
+            print('[ERROR] Failed to generate the Linux FPGA-Configuration file')
+            sys.exit()
+
+        # Generate a FPGA Configuration file that can be written by u-boot
+        boot_fpga_file_name= ''
+        if arg_set_flashBoot:
+            boot_fpga_file_name= 'socfpga.rbf'
+            if not flashFPGA2Linux.GenerateFPGAconf(False,boot_fpga_file_name,rbf_dir):
+                print('[ERROR] Failed to generate the u-boot (bootloader) FPGA-Configuration file')
+                sys.exit()
+        
     #
     ## 5.Step: Coyp the FPGA-Configuration files via SSH to rsyocto and write the FPGA-Fabric with it
     #
-    flashFPGA2Linux.startCopingFPGAconfig(rbf_dir,linux_fpga_file_name,boot_fpga_file_name)
+    if arg_use_jtag:
+        # Write the FPGA-Configuration only with JTAG
+        flashFPGA2Linux.command_jtag_writeConfRAM()
+    else:
+        flashFPGA2Linux.startCopingFPGAconfig(rbf_dir,linux_fpga_file_name,boot_fpga_file_name)
 
-    # Wait until the SSH Thread is done
-    flashFPGA2Linux.join()
+        # Wait until the SSH Thread is done
+        flashFPGA2Linux.join()
 
-    # Remove the FPGA-Configuration files from the Intel Quartus Prime Project folder 
-    if os.path.isfile(rbf_dir+SPLM[SPno]+linux_fpga_file_name):
-        try:
-            os.remove(rbf_dir+SPLM[SPno]+linux_fpga_file_name)
-        except Exception:
-            pass
-    if arg_set_flashBoot and os.path.isfile(rbf_dir+SPLM[SPno]+boot_fpga_file_name):
-        try:
-            os.remove(rbf_dir+SPLM[SPno]+boot_fpga_file_name)
-        except Exception:
-            pass
+        # Remove the FPGA-Configuration files from the Intel Quartus Prime Project folder 
+        if os.path.isfile(rbf_dir+SPLM[SPno]+linux_fpga_file_name):
+            try:
+                os.remove(rbf_dir+SPLM[SPno]+linux_fpga_file_name)
+            except Exception:
+                pass
+        if arg_set_flashBoot and os.path.isfile(rbf_dir+SPLM[SPno]+boot_fpga_file_name):
+            try:
+                os.remove(rbf_dir+SPLM[SPno]+boot_fpga_file_name)
+            except Exception:
+                pass
     if flashFPGA2Linux.ThreadStatus:
         print('[SUCCESS] Support the author Robin Sebastian (git@robseb.de)')
 # EOF
