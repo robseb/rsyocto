@@ -233,7 +233,7 @@ This is for instance the case with a *Intel NIOS II Soft-Core* Processor project
     ********************************************************************************
     *            use CTL + C to abort the script after you are done                *
     *             Support the author Robin Sebastian (git@robseb.de)               *
-********************************************************************************
+   ********************************************************************************
     ````
     * Use the shortcut `CTL + C` to abort the script after you are done
     <details>
