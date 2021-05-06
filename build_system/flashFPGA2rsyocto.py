@@ -1632,7 +1632,7 @@ def praseInputArgs():
         tree.write(FLASHFPGA_SETTINGS_XML_FILE_NAME)
 
         # In set mode end script here 
-        if  arg_set_ip or  arg_set_user or arg_set_pw or flashBoot_chnaged:
+        if  arg_set_ip or  arg_set_user or arg_set_pw or flashBoot_chnaged or quartusver_changed:
             sys.exit()
 
     ################################### Read the settings from the XML file  ##################################
