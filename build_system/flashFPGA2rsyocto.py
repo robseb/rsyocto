@@ -44,7 +44,10 @@
 #   JTAG support for Linux
 #   removing the second terminal window for the FPGA IP Evaluation Mode
 #
-version = "1.103"
+# (2021-05-09) Vers.1.104
+#   small bug fixes with JTAG mode 
+#
+version = "1.104"
 
 #
 #
@@ -683,14 +686,21 @@ class FlashFPGA2Linux(Thread):
             return False
         
         start_symbol_pos = out_chain.find('1)')
-        JTAG_debugger_id_start_pos = out_chain.find('-1]')
+        if self.__SPno==0:
+            JTAG_debugger_id_start_pos = out_chain.find('[1-1]')
+        else: 
+            JTAG_debugger_id_start_pos = out_chain.find('[USB-1]')
         
         if start_symbol_pos==-1 or JTAG_debugger_id_start_pos==-1:
             print('[ERROR] No USB JTAG Debugger found! Only USB Debuggers are supported!')
             return False
 
         # At least one JTAG Debugger was connected --> read the ID of the Debugger
-        JTAG_debugger_id = out_chain[start_symbol_pos+3:JTAG_debugger_id_start_pos+7]
+        if self.__SPno==0:
+            JTAG_debugger_id = out_chain[start_symbol_pos+3:JTAG_debugger_id_start_pos+6]
+        else:
+            JTAG_debugger_id = out_chain[start_symbol_pos+3:JTAG_debugger_id_start_pos+7]
+        JTAG_debugger_id= JTAG_debugger_id.replace('\n','',100)
 
         # Are more then one debugger connected --> not supported
         if not out_chain.find('2)',JTAG_debugger_id_start_pos)==-1:
@@ -845,24 +855,25 @@ class FlashFPGA2Linux(Thread):
                 with open(sh_file_name, "a") as f:
                     if self.__SPno==0: f.write('#!/bin/sh \n')
                     f.write(cmd+'\n')
+
+                    f.write('echo "********************************************************************************"\n')
+                    f.write('echo "*               Unlicensed IP inside the FPGA project was found!               *"\n')
+                    f.write('echo "********************************************************************************"\n')
+                    f.write('echo "*      The FPGA-Conf. was written and the FPGA IP Evaluation Mode has started. *"\n')
+                    f.write('echo "*                  Now it is enabled to test the IP. After this                *"\n')
+                    f.write('echo "*                   promped is closed the licence will expire...               *"\n')
+                    f.write('echo "********************************************************************************"\n')
+                    f.write('echo "*             Support the author Robin Sebastian (git@robseb.de)               *"\n')
+                    f.write('echo "********************************************************************************"\n')
+
                     if self.__SPno==0:
-                        f.write('read -p "Type something to leave..." mainmenuinput\n')
+                        f.write('read -p "Type something to exit..." mainmenuinput\n')
                     else:
                         f.write('pause\n')
             except Exception as ex:
                 self._print('[ERROR] Failed create the quartus_pgm JTAG flash shell script\n'+\
                             '        MSG: '+str(ex))
                 return False
-
-            print('********************************************************************************')
-            print('*               Unlicensed IP inside the FPGA project was found!               *')
-            print('*         A new terminal window will be open to write the FPGA-Conf.           *')
-            print('*          via JTAG. Then it will start the FPGA IP Evaluation Mode.           *')
-            print('********************************************************************************')
-            print('*        After you are done with testing of the IP type here something         *')
-            print('*                 and in the new window type "q" to close it                   *')
-            print('*             Support the author Robin Sebastian (git@robseb.de)               *')
-            print('********************************************************************************')
 
             # Execute the shell script in a new terminal window 
             try:
@@ -881,7 +892,7 @@ class FlashFPGA2Linux(Thread):
                 return False
 
             # Wait for the user
-            inch = input('===> Type something to terminal the FPGA IP Evaluation Mode... $')
+            #inch = input('===> Type something to terminal the FPGA IP Evaluation Mode... $')
 
             # Remove the Shell script file 
             if os.path.isfile(sof_file_dir+self.__SPLM[self.__SPno]+sh_file_name):
@@ -933,7 +944,7 @@ class FlashFPGA2Linux(Thread):
 
         if err=='' and out_pgm.find('Info: Quartus Prime Programmer was successful')>-1:
             print('[INFO] FPGA-Configuration was written successfully via JTAG')
-        if out_pgm.find('Intel FPGA IP Evaluation Mode feature that will not work after the hardware evaluation time expires')>-1:
+        elif out_pgm.find('Intel FPGA IP Evaluation Mode feature that will not work after the hardware evaluation time expires')>-1:
             print('[ERROR] Failed to write the FPGA-Configuration via JTAG!')
             print('        The FPGA-Configuration file contains a unlicensed IP and Intel FPGA IP Evaluation Mode error occurred!')
             print('        It looks like that Intel FPGA IP Evaluation mode server is allready running.')
