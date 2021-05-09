@@ -33,7 +33,11 @@
 #   adding the JTAG mode to enable the writing of 
 #       unlicensed IP/regular FPGA-Configuration via JTAG 
 #
-version = "1.10"
+# (2021-05-09) Vers.1.101
+#   fixing a ERROR that during a JTAG Connection occurred 
+#   new FPGA IP test mode (JTAG) by generating and executing a shell script 
+#
+version = "1.101"
 
 #
 #
@@ -621,7 +625,6 @@ class FlashFPGA2Linux(Thread):
     # @return success 
     #
     def command_jtag_writeConfRAM(self):
-        # quartus_pgm.exe -c1 -m JTAG -o P;D:\Tresorit\Robin\FPGA\DE10STD_NIOS\DE10STDrsyocto_NIOS2_1\output_files\DE10STDrsyocto.sof
 
         if not os.path.isfile(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+self.Sof_folder+\
                 self.__SPLM[self.__SPno]+self.Sof_file_name):
@@ -666,7 +669,7 @@ class FlashFPGA2Linux(Thread):
             err= err.replace('\n','')
             print('        MSG: '+err)
             return False
-        if not err=='' or out_chain=='':
+        if  out_chain=='':
             print('[ERROR] During JTAG Debugger connection attempt unknown Error occurred!')
             err= err.replace('\n','')
             print('        MSG: '+err)
@@ -795,7 +798,7 @@ class FlashFPGA2Linux(Thread):
             return False
 
         # Write the CDF File
-        cdf_file_dir = sof_file_dir+self.__SPLM[self.__SPno]+cdf_file_name
+        cdf_file_dir = sof_file_dir+cdf_file_name
         with open(cdf_file_dir,"w") as f: 
             f.write(cdf_file_content)
 
@@ -809,15 +812,71 @@ class FlashFPGA2Linux(Thread):
         cmd = quartus_pgm_cmd_dir+' -m JTAG -c 1 '+cdf_file_dir
 
         if self.unlicensed_ip_found: 
+
+            # 
+            ## 3.A Step: Write the FPGA-Configuration with "quartus_pgm"
+            # Create a BASH or Shell script for executing this command
+            #
+
+            # Remove the older BASH/SH File
+            sh_file_name=self.Sof_file_name.replace('.sof', '.sh' if self.__SPno==0 else '.bat')
+            if os.path.isfile(sof_file_dir+self.__SPLM[self.__SPno]+sh_file_name):
+                try:
+                    os.remove(sof_file_dir+self.__SPLM[self.__SPno]+sh_file_name)
+                except Exception:
+                    print('[ERROR] Failed to remove the old SH/BAT File! Please remove it by hand!')
+                    print('        File dir: "'+of_file_dir+self.__SPLM[self.__SPno]+sh_file_name+'"')
+
+            # Create a new SH/BAT file
+            try:
+                with open(sh_file_name, "a") as f:
+                    if self.__SPno==0: f.write('#!/bin/sh \n')
+                    f.write('echo "quartus_pgm shell script was called by flashFPGA2rsyocto.py"\n')
+                    f.write(cmd+'\n')
+            except Exception as ex:
+                self._print('[ERROR] Failed create the quartus_pgm JTAG flash shell script\n'+\
+                            '        MSG: '+str(ex))
+                return False
+
             print('********************************************************************************')
             print('*               Unlicensed IP inside the FPGA project was found!               *')
-            print('*          After the FPGA-Configuration is done the task will freeze           *')
-            print('*      and allow to run unlicensed IP during this JTAG connection is active    *')
+            print('*         A new terminal window will be open to write the FPGA-Conf.           *')
+            print('*          via JTAG. Then it will start the FPGA IP Evaluation Mode.           *')
             print('********************************************************************************')
-            print('*            use CTL + C to abort the script after you are done                *')
+            print('*        After you are done with testing of the IP type here something         *')
             print('*             Support the author Robin Sebastian (git@robseb.de)               *')
             print('********************************************************************************')
 
+            # Execute the shell script in a new terminal window 
+            try:
+                if sys.platform == "win32":
+                    os.startfile(sh_file_name)
+                else:
+                    st_dir= sh_file_name.replace(os.path.expanduser('~'), '~', 1)
+                    os.chmod(sh_file_name, 0o775)
+                    os.system('gnome-terminal -x '+st_dir)
+            except Exception as ex:
+                self._print('[ERROR] Failed start the quartus_pgm JTAG flash shell script!\n'+\
+                            '        MSG.: '+str(ex))
+                return False
+
+            # Wait for the user
+            inch = input('===> Type something to terminal the FPGA IP Evaluation Mode... $')
+
+            # Remove the Shell script file 
+            if os.path.isfile(sof_file_dir+self.__SPLM[self.__SPno]+sh_file_name):
+                try:
+                    os.remove(sof_file_dir+self.__SPLM[self.__SPno]+sh_file_name)
+                except Exception:
+                    print('[ERROR] Failed to remove the old SH/BAT File! Please remove it by hand!')
+                    print('        File dir: "'+of_file_dir+self.__SPLM[self.__SPno]+sh_file_name+'"')
+
+            # Set status to true
+            self.ThreadStatus=True
+
+            return True
+
+        # For the case with a full licensed FPGA-Configuration 
         err=''
         out_pgm=''
         try:
@@ -825,6 +884,9 @@ class FlashFPGA2Linux(Thread):
                 stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr = subprocess.PIPE) as edsCmdShell:
 
                 time.sleep(DELAY_MS)
+
+                b = bytes('i \n', 'utf-8')
+                edsCmdShell.stdin.write(b)
 
                 out_pgm, err = edsCmdShell.communicate()
 
@@ -845,6 +907,14 @@ class FlashFPGA2Linux(Thread):
 
         if err=='' and out_pgm.find('Info: Quartus Prime Programmer was successful')>-1:
             print('[INFO] FPGA-Configuration was written successfully via JTAG')
+        if out_pgm.find('Intel FPGA IP Evaluation Mode feature that will not work after the hardware evaluation time expires')>-1:
+            print('[ERROR] Failed to write the FPGA-Configuration via JTAG!')
+            print('        The FPGA-Configuration file contains a unlicensed IP and Intel FPGA IP Evaluation Mode error occurred!')
+            print('        It looks like that Intel FPGA IP Evaluation mode server is allready running.')
+            print('        Close any currently open FPGA-Configurations with CMD + C and try it agin!')
+            print('************************ OUTPUT OF "quartus_pgm" ************************')
+            print(out_pgm)
+            return False
         else:
             print('[ERROR] Failed to write the FPGA-Configuration via JTAG')
             err= err.replace('\n','')
@@ -1632,7 +1702,7 @@ def praseInputArgs():
         tree.write(FLASHFPGA_SETTINGS_XML_FILE_NAME)
 
         # In set mode end script here 
-        if  arg_set_ip or  arg_set_user or arg_set_pw or flashBoot_chnaged or quartusver_changed:
+        if  arg_set_ip or  arg_set_user or arg_set_pw or flashBoot_chnaged:
             sys.exit()
 
     ################################### Read the settings from the XML file  ##################################
@@ -1683,10 +1753,16 @@ if __name__ == '__main__':
     else:  SPno = 1
 
     SPLM = ['/','\\'] # Linux, Windows 
+    #      [INFO]
+    print('****** Flash FPGA Configuration to rsyocto via SSH/SFTP or JTAG  (Ver.: '+version+') ******')
 
     # Enable and read input arguments or the settings from a XML file
     arg_set_ip, arg_set_user,arg_set_pw,arg_set_flashBoot,\
         arg_compile_project,arg_quartus_ver,arg_use_jtag  = praseInputArgs()
+
+    ############################################################################################################################################
+    #arg_use_jtag = True
+    ############################################################################################################################################
 
     if arg_use_jtag and SPno == 0:
         print('[ERROR] JATG FPGA-Configuration is on Linux not supported right now!')
