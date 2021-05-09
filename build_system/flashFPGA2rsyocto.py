@@ -47,7 +47,10 @@
 # (2021-05-09) Vers.1.104
 #   small bug fixes with JTAG mode 
 #
-version = "1.104"
+# (2021-05-09) Vers.1.105
+#   JTAG mode support for regular FPGAs without HPS (Hard Processor System)
+#
+version = "1.105"
 
 #
 #
@@ -157,6 +160,7 @@ class FlashFPGA2Linux(Thread):
     Device_id                   : int # SocFPGA ID (0: Cyclone V; 1: Arria V;2: Arria 10)
     Device_name                 = ['Intel Cyclone V','Intel Arria V','Intel Arria 10']
     unlicensed_ip_found         : bool# Quartus project contains an unlicensed IP (e.g. NIOS II Core) 
+    regular_fpga_project        : bool # FPGA Project type: True: regular FPGA | False: SoC-FPGA 
     board_ip_addrs              : ''  # IPv4 Address of the SoC-FPGA Linux Distribution (rsyocto)
     board_user                  : ''  # SoC-FPGA Linux Distribution (rsyocto) Linux user name
     board_pw                    : ''  # SoC-FPGA Linux Distribution (rsyocto) Linux user password
@@ -349,7 +353,7 @@ class FlashFPGA2Linux(Thread):
                 if ".qsys" in file and not ".qsys_edit" in file:
                     self.Qsys_file_name =file
                     break
-
+        device_name_temp =''
         # Does the SOF file contains an IP with a test licence, such as a NIOS II Core?
         self.unlicensed_ip_found=False
         if self.Sof_file_name.find("_time_limited")!=-1:
@@ -399,83 +403,106 @@ class FlashFPGA2Linux(Thread):
                     handoff_folder_start_name =file
                     break
         folder_found = False
-        for folder in os.listdir(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+handoff_folder_start_name):
-            if os.path.isdir(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+handoff_folder_start_name+self.__SPLM[self.__SPno]+folder):
-                self.Handoff_folder_name = folder
-                if folder_found:
-                    print('[ERROR]  More than one folder inside the Quartus handoff folder "'+self.Handoff_folder_name+'" found! Please delete one!')
-                    print('         NOTE: It is necessary to build the Prime Quartus Project for the bootloader generation!')
-                    sys.exit()
-                folder_found = True
-        self.Handoff_folder_name = handoff_folder_start_name+self.__SPLM[self.__SPno]+self.Handoff_folder_name
+        if not handoff_folder_start_name=='':
+            for folder in os.listdir(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+handoff_folder_start_name):
+                if os.path.isdir(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+handoff_folder_start_name+self.__SPLM[self.__SPno]+folder):
+                    self.Handoff_folder_name = folder
+                    if folder_found:
+                        print('[ERROR]  More than one folder inside the Quartus handoff folder "'+self.Handoff_folder_name+'" found! Please delete one!')
+                        print('         NOTE: It is necessary to build the Prime Quartus Project for the bootloader generation!')
+                        sys.exit()
+                    folder_found = True
+            self.Handoff_folder_name = handoff_folder_start_name+self.__SPLM[self.__SPno]+self.Handoff_folder_name
 
-        # Find the "hps.xml"-file inside the handoff folder
-        handoff_xml_found =False
+            # Find the "hps.xml"-file inside the handoff folder
+            handoff_xml_found =False
 
-        for file in os.listdir(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+self.Handoff_folder_name):
-            if "hps.xml" == file:
-                handoff_xml_found =True
-                break 
-        if not handoff_xml_found:
-            print('[ERROR]  The "hps.xml" file inside the handoff folder was not found!')
-            print('         NOTE: It is necessary to build the Prime Quartus Project for the bootloader generation!')
-            sys.exit()
+            for file in os.listdir(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+self.Handoff_folder_name):
+                if "hps.xml" == file:
+                    handoff_xml_found =True
+                    break 
+            if not handoff_xml_found:
+                print('[ERROR]  The "hps.xml" file inside the handoff folder was not found!')
+                print('         NOTE: It is necessary to build the Prime Quartus Project for the bootloader generation!')
+                sys.exit()
+            # Load the "hps.xml" file to read the device name
+            try:
+                tree = ET.parse(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+self.Handoff_folder_name+self.__SPLM[self.__SPno]+'hps.xml') 
+                root = tree.getroot()
+            except Exception as ex:
+                print(' [ERROR]  Failed to parse "hps.xml" file!')
+                print('          Msg.: '+str(ex))
+                sys.exit()
 
-        # Load the "hps.xml" file to read the device name
-        try:
-            tree = ET.parse(self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+self.Handoff_folder_name+self.__SPLM[self.__SPno]+'hps.xml') 
-            root = tree.getroot()
-        except Exception as ex:
-            print(' [ERROR]  Failed to parse "hps.xml" file!')
-            print('          Msg.: '+str(ex))
-            sys.exit()
-
-        device_name_temp =''
-        for it in root.iter('config'):
-            name = str(it.get('name'))
-            if name == 'DEVICE_FAMILY':
-                device_name_temp = str(it.get('value'))
-                break
-        if device_name_temp == '':
-            print('[ERROR]  Failed to decode the device name inside "hps.xml"')
-
-        # Convert Device name
-        if device_name_temp == 'Cyclone V':
-            self.Device_id = 0
-            '''
-            elif device_name_temp == 'Arria V':
-                self.Device_id = 1
-            '''
-        elif device_name_temp == 'Arria 10':
-            self.Device_id = 2
-            print('[ERROR] The Arria 10 SX SoC-FPGA is right now not supported!')
-            print('         I am working on it...')
-            sys.exit()
-        
-            ## NOTE: ADD ARRIA V/ SUPPORT HERE 
-        else:
-            print('[ERROR]  Your Device ('+device_name_temp+') is not supported!')
-            sys.exit()
-    
-        # For Arria 10 SX: The early I/O release must be enabled inside Quartus Prime!
-        early_io_mode =-1
-        if self.Device_id == 2:
+            device_name_temp =''
             for it in root.iter('config'):
                 name = str(it.get('name'))
-                if name == 'chosen.early-release-fpga-config':
-                    early_io_mode = int(it.get('value'))
+                if name == 'DEVICE_FAMILY':
+                    device_name_temp = str(it.get('value'))
                     break
-            
-            if not early_io_mode==1:
-                print('[ERROR]   This build system supports only the Arria 10 SX SoC-FPGA')
-                print('          with the Early I/O release feature enabled!')
-                print('          Please enable Early I/O inside the Intel Quartus Prime project settings')
-                print('          and rebuild the project again')
-                print('Setting: "Enables the HPS early release of HPS IO" inside the general settings')
-                print('Note:     Do not forget to enable it for the EMIF inside Qysis')
+            if device_name_temp == '':
+                print('[ERROR]  Failed to decode the device name inside "hps.xml"')
+
+            # Convert Device name
+            if device_name_temp == 'Cyclone V':
+                self.Device_id = 0
+                '''
+                elif device_name_temp == 'Arria V':
+                    self.Device_id = 1
+                '''
+            elif device_name_temp == 'Arria 10':
+                self.Device_id = 2
+                print('[ERROR] The Arria 10 SX SoC-FPGA is right now not supported!')
+                print('         I am working on it...')
                 sys.exit()
+            
+                ## NOTE: ADD ARRIA V/ SUPPORT HERE 
             else:
-                print('[INFO] HPS early release of HPS IO for the Intel Arria 10 SX SoC-FPGA is enabled') 
+                print('[ERROR]  Your Device ('+device_name_temp+') is not supported!')
+                sys.exit()
+        
+            # For Arria 10 SX: The early I/O release must be enabled inside Quartus Prime!
+            early_io_mode =-1
+            if self.Device_id == 2:
+                for it in root.iter('config'):
+                    name = str(it.get('name'))
+                    if name == 'chosen.early-release-fpga-config':
+                        early_io_mode = int(it.get('value'))
+                        break
+                
+                if not early_io_mode==1:
+                    print('[ERROR]   This build system supports only the Arria 10 SX SoC-FPGA')
+                    print('          with the Early I/O release feature enabled!')
+                    print('          Please enable Early I/O inside the Intel Quartus Prime project settings')
+                    print('          and rebuild the project again')
+                    print('Setting: "Enables the HPS early release of HPS IO" inside the general settings')
+                    print('Note:     Do not forget to enable it for the EMIF inside Qysis')
+                    sys.exit()
+                else:
+                    print('[INFO] HPS early release of HPS IO for the Intel Arria 10 SX SoC-FPGA is enabled') 
+                
+        else: 
+            # It was no handoff folder found!
+            if self.use_jtag==False:
+                # Use the network for writting the FPGA-Configuration
+                print('********************************************************************************')
+                print('*        This is a regular Quartus Prime FPGA project without a HPS            *')
+                print('*                (Hard Processor System) implementation!                       *')
+                print('*     --> It is not possible to write the FPGA-Conf with the Linux rsyocto!    *')
+                print('********************************************************************************')
+                print('*                                                                              *')
+                print('*       Use the argument "-j 1" to write the FPGA-Configuration via JTAG       *')
+                print('*                                                                              *')
+                print('********************************************************************************')
+                sys.exit()
+            else: 
+                # Use JTAG
+                print('[INFO] The FPGA project has no HPS. FPGA-Config via JTAG is enabled')
+                self.regular_fpga_project=True
+
+                ######################################## Force to cyclone V ########################################
+                device_name_temp == 'Cyclone V'
+                self.Device_id = 0
 
         print('[INFO] A valid Intel Quartus Prime '+device_name_temp+' SoC-FPGA project was found') 
 
@@ -754,7 +781,7 @@ class FlashFPGA2Linux(Thread):
                         device_id_start = i
                         break
                 if device_id_start > 0: 
-                    device_id_end=line.find('(.',device_id_start)
+                    device_id_end=line.find('(',device_id_start)
                     if device_id_end==-1: device_id_end=len(line)
 
                     Device_id_list.append(line[device_id_start:device_id_end])
@@ -793,29 +820,28 @@ class FlashFPGA2Linux(Thread):
         # Create the JTAG Chain file
         sof_file_dir_2 = sof_file_dir.replace('\\','/',50)+'/'
 
+        cfg_no =0
+        if len(JTAG_id_list)==2: cfg_no=1
+        # CDF file for FPGAs
+        cdf_file_content= '/* Generated file by "flashFPGA2rsyocto.py" by Robin Sebastian (git@robseb.de) */\n' + \
+        'JedecChain;\n' + \
+        '   FileRevision(JESD32A);\n' + \
+        '   DefaultMfr(6E);\n' +'\n'
         if len(JTAG_id_list)==2:
-            # CDF file for SoC-FPGAs
-            cdf_file_content= '/* Generated file by "flashFPGA2rsyocto.py" by Robin Sebastian (git@robseb.de) */\n' + \
-            'JedecChain;\n' + \
-            '   FileRevision(JESD32A);\n' + \
-            '   DefaultMfr(6E);\n' +'\n' + \
-            '   P ActionCode(Ign)\n' + \
-            '	    Device PartName('+Device_id_list[0]+') MfrSpec(OpMask(0));\n' + \
-            '   P ActionCode(Cfg)\n' + \
-            '	    Device PartName('+Device_id_list[1]+') Path("'+sof_file_dir_2+\
-                '") File("'+self.Sof_file_name+'") MfrSpec(OpMask(1));\n' + \
-            '\n' + \
-            'ChainEnd;\n' + '\n' + \
-            'AlteraBegin;\n' + \
-            '	ChainType(JTAG);\n' + \
-            'AlteraEnd;\n'
-        else:
-            # CDF file for regular FPGAs
-            print('[ERROR] Regular FPGA CDF file generation not implemnetnet!')
-            return False
+            cdf_file_content+= '   P ActionCode(Ign)\n'
+            cdf_file_content+= '	    Device PartName('+Device_id_list[0]+') MfrSpec(OpMask(0));\n'
+        cdf_file_content+= '   P ActionCode(Cfg)\n' + \
+        '	    Device PartName('+Device_id_list[cfg_no]+') Path("'+sof_file_dir_2+\
+            '") File("'+self.Sof_file_name+'") MfrSpec(OpMask(1));\n' + \
+        '\n' + \
+        'ChainEnd;\n' + '\n' + \
+        'AlteraBegin;\n' + \
+        '	ChainType(JTAG);\n' + \
+        'AlteraEnd;\n'
+ 
 
         # Write the CDF File
-        cdf_file_dir = sof_file_dir+cdf_file_name
+        cdf_file_dir = sof_file_dir+self.__SPLM[self.__SPno]+cdf_file_name
         with open(cdf_file_dir,"w") as f: 
             f.write(cdf_file_content)
 
@@ -975,12 +1001,18 @@ class FlashFPGA2Linux(Thread):
         if platform.system().lower() == 'windows':
             command = ['ping', '-n', str(packets), '-w', str(timeout), host_or_ip]
             res= subprocess.run(command, stdin=subprocess.DEVNULL, stdout=subprocess.PIPE, \
-                stderr=subprocess.DEVNULL, creationflags=0x08000000)
+            stderr=subprocess.DEVNULL, creationflags=0x08000000)
             return res.returncode == 0 and b'TTL=' in res.stdout
         else:
             ping_response =''
             try:
+                '''
                 ping_response = subprocess.Popen(["/bin/ping", "-c5", "-w100",host_or_ip], stdout=subprocess.PIPE, \
+                    stdin=subprocess.DEVNULL).stdout.read()
+                ping_response = ping_response.decode("utf-8") 
+                '''
+
+                ping_response = subprocess.Popen(["timeout","5","ping", "-c5", "-w100",host_or_ip], stdout=subprocess.PIPE, \
                     stdin=subprocess.DEVNULL).stdout.read()
                 ping_response = ping_response.decode("utf-8") 
             except Exception:
@@ -1793,7 +1825,7 @@ if __name__ == '__main__':
         arg_compile_project,arg_quartus_ver,arg_use_jtag  = praseInputArgs()
 
     ############################################################################################################################################
-    arg_use_jtag = True
+    #arg_use_jtag = True
     ############################################################################################################################################
 
     print('****** Flash FPGA Configuration to rsyocto via SSH/SFTP or JTAG  (Ver.: '+version+') ******')
