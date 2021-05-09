@@ -1793,7 +1793,7 @@ if __name__ == '__main__':
         arg_compile_project,arg_quartus_ver,arg_use_jtag  = praseInputArgs()
 
     ############################################################################################################################################
-    arg_use_jtag = True
+    #arg_use_jtag = True
     ############################################################################################################################################
 
     print('****** Flash FPGA Configuration to rsyocto via SSH/SFTP or JTAG  (Ver.: '+version+') ******')
