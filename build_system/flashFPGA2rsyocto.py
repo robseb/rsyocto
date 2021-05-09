@@ -37,7 +37,10 @@
 #   fixing a ERROR that during a JTAG Connection occurred 
 #   new FPGA IP test mode (JTAG) by generating and executing a shell script 
 #
-version = "1.101"
+# (2021-05-09) Vers.1.102
+#   remove .cdf file after shell script executing
+#
+version = "1.102"
 
 #
 #
@@ -351,7 +354,7 @@ class FlashFPGA2Linux(Thread):
                 print('*     --> It is not allowed to generate a static FPGA-Configuration file       *')
                 print('********************************************************************************')
                 print('*                                                                              *')
-                print('* Use the argument "-j <JTAG ID>" to write the FPGA-Configuration via JTAG     *')
+                print('*       Use the argument "-j 1" to write the FPGA-Configuration via JTAG       *')
                 print('*                                                                              *')
                 print('********************************************************************************')
                 sys.exit()
@@ -833,6 +836,10 @@ class FlashFPGA2Linux(Thread):
                     if self.__SPno==0: f.write('#!/bin/sh \n')
                     f.write('echo "quartus_pgm shell script was called by flashFPGA2rsyocto.py"\n')
                     f.write(cmd+'\n')
+                    if self.__SPno==0:
+                        f.write('read -p "Press any key to continue... " -n1 -s\n')
+                    else:
+                        f.write('pause\n')
             except Exception as ex:
                 self._print('[ERROR] Failed create the quartus_pgm JTAG flash shell script\n'+\
                             '        MSG: '+str(ex))
@@ -844,6 +851,7 @@ class FlashFPGA2Linux(Thread):
             print('*          via JTAG. Then it will start the FPGA IP Evaluation Mode.           *')
             print('********************************************************************************')
             print('*        After you are done with testing of the IP type here something         *')
+            print('*                 and in the new window type "q" to close it                   *')
             print('*             Support the author Robin Sebastian (git@robseb.de)               *')
             print('********************************************************************************')
 
@@ -870,6 +878,14 @@ class FlashFPGA2Linux(Thread):
                 except Exception:
                     print('[ERROR] Failed to remove the old SH/BAT File! Please remove it by hand!')
                     print('        File dir: "'+of_file_dir+self.__SPLM[self.__SPno]+sh_file_name+'"')
+
+            # Remove the CDF script file 
+            if os.path.isfile(sof_file_dir+self.__SPLM[self.__SPno]+cdf_file_name):
+                try:
+                    os.remove(sof_file_dir+self.__SPLM[self.__SPno]+cdf_file_name)
+                except Exception:
+                    print('[ERROR] Failed to remove the old CDF File! Please remove it by hand!')
+                    print('        File dir: "'+of_file_dir+self.__SPLM[self.__SPno]+cdf_file_name+'"')
 
             # Set status to true
             self.ThreadStatus=True
@@ -1541,10 +1557,6 @@ class FlashFPGA2Linux(Thread):
         return True
 
 
-
-
-
-
 #
 # @brief Prase input arguments to enable to special modes 
 #        Read and store settings inside a XML file
@@ -1603,6 +1615,7 @@ def praseInputArgs():
                 print('[ERROR] The given IP Address is not in the proper format (0.0.0.0)')
                 sys.exit()
             arg_set_ip = args.set_ipaddres
+            print('[INFO] IP Address of the board was set to "'+arg_set_ip+'"')
 
         # Set the Linux user name of the baord 
         if args.set_user != None: arg_set_user=args.set_user
@@ -1753,8 +1766,6 @@ if __name__ == '__main__':
     else:  SPno = 1
 
     SPLM = ['/','\\'] # Linux, Windows 
-    #      [INFO]
-    print('****** Flash FPGA Configuration to rsyocto via SSH/SFTP or JTAG  (Ver.: '+version+') ******')
 
     # Enable and read input arguments or the settings from a XML file
     arg_set_ip, arg_set_user,arg_set_pw,arg_set_flashBoot,\
@@ -1763,6 +1774,8 @@ if __name__ == '__main__':
     ############################################################################################################################################
     #arg_use_jtag = True
     ############################################################################################################################################
+
+    print('****** Flash FPGA Configuration to rsyocto via SSH/SFTP or JTAG  (Ver.: '+version+') ******')
 
     if arg_use_jtag and SPno == 0:
         print('[ERROR] JATG FPGA-Configuration is on Linux not supported right now!')
