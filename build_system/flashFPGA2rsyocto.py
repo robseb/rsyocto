@@ -40,7 +40,11 @@
 # (2021-05-09) Vers.1.102
 #   remove .cdf file after shell script executing
 #
-version = "1.102"
+# (2021-05-09) Vers.1.103
+#   JTAG support for Linux
+#   removing the second terminal window for the FPGA IP Evaluation Mode
+#
+version = "1.103"
 
 #
 #
@@ -636,15 +640,15 @@ class FlashFPGA2Linux(Thread):
             
         sof_file_dir = self.Quartus_proj_top_dir+self.__SPLM[self.__SPno]+self.Sof_folder
 
-        jtagconfig_cmd_dir = self.shell_quartus_dir = self.installDir_Quartus_bin+self.__SPLM[self.__SPno]+\
-                            'jtagconfig.exe'
+        jtagconfig_cmd_dir = self.installDir_Quartus_bin+self.__SPLM[self.__SPno]
+        jtagconfig_cmd_dir+= 'jtagconfig' if self.__SPno==0 else 'jtagconfig.exe'
+                            
         '''
         C:\intelFPGA\18.1\quartus\bin64>jtagconfig.exe
         1) DE-SoC [USB-1]
         4BA00477   SOCVHPS
         02D020DD   5CSEBA6(.|ES)/5CSEMA6/..
         '''
-
         #
         ### 1. Step: Run "jtagconfig" to scan the JTAG Chain 
         #
@@ -679,7 +683,7 @@ class FlashFPGA2Linux(Thread):
             return False
         
         start_symbol_pos = out_chain.find('1)')
-        JTAG_debugger_id_start_pos = out_chain.find('[USB-1]')
+        JTAG_debugger_id_start_pos = out_chain.find('-1]')
         
         if start_symbol_pos==-1 or JTAG_debugger_id_start_pos==-1:
             print('[ERROR] No USB JTAG Debugger found! Only USB Debuggers are supported!')
@@ -810,9 +814,15 @@ class FlashFPGA2Linux(Thread):
         #
 
         # quartus_pgm.exe -m JTAG -c 1 D:\Tresorit\Robin\FPGA\DE10STD_NIOS\DE10STDrsyocto_NIOS2_1\output_files\DE10STD.cdf
-        quartus_pgm_cmd_dir = self.shell_quartus_dir = self.installDir_Quartus_bin+self.__SPLM[self.__SPno]+\
-                            'quartus_pgm.exe'
+        quartus_pgm_cmd_dir = self.shell_quartus_dir = self.installDir_Quartus_bin+self.__SPLM[self.__SPno]
+        quartus_pgm_cmd_dir+= 'quartus_pgm' if self.__SPno==0 else 'quartus_pgm.exe'
         cmd = quartus_pgm_cmd_dir+' -m JTAG -c 1 '+cdf_file_dir
+        '''
+        print(cmd)
+        if self.__SPno==0:
+            # for Linux
+            cmd = [quartus_pgm_cmd_dir,' -c 1 ',' -m JTAG ',cdf_file_dir]
+        '''
 
         if self.unlicensed_ip_found: 
 
@@ -834,10 +844,9 @@ class FlashFPGA2Linux(Thread):
             try:
                 with open(sh_file_name, "a") as f:
                     if self.__SPno==0: f.write('#!/bin/sh \n')
-                    f.write('echo "quartus_pgm shell script was called by flashFPGA2rsyocto.py"\n')
                     f.write(cmd+'\n')
                     if self.__SPno==0:
-                        f.write('read -p "Press any key to continue... " -n1 -s\n')
+                        f.write('read -p "Type something to leave..." mainmenuinput\n')
                     else:
                         f.write('pause\n')
             except Exception as ex:
@@ -857,14 +866,17 @@ class FlashFPGA2Linux(Thread):
 
             # Execute the shell script in a new terminal window 
             try:
-                if sys.platform == "win32":
-                    os.startfile(sh_file_name)
-                else:
+                #os.startfile(sh_file_name)
+                
+                #os.system('gnome-terminal -x '+st_dir)
+                if self.__SPno==0:
                     st_dir= sh_file_name.replace(os.path.expanduser('~'), '~', 1)
                     os.chmod(sh_file_name, 0o775)
-                    os.system('gnome-terminal -x '+st_dir)
+                    os.system('./'+st_dir)
+                else: 
+                    os.system(sh_file_name)
             except Exception as ex:
-                self._print('[ERROR] Failed start the quartus_pgm JTAG flash shell script!\n'+\
+                print('[ERROR] Failed start the quartus_pgm JTAG flash shell script!\n'+\
                             '        MSG.: '+str(ex))
                 return False
 
@@ -896,14 +908,12 @@ class FlashFPGA2Linux(Thread):
         err=''
         out_pgm=''
         try:
+            
+            if self.__SPno==0:
+                cmd = [quartus_pgm_cmd_dir,'-c1','-mJTAG',cdf_file_dir]
             with subprocess.Popen(cmd,\
                 stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr = subprocess.PIPE) as edsCmdShell:
-
                 time.sleep(DELAY_MS)
-
-                b = bytes('i \n', 'utf-8')
-                edsCmdShell.stdin.write(b)
-
                 out_pgm, err = edsCmdShell.communicate()
 
         except Exception as ex:
@@ -1772,14 +1782,10 @@ if __name__ == '__main__':
         arg_compile_project,arg_quartus_ver,arg_use_jtag  = praseInputArgs()
 
     ############################################################################################################################################
-    #arg_use_jtag = True
+    arg_use_jtag = True
     ############################################################################################################################################
 
     print('****** Flash FPGA Configuration to rsyocto via SSH/SFTP or JTAG  (Ver.: '+version+') ******')
-
-    if arg_use_jtag and SPno == 0:
-        print('[ERROR] JATG FPGA-Configuration is on Linux not supported right now!')
-        sys.exit()
 
     #
     ## 1. Step: Read the execution environment and scan the Intel Quartus Prime FPGA project
