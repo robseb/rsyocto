@@ -45,6 +45,7 @@ For FPGA developers, a **Python script** has been developed that allows the **FP
 * **Supported Intel SoC-FPGAs running *rsyocto***
     * **Intel Cyclone V**
     * **Intel Arria 10 SX** (*Currently only via JTAG*)
+*  **Support for regular Intel FPGAs connected via JTAG** 
 
 ### Getting Started 
 
