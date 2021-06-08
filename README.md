@@ -358,7 +358,8 @@ I’m recently graduated as a master in electrical engineering with the major em
 
 **I'm open for cooperations as a freelancer to realize your specific requirements especially for industrial, scientific and automotive purposes.** 
 
-**For commercial users please visted my embedded service provider website:**
+**For commercial users, please visit my website of the embedded service provider website:**
+
 [**rsyocto.com**](https://rsyocto.com/)
 <br>
 
