@@ -356,7 +356,11 @@ Currently I am working on a Windows 10 .net Desktop application to manage FPGA c
 *rsyocto* is a project, that I have fully developed on *my own*. No companies are involved in my projects. 
 I’m recently graduated as a master in electrical engineering with the major embedded systems (*M. Sc.*).
 
-**I'm open for cooperations as a freelancer to realize your specific requirements especially for industrial and automotive purposes.** 
+**I'm open for cooperations as a freelancer to realize your specific requirements especially for industrial, scientific and automotive purposes.** 
+
+**For commercial users please visted my embedded service provider website:**
+[**rsyocto.com**](https://rsyocto.com/)
+<br>
 
 **[Github sponsoring is welcome.](https://github.com/sponsors/robseb)**
 
