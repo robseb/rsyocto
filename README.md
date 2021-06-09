@@ -351,19 +351,20 @@ Currently I am working on a Windows 10 .net Desktop application to manage FPGA c
 
 
 # Author
-* **Robin Sebastian [(LinkedIn)](https://www.linkedin.com/in/robin-sebastian-a5080220a)**
+* *rsyocto*; **Robin Sebastian,M.Sc. [(LinkedIn)](https://www.linkedin.com/in/robin-sebastian-a5080220a)**
 
-*rsyocto* is a project, that I have fully developed on *my own*. No companies were involved in my projects. 
-I’m recently graduated as a master in electrical engineering with the major embedded systems (*M. Sc.*).
+*rsyocto* is a self-developed project in which no other companies are involved. 
+It is specifically designed to serve students and the Linux/FPGA open-source community with its publication on GitHub and its open-source MIT license. 
+In the future, *rsyocto* will retain its open-source status and it will be further developed. 
 
-**I'm open for cooperations as a freelancer to realize your specific requirements especially for industrial, scientific and automotive purposes.** 
+Due to the enthusiasm of commercial users, special features for industrial, scientific and automotive applications 
+were developed and ready for the implementation in a highly optimazed closed commercial version. 
+Partnerships as an embedded SoC-FPGA design service to fulfil these specific commercial requirements are offered. 
+It should help, besides students with the *rsyocto* open-source version, commercial users, as well.   
 
-**For commercial users, please visit my website of the embedded service provider website:**
-
+**For commercial users, please visit the *rsyocto* embedded service provider website:** 
 [**rsyocto.com**](https://rsyocto.com/)
 <br>
-
-**[Github sponsoring is welcome.](https://github.com/sponsors/robseb)**
 
 [![Gitter](https://badges.gitter.im/rsyocto/community.svg)](https://gitter.im/rsyocto/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 [![Email me!](https://img.shields.io/badge/Ask%20me-anything-1abc9c.svg)](mailto:git@robseb.de)
