@@ -19,7 +19,7 @@ Here are also commands given to change the **FPGA Fabric Configuration** by usin
 1. **To toggle the HPS_LED is a *blinkLed.py* Python script pre-installed**
     * Run a exiting Python script that is located on the home-dir (*~*) by using
     ```bash 
-    Python3 blinkLed.py
+    python3 blinkLed.py
     ```
 1. **With `nano`- Editor it is possible to change the script**
     ```bash 
