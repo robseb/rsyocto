@@ -81,7 +81,7 @@ The *Intel NIOS II* Soft-Core processor can be designed as usually and will for 
     * **Use an Address Span Expander to allow the *Intel NIOS II* with its memory to interact with the 32-bit address size of the HPS**
         * Due to the fact that the *Intel NIOS II* requires some system memory the available address bus is too small  
         * By using a sub-window offset of *0xfc000000* it is for the *Intel NIOS II* Core enabled to access the entire memory space of the HPS components
-        * That means a *Intel NIOS II* Core can for example access the base address of *CAN0* (*HPS base Address: 0xFFC00000*) by using the address *0x3C00000* (*=0xFFC00000-0xFFC00000*)
+        * That means a *Intel NIOS II* Core can for example access the base address of *CAN0* (*HPS base Address: 0xFFC00000*) by using the address *0x3C00000* (*=0xFFC00000-0xfc000000*)
         * **Use the following settings for the Address Span Expander**
             <br>
 
